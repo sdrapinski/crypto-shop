@@ -1,54 +1,32 @@
 version: "3"
-
 services:
   backend:
     build:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
-    volumes:
-      - ./backend:/var/www/html
-      - dbdata:/var/lib/mysql
+      - "8000:3000"
     depends_on:
       - db
-    environment:
-      - DB_HOST=db
-      - DB_DATABASE=docker_laravel
-      - DB_USERNAME=docker
-      - DB_PASSWORD=docker
-
-  db:
-    image: mysql:8.0
-    command: "--default-authentication-plugin=mysql_native_password"
-    ports:
-      - "3306:3306"
-    environment:
-      - MYSQL_ROOT_PASSWORD=secret
-      - MYSQL_DATABASE=docker_laravel
-      - MYSQL_USER=docker
-      - MYSQL_PASSWORD=docker
-
-  phpmyadmin:
-    image: phpmyadmin/phpmyadmin:5.2
-    environment:
-      - PMA_ARBITRARY=1
-    ports:
-      - "8080:80"
-    depends_on:
-      - db
-
   frontend:
     build:
       context: ./frontend
-      dockerfile: Dockerfile.react
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
-    volumes:
-      - ./frontend:/usr/src/app
+    depends_on:
+      - backend
+  db:
+    image: mysql:latest
     environment:
-      - CHOKIDAR_USEPOLLING=true
-    command: npm start
+      MYSQL_ROOT_PASSWORD: example_password
+      MYSQL_DATABASE: crypto_shop_db
+      MYSQL_USER: giga_user
+      MYSQL_PASSWORD: maslo
 
-volumes:
-  dbdata:
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: db
+    ports:
+      - 8080:80
