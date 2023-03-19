@@ -1,0 +1,36 @@
+.login {
+  height: 100dvh;
+  width: 100dvw;
+  background-color: rgb(240, 221, 138);
+  &__form {
+    background-image: url("../../styles/backgrounds/burger.png");
+    background-repeat: no-repeat;
+    background-position: center;
+
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 150px;
+
+    button {
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: rgb(209, 209, 209);
+    }
+  }
+  &__input,
+  &__submit {
+    margin-bottom: 15px;
+    height: 40px;
+    width: 450px;
+    border-radius: 10px;
+    border: none;
+    padding: 10px;
+    @include media-below(sm) {
+      width: 80vw;
+    }
+  }
+}

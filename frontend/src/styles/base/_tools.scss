@@ -1,0 +1,36 @@
+// RWD
+@mixin media-above($breakpoint) {
+  $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+  @media (min-width: $breakpoint-value) {
+    @content;
+  }
+}
+
+@mixin media-below($breakpoint) {
+  $breakpoint-value: map-get($breakpoints, $breakpoint);
+
+  @media (max-width: ($breakpoint-value - 1)) {
+    @content;
+  }
+}
+
+@mixin media-between($lower, $upper) {
+  $lower-breakpoint: map-get($breakpoints, $lower);
+  $upper-breakpoint: map-get($breakpoints, $upper);
+
+  @media (min-width: $lower-breakpoint) and (max-width: ($upper-breakpoint - 1)) {
+    @content;
+  }
+}
+
+@mixin flexCenter() {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin size($width, $height: $width) {
+  width: #{$width};
+  height: #{$height};
+}

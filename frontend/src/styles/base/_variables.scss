@@ -1,0 +1,28 @@
+$font-size: 16px;
+
+:root {
+  --text-xs: #{rem(12px)};
+  --text-sm: #{rem(14px)};
+  --text-base: #{rem(16px)};
+  --text-lg: #{rem(18px)};
+  --text-xl: #{rem(20px)};
+  --text-2xl: #{rem(24px)};
+  --text-3xl: #{rem(32px)};
+  --text-4xl: #{rem(40px)};
+  --text-5xl: #{rem(48px)};
+  --text-6xl: #{rem(60px)};
+}
+
+$breakpoints: (
+  xs: 576px,
+  sm: 768px,
+  md: 992px,
+  lg: 1230px,
+  xl: 1500px,
+  xxl: 1920px,
+);
+
+:root {
+  --font-primary: sans-serif;
+  --font-secondary: sans-serif;
+}
