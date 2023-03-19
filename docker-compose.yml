@@ -5,7 +5,7 @@ services:
       context: ./backend
       dockerfile: Dockerfile
     ports:
-      - "8000:3000"
+      - "8000:3001"
     depends_on:
       - db
   frontend:
@@ -19,7 +19,7 @@ services:
   db:
     image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: example_password
+      MYSQL_ROOT_PASSWORD: maslo
       MYSQL_DATABASE: crypto_shop_db
       MYSQL_USER: giga_user
       MYSQL_PASSWORD: maslo
