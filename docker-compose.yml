@@ -23,6 +23,8 @@ services:
       MYSQL_DATABASE: crypto_shop_db
       MYSQL_USER: giga_user
       MYSQL_PASSWORD: maslo
+    ports:
+      - "3306:3306"
 
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
