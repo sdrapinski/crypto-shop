@@ -1,12 +1,13 @@
 const express = require("express");
 const app = express();
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 const db = mysql.createPool({
   host: "db",
   user: "giga_user",
   password: "maslo",
   database: "crypto_shop_db",
+  port: "3306",
 });
 
 app.use(express.json());
@@ -37,7 +38,13 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  res.send("hello");
+  db.query("select * from test", (err, resp) => {
+    if (err) {
+      res.send(err);
+    } else {
+      res.send(resp);
+    }
+  });
 });
 
 app.post("/login", (req, res) => {
