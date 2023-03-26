@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const mysql = require("mysql2");
+const user = require("./user");
 
 const db = mysql.createPool({
   host: "db",
@@ -38,27 +39,58 @@ app.use(function (req, res, next) {
 });
 
 app.get("/", (req, res) => {
-  db.query("select * from test", (err, resp) => {
-    if (err) {
-      res.send(err);
-    } else {
-      res.send(resp);
-    }
+  user.getUsers((data) => {
+    res.send(data);
   });
 });
 
 app.post("/login", (req, res) => {
-  db.query(
-    "INSERT INTO `test` (`Id`, `email`, `password`, `name`) VALUES ('', 'dsss', 'sssd', 'sdss')",
-    (err, response) => {
-      if (err) {
-        res.send(err);
-      } else {
-        res.send(response);
-      }
-    }
-  );
+  user.addUser("test@test.com", "password", "Test User");
+  res.send("User added");
 });
+
+user.createUsersTable();
+
+
+const createInitialData = () => {
+  const users = [
+    { email: 'szymon@example.com', password: 'password1', name: 'testowe1' },
+    { email: 'maciej@example.com', password: 'password2', name: 'testowe2' },
+    { email: 'kuba@example.com', password: 'password3', name: 'testowe3' },
+    { email: 'olek@example.com', password: 'password3', name: 'testowe4' },
+  ];
+
+  const insertUsersSql =
+  'INSERT INTO users (email, password, name) VALUES (?, ?, ?)';
+
+  /*
+users.forEach((user) => {
+  db.query(insertUsersSql, [user.email, user.password, user.name], (err, result) => {
+    if (err) throw err;
+    console.log(`Uzytkownik ${user.name} zostal dodany do bazy`);
+  });
+});
+};
+*/
+
+users.forEach((user) => {
+  const checkUserSql = 'SELECT COUNT(*) AS count FROM users WHERE email = ?';
+  db.query(checkUserSql, [user.email], (err, result) => {
+  if (err) throw err;
+  if (result[0].count === 0) {
+  db.query(insertUsersSql, [user.email, user.password, user.name], (err, result) => {
+  if (err) throw err;
+  console.log(`Uzytkownik ${user.name} zostal dodany do bazy`);
+  });
+  } else {
+  console.log(`Uzytkownik ${user.name} juz istnieje w bazie`);
+  }
+  });
+  });
+};
+
+// Wywołanie funkcji createInitialData
+createInitialData();
 
 app.listen("3001", () => {
   console.log("it works");
