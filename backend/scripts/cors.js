@@ -1,5 +1,11 @@
-const cors = (app)=>{
-    app.use(function (req, res, next) {
+class Cors{
+  #app;
+  constructor(app){
+    this.#app = app;
+  }
+
+  setCors(){
+    this.#app.use(function (req, res, next) {
         // Website you wish to allow to connect
         res.setHeader("Access-Control-Allow-Origin", "*");
       
@@ -23,6 +29,6 @@ const cors = (app)=>{
         // Pass to next layer of middleware
         next();
       });
-};
-
-module.exports = {cors};
+  }
+}
+module.exports = Cors;

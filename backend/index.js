@@ -5,8 +5,9 @@ const port = process.env.port || 3001;
 const routes = require('./routes.js');
 routes(app);
 
-const mysql = require('./scripts/mysql.js');
-mysql.createInitialData();
+const createData = require('./scripts/createData.js');
+const data = new createData();
+data.createInitialData();
 
 app.listen(port, () => {
   console.log("it works");
