@@ -1,6 +1,7 @@
 import axios from "axios";
 import React, { useEffect } from "react";
-import Navbar from "../../components/Navbar";
+import Navbar from "../../components/navbar/Navbar";
+import { SwitchButton } from "../../components/switchButton/SwitchButton";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -20,7 +21,11 @@ const Homepage = () => {
     return () => {};
   }, []);
 
-  return <div>hej</div>;
+  return (
+    <div>
+      <SwitchButton />
+    </div>
+  );
 };
 
 export default Homepage;

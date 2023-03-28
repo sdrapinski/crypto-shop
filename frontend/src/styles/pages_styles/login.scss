@@ -1,36 +1,117 @@
 .login {
-  height: 100dvh;
-  width: 100dvw;
-  background-color: rgb(240, 221, 138);
-  &__form {
-    background-image: url("../../styles/backgrounds/burger.png");
-    background-repeat: no-repeat;
-    background-position: center;
+  height: 100vh;
+  width: 100vw;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.login__form {
+  width: 500px;
+  background-color: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
 
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 150px;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 40px rgba(56, 15, 88, 0.6);
+  padding: 50px 35px;
 
-    button {
-      cursor: pointer;
-    }
-    button:hover {
-      background-color: rgb(209, 209, 209);
-    }
+  h3 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
   }
-  &__input,
-  &__submit {
-    margin-bottom: 15px;
-    height: 40px;
-    width: 450px;
-    border-radius: 10px;
+  * {
+    font-family: sans-serif;
+
+    letter-spacing: 0.5px;
+    outline: none;
     border: none;
-    padding: 10px;
-    @include media-below(sm) {
-      width: 80vw;
-    }
   }
 }
+
+.login__form input {
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: #541ce8;
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+  background: rgb(231, 231, 231);
+}
+.login__form input::placeholder {
+  color: rgb(163, 163, 163);
+}
+
+.login__submit {
+  width: 100%;
+  background-color: rgb(95, 57, 126);
+  color: #ffffff;
+  padding: 15px 0;
+  font-size: 19px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 1s;
+}
+.login__submit:hover {
+  background-color: rgba(52, 179, 120, 1);
+}
+.providers {
+  margin-top: 30px;
+  display: flex;
+  justify-content: space-between;
+  div {
+    width: 200px;
+    border-radius: 5px;
+    justify-content: center;
+    padding: 5px 10px 10px 5px;
+    color: #eaf0fb;
+    text-align: center;
+    cursor: pointer;
+  }
+  .google {
+    background-color: #4285f4;
+  }
+  .fb {
+    background-color: #4267b2;
+  }
+  .google,
+  .fb {
+    display: flex;
+
+    align-items: center;
+    svg {
+      margin-right: 10px;
+    }
+    span {
+      margin-top: 4px;
+    }
+  }
+  div:hover {
+    background-color: rgba(66, 75, 211, 1);
+  }
+}
+
+.login__NoAccount {
+  color: black;
+  margin-top: 25px;
+  text-align: center;
+  a {
+    color: black;
+  }
+  a:hover {
+    color: rgb(95, 57, 126);
+  }
+}
+.login__error {
+  color: red;
+  margin: 20px 0px;
+}
+.login__errorInput {
+  border: 1px solid red;
+}
+// button
