@@ -1,0 +1,118 @@
+.main__header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr; /* trzy kolumny równej szerokości */
+  grid-template-rows: auto auto; /* dwa wiersze z automatyczną wysokością */
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #ffffff;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main__header img {
+  grid-column: 1 / 2; /* od pierwszej do drugiej kolumny */
+  grid-row: 1 / 2; /* od pierwszego do drugiego wiersza */
+  height: 50px;
+}
+
+.main__header .header__icons {
+  grid-column: 3 / 4; /* od trzeciej do czwartej kolumny */
+  grid-row: 1 / 2; /* od pierwszego do drugiego wiersza */
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.main__header .header__icons > * {
+  margin-left: 10px;
+  font-size: 20px;
+  color: #444444;
+  cursor: pointer;
+}
+
+.input__wrapper {
+  grid-column: 1 / -1; /* od pierwszej do ostatniej kolumny */
+  grid-row: 2 / 3; /* od drugiego do trzeciego wiersza */
+  position: relative;
+  margin-top: 10px;
+}
+
+.input__wrapper input {
+  border: none;
+  border-radius: 20px;
+  padding: 10px;
+  font-size: 16px;
+  background-color: #e4e4e4;
+  width: 100%;
+}
+
+.input__wrapper input:focus {
+  outline: none;
+}
+
+.main__header ul {
+  position: absolute;
+  top: 50px;
+  left: 0;
+  right: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  border-radius: 0 0 10px 10px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.main__header li {
+  padding: 10px;
+  font-size: 16px;
+  border-bottom: 1px solid #d9d9d9;
+  cursor: pointer;
+}
+
+@media screen and (min-width: 768px) {
+  .main__header {
+    grid-template-columns: auto 1fr auto; /* pierwsza i ostatnia kolumna z automatyczną szerokością */
+    grid-template-rows: auto; /* jedyny wiersz z automatyczną wysokością */
+    padding: 10px 50px;
+  }
+  .input__wrapper {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    width: 80vw;
+    display: flex;
+    justify-content: center;
+    position: relative;
+    margin: auto;
+  }
+  .main__header ul {
+    box-shadow: none;
+  }
+
+  .main__header ul li {
+    width: 48vw;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .dropdown__wrapper {
+    width: 60%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .main__header input {
+    width: 100%;
+    margin-left: auto; /* przesunięcie w prawą stronę */
+    margin-right: auto; /* przesunięcie w lewą stronę */
+  }
+
+  .main__header ul {
+    width: 200px;
+  }
+  .main__header .header__icons {
+    svg {
+      margin-left: 15px;
+    }
+  }
+}

@@ -7,15 +7,19 @@ import RegisterPage from "./pages/registerPage/RegisterPage";
 import AppProvider from "./state/AppContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/style.scss";
+import DashboardHeader from "./components/dashboardHeader/DashboardHeader";
 
 function Router() {
   return (
     <AppProvider>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<Homepage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
+
+          <Route path="/" element={<DashboardHeader />}>
+            <Route index element={<Homepage />} />
+          </Route>
         </Routes>
       </BrowserRouter>
     </AppProvider>

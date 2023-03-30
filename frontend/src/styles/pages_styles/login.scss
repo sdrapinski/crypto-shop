@@ -29,7 +29,7 @@
   }
 }
 
-.login__form input {
+.inputForm {
   display: block;
   height: 50px;
   width: 100%;
@@ -42,7 +42,7 @@
   color: rgb(0, 0, 0);
   background: rgb(231, 231, 231);
 }
-.login__form input::placeholder {
+.inputForm::placeholder {
   color: rgb(163, 163, 163);
 }
 
