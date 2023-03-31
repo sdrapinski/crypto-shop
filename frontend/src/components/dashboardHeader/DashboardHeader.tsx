@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { FaUser, FaShoppingCart, FaBell } from "react-icons/fa";
+import MobileMenu from "./MobileMenu";
 
 interface HeaderProps {
   // deklarujemy propsy, których będziemy używać
@@ -8,6 +9,7 @@ interface HeaderProps {
 const DashboardHeader: React.FC<HeaderProps> = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showOptions, setShowOptions] = useState(false);
+  const [showMobileMenu, setshowMobileMenu] = useState(false);
 
   const options = ["Wszystko", "Książki", "Filmy"];
 
@@ -19,11 +21,14 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
     setSearchValue(event.target.value);
     setShowOptions(true);
   };
+  const handleBurgerClick = () => {
+    setshowMobileMenu(!showMobileMenu);
+  };
 
   return (
     <header className="main__header">
       {/* Logo */}
-      <div>
+      <div className="header__logo">
         <img src="logo.png" alt="Logo" />
       </div>
       {/* Wyszukiwarka z dropdownem */}
@@ -38,7 +43,7 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
             onFocus={() => setShowOptions(true)}
           />
           {showOptions && (
-            <ul>
+            <ul className="header__autocomplete">
               {filteredOptions.map((option) => (
                 <li key={option}>{option}</li>
               ))}
@@ -52,6 +57,12 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
         <FaShoppingCart />
         <FaBell />
       </div>
+      <div className="header__burger" onClick={handleBurgerClick}>
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      {showMobileMenu && <MobileMenu callback={handleBurgerClick} />}
     </header>
   );
 };
