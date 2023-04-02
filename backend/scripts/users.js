@@ -4,22 +4,7 @@ class Users{
   constructor(){
     this.#db = new DB();
   };
-  /*
-definiuje funkcję "createUsersTable", która tworzy tabelę "users" w bazie danych, jeśli nie istnieje. 
-Funkcja tworzy kolumny dla "id", "email", "password" i "name". Kolumna "id" jest kluczem podstawowym i jest automatycznie inkrementowana.
-Funkcja wykonuje zapytanie do bazy danych za pomocą metody "query" z obiektu "db" i wywołuje funkcję zwrotną, która wyświetla informację o utworzeniu tabeli.
-*/
-  createUsersTable(){
-    const query = `
-    CREATE TABLE IF NOT EXISTS users (
-      id INT PRIMARY KEY AUTO_INCREMENT,
-      email VARCHAR(255) NOT NULL,
-      password VARCHAR(255) NOT NULL,
-      name VARCHAR(255) NOT NULL
-    )
-  `;
-  this.#db.CREATE(query);
-  };
+
   /*
 definiuje funkcję "addUser", która dodaje nowego użytkownika do tabeli "users" w bazie danych. 
 Funkcja wykonuje zapytanie do bazy danych za pomocą metody "query" z obiektu "db" i przekazuje argumenty "email", "password" i "name". 

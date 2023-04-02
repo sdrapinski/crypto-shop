@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { FaUser, FaShoppingCart, FaBell } from "react-icons/fa";
 import MobileMenu from "./MobileMenu";
+import { Outlet } from "react-router-dom";
 
 interface HeaderProps {
   // deklarujemy propsy, których będziemy używać
@@ -26,6 +27,7 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
   };
 
   return (
+    <>
     <header className="main__header">
       {/* Logo */}
       <div className="header__logo">
@@ -64,6 +66,8 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
       </div>
       {showMobileMenu && <MobileMenu callback={handleBurgerClick} />}
     </header>
+    <Outlet/>
+    </>
   );
 };
 

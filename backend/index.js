@@ -5,9 +5,9 @@ const port = process.env.port || 3001;
 const routes = require('./routes.js');
 routes(app);
 
-const createData = require('./scripts/createData.js');
-const data = new createData();
-data.createInitialData();
+// const createData = require('./scripts/createData.js');
+// const data = new createData();
+// data.createDataBase();
 
 app.listen(port, () => {
   console.log("it works");

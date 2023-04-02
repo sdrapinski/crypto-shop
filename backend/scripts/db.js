@@ -10,15 +10,12 @@ class db {
             port: "3306",
           });
     }
-    SELECT(query){
-        this.#db.query(query, (err, result)=>{
-            if(err){
-                this.error(err);
-            }
-            else{
-                return result;
-            }
-        });
+    async SELECT(query){
+        return this.#db.promise().query(query).then(([rows, fields]) => {
+            return rows;
+          }).catch((err) => {
+            this.error(err);
+          });
     }
     INSERT(query){
         this.#db.query(query, (err, result)=>{
