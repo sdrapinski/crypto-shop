@@ -11,9 +11,13 @@ const RegisterForm = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
+  const [login, setlogin] = useState("");
 
   const handleEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
     setemail(e.currentTarget.value);
+  };
+  const handleLoginChange = (e: React.FormEvent<HTMLInputElement>) => {
+    setlogin(e.currentTarget.value);
   };
   const [authenticationFailed, setauthenticationFailed] =
     useState<boolean>(false);
@@ -34,6 +38,7 @@ const RegisterForm = () => {
       .post<UserProps>(
         `${backendUrl}/register`,
         {
+          login: login,
           email: email,
           password: password,
         },
@@ -62,6 +67,14 @@ const RegisterForm = () => {
         value={email}
         callback={handleEmailChange}
         placeholder="Email"
+      />{" "}
+      <br />
+      <InputForm
+        type="text"
+        label="Login"
+        value={login}
+        callback={handleLoginChange}
+        placeholder="Login"
       />
       <br />
       <InputForm

@@ -2,6 +2,11 @@ import axios from "axios";
 import React, { useEffect } from "react";
 import Navbar from "../../components/navbar/Navbar";
 import { SwitchButton } from "../../components/switchButton/SwitchButton";
+import { Container } from "react-bootstrap";
+import SponsoredPosts from "../../components/Products/sponsoredProducts/SponsoredProducts";
+import Categories from "../../components/Categories/Categories";
+import MainPageProducts from "../../components/Products/mainPageProducts/MainPageProducts";
+import Footer from "../../components/footer/Footer";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
@@ -22,9 +27,14 @@ const Homepage = () => {
   }, []);
 
   return (
-    <div>
-      <SwitchButton />
-    </div>
+    <>
+      <Container>
+        <SponsoredPosts />
+        <Categories />
+        <MainPageProducts />
+      </Container>
+      <Footer />
+    </>
   );
 };
 
