@@ -2,7 +2,8 @@ const bodyParser = require('body-parser');
 const Users = require("./scripts/users.js");
 const user = new Users();
 const Cors = require("./scripts/cors.js");
-
+const Offers = require("./scripts/offers.js");
+const offer = new Offers();
 module.exports = function(app){
   const cors = new Cors(app);
   cors.setCors();
@@ -27,6 +28,11 @@ module.exports = function(app){
       .post((req, res) =>{
         user.addUser("test@test.com", "password", "Test User");
         res.send("User added");
+      });
+      app.route("/searched")
+      .get((req, res) =>{
+        const outserch=offer.OfferSearch("Chomiki");
+        res.send(outserch);
       });
 
 }
