@@ -28,7 +28,7 @@ const Homepage = () => {
 
   return (
     <>
-      <Container>
+      <Container fluid style={{ padding: "0px 30px" }}>
         <SponsoredPosts />
         <Categories />
         <MainPageProducts />

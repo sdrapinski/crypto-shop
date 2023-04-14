@@ -9,23 +9,23 @@ interface Photo {
 const photosTest: Photo[] = [
   {
     id: 1,
-    url: "https://picsum.photos/200/300",
+    url: "https://picsum.photos/1350/350",
   },
   {
     id: 2,
-    url: "https://picsum.photos/100/300",
+    url: "https://picsum.photos/1350/300",
   },
   {
     id: 3,
-    url: "https://picsum.photos/400/300",
+    url: "https://picsum.photos/1350/400",
   },
   {
     id: 4,
-    url: "https://picsum.photos/300/300",
+    url: "https://picsum.photos/1350/450",
   },
   {
     id: 5,
-    url: "https://picsum.photos/250/300",
+    url: "https://picsum.photos/1350/320",
   },
 ];
 
