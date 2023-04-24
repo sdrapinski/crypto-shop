@@ -29,21 +29,21 @@ module.exports = function(app){
         user.addUser("test@test.com", "password", "Test User");
         res.send("User added");
       });
-      app.route("/searched")
+      app.route("/del")
       .get((req, res) =>{
-        const outserch=offer.OfferSearch("Chomiki");
+        const outserch=offer.removeOffer(1);
         res.send(outserch);
       });
       
       app.route("/neof")
       .get((req, res) =>{
         offer.addOffer("");
-        res.send(outserch);
+        res.send("offer added");
       });
       
       app.route("/searched")
       .get((req, res) =>{
-        const outserch=offer.OfferSearch("Chomiki");
+        const outserch=offer.OfferSearch(2);
         res.send(outserch);
       });
 
