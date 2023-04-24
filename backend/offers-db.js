@@ -2,7 +2,7 @@ const DB = require('./db.js');
 
 class Offers{
     #db=new DB();
-    addOffer(user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_destcription, photo_id, photo_id, added_when, popularity){
+    addOffer(user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_destcription, photo_id, added_when, popularity){
         const query = `
           INSERT INTO products (user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_destcription, photo_id, added_when) 
           VALUES (${user_id}, ${product_name}, ${products_category_id}, ${product_cost_cash}, ${ product_cost_crypto}, ${product_quantity}, ${product_destcription}, ${photo_id}, ${photo_id}, ${added_when})
