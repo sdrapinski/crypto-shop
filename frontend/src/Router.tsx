@@ -8,6 +8,8 @@ import AppProvider from "./state/AppContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/style.scss";
 import DashboardHeader from "./components/dashboardHeader/DashboardHeader";
+import UserDetails from "./pages/userDetails/UserDetails";
+import UserCart from "./pages/userCart/UserCart";
 
 function Router() {
   return (
@@ -19,6 +21,8 @@ function Router() {
 
           <Route path="/" element={<DashboardHeader />}>
             <Route index element={<Homepage />} />
+            <Route path="/userdetails" element={<UserDetails />} />
+            <Route path="/usercart" element={<UserCart />} />
           </Route>
         </Routes>
       </BrowserRouter>

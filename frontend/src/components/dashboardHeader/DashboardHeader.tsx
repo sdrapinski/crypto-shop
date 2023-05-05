@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { FaUser, FaShoppingCart, FaBell } from "react-icons/fa";
+
 import MobileMenu from "./MobileMenu";
-import { Outlet } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import axios from "axios";
+import LoginSwitch from "./LoginSwitch";
 
 interface HeaderProps {
   // deklarujemy propsy, których będziemy używać
@@ -46,7 +47,9 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
       <header className="main__header">
         {/* Logo */}
         <div className="header__logo">
-          <img src="logo.png" alt="Logo" />
+          <NavLink to="/">
+            <img src="logo.png" alt="Logo" />
+          </NavLink>
         </div>
         {/* Wyszukiwarka z dropdownem */}
         <form
@@ -74,9 +77,7 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
         </form>
         {/* Ikony */}
         <div className="header__icons">
-          <FaUser />
-          <FaShoppingCart />
-          <FaBell />
+          <LoginSwitch />
         </div>
         <div className="header__burger" onClick={handleBurgerClick}>
           <span></span>

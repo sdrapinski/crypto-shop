@@ -1,0 +1,16 @@
+.inputForm {
+  display: block;
+  height: 50px;
+  width: 100%;
+  background-color: #541ce8;
+  border-radius: 3px;
+  padding: 0 10px;
+  margin-top: 8px;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+  background: rgb(231, 231, 231);
+}
+.inputForm::placeholder {
+  color: rgb(163, 163, 163);
+}

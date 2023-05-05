@@ -1,0 +1,10 @@
+.button {
+  padding: 5px;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+
+  &.--login:hover {
+    border-bottom: 1px solid black !important;
+  }
+}
