@@ -1,14 +1,19 @@
 import axios from "axios";
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
-import { UserProps } from "../../interfaces/AppContext.interface";
+import React, { useState, useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
 import InputForm from "./InputForm";
 import LoginProviders from "./LoginProviders";
+import { JwtInteface } from "../../interfaces/jwt.interface";
+import { AppContext } from "../../state/AppContext";
+import { Alert } from "react-bootstrap";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
+  const appContext = useContext(AppContext);
+  const navigate = useNavigate();
 
   const handleEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
     setemail(e.currentTarget.value);
@@ -25,7 +30,7 @@ const LoginForm = () => {
     e.preventDefault();
 
     axios
-      .post<UserProps>(
+      .post<JwtInteface>(
         `${backendUrl}/login`,
         {
           email: email,
@@ -40,45 +45,65 @@ const LoginForm = () => {
       )
       .then((response) => {
         console.log(response);
+        appContext?.loginUser(response.data);
+        navigate("/");
+      })
+      .catch((error) => {
+        setauthenticationFailed(true);
+        console.log(error);
       });
   };
   return (
-    <form
-      action="#"
-      onSubmit={handleSubmit}
-      method="POST"
-      className="login__form"
-    >
-      <h3>Sign In</h3>
-      <InputForm
-        type="email"
-        label="Email"
-        value={email}
-        callback={handleEmailChange}
-        placeholder="Email"
-      />
-      <br />
-      <InputForm
-        type="password"
-        label="Password"
-        value={password}
-        callback={handlePasswordChange}
-        placeholder="Password"
-      />
-      <div className="login__error">
-        {authenticationFailed === true ? `${errorDetail}` : ""}
-      </div>
-      <button type="submit" className="login__submit">
-        Sign In{" "}
-      </button>
-      <LoginProviders />
-      <div className="login__NoAccount">
-        <NavLink to="/register">
+    <>
+      {authenticationFailed && (
+        <Alert className="loginAlert" variant="danger">
           {" "}
-          You dont have an account yet? Register One{" "}
-        </NavLink>
-      </div>
-    </form>
+          Wrong Email or Password
+        </Alert>
+      )}
+      <form
+        action="#"
+        onSubmit={handleSubmit}
+        method="POST"
+        className="login__form"
+      >
+        <h3
+          onClick={() => {
+            console.log(appContext?.user);
+          }}
+        >
+          Sign In
+        </h3>
+        <InputForm
+          type="email"
+          label="Email"
+          value={email}
+          callback={handleEmailChange}
+          placeholder="Email"
+        />
+        <br />
+        <InputForm
+          type="password"
+          label="Password"
+          value={password}
+          callback={handlePasswordChange}
+          placeholder="Password"
+        />
+        <div className="login__error">
+          {authenticationFailed === true ? `${errorDetail}` : ""}
+        </div>
+        <button type="submit" className="login__submit">
+          Sign In{" "}
+        </button>
+        <LoginProviders />
+        <div className="login__NoAccount">
+          <NavLink to="/register">
+            {" "}
+            You dont have an account yet? Register One{" "}
+          </NavLink>
+        </div>
+      </form>
+    </>
   );
 };
 

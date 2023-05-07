@@ -1,6 +1,8 @@
 import { User } from "../classes/User";
+import { JwtInteface } from "./jwt.interface";
 export interface AppContextInterface {
-  user: User;
+  user: User | null;
+  loginUser: (data: JwtInteface) => void;
 }
 
 export interface UserProps {
