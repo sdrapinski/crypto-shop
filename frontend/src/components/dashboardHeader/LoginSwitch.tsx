@@ -48,7 +48,15 @@ const LoginSwitch = () => {
                   </ul>
                 )}
 
-                {menuContent === "cart" && <p>Tu będą produkty</p>}
+                {menuContent === "cart" && (
+                  <div>
+                    <p>Tu będą produkty</p>{" "}
+                    <NavLink to="/usercart">
+                      {" "}
+                      <button>Przejdz do koszyka</button>{" "}
+                    </NavLink>{" "}
+                  </div>
+                )}
 
                 {menuContent === "notifications" && <p>Brak powiadomień</p>}
               </div>

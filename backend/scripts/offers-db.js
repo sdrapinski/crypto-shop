@@ -19,13 +19,13 @@ class Offers {
           INSERT INTO products (user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_description, photo_id, added_when) 
           VALUES (${user_id}, ${product_name}, ${products_category_id}, ${product_cost_cash}, ${product_cost_crypto}, ${product_quantity}, ${product_description}, ${photo_id}, ${photo_id}, ${added_when})
         `;
-    this.#db.INSERT(query);
+    return this.#db.INSERT(query);
   }
   removeOffer(products_id) {
     const query = `
           DELETE FROM products WHERE products_id=${products_id}
         `;
-    this.#db.DELETE(query);
+    return this.#db.DELETE(query);
   }
   overwrite_Offer(
     products_id,
@@ -40,7 +40,7 @@ class Offers {
           UPDATE products SET product_name=${product_name} ,product_cost_cash=${product_cost_cash}, product_cost_crypto= ${product_cost_crypto}, product_quantity=${product_quantity}, product_description=${product_description} , photo_id=  ${photo_id}, added_when=${added_when}
           WHERE products_id=${products_id}
         `;
-    this.#db.INSERT(query);
+    return this.#db.INSERT(query);
   }
   OfferSearch(Searched_pharse) {
     const query = `
