@@ -13,7 +13,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const Homepage = () => {
   useEffect(() => {
     axios
-      .get(`${backendUrl}`, {
+      .get(`${backendUrl}/promotedProducts`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

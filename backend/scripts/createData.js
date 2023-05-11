@@ -42,10 +42,10 @@ class createData{
 
     await this.initialDatabase('products_category', productsCategoryData);
     const productsData = [
-      {user_id: 1,products_category_id: 1, product_name:"Niewolnicy", product_cost_cash:100, product_cost_crypto:1,product_quantity:9999999, product_description:"Dobrze trzyma szpadel", photo_id:0 },
-      {user_id: 2,products_category_id: 2, product_name:"Kreatyna", product_cost_cash:200, product_cost_crypto:2,product_quantity:800, product_description:"Najwyższej jakości kreatyna", photo_id:0 },
-      {user_id: 3,products_category_id: 3, product_name:"Chomiki", product_cost_cash:150, product_cost_crypto:1.5,product_quantity:99999, product_description:"Śmiesznie piszczy jak zdepniesz", photo_id:0 },
-      {user_id: 4,products_category_id: 4, product_name:"Glazura", product_cost_cash:80, product_cost_crypto:0.8,product_quantity:0, product_description:"Może i chujowe ale kto ma dobre", photo_id:0 }
+      {user_id: 1,products_category_id: 1, product_name:"Niewolnicy", product_cost_cash:100, product_cost_crypto:1,product_quantity:9999999, product_description:"Dobrze trzyma szpadel", photo_id:0,promoted_for:null },
+      {user_id: 2,products_category_id: 2, product_name:"Kreatyna", product_cost_cash:200, product_cost_crypto:2,product_quantity:800, product_description:"Najwyższej jakości kreatyna", photo_id:0,promoted_for:null },
+      {user_id: 3,products_category_id: 3, product_name:"Chomiki", product_cost_cash:150, product_cost_crypto:1.5,product_quantity:99999, product_description:"Śmiesznie piszczy jak zdepniesz", photo_id:0,promoted_for:null },
+      {user_id: 4,products_category_id: 4, product_name:"Glazura", product_cost_cash:80, product_cost_crypto:0.8,product_quantity:0, product_description:"Może i chujowe ale kto ma dobre", photo_id:0,promoted_for:null }
     ]
     await this.initialDatabase('products', productsData);
     const productsSoldData = [
@@ -86,7 +86,7 @@ class createData{
     await this.#db.CREATE(productsCategory);
   }
   async products(){
-   const products = "CREATE TABLE IF NOT EXISTS products( product_id INT PRIMARY KEY AUTO_INCREMENT, user_id INT NOT NULL, FOREIGN KEY (user_id) REFERENCES users(user_id), products_category_id INT NOT NULL, FOREIGN KEY (products_category_id) REFERENCES products_category(products_category_id), product_name TINYTEXT NOT NULL, product_cost_cash FLOAT NOT NULL, product_cost_crypto FLOAT, product_quantity INT NOT NULL, product_description TINYTEXT, photo_id INT, added_when TIMESTAMP NOT NULL)";
+   const products = "CREATE TABLE IF NOT EXISTS products( product_id INT PRIMARY KEY AUTO_INCREMENT, user_id INT NOT NULL, FOREIGN KEY (user_id) REFERENCES users(user_id), products_category_id INT NOT NULL, FOREIGN KEY (products_category_id) REFERENCES products_category(products_category_id), product_name TINYTEXT NOT NULL, product_cost_cash FLOAT NOT NULL, product_cost_crypto FLOAT, product_quantity INT NOT NULL, product_description TINYTEXT, photo_id INT, added_when TIMESTAMP NOT NULL, promoted_for DATE NULL)";
    await this.#db.CREATE(products);
   }
   async productsSold(){
@@ -114,5 +114,4 @@ class createData{
     }
   }
   }
-
 module.exports = createData;
