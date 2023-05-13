@@ -13,11 +13,12 @@ class Offers {
     product_description,
     photo_id,
     added_when,
-    popularity
+    popularity,
+    promoted_for
   ) {
     const query = `
-          INSERT INTO products (user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_description, photo_id, added_when) 
-          VALUES (${user_id}, ${product_name}, ${products_category_id}, ${product_cost_cash}, ${product_cost_crypto}, ${product_quantity}, ${product_description}, ${photo_id}, ${photo_id}, ${added_when})
+          INSERT INTO products (user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_description, photo_id, added_when,promoted_for) 
+          VALUES (${user_id}, ${product_name}, ${products_category_id}, ${product_cost_cash}, ${product_cost_crypto}, ${product_quantity}, ${product_description}, ${photo_id}, ${photo_id}, ${added_when},${promoted_for})
         `;
     return this.#db.INSERT(query);
   }
@@ -34,17 +35,32 @@ class Offers {
     product_cost_crypto,
     product_quantity,
     product_description,
-    photo_id
+    photo_id,
+    added_when,
+    promoted_for
   ) {
     const query = `
-          UPDATE products SET product_name=${product_name} ,product_cost_cash=${product_cost_cash}, product_cost_crypto= ${product_cost_crypto}, product_quantity=${product_quantity}, product_description=${product_description} , photo_id=  ${photo_id}, added_when=${added_when}
+          UPDATE products SET product_name=${product_name} ,product_cost_cash=${product_cost_cash}, product_cost_crypto= ${product_cost_crypto}, product_quantity=${product_quantity}, product_description=${product_description} , photo_id=  ${photo_id}, added_when=${added_when}, promoted_for=${promoted_for}
           WHERE products_id=${products_id}
         `;
+    return this.#db.INSERT(query);
+  }
+  PromoUpdate(product_id, promoted_for) {
+    const query = `
+          UPDATE products SET promoted_for=${promoted_for}
+          WHERE products_id=${products_id}
+          `;
     return this.#db.INSERT(query);
   }
   OfferSearch(Searched_pharse) {
     const query = `
            SELECT * from products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}%'
+          `;
+    return this.#db.SELECT(query);
+  }
+  PromotedOffers() {
+    const query = `
+           SELECT * from products WHERE promoted_for>CURDATE() ORDER BY RAND() LIMIT 6
           `;
     return this.#db.SELECT(query);
   }

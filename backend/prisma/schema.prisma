@@ -1,0 +1,103 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+// basic
+model Region {
+  region_id String @id @default(uuid())
+  continent String
+  country String
+  city String
+  street String
+  user Users @relation(fields: [user_id],references: [user_id])
+  user_id String @unique
+}
+
+model Products_category{
+  product_category_id Int @id @default(autoincrement())
+  product_category_name String
+  products Products[]
+}
+
+//main
+model Users {
+user_id String @id @default(uuid())
+user_products Products[] @relation("ProductCreatedBy")
+user_region Region?
+user_name String
+user_surname String
+user_email String
+user_date_of_birth DateTime
+user_phone_number String
+user_login String
+user_password String
+user_join_date DateTime
+user_avatar_url String?
+user_premium_tokens Float?
+user_cart Cart?
+user_watched_products Products[] @relation("WatchedProducts")
+user_products_purchased ProductsSold[]
+
+}
+
+model Products {
+  product_id   String   @id @default(uuid())
+  user_id String
+  user Users @relation("ProductCreatedBy",fields: [user_id], references: [user_id])
+  products_category_id Int
+  products_category Products_category @relation(fields: [products_category_id], references: [product_category_id])
+  product_name         String
+  product_description  String?
+  product_images        Json
+  product_dollar_price Float
+  product_crypto_prices CryptoProductPrice[]
+  product_quantity Int
+  cart Cart[]
+  product_watchedBy Users @relation("WatchedProducts", fields: [product_watched_by_id], references: [user_id])
+  product_watched_by_id String
+  product_sold ProductsSold[]
+
+}
+
+model Crypto {
+  crypto_id   String    @id @default(uuid())
+  crypto_name String @unique
+  crypto_usd_price Float
+  crypto_product_price CryptoProductPrice[]
+}
+
+model CryptoProductPrice {
+  crypto_product_price_id String  @id @default(uuid())
+  product       Products @relation(fields: [product_Id], references: [product_id])
+  product_Id     String
+  crypto        Crypto  @relation(fields: [crypto_Id], references: [crypto_id])
+  crypto_Id      String
+  crypto_price  Float
+}
+
+model Cart {
+  cart_id String @id @default(uuid())
+  product_id String 
+  products Products @relation(fields: [product_id], references: [product_id])
+  user_id String @unique
+  user Users @relation(fields: [user_id], references: [user_id])
+
+}
+
+model ProductsSold{
+  product_sold_id String @id @default(uuid())
+  user_id String
+  product_id String
+  product Products @relation(fields: [product_id], references: [product_id])
+  user Users @relation(fields: [user_id], references: [user_id])
+  sale_time DateTime
+
+}

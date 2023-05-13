@@ -5,6 +5,8 @@ const Cors = require("./scripts/cors.js");
 const Offers = require("./scripts/offers-db.js");
 
 const jwtUtils = require("./services/jwt.js");
+const Categories = require("./scripts/Categories-db.js");
+const Category = new Categories();
 const user = new Users();
 const offer = new Offers();
 module.exports = function (app) {
@@ -58,6 +60,32 @@ module.exports = function (app) {
 
   app.route("/searchProduct/:offerName").get((req, res) => {
     offer.OfferSearch(req.params.offerName).then((response) => {
+      res.send(response);
+    });
+  });
+  app.route("/Updateproduct/:offerId").post((req, res) => {
+    offer.overwrite_Offer(req.params.offerId).then((response) => {
+      res.send(response);
+    });
+  });
+  app.route("/UpdatePromoDate/:offerId").post((req, res) => {
+    offer.PromoUpdate(req.params.offerId).then((response) => {
+      res.send(response);
+    });
+  });
+  app.route("/promotedProducts").get((req, res) => {
+    offer.PromotedOffers().then((response) => {
+      res.send(response);
+    });
+  });
+
+  app.route("/Categories").get((req, res) => {
+    Category.AskCats().then((response) => {
+      res.send(response);
+    });
+  });
+  app.route("/mainPageProducts").get((req, res) => {
+    Category.Categoriesformainpage().then((response) => {
       res.send(response);
     });
   });
