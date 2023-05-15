@@ -64,6 +64,8 @@ model Products {
   product_watchedBy Users @relation("WatchedProducts", fields: [product_watched_by_id], references: [user_id])
   product_watched_by_id String
   product_sold ProductsSold[]
+  product_popularity Float?
+  product_promotion DateTime?
 
 }
 
