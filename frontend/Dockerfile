@@ -13,6 +13,8 @@ RUN npm install
 # Kopiujemy resztę plików aplikacji
 COPY . .
 
+
+
 EXPOSE 3000
 
 # Uruchamiamy serwer HTTP z aplikacją

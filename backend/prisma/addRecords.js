@@ -30,6 +30,7 @@ async function addRecords() {
             product_category_id: records.products[index].products_category_id,
           },
         },
+        product_watchedBy: { connect: { user_id: newUser.user_id } },
         product_name: records.products[index].product_name,
         product_description: records.products[index].product_description,
         product_images: records.products[index].product_images,
@@ -37,7 +38,6 @@ async function addRecords() {
         product_quantity: records.products[index].product_quantity,
         product_popularity: records.products[index].product_popularity,
         product_promotion: records.products[index].product_promotion,
-        product_watchedBy: { connect: { user_id: newUser.user_id } },
       },
     });
   });

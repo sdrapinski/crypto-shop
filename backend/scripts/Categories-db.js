@@ -1,14 +1,16 @@
 const DB = require("./db.js");
-
+const { PrismaClient } = require("@prisma/client");
 class Categories {
   #db = new DB();
-  AskCats() {
-    const query = `
-          SELECT products_category_name FROM products_category
-        `;
-    return this.#db.SELECT(query);
+  #prisma;
+  constructor() {
+    this.#prisma = new PrismaClient();
   }
-  Categoriesformainpage() {
+  async getCategories() {
+    const categories = await this.#prisma.products_category.findMany({});
+    return categories;
+  }
+  categoriesForMainPage() {
     const query = `
       foreach products_category
       {

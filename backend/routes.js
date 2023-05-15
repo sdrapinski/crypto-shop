@@ -80,7 +80,7 @@ module.exports = function (app) {
   });
 
   app.route("/Categories").get((req, res) => {
-    Category.AskCats().then((response) => {
+    Category.getCategories().then((response) => {
       res.send(response);
     });
   });

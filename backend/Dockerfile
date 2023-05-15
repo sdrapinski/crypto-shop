@@ -13,6 +13,9 @@ RUN npm install
 # Kopiujemy resztę plików aplikacji
 COPY . .
 
+#Start prisma
+Run npx prisma generate
+
 EXPOSE 8000
 # Uruchamiamy aplikację
 CMD ["npm", "start"]

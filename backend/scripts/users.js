@@ -1,27 +1,35 @@
 const DB = require("./db.js");
+const { PrismaClient } = require("@prisma/client");
 class Users {
-  #db;
+  #prisma;
   constructor() {
-    this.#db = new DB();
+    this.#prisma = new PrismaClient();
   }
 
-  addUser(email, password, name) {
-    const query = `
-    INSERT INTO users (email, password, name) 
-    VALUES (${email}, ${password}, ${name})
-  `;
-    return this.#db.INSERT(query);
+  async createUser(user) {
+    const newUser = await this.#prisma.users.create({
+      data: user,
+    });
+    return newUser;
   }
 
-  findUser(user) {
-    const query = `select * from users where user_email="${user.email}" and user_password="${user.password}" limit 1`;
-    return this.#db.SELECT(query);
+  async getUserByLoginAndPassword(user) {
+    const findedUser = await this.#prisma.users.findFirst({
+      where: {
+        user_email: user.email,
+        user_password: user.password,
+      },
+    });
+    return findedUser;
   }
 
-  getUsers(callback) {
-    const query = "SELECT * FROM users";
-    const result = this.#db.SELECT(query) != null ? this.#db.SELECT(query) : [];
-    callback(result);
+  async getUserById(user) {
+    const findedUser = await this.#prisma.users.findUnique({
+      where: {
+        user_id: user.id,
+      },
+    });
+    return findedUser;
   }
 }
 
