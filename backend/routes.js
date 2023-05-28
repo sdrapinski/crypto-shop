@@ -85,7 +85,7 @@ module.exports = function (app) {
     });
   });
   app.route("/mainPageProducts").get((req, res) => {
-    Category.Categoriesformainpage().then((response) => {
+    Category.categoriesForMainPage().then((response) => {
       res.send(response);
     });
   });

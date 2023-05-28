@@ -1,55 +1,47 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { CategoriesInterface } from "../../interfaces/categories.interface";
 
-const categories = [
-  {
-    name: "Kategoria1",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Kategoria2",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Kategoria3",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Kategoria4",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Kategoria5",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Kategoria6",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Kategoria7",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Kategoria8",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-  {
-    name: "Kategoria9",
-    imageSrc: "https://via.placeholder.com/150",
-  },
-];
-
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const categoriesInit = {
+  data: [{ product_category_id: 0, product_category_name: "" }],
+};
 const Categories = () => {
+  const [categories, setcategories] =
+    useState<CategoriesInterface>(categoriesInit);
+
+  useEffect(() => {
+    axios
+      .get(`${backendUrl}/Categories`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then((resp) => {
+        setcategories(resp);
+      });
+
+    return () => {};
+  }, []);
   return (
     <div className="category-grid">
-      {categories.map((category, index) => (
-        <NavLink to={`/products/category/${category.name}`}>
-          <div key={index} className="category-item">
+      {categories.data.map((category, index) => (
+        <NavLink
+          key={index}
+          to={`/products/category/${category.product_category_id}`}
+        >
+          <div className="category-item">
             <div className="category-image">
-              <img src={category.imageSrc} alt={category.name} />
+              <img
+                src="https://via.placeholder.com/150"
+                alt={category.product_category_name}
+              />
             </div>
-            <div className="category-name">{category.name}</div>
+            <div className="category-name">
+              {category.product_category_name}
+            </div>
           </div>
         </NavLink>
       ))}

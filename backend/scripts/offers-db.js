@@ -54,7 +54,7 @@ class Offers {
   }
   OfferSearch(Searched_pharse) {
     const query = `
-           SELECT * from products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}%'
+           SELECT * from Products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}%'
           `;
     return this.#db.SELECT(query);
   }

@@ -31,7 +31,7 @@ function Router() {
             <Route path="/product/:productId" element={<ProductDetails />} />
             <Route path="/products">
               <Route
-                path="category/:categoryName"
+                path="category/:categoryId"
                 element={<ProductsByCategoryPage />}
               />
               <Route path="search/:query" element={<ProductsBySearchPage />} />

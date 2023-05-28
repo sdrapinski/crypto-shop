@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
 import MobileMenu from "./MobileMenu";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
 import LoginSwitch from "./LoginSwitch";
 
@@ -13,6 +13,7 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showOptions, setShowOptions] = useState(false);
   const [showMobileMenu, setshowMobileMenu] = useState(false);
+  const navigate = useNavigate();
 
   const options = ["Wszystko", "Książki", "Filmy"];
 
@@ -22,24 +23,24 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
 
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(event.target.value);
-    setShowOptions(true);
+    if (event.target.value.length > 2) {
+      axios
+        .get(
+          `${process.env.REACT_APP_BACKEND_URL}/searchProduct/${event.target.value}`
+        )
+        .then((response) => {
+          console.log(response);
+        });
+      setShowOptions(true);
+    }
   };
   const handleBurgerClick = () => {
     setshowMobileMenu(!showMobileMenu);
   };
 
-  const headers = {
-    "Content-Type": "application/json",
-    Accept: "application/json",
-  };
-
   const handleFromSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/searchProduct/${searchValue}`)
-      .then((response) => {
-        console.log(response);
-      });
+    navigate(`products/search/${searchValue}`);
   };
 
   return (
