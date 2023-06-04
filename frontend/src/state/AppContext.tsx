@@ -10,6 +10,8 @@ import Cookies from "universal-cookie";
 
 export const AppContext = createContext<AppContextInterface | null>(null);
 
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const AppProvider = ({ children }: AppProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
 
@@ -30,6 +32,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const appContextValue: AppContextInterface = {
     user,
     loginUser,
+    backendUrl,
   };
 
   return (

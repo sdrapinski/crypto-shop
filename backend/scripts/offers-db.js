@@ -62,30 +62,31 @@ class Offers {
           `;
     return this.#db.SELECT(query);
   }
+  OfferSearchWithLimit(Searched_pharse, limit) {
+    const query = `
+           SELECT * from products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}% limit ${limit}'
+          `;
+    return this.#db.SELECT(query);
+  }
   PromotedOffers() {
     const query = `
            SELECT * from products WHERE promoted_for>CURDATE() ORDER BY RAND() LIMIT 6
           `;
     return this.#db.SELECT(query);
   }
-  async mainpageproducts()
-  {
+  async mainpageproducts() {
     const categories = await this.#prisma.products_category.findMany({});
     var randomIndex = Math.floor(Math.random() * categories.length);
-    const products = await this.#prisma.products.findMany(
-    {
-        take: 6,
-        where:
-        {
-            products_category_id:randomIndex,
-        },
-        include:
-        {
-            products_category: true,
-        },
-    })
-    return products
+    const products = await this.#prisma.products.findMany({
+      take: 6,
+      where: {
+        products_category_id: randomIndex,
+      },
+      include: {
+        products_category: true,
+      },
+    });
+    return products;
   }
 }
 module.exports = Offers;
-

@@ -1,17 +1,17 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { UserProps } from "../../interfaces/AppContext.interface";
 import InputForm from "./InputForm";
 import LoginProviders from "./LoginProviders";
-
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+import { AppContext } from "../../state/AppContext";
 
 const RegisterForm = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [login, setlogin] = useState("");
+  const appContext = useContext(AppContext);
 
   const handleEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
     setemail(e.currentTarget.value);
@@ -31,12 +31,11 @@ const RegisterForm = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(backendUrl);
     e.preventDefault();
 
     axios
       .post<UserProps>(
-        `${backendUrl}/register`,
+        `${appContext?.backendUrl}/register`,
         {
           login: login,
           email: email,

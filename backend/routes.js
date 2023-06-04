@@ -63,6 +63,11 @@ module.exports = function (app) {
       res.send(response);
     });
   });
+  app.route("/searchProductWL/:offerName").get((req, res) => {
+    offer.OfferSearchWithLimit(req.params.offerName, 5).then((response) => {
+      res.send(response);
+    });
+  });
   app.route("/Updateproduct/:offerId").post((req, res) => {
     offer.overwrite_Offer(req.params.offerId).then((response) => {
       res.send(response);

@@ -7,8 +7,6 @@ import { JwtInteface } from "../../interfaces/jwt.interface";
 import { AppContext } from "../../state/AppContext";
 import { Alert } from "react-bootstrap";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
-
 const LoginForm = () => {
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
@@ -26,12 +24,11 @@ const LoginForm = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    console.log(backendUrl);
     e.preventDefault();
 
     axios
       .post<JwtInteface>(
-        `${backendUrl}/login`,
+        `${appContext?.backendUrl}/login`,
         {
           email: email,
           password: password,
