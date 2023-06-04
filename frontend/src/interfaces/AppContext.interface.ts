@@ -3,6 +3,7 @@ import { JwtInteface } from "./jwt.interface";
 export interface AppContextInterface {
   user: User | null;
   loginUser: (data: JwtInteface) => void;
+  backendUrl: string | undefined;
 }
 
 export interface UserProps {
