@@ -1,7 +1,11 @@
 const DB = require("./db.js");
-
+const { PrismaClient } = require("@prisma/client");
 class Offers {
   #db = new DB();
+  #prisma;
+  constructor() {
+    this.#prisma = new PrismaClient();
+  }
   addOffer(
     user_id,
     products_id,
@@ -54,7 +58,7 @@ class Offers {
   }
   OfferSearch(Searched_pharse) {
     const query = `
-           SELECT * from Products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}%'
+           SELECT * from products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}%'
           `;
     return this.#db.SELECT(query);
   }
@@ -64,5 +68,24 @@ class Offers {
           `;
     return this.#db.SELECT(query);
   }
+  async mainpageproducts()
+  {
+    const categories = await this.#prisma.products_category.findMany({});
+    var randomIndex = Math.floor(Math.random() * categories.length);
+    const products = await this.#prisma.products.findMany(
+    {
+        take: 6,
+        where:
+        {
+            products_category_id:randomIndex,
+        },
+        include:
+        {
+            products_category: true,
+        },
+    })
+    return products
+  }
 }
 module.exports = Offers;
+
