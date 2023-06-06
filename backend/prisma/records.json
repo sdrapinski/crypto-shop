@@ -1,25 +1,21 @@
 {
   "region": [
     {
-      "continent": "Europe",
       "country": "Poland",
       "city": "Warsaw",
       "street": "Marszałkowska 1"
     },
     {
-      "continent": "Europe",
       "country": "Poland",
       "city": "Poznan",
       "street": "szkolna 1"
     },
     {
-      "continent": "North America",
       "country": "USA",
       "city": "Ohaio",
       "street": "lump 1"
     },
     {
-      "continent": "Asia",
       "country": "Japan",
       "city": "Tokyo",
       "street": "kiriko 12"

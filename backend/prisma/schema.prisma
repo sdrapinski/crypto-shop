@@ -13,7 +13,6 @@ datasource db {
 // basic
 model Region {
   region_id String @id @default(uuid())
-  continent String
   country String
   city String
   street String
