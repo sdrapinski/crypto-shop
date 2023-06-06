@@ -28,6 +28,29 @@
     border: none;
   }
 }
+.login__form_2{
+  width: 70vw;
+  background-color: rgba(255, 255, 255, 0.13);
+  border-radius: 10px;
+
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  // box-shadow: 0 0 40px rgba(56, 15, 88, 0.6);
+  box-shadow: 0 0 10px gray;
+  padding: 50px 35px;
+
+  h3 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+  }
+  * {
+    font-family: sans-serif;
+
+    letter-spacing: 0.5px;
+    outline: none;
+    border: none;
+  }
+}
 
 .inputForm {
   display: block;
@@ -46,6 +69,34 @@
   color: rgb(163, 163, 163);
 }
 
+.custom-phone-input input {
+  height: 50px;
+  width: 100%;
+  background-color: #541ce8;
+  border-radius: 3px;
+  padding: 0 10px;
+  font-size: 14px;
+  font-weight: 300;
+  color: rgb(0, 0, 0);
+  background: rgb(231, 231, 231);
+  position: relative;
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  margin-right: var(--PhoneInputCountrySelect-marginRight);
+}
+.custom-phone-input {
+  width: 100%;
+  font-size: 14px;
+  font-weight: 300;
+  border-radius: 3px;
+  padding: 0 10px;
+  background: rgb(231, 231, 231);
+  &.custom-phone-input-form{
+    margin-top: 8px;
+  }
+}
+
 .login__submit {
   width: 100%;
   background-color: rgb(95, 57, 126);
@@ -58,6 +109,27 @@
   transition: 1s;
 }
 .login__submit:hover {
+  background-color: rgba(52, 179, 120, 1);
+}
+.login__submit_2{
+  min-width: 100px;
+  max-width: 200px;
+  width: 10vw;
+  background-color: rgb(95, 57, 126);
+  color: #ffffff;
+  padding: 15px 0;
+  font-size: 16px;
+  font-weight: 550;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 1s;
+  height: 40px;
+  line-height: normal !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.login__submit_2:hover{
   background-color: rgba(52, 179, 120, 1);
 }
 .providers {
