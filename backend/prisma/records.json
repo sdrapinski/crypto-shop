@@ -30,6 +30,9 @@
       "product_category_name": "Skates"
     },
     {
+      "product_category_name": "Cars"
+    },
+    {
       "product_category_name": "Houses"
     }
   ],
@@ -45,6 +48,18 @@
       "user_join_date": "2020-01-01T00:00:00.000Z",
       "user_avatar_url": "https://example.com/avatar.png",
       "user_premium_tokens": 10.5
+    },
+    {
+      "user_name": "Janus",
+      "user_surname": "Bisne'sau",
+      "user_email": "JBiz@example.com",
+      "user_date_of_birth": "1967-06-11T00:00:00.000Z",
+      "user_phone_number": "666999222",
+      "user_login": "Jbizos",
+      "user_password": "hasło",
+      "user_join_date": "2020-01-01T00:00:00.000Z",
+      "user_avatar_url": "https://example.com/wuns.png",
+      "user_premium_tokens": 0
     },
     {
       "user_name": "Adam",
@@ -73,6 +88,27 @@
   ],
   "products": [
     {
+      "product_name": "Opony",
+      "products_category_id": 4,
+      "product_description": "Dziurawe ale jak się załata to będzie git",
+      "product_images": {},
+      "product_dollar_price": 100,
+      "product_quantity": 4,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    {
+      "product_name": "Opel",
+      "products_category_id": 4,
+      "product_description": "Sprzedam opla, dubra cena, Ledwo urzywany przebieg 100km licznik nie cofany, żona jeździła nim do pracy a pracuje w domu",
+      "product_images": {},
+      "product_dollar_price": 1000,
+      "product_quantity": 1,
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    {
       "product_name": "Harry potter",
       "products_category_id": 2,
       "product_description": "Lorem ipsum dolor sit amet",
@@ -84,12 +120,127 @@
       "product_promotion": null
     },
     {
+      "product_name": "Władca Pierścieni:Dwie wieże",
+      "products_category_id": 2,
+      "product_description": "Lorem ipsum dolor sit amet",
+      "product_images": {},
+      "product_dollar_price": 50,
+      "product_quantity": 10,
+
+      "product_popularity": 8,
+      "product_promotion": null
+    },
+    {
+      "product_name": "Karton",
+      "products_category_id": 5,
+      "product_description": "Lorem ipsum dolor sit amet",
+      "product_images": {},
+      "product_dollar_price": 5,
+      "product_quantity": 100,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    {
+      "product_name": "kołpak",
+      "products_category_id": 4,
+      "product_description": "Ukradłem",
+      "product_images": {},
+      "product_dollar_price": 10,
+      "product_quantity": 4,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    
+    {
+      "product_name": "Dziecko",
+      "products_category_id": 3,
+      "product_description": "Lorem ipsum dolor sit amet",
+      "product_images": {},
+      "product_dollar_price": 200,
+      "product_quantity": 1,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    
+    {
+      "product_name": "Buła na ryj",
+      "products_category_id": 3,
+      "product_description": "Lorem ipsum dolor sit amet",
+      "product_images": {},
+      "product_dollar_price": 0,
+      "product_quantity": 1,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    {
+      "product_name": "Sześcian",
+      "products_category_id": 5,
+      "product_description": "Lorem ipsum dolor sit amet",
+      "product_images": {},
+      "product_dollar_price": 500,
+      "product_quantity": 1,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    {
+      "product_name": "Pasat",
+      "products_category_id": 4,
+      "product_description": "TDI!!!",
+      "product_images": {},
+      "product_dollar_price": 5000,
+      "product_quantity": 1,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    {
       "product_name": "Pizza",
-      "products_category_id": 1,
+      "products_category_id": 2,
       "product_description": "Lorem ipsum dolor sit amet",
       "product_images": {},
       "product_dollar_price": 500,
       "product_quantity": 10,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    
+    {
+      "product_name": "Czapka z draszkiem",
+      "product_description": "Fajna w huj",
+      "products_category_id": 3,
+      "product_images": {},
+      "product_dollar_price": 20,
+      "product_quantity": 50,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    
+    {
+      "product_name": "kółka",
+      "product_description": "Lorem ipsum dolor sit amet",
+      "products_category_id": 3,
+      "product_images": {},
+      "product_dollar_price": 400,
+      "product_quantity": 15,
+
+      "product_popularity": 0.8,
+      "product_promotion": null
+    },
+    
+    {
+      "product_name": "Deskorolka",
+      "product_description": "Lorem ipsum dolor sit amet",
+      "products_category_id": 3,
+      "product_images": {},
+      "product_dollar_price": 40,
+      "product_quantity": 1,
 
       "product_popularity": 0.8,
       "product_promotion": null
@@ -107,7 +258,7 @@
     },
     {
       "product_name": "Villa",
-      "products_category_id": 4,
+      "products_category_id": 5,
       "product_description": "Lorem ipsum dolor sit amet",
       "product_images": {},
       "product_dollar_price": 500,
