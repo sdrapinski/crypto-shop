@@ -88,8 +88,7 @@ model CryptoProductPrice {
 
 model Cart {
   cart_id String @id @default(uuid())
-  product_id String 
-  products Products @relation(fields: [product_id], references: [product_id])
+  products Products[]
   user_id String @unique
   user Users @relation(fields: [user_id], references: [user_id])
 

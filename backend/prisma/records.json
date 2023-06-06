@@ -7,6 +7,12 @@
       "street": "Marszałkowska 1"
     },
     {
+      "continent": "Europe",
+      "country": "Poland",
+      "city": "Poznan",
+      "street": "szkolna 1"
+    },
+    {
       "continent": "North America",
       "country": "USA",
       "city": "Ohaio",
@@ -148,7 +154,7 @@
       "product_popularity": 0.8,
       "product_promotion": null
     },
-    
+
     {
       "product_name": "Dziecko",
       "products_category_id": 3,
@@ -160,7 +166,7 @@
       "product_popularity": 0.8,
       "product_promotion": null
     },
-    
+
     {
       "product_name": "Buła na ryj",
       "products_category_id": 3,
@@ -205,7 +211,7 @@
       "product_popularity": 0.8,
       "product_promotion": null
     },
-    
+
     {
       "product_name": "Czapka z draszkiem",
       "product_description": "Fajna w huj",
@@ -217,7 +223,7 @@
       "product_popularity": 0.8,
       "product_promotion": null
     },
-    
+
     {
       "product_name": "kółka",
       "product_description": "Lorem ipsum dolor sit amet",
@@ -229,7 +235,7 @@
       "product_popularity": 0.8,
       "product_promotion": null
     },
-    
+
     {
       "product_name": "Deskorolka",
       "product_description": "Lorem ipsum dolor sit amet",
