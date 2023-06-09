@@ -90,7 +90,7 @@ module.exports = function (app) {
     });
   });
   app.route("/mainPageProducts").get((req, res) => {
-    Category.categoriesForMainPage().then((response) => {
+    offer.mainpageproducts().then((response) => {
       res.send(response);
     });
   });
