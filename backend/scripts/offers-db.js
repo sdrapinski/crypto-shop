@@ -90,35 +90,23 @@ class Offers {
   }
 
   async mainpageproducts() {
-    let invalidNumbers = [];
     let productsList = [];
-    const categories = await this.#prisma.products_category.findMany({});
+    const categories = await this.#prisma.products_category.findMany({
+      where: {
+        products: {
+          some: {},
+        },
+      },
+    });
 
-    let indexes = getRandomUniqueNumbers(1, categories.length, 3);
+    let indexes = getRandomUniqueNumbers(0, categories.length - 1, 3);
 
     for await (const item of indexes) {
-      const products = await this.findProductsFromCategory(item);
-      if (products.length === 0) {
-        invalidNumbers.push(item);
-      } else {
-        productsList.push(products);
-      }
-    }
-    if (invalidNumbers.length > 0) {
-      console.log(invalidNumbers);
-      let indexes = getRandomUniqueNumbers(
-        1,
-        categories.length,
-        invalidNumbers.length,
-        invalidNumbers
+      const products = await this.findProductsFromCategory(
+        categories[item].product_category_id
       );
-
-      for (const newItems of indexes) {
-        const products = await this.findProductsFromCategory(newItems);
-        productsList.push(products);
-      }
+      productsList.push(products);
     }
-
     return productsList;
   }
 }
