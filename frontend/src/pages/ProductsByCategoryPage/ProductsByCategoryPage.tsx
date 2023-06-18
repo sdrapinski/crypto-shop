@@ -15,7 +15,7 @@ const ProductsByCategoryPage = () => {
   useEffect(() => {
     axios
       .get<mainPageProductsInterface[]>(
-        `${appcontext?.backendUrl}/products/${categoryId}`,
+        `${appcontext?.backendUrl}/offersincategory/${categoryId}`,
         {
           headers: {
             "Content-Type": "application/json",

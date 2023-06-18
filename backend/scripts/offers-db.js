@@ -76,6 +76,24 @@ class Offers {
     return this.#db.SELECT(query);
   }
 
+  async offersinCategory(CategoryId) {
+    const products = await this.#prisma.products.findMany({
+      take: 20,
+      where: {
+        products_category_id: parseInt(CategoryId),
+      },
+    });
+    return products;
+  }
+  async Usersoffers(user_id) {
+    const products = await this.#prisma.products.findMany({
+      where: {
+        user_id: user_id,
+      },
+    });
+    return products;
+  }
+
   async findProductsFromCategory(item) {
     const products = await this.#prisma.products.findMany({
       take: 6,
