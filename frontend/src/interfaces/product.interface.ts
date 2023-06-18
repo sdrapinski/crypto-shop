@@ -16,3 +16,7 @@ export interface mainPageProductsInterface {
   products_category_id: number;
   user_id: string;
 }
+
+export interface ProductsArrayInterface {
+  products: Array<mainPageProductsInterface>;
+}
