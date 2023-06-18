@@ -58,13 +58,8 @@ class Offers {
   }
   OfferSearch(Searched_pharse) {
     const query = `
+          
            SELECT * from products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}%'
-          `;
-    return this.#db.SELECT(query);
-  }
-  OfferSearchWithLimit(Searched_pharse, limit) {
-    const query = `
-           SELECT * from products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}% limit ${limit}'
           `;
     return this.#db.SELECT(query);
   }
@@ -74,19 +69,45 @@ class Offers {
           `;
     return this.#db.SELECT(query);
   }
-  async mainpageproducts() {
+  async offersofCategory(CategoryId)
+  {
+    const products = await this.#prisma.products.findMany(
+      {
+        take: 5,
+        where:
+        {
+            products_category_id:CategoryId
+        },
+      })
+  }
+  async Usersoffers(CategoryId)
+  {
+    const products = await this.#prisma.products.findMany(
+      {
+        where:
+        {
+            user_id:Userpage
+        },
+      })
+  }
+  async mainpageproducts()
+  {
     const categories = await this.#prisma.products_category.findMany({});
     var randomIndex = Math.floor(Math.random() * categories.length);
-    const products = await this.#prisma.products.findMany({
-      take: 6,
-      where: {
-        products_category_id: randomIndex,
-      },
-      include: {
-        products_category: true,
-      },
-    });
-    return products;
+    const products = await this.#prisma.products.findMany(
+    {
+        take: 6,
+        where:
+        {
+            products_category_id:randomIndex,
+        },
+        include:
+        {
+            products_category: true,
+        },
+    })
+    return products
   }
 }
 module.exports = Offers;
+

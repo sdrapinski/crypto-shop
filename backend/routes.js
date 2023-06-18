@@ -83,7 +83,11 @@ module.exports = function (app) {
       res.send(response);
     });
   });
-
+  app.route("/offersofcategory/:Categoryid").get((req, res) => {
+    Category.getCategories().then((response) => {
+      res.send(response);
+    });
+  });
   app.route("/Categories").get((req, res) => {
     Category.getCategories().then((response) => {
       res.send(response);

@@ -22,7 +22,6 @@ class Users {
     });
     return findedUser;
   }
-
   async getUserById(user) {
     const findedUser = await this.#prisma.users.findUnique({
       where: {
