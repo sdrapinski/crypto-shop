@@ -84,7 +84,7 @@ module.exports = function (app) {
     });
   });
   app.route("/offersofcategory/:Categoryid").get((req, res) => {
-    Category.getCategories().then((response) => {
+    offer.offersofCategory().then((response) => {
       res.send(response);
     });
   });

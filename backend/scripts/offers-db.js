@@ -69,7 +69,7 @@ class Offers {
           `;
     return this.#db.SELECT(query);
   }
-  async offersofCategory(CategoryId)
+  async offersinCategory(CategoryId)
   {
     const products = await this.#prisma.products.findMany(
       {
