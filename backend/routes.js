@@ -98,7 +98,8 @@ module.exports = function (app) {
       res.send(response);
     });
   });
-  app.route("/products/:productId").get((req, res) => {
+  app.route("/product/:productId").get((req, res) => {
+    console.log(req.params.productId);
     offer.getProductByID(req.params.productId).then((response) => {
       res.send(response);
     });

@@ -95,9 +95,17 @@ class Offers {
   }
 
   async getProductByID(id) {
-    const product = await this.#prisma.products.findUnique({
+    console.log(id);
+    const product = await this.#prisma.products.findFirst({
       where: {
         product_id: id,
+      },
+      include: {
+        user: {
+          select: {
+            user_name: true,
+          },
+        },
       },
     });
     return product;
