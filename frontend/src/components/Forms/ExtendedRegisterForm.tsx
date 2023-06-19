@@ -48,11 +48,21 @@ const ExtendedRegisterForm: React.FC = () => {
       setStreet(e.currentTarget.value);
     }
     const transformCode = (code: string) => {
+      if(code.length > 2 && code.length <= 6){
+        let symbol = ['-'];
+        let array = code.split('');
+        code = array.filter(item => !symbol.includes(item)).join('');
+        let firstString = code.substring(0,2);
+        let secondString = code.substring(2);
+        return firstString + "-" + secondString;
+      }else{
+        return code.length <= 6 ? code : postCode;
+      }
+      
       // const firstPart = code.substring(0, 2);
       // const secondPart = code.substring(2);
     
       // return `${firstPart}-${secondPart}`;
-      return code;
     };
 
     // const calculateAge = (birthday: string) => {

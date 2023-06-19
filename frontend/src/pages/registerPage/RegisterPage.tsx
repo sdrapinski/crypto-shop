@@ -6,7 +6,7 @@ const RegisterPage = () => {
   const [isRegisterOk, setisRegisterOk] = useState<boolean>(false);
   return (
     <>
-      {!isRegisterOk ? (
+      {isRegisterOk ? (
         <div className="login">
           {" "}
           <RegisterForm />{" "}
