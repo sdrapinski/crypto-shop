@@ -94,6 +94,15 @@ class Offers {
     return products;
   }
 
+  async getProductByID(id) {
+    const product = await this.#prisma.products.findUnique({
+      where: {
+        product_id: id,
+      },
+    });
+    return product;
+  }
+
   async findProductsFromCategory(item) {
     const products = await this.#prisma.products.findMany({
       take: 6,

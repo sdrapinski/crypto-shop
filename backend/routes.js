@@ -98,4 +98,9 @@ module.exports = function (app) {
       res.send(response);
     });
   });
+  app.route("/products/:productId").get((req, res) => {
+    offer.getProductByID(req.params.productId).then((response) => {
+      res.send(response);
+    });
+  });
 };
