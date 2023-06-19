@@ -93,7 +93,28 @@
       "product_dollar_price": 100,
       "product_quantity": 4,
 
-      "product_popularity": 0.8,
+      "product_popularity": 2,
+      "product_promotion": null
+    },
+    {
+      "product_name": "Skuter",
+      "products_category_id": 4,
+      "product_description": " to ulepszona, zasilana elektrycznie wersja starych skuterów z lat 90-tych. Prędkość maksymalna 65 km/h; może jechać 6 godzin bez ładowania (około 5 minut na każdej stacji usługowej).",
+      "product_images": {},
+      "product_dollar_price": 300,
+      "product_quantity": 1,
+
+      "product_popularity": 6,
+      "product_promotion": null
+    },
+    {
+      "product_name": "Motocykl",
+      "products_category_id": 4,
+      "product_description": "ulepszone wersje zwykłych mo-tocykli. Większość to modele półleżące, któ-rych plastikowa obudowa zamyka się nad kierowcą. Około połowa modeli zasilana jest elektrycznie – poruszają się one z maksymalną prędkością 100 km/h i mogą jechać około 8 godz. jazdy/naładowanie. Motocykle zasilane CHOOH2 rozwijają prędkości do 220 km/h i mają zbiornik osiemnastolitrowy.",
+      "product_images": {},
+      "product_dollar_price": 750,
+      "product_quantity": 1,
+      "product_popularity": 9,
       "product_promotion": null
     },
     {
@@ -103,176 +124,187 @@
       "product_images": {},
       "product_dollar_price": 1000,
       "product_quantity": 1,
-      "product_popularity": 0.8,
+      "product_popularity": 5,
       "product_promotion": null
     },
     {
       "product_name": "Harry potter",
       "products_category_id": 1,
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_images": {},
-      "product_dollar_price": 500,
+      "product_dollar_price": 8,
       "product_quantity": 10,
 
-      "product_popularity": 0.8,
+      "product_popularity": 6.7,
+      "product_promotion": null
+    },
+    {
+      "product_name": "Horror z Dunwich",
+      "products_category_id": 1,
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
+      "product_images": {},
+      "product_dollar_price": 25,
+      "product_quantity": 10,
+
+      "product_popularity": 10,
       "product_promotion": null
     },
     {
       "product_name": "Władca Pierścieni:Dwie wieże",
       "products_category_id": 1,
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_images": {},
       "product_dollar_price": 50,
       "product_quantity": 10,
 
-      "product_popularity": 8,
+      "product_popularity": 10,
       "product_promotion": null
     },
     {
       "product_name": "Karton",
       "products_category_id": 5,
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_images": {},
       "product_dollar_price": 5,
       "product_quantity": 100,
 
-      "product_popularity": 0.8,
+      "product_popularity": 3,
       "product_promotion": null
     },
     {
       "product_name": "kołpak",
       "products_category_id": 4,
-      "product_description": "Ukradłem",
+      "product_description": "Ukradłem, ale tylko głupi by nie ukradł. Trzeba było pilnować.",
       "product_images": {},
       "product_dollar_price": 10,
       "product_quantity": 4,
 
-      "product_popularity": 0.8,
+      "product_popularity": 4.5,
       "product_promotion": null
     },
 
     {
       "product_name": "Kask dla dziecka",
       "products_category_id": 3,
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_images": {},
       "product_dollar_price": 20,
       "product_quantity": 1,
 
-      "product_popularity": 0.8,
+      "product_popularity": 7.8,
       "product_promotion": null
     },
 
     {
       "product_name": "Pęknięta deska",
       "products_category_id": 3,
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_images": {},
       "product_dollar_price": 0,
       "product_quantity": 1,
 
-      "product_popularity": 0.8,
+      "product_popularity": 6.8,
       "product_promotion": null
     },
     {
       "product_name": "Sześcian",
       "products_category_id": 5,
-      "product_description": "20 za noc",
+      "product_description": "20 za noc wedle podręcznika gracza cyberpunk 2020, po prostu 6 ścian",
       "product_images": {},
       "product_dollar_price": 500,
       "product_quantity": 1,
 
-      "product_popularity": 0.8,
+      "product_popularity": 4.8,
       "product_promotion": null
     },
     {
       "product_name": "Pasat",
       "products_category_id": 4,
-      "product_description": "TDI!!!",
+      "product_description": "TDI!!! super!!! mega oferta!!! niemiec płakał jak sprzedawał!!! do negocjacji esemesem :690420666",
       "product_images": {},
       "product_dollar_price": 5000,
       "product_quantity": 1,
 
-      "product_popularity": 0.8,
+      "product_popularity": 8.8,
       "product_promotion": null
     },
     {
       "product_name": "Pizza",
       "products_category_id": 2,
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_images": {},
       "product_dollar_price": 50,
       "product_quantity": 10,
 
-      "product_popularity": 0.8,
+      "product_popularity": 9.3,
       "product_promotion": null
     },
     
     {
       "product_name": "Dobry prepak",
       "products_category_id": 2,
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_images": {},
       "product_dollar_price": 200,
       "product_quantity": 10,
 
-      "product_popularity": 0.8,
+      "product_popularity": 6.8,
       "product_promotion": null
     },
     {
       "product_name": "Czapka z draszkiem",
-      "product_description": "Fajna w czapka",
+      "product_description": "Fajna w czapka, najlepiej nosi się na głowie, spada jak się ją zdejmie -wymaga fizycznego połączenia z użytkownikiem",
       "products_category_id": 3,
       "product_images": {},
       "product_dollar_price": 20,
       "product_quantity": 50,
 
-      "product_popularity": 0.8,
+      "product_popularity": 5.3,
       "product_promotion": null
     },
 
     {
       "product_name": "kółka",
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "products_category_id": 3,
       "product_images": {},
       "product_dollar_price": 400,
       "product_quantity": 15,
 
-      "product_popularity": 0.8,
+      "product_popularity": 8.2,
       "product_promotion": null
     },
 
     {
       "product_name": "Deskorolka",
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "products_category_id": 3,
       "product_images": {},
       "product_dollar_price": 40,
       "product_quantity": 1,
 
-      "product_popularity": 0.8,
+      "product_popularity": 7.8,
       "product_promotion": null
     },
     {
       "product_name": "Skateboard",
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "products_category_id": 3,
       "product_images": {},
       "product_dollar_price": 500,
       "product_quantity": 10,
 
-      "product_popularity": 0.8,
+      "product_popularity": 9.8,
       "product_promotion": null
     },
     {
       "product_name": "Villa",
       "products_category_id": 5,
-      "product_description": "Lorem ipsum dolor sit amet",
+      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_images": {},
-      "product_dollar_price": 500,
+      "product_dollar_price": 50000,
       "product_quantity": 10,
-      "product_popularity": 0.8,
+      "product_popularity": 10,
       "product_promotion": null
     }
   ],
