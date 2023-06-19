@@ -8,7 +8,6 @@ const ProductDetails = () => {
   const { productId } = useParams();
   const appcontext = useContext(AppContext);
   const [product, setProduct] = useState<ProductDetailsInterface | null>();
-  const [date, setdate] = useState();
 
   useEffect(() => {
     axios
@@ -32,6 +31,8 @@ const ProductDetails = () => {
   if (!product) {
     return <div>Loading...</div>;
   }
+  const addedTime = new Date(product.product_added_time);
+  const addedDate = addedTime.toLocaleDateString();
 
   return (
     <div className="product-container">
@@ -65,7 +66,7 @@ const ProductDetails = () => {
           >
             Popularity: {product.product_popularity}/10
           </p>
-          <p className="product-added">Added: {}</p>
+          <p className="product-added">Added: {addedDate}</p>
 
           <hr className="separator" />
           <p className="product-price">
