@@ -19,7 +19,7 @@ const LoginSwitch = () => {
 
   return (
     <>
-      {!appcontext?.user ? (
+      {appcontext?.user ? (
         <div className="header__icons">
           <div className="icon-wrapper">
             <FaUser onClick={() => handleButtonClick("user")} />
@@ -41,7 +41,7 @@ const LoginSwitch = () => {
                       <NavLink to="/account">Szczegóły konta</NavLink>
                     </li>
                     <li>
-                      <button onClick={() => console.log("Wyloguj")}>
+                      <button onClick={() => appcontext.logout()}>
                         Wyloguj
                       </button>
                     </li>

@@ -1,25 +1,27 @@
 import React, { useState } from "react";
 import { NavLink } from "react-router-dom";
+import { mainPageProductsInterface } from "../../../interfaces/product.interface";
 
 interface CardProps {
-  id: number;
-  handleMouseEnter: (id: number) => void;
+  product: mainPageProductsInterface;
+  handleMouseEnter: (id: string) => void;
   handleMouseLeave: () => void;
-  isHovered: Number;
+  isHovered: string;
 }
 
 const ProductCard: React.FC<CardProps> = (props) => {
+  const { product } = props;
   return (
-    <NavLink to={`/product/${props.id}`}>
+    <NavLink to={`/product/${product.product_id}`}>
       <div
         className={`productCard ${
-          props.isHovered === props.id
+          props.isHovered === product.product_id
             ? "hovered"
-            : props.isHovered === 0
+            : props.isHovered === ""
             ? ""
             : "not-hovered"
         }`}
-        onMouseEnter={() => props.handleMouseEnter(props.id)}
+        onMouseEnter={() => props.handleMouseEnter(product.product_id)}
         onMouseLeave={props.handleMouseLeave}
       >
         <div
@@ -27,10 +29,10 @@ const ProductCard: React.FC<CardProps> = (props) => {
           style={{ backgroundImage: "url(https://picsum.photos/230/300)" }}
         >
           <div className="productCard__content">
-            <h4 className="productCard__heading">
-              Product name {props.id.toString()}
-            </h4>
-            <h5 className="productCard__heading">Price: 20$</h5>
+            <h4 className="productCard__heading">{product.product_name}</h4>
+            <h5 className="productCard__heading">
+              Price: ${product.product_dollar_price}
+            </h5>
           </div>
         </div>
       </div>

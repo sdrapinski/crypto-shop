@@ -4,6 +4,7 @@ export interface AppContextInterface {
   user: User | null;
   loginUser: (data: JwtInteface) => void;
   backendUrl: string | undefined;
+  logout: () => void;
 }
 
 export interface UserProps {

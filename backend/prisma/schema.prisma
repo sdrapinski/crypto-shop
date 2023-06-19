@@ -13,7 +13,6 @@ datasource db {
 // basic
 model Region {
   region_id String @id @default(uuid())
-  continent String
   country String
   city String
   street String
@@ -39,7 +38,7 @@ user_date_of_birth DateTime
 user_phone_number String
 user_login String
 user_password String
-user_join_date DateTime
+user_join_date DateTime @default(now())
 user_avatar_url String?
 user_premium_tokens Float?
 user_cart Cart?
@@ -65,6 +64,7 @@ model Products {
   product_watched_by_id String
   product_sold ProductsSold[]
   product_popularity Float?
+  product_added_time DateTime @default(now())
   product_promotion DateTime?
 
 }
@@ -87,8 +87,7 @@ model CryptoProductPrice {
 
 model Cart {
   cart_id String @id @default(uuid())
-  product_id String 
-  products Products @relation(fields: [product_id], references: [product_id])
+  products Products[]
   user_id String @unique
   user Users @relation(fields: [user_id], references: [user_id])
 

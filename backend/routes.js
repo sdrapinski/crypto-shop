@@ -83,8 +83,8 @@ module.exports = function (app) {
       res.send(response);
     });
   });
-  app.route("/offersofcategory/:Categoryid").get((req, res) => {
-    offer.offersofCategory().then((response) => {
+  app.route("/offersincategory/:Categoryid").get((req, res) => {
+    offer.offersinCategory(req.params.Categoryid).then((response) => {
       res.send(response);
     });
   });
@@ -94,7 +94,12 @@ module.exports = function (app) {
     });
   });
   app.route("/mainPageProducts").get((req, res) => {
-    Category.categoriesForMainPage().then((response) => {
+    offer.mainpageproducts().then((response) => {
+      res.send(response);
+    });
+  });
+  app.route("/products/:productId").get((req, res) => {
+    offer.getProductByID(req.params.productId).then((response) => {
       res.send(response);
     });
   });

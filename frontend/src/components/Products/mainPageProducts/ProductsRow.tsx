@@ -1,27 +1,30 @@
 import React, { useState } from "react";
 import ProductCard from "./ProductCard";
+import { mainPageProductsInterface } from "../../../interfaces/product.interface";
 
-const items = [1, 2, 3, 4, 5, 6];
+interface ProductsRowProps {
+  products: mainPageProductsInterface[];
+}
 
-const ProductsRow = () => {
-  const [isHovered, setIsHovered] = useState(0);
+const ProductsRow: React.FC<ProductsRowProps> = (props) => {
+  const [isHovered, setIsHovered] = useState("");
 
-  const handleMouseEnter = (id: number) => {
+  const handleMouseEnter = (id: string) => {
     setIsHovered(id);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(0);
+    setIsHovered("");
   };
 
   return (
     <section className="MainPageProducts">
-      <h3> New Products</h3>
+      <h3> {props.products[0].products_category.product_category_name}</h3>
       <div className="MainPageProducts__container">
-        {items.map((item) => (
+        {props.products.map((item, index) => (
           <ProductCard
-            key={item}
-            id={item}
+            key={index}
+            product={item}
             handleMouseLeave={handleMouseLeave}
             handleMouseEnter={handleMouseEnter}
             isHovered={isHovered}

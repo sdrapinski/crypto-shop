@@ -3,18 +3,20 @@ const prisma = new PrismaClient();
 const records = require("./records.json");
 
 async function addRecords() {
-  records.products_category.map(async (cat) => {
+  for (const cat of records.products_category) {
     const category = await prisma.products_category.create({
       data: cat,
     });
-  });
+  }
 
-  records.crypto.map(async (crypto) => {
+  for (const crypto of records.crypto) {
     const coin = await prisma.crypto.create({
       data: crypto,
     });
-  });
-  records.users.map(async (user, index) => {
+  }
+
+  const newUsers = [];
+  for (const [index, user] of records.users.entries()) {
     const newUser = await prisma.users.create({
       data: user,
     });
@@ -22,15 +24,23 @@ async function addRecords() {
       data: { user_id: newUser.user_id, ...records.region[index] },
     });
 
+    newUsers.push(newUser);
+  }
+
+  let user_index = 0;
+
+  for (let index = 0; index < records.products.length; index++) {
     const userProduct = await prisma.products.create({
       data: {
-        user: { connect: { user_id: newUser.user_id } },
+        user: { connect: { user_id: newUsers[user_index].user_id } },
         products_category: {
           connect: {
             product_category_id: records.products[index].products_category_id,
           },
         },
-        product_watchedBy: { connect: { user_id: newUser.user_id } },
+        product_watchedBy: {
+          connect: { user_id: newUsers[user_index].user_id },
+        },
         product_name: records.products[index].product_name,
         product_description: records.products[index].product_description,
         product_images: records.products[index].product_images,
@@ -40,8 +50,15 @@ async function addRecords() {
         product_promotion: records.products[index].product_promotion,
       },
     });
-  });
+
+    if (user_index >= newUsers.length - 1) {
+      user_index = 0;
+    } else {
+      user_index++;
+    }
+  }
 }
+
 addRecords()
   .catch((err) => console.error(err))
   .finally(async () => await prisma.$disconnect());
