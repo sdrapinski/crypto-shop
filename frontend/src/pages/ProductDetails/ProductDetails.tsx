@@ -45,9 +45,6 @@ const ProductDetails = () => {
               alt={product.product_name}
             />
           </div>
-          <div className="product-description">
-            {product.product_description}
-          </div>
         </div>
         <div className="product-details">
           <div className="product-user">
@@ -78,6 +75,10 @@ const ProductDetails = () => {
           <hr className="separator" />
           <button>Buy Now</button>
         </div>
+      </div>
+      <div className="product-additionalInfo">
+        <hr className="separator" />
+        <div className="product-description">{product.product_description}</div>
       </div>
     </div>
   );
