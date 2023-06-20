@@ -16,14 +16,14 @@ module.exports = function (app) {
   app.use(bodyParser.json());
 
   app.post("/login", async (req, res) => {
-    const userFromDB = await user.findUser(req.body);
+    const userFromDB = await user.getUserByLoginAndPassword(req.body);
+
     if (!userFromDB || userFromDB.length === 0) {
       return res.sendStatus(401);
     }
-    const userObject = userFromDB[0];
 
-    const accessToken = jwtUtils.generateAccessToken(userObject);
-    const refreshToken = jwtUtils.generateRefreshToken(userObject);
+    const accessToken = jwtUtils.generateAccessToken(userFromDB);
+    const refreshToken = jwtUtils.generateRefreshToken(userFromDB);
 
     res.json({ accessToken, refreshToken });
   });
