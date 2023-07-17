@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import RegisterForm from "../../components/Forms/RegisterForm";
-import MoreRegisterDataPage from "./MoreRegisterDataPage";
+import ExtendedRegisterForm from "../../components/Forms/ExtendedRegisterForm";
 
 const RegisterPage = () => {
   const [isRegisterOk, setisRegisterOk] = useState<boolean>(false);
@@ -12,7 +12,9 @@ const RegisterPage = () => {
           <RegisterForm />{" "}
         </div>
       ) : (
-        <MoreRegisterDataPage />
+        <div className="login login--autoHeight">
+          <ExtendedRegisterForm />
+        </div>
       )}
     </>
   );

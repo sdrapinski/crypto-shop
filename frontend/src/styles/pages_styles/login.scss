@@ -5,12 +5,18 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+
+  @media (max-width: 768px) {
+    /* Style dla mniejszych ekranów */
+    height: 100vh;
+    padding: 20px;
+  }
 }
+
 .login__form {
   width: 500px;
   background-color: rgba(255, 255, 255, 0.13);
   border-radius: 10px;
-
   border: 2px solid rgba(255, 255, 255, 0.1);
   box-shadow: 0 0 40px rgba(56, 15, 88, 0.6);
   padding: 50px 35px;
@@ -20,12 +26,22 @@
     font-size: 40px;
     font-weight: 500;
   }
+
   * {
     font-family: sans-serif;
-
     letter-spacing: 0.5px;
     outline: none;
     border: none;
+  }
+
+  @media (max-width: 768px) {
+    /* Style dla mniejszych ekranów */
+    display: flex;
+    flex-direction: column;
+
+    width: 100%;
+    padding: 30px;
+    box-shadow: none;
   }
 }
 
@@ -39,14 +55,22 @@
   border-radius: 5px;
   cursor: pointer;
   transition: 1s;
+
+  &:hover {
+    background-color: rgba(52, 179, 120, 1);
+  }
+
+  @media (max-width: 768px) {
+    /* Style dla mniejszych ekranów */
+    font-size: 16px;
+  }
 }
-.login__submit:hover {
-  background-color: rgba(52, 179, 120, 1);
-}
+
 .providers {
   margin-top: 30px;
   display: flex;
   justify-content: space-between;
+
   div {
     width: 200px;
     border-radius: 5px;
@@ -56,26 +80,41 @@
     text-align: center;
     cursor: pointer;
   }
+
   .google {
     background-color: #4285f4;
   }
+
   .fb {
     background-color: #4267b2;
   }
+
   .google,
   .fb {
     display: flex;
-
     align-items: center;
+
     svg {
       margin-right: 10px;
     }
+
     span {
       margin-top: 4px;
     }
   }
+
   div:hover {
     background-color: rgba(66, 75, 211, 1);
+  }
+
+  @media (max-width: 768px) {
+    /* Style dla mniejszych ekranów */
+    flex-direction: column;
+
+    div {
+      margin-top: 15px;
+      width: 100%;
+    }
   }
 }
 
@@ -83,18 +122,33 @@
   color: black;
   margin-top: 25px;
   text-align: center;
+
   a {
     color: black;
   }
+
   a:hover {
     color: rgb(95, 57, 126);
   }
+
+  @media (max-width: 768px) {
+    /* Style dla mniejszych ekranów */
+    font-size: 14px;
+    margin-top: 20px;
+  }
 }
+
 .login__error {
   color: red;
   margin: 20px 0px;
+
+  @media (max-width: 768px) {
+    /* Style dla mniejszych ekranów */
+    font-size: 14px;
+    margin-top: 20px;
+  }
 }
+
 .login__errorInput {
   border: 1px solid red;
 }
-// button
