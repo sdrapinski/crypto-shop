@@ -28,6 +28,19 @@ module.exports = function (app) {
     res.json({ accessToken, refreshToken });
   });
 
+  app.post("/ChceckIfUserDoesNotExist", async (req, res) => {
+    user.checkIfUserNotExistByEmail(req.body.email).then((val) => {
+      res.send(val);
+    });
+  });
+
+  app.post("/registerUser", async (req, res) => {
+    console.log(req.body);
+    user.createUser(req.body).then((resp) => {
+      res.send(resp);
+    });
+  });
+
   app.post("/refresh-token", (req, res) => {
     const { token } = req.body;
     const data = jwtUtils.verifyRefreshToken(token);

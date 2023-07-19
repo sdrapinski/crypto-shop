@@ -4,16 +4,41 @@ import ExtendedRegisterForm from "../../components/Forms/ExtendedRegisterForm";
 
 const RegisterPage = () => {
   const [isRegisterOk, setisRegisterOk] = useState<boolean>(false);
+  const [email, setemail] = useState("");
+  const [login, setlogin] = useState("");
+  const [password, setpassword] = useState("");
+
+  const handleRegisterOk = (ok: boolean) => {
+    setisRegisterOk(ok);
+  };
+
+  const setDataFromRegisterFrom = (
+    email: string,
+    login: string,
+    password: string
+  ) => {
+    setemail(email);
+    setlogin(login);
+    setpassword(password);
+  };
+
   return (
     <>
       {!isRegisterOk ? (
         <div className="login">
           {" "}
-          <RegisterForm />{" "}
+          <RegisterForm
+            isRegisterOk={handleRegisterOk}
+            callbackData={setDataFromRegisterFrom}
+          />{" "}
         </div>
       ) : (
         <div className="login login--autoHeight">
-          <ExtendedRegisterForm />
+          <ExtendedRegisterForm
+            login={login}
+            password={password}
+            email={email}
+          />
         </div>
       )}
     </>

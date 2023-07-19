@@ -23,6 +23,20 @@ class Users {
     return findedUser;
   }
 
+  async checkIfUserNotExistByEmail(email) {
+    const user = await this.getUserByEmail(email);
+    return !user;
+  }
+
+  async getUserByEmail(email) {
+    const findedUser = await this.#prisma.users.findFirst({
+      where: {
+        user_email: email,
+      },
+    });
+    return findedUser;
+  }
+
   async getUserById(user) {
     const findedUser = await this.#prisma.users.findUnique({
       where: {

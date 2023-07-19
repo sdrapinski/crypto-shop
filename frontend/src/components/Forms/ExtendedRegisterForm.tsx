@@ -3,15 +3,16 @@ import InputForm from "./InputForm";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
 import axios from "axios";
-import { ExtendedUserProps } from "../../interfaces/Login.interface";
+import { ExtendedRegisterProps } from "../../interfaces/Login.interface";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-const ExtendedRegisterForm: React.FC = () => {
+const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
+  const { login, email, password } = props;
+
   const [userName, setUserName] = useState("");
   const [userSurname, setUserSurname] = useState("");
-  // const [userAge, setUserAge] = useState("");
   const [userBirthday, setUserBirthday] = useState("");
   const [userPhoneNumber, setPhoneNumber] = useState("");
   const [country, setCountry] = useState("");
@@ -64,38 +65,33 @@ const ExtendedRegisterForm: React.FC = () => {
     // return `${firstPart}-${secondPart}`;
   };
 
-  // const calculateAge = (birthday: string) => {
-  //     const currentDate = new Date();
-  //     const birthdayDate = new Date(birthday);
-  //     const ageInMilliseconds = currentDate.getTime() - birthdayDate.getTime();
-  //     const ageDate = new Date(ageInMilliseconds);
-  //     const age = Math.abs(ageDate.getUTCFullYear() - 1970);
-  //     setUserAge(`${age}`);
-  //   };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    // console.log(userPhoneNumber);
     e.preventDefault();
+    let userDate = new Date(userBirthday);
+    let userBirthdayISO = userDate.toISOString();
 
-    //   axios
-    //     .post<ExtendedUserProps>(
-    //       `${backendUrl}/extendedRegister`,
-    //       {
-    //         userName: userName,
-    //         userSurname: userSurname,
-    //         userAge: userAge,
-    //         userBirthday: userBirthday
-    //       },
-    //       {
-    //         headers: {
-    //           "Content-Type": "application/json",
-    //           Accept: "application/json",
-    //         },
-    //       }
-    //     )
-    //     .then((response) => {
-    //       console.log(response);
-    //     });
+    axios
+      .post(
+        `${backendUrl}/registerUser`,
+        {
+          user_name: userName,
+          user_surname: userSurname,
+          user_email: email,
+          user_date_of_birth: userBirthdayISO,
+          user_phone_number: userPhoneNumber,
+          user_login: login,
+          user_password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        }
+      )
+      .then((response) => {
+        console.log(response);
+      });
   };
 
   return (

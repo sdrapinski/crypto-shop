@@ -5,13 +5,18 @@ import { UserProps } from "../../interfaces/AppContext.interface";
 import InputForm from "./InputForm";
 import LoginProviders from "./LoginProviders";
 import { AppContext } from "../../state/AppContext";
+import { RegisterFormProps } from "../../interfaces/Login.interface";
 
-const RegisterForm = () => {
+const RegisterForm: React.FC<RegisterFormProps> = (props) => {
+  const { isRegisterOk, callbackData } = props;
   const [email, setemail] = useState("");
   const [password, setpassword] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [login, setlogin] = useState("");
   const appContext = useContext(AppContext);
+  const [authenticationFailed, setauthenticationFailed] =
+    useState<boolean>(false);
+  const [errorDetail, seterrorDetail] = useState("");
 
   const handleEmailChange = (e: React.FormEvent<HTMLInputElement>) => {
     setemail(e.currentTarget.value);
@@ -19,9 +24,6 @@ const RegisterForm = () => {
   const handleLoginChange = (e: React.FormEvent<HTMLInputElement>) => {
     setlogin(e.currentTarget.value);
   };
-  const [authenticationFailed, setauthenticationFailed] =
-    useState<boolean>(false);
-  const [errorDetail, seterrorDetail] = useState("");
 
   const handlePasswordChange = (e: React.FormEvent<HTMLInputElement>) => {
     setpassword(e.currentTarget.value);
@@ -33,13 +35,17 @@ const RegisterForm = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
+    if (!email || !password || !repeatPassword || !login) {
+      setauthenticationFailed(true);
+      seterrorDetail("Please fill all inputs");
+      return;
+    }
+
     axios
       .post<UserProps>(
-        `${appContext?.backendUrl}/register`,
+        `${appContext?.backendUrl}/ChceckIfUserDoesNotExist`,
         {
-          login: login,
           email: email,
-          password: password,
         },
         {
           headers: {
@@ -49,7 +55,14 @@ const RegisterForm = () => {
         }
       )
       .then((response) => {
-        console.log(response);
+        if (response.data) {
+          isRegisterOk(true);
+          callbackData(email, login, password);
+        } else {
+          isRegisterOk(false);
+          setauthenticationFailed(true);
+          seterrorDetail("User with this email already exist");
+        }
       });
   };
   return (
