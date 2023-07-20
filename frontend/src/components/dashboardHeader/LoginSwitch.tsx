@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
-import { FaUser, FaShoppingCart, FaBell } from "react-icons/fa";
+import { FaUser, FaShoppingCart, FaBell, FaPlusSquare } from "react-icons/fa";
 import { AppContext } from "../../state/AppContext";
 import { NavLink } from "react-router-dom";
 
@@ -21,6 +21,12 @@ const LoginSwitch = () => {
     <>
       {appcontext?.user ? (
         <div className="header__icons">
+          <div className="icon-wrapper--addProduct">
+            <NavLink to="/product/addProduct">
+              {" "}
+              <FaPlusSquare />{" "}
+            </NavLink>
+          </div>
           <div className="icon-wrapper">
             <FaUser onClick={() => handleButtonClick("user")} />
           </div>

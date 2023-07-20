@@ -10,9 +10,10 @@ import "./styles/style.scss";
 import DashboardHeader from "./components/dashboardHeader/DashboardHeader";
 import UserDetails from "./pages/userDetails/UserDetails";
 import UserCart from "./pages/userCart/UserCart";
-import ProductDetails from "./pages/ProductDetails/ProductDetails";
-import ProductsByCategoryPage from "./pages/ProductsByCategoryPage/ProductsByCategoryPage";
-import ProductsBySearchPage from "./pages/ProductsBySearchPage/ProductsBySearchPage";
+import ProductDetails from "./pages/productDetails/ProductDetails";
+import ProductsByCategoryPage from "./pages/productsByCategoryPage/ProductsByCategoryPage";
+import ProductsBySearchPage from "./pages/productsBySearchPage/ProductsBySearchPage";
+import AddProductPage from "./pages/addProduct/AddProductPage";
 
 function Router() {
   return (
@@ -29,6 +30,7 @@ function Router() {
             <Route path="/usercart" element={<UserCart />} />
 
             <Route path="/product/:productId" element={<ProductDetails />} />
+            <Route path="/product/addProduct" element={<AddProductPage />} />
             <Route path="/products">
               <Route
                 path="category/:categoryId"

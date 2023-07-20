@@ -2,6 +2,13 @@
   position: relative;
   display: inline-block;
   margin: 0 5px;
+  &--addProduct {
+    margin: 0px 50%;
+    a {
+      text-decoration: none;
+      color: rgb(233, 178, 29);
+    }
+  }
 }
 
 .header__icons {

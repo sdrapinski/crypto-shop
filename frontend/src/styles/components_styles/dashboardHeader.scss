@@ -1,6 +1,6 @@
 .main__header {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr; /* trzy kolumny równej szerokości */
+  grid-template-columns: 1fr 1fr auto 1fr; /* trzy kolumny równej szerokości */
   grid-template-rows: auto auto; /* dwa wiersze z automatyczną wysokością */
   justify-content: space-between;
   align-items: center;
@@ -16,7 +16,7 @@
 }
 
 .main__header .header__icons {
-  grid-column: 3 / 4; /* od trzeciej do czwartej kolumny */
+  grid-column: 3 / 5; /* od trzeciej do czwartej kolumny */
   grid-row: 1 / 2; /* od pierwszego do drugiego wiersza */
   display: none;
   align-items: center;

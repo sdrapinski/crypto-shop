@@ -40,6 +40,11 @@ const RegisterForm: React.FC<RegisterFormProps> = (props) => {
       seterrorDetail("Please fill all inputs");
       return;
     }
+    if (repeatPassword !== password) {
+      setauthenticationFailed(true);
+      seterrorDetail("password and repeat password do not match");
+      return;
+    }
 
     axios
       .post<UserProps>(
