@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
+import Form from "react-bootstrap/Form";
 
 const AddProductPage = () => {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
-  const [selectedCategory, setSelectedCategory] = useState("");
 
   const [productDollarPrice, setProductDollarPrice] = useState(0);
   const [productQuantity, setProductQuantity] = useState(0);
   const [isProductPromoted, setIsProductPromoted] = useState(false);
   const [productPromotion, setProductPromotion] = useState("");
+  const [productImages, setProductImages] = useState<File[]>([]);
+  const [imagePreviews, setImagePreviews] = useState<string[]>([]);
+
+  //// testowanko
 
   // Lista predefiniowanych kategorii
   const predefinedCategories = [
@@ -18,9 +22,22 @@ const AddProductPage = () => {
     // Dodaj tutaj pozostałe predefiniowane kategorie z bazy danych
   ];
 
-  const handleCategoryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSelectedCategory(value);
+  const handleThumbnailClick = (index: number) => {
+    setImagePreviews((prevPreviews) => {
+      const updatedPreviews = [
+        ...prevPreviews.slice(0, index),
+        ...prevPreviews.slice(index + 1),
+      ];
+      return updatedPreviews;
+    });
+
+    setProductImages((prevImages) => {
+      const updatedImages = [
+        ...prevImages.slice(0, index),
+        ...prevImages.slice(index + 1),
+      ];
+      return updatedImages;
+    });
   };
 
   const handleAddProduct = () => {
@@ -28,11 +45,9 @@ const AddProductPage = () => {
     // Pamiętaj, że musisz również przekazać identyfikator użytkownika (user_id) dla danego produktu,
     // który możesz uzyskać z appContext.
     // Przykład:
-    // const selectedProductCategory = customCategory || selectedCategory;
     // const newProduct = {
     //   productName,
     //   productDescription,
-    //   productCategory: selectedProductCategory,
     //   productDollarPrice,
     //   productQuantity,
     //   productPromotion: isProductPromoted ? productPromotion : undefined,
@@ -46,10 +61,72 @@ const AddProductPage = () => {
     // });
   };
 
+  useEffect(() => {
+    // Convert selected files to data URLs
+    Promise.all(
+      productImages.map((file) => {
+        return new Promise<string>((resolve) => {
+          const reader = new FileReader();
+          reader.onload = () => resolve(reader.result as string);
+          reader.readAsDataURL(file);
+        });
+      })
+    ).then((previewUrls) => {
+      setImagePreviews(previewUrls);
+    });
+  }, [productImages]);
+
+  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    setProductImages((prev) => [...prev, ...files]);
+  };
+  const handleRemoveImage = (index: number) => {
+    setImagePreviews((prevPreviews) =>
+      prevPreviews.filter((_, i) => i !== index)
+    );
+    setProductImages((prevImages) => prevImages.filter((_, i) => i !== index));
+  };
+
   return (
     <div className="add-product-container">
       <h2 className="add-product-header">Add Product</h2>
-      <form className="add-product-form">
+      <div className="add-product-form">
+        {imagePreviews.length > 0 && (
+          <div className="image-preview-container">
+            <div className="image-preview-selected">
+              <img
+                src={imagePreviews[0]}
+                alt={`Preview added product`}
+                className="selected-image"
+              />
+              <button
+                className="remove-image-btn"
+                onClick={() => handleRemoveImage(0)}
+              >
+                X
+              </button>
+            </div>
+            <div className="image-preview-thumbnails">
+              {imagePreviews.slice(1).map((previewUrl, index) => (
+                <img
+                  key={index}
+                  src={previewUrl}
+                  alt={`Preview ${index + 1}`}
+                  className="thumbnail"
+                  onClick={() => handleThumbnailClick(index)}
+                />
+              ))}
+            </div>
+          </div>
+        )}
+        <label>Product Images:</label>
+        <input
+          multiple
+          type="file"
+          accept="image/*"
+          onChange={handleFileInputChange}
+        />
+        <br />
         <label>Product Name:</label>
         <input
           type="text"
@@ -64,21 +141,15 @@ const AddProductPage = () => {
           onChange={(e) => setProductDescription(e.target.value)}
         />
         <br />
-
         <label>Product Category:</label>
-        {/* Użyj elementu datalist do wyświetlenia listy sugestii */}
-        <input
-          type="text"
-          value={selectedCategory}
-          onChange={handleCategoryChange}
-          list="categories"
-        />
-        <datalist id="categories">
+        <Form.Select aria-label="Default select example">
+          <option>Open this select menu</option>
           {predefinedCategories.map((category) => (
-            <option key={category} value={category} />
+            <option key={category} value={category}>
+              {category}
+            </option>
           ))}
-        </datalist>
-        <br />
+        </Form.Select>
 
         {/* Dodaj nowe pole do wprowadzenia niestandardowej kategorii */}
 
@@ -118,10 +189,16 @@ const AddProductPage = () => {
         )}
         <br />
 
-        <button type="button" onClick={handleAddProduct}>
+        <button
+          type="button"
+          onClick={(e) => {
+            e.preventDefault();
+            handleAddProduct();
+          }}
+        >
           Add Product
         </button>
-      </form>
+      </div>
     </div>
   );
 };

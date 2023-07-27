@@ -4,6 +4,7 @@
 .add-product-container {
   max-width: 600px;
   margin: 0 auto;
+
   padding: 20px;
 }
 
@@ -40,4 +41,46 @@
     appearance: none;
     -moz-appearance: textfield;
   }
+
+  .image-preview-container {
+    margin-bottom: 20px;
+  }
+
+  .image-preview-selected {
+    display: flex;
+    max-width: 400px;
+    align-items: center;
+    position: relative;
+  }
+
+  .selected-image {
+    max-width: 400px;
+    height: auto;
+    margin-right: 10px;
+  }
+
+  .remove-image-btn {
+    top: 10px;
+    right: 10px;
+    position: absolute;
+    font-size: 20px;
+    padding: 4px 8px;
+    background-color: transparent;
+    color: rgb(255, 255, 255);
+    border: none;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+
+  .image-preview-thumbnails {
+    display: flex;
+
+    .thumbnail {
+      max-width: 60px;
+      height: auto;
+      margin-right: 10px;
+      cursor: pointer;
+    }
+  }
 }
+/* Podgląd wybranych zdjęć */
