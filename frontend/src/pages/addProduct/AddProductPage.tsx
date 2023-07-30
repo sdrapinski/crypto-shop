@@ -46,6 +46,7 @@ const AddProductPage = () => {
     // który możesz uzyskać z appContext.
     // Przykład:
     // const newProduct = {
+    //
     //   productName,
     //   productDescription,
     //   productDollarPrice,
