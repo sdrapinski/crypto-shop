@@ -8,12 +8,14 @@ import AppProvider from "./state/AppContext";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./styles/style.scss";
 import DashboardHeader from "./components/dashboardHeader/DashboardHeader";
-import UserDetails from "./pages/userDetails/UserDetails";
+import UserAccountPage from "./pages/userAccountPage/userAccountPage";
 import UserCart from "./pages/userCart/UserCart";
 import ProductDetails from "./pages/productDetails/ProductDetails";
 import ProductsByCategoryPage from "./pages/productsByCategoryPage/ProductsByCategoryPage";
 import ProductsBySearchPage from "./pages/productsBySearchPage/ProductsBySearchPage";
 import AddProductPage from "./pages/addProduct/AddProductPage";
+import UserProducts from "./pages/userProducts/UserProducts";
+import EditProduct from "./pages/editProduct/EditProduct";
 
 function Router() {
   return (
@@ -26,7 +28,14 @@ function Router() {
           <Route path="/" element={<DashboardHeader />}>
             <Route index element={<Homepage />} />
 
-            <Route path="/userdetails" element={<UserDetails />} />
+            <Route path="/account" element={<UserAccountPage />} />
+
+            <Route path="/account/userProducts" element={<UserProducts />} />
+            <Route
+              path="/account/userProducts/editProduct/:productId"
+              element={<EditProduct />}
+            />
+
             <Route path="/usercart" element={<UserCart />} />
 
             <Route path="/product/:productId" element={<ProductDetails />} />

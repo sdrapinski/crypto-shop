@@ -27,11 +27,13 @@ class Offers {
         `;
     return this.#db.INSERT(query);
   }
-  removeOffer(products_id) {
-    const query = `
-          DELETE FROM Products WHERE products_id=${products_id}
-        `;
-    return this.#db.DELETE(query);
+  async removeOffer(product_id) {
+    const product = await this.#prisma.products.delete({
+      where: {
+        product_id: product_id,
+      },
+    });
+    return product;
   }
   overwrite_Offer(
     products_id,
@@ -143,6 +145,15 @@ class Offers {
       productsList.push(products);
     }
     return productsList;
+  }
+
+  async getUserProducts(user_id) {
+    const products = await this.#prisma.products.findMany({
+      where: {
+        user_id: user_id,
+      },
+    });
+    return products;
   }
 }
 module.exports = Offers;
