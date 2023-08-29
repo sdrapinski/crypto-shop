@@ -28,6 +28,10 @@ const ProductDetails = () => {
     return () => {};
   }, []);
 
+  const handleAddProduct = () => {
+    appcontext?.addToCart(productId!.toString());
+  };
+
   if (!product) {
     return <div>Loading...</div>;
   }
@@ -73,7 +77,7 @@ const ProductDetails = () => {
             Quantity: {product.product_quantity}
           </p>
           <hr className="separator" />
-          <button>Buy Now</button>
+          <button onClick={handleAddProduct}>Buy Now</button>
         </div>
       </div>
       <div className="product-additionalInfo">

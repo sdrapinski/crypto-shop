@@ -8,15 +8,22 @@ import { JwtInteface, DecodedToken } from "../interfaces/jwt.interface";
 import jwt from "jwt-decode";
 import Cookies from "universal-cookie";
 import axios from "axios";
+import { CartInterface } from "../interfaces/CartInterface";
 
 export const AppContext = createContext<AppContextInterface | null>(null);
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
+const initialCart: CartInterface = {
+  cart_id: "",
+  products_id: [],
+};
+
 const AppProvider = ({ children }: AppProviderProps) => {
   const [user, setUser] = useState<User | null>(null);
   const [expirationDate, setexpirationDate] = useState<Date>();
-  const [accessToken, setaccessToken] = useState<string | null>()
+  const [accessToken, setaccessToken] = useState<string | null>();
+  const [cart, setCart] = useState<CartInterface>(initialCart);
 
   const cookie = new Cookies();
 
@@ -27,7 +34,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
     const refreshToken: DecodedToken = jwt(data.refreshToken);
     console.log(refreshToken);
 
-    setaccessToken(data.accessToken)
+    setaccessToken(data.accessToken);
 
     cookie.set("jwt_RefreshToken", data.refreshToken, {
       expires: new Date(refreshToken.exp * 1000),
@@ -94,14 +101,26 @@ const AppProvider = ({ children }: AppProviderProps) => {
     setUser(null);
     cookie.remove("jwt_RefreshToken");
   };
+  //
 
+  const addToCart = (product_id: string) => {
+    const updatedCart = { ...cart };
+    updatedCart.products_id = [...updatedCart.products_id, product_id];
+    setCart(updatedCart);
 
+    axios.post(`${backendUrl}/addtocart`, {
+      cart_id: updatedCart.cart_id,
+      product_id: product_id,
+    });
+  };
 
   const appContextValue: AppContextInterface = {
     user,
     loginUser,
     backendUrl,
-    logout
+    logout,
+    addToCart,
+    cart,
   };
 
   return (

@@ -56,7 +56,7 @@ const LoginSwitch = () => {
 
                 {menuContent === "cart" && (
                   <div>
-                    <p>Products</p>{" "}
+                    <p>Products: {appcontext.cart.products_id.length}</p>{" "}
                     <NavLink to="/usercart">
                       {" "}
                       <button>Cart</button>{" "}
