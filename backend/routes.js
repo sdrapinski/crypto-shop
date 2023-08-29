@@ -132,4 +132,10 @@ module.exports = function (app) {
       res.send(response);
     });
   });
+
+  app.route("/getUserProducts/:userId").get((req, res) => {
+    offer.getUserProducts(req.params.userId).then((response) => {
+      res.send(response);
+    });
+  });
 };

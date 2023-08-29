@@ -44,7 +44,7 @@ const LoginSwitch = () => {
                 {menuContent === "user" && (
                   <ul className="menu__userOptions">
                     <li>
-                      <NavLink to="/account">Szczegóły konta</NavLink>
+                      <NavLink to="/account">Account Details</NavLink>
                     </li>
                     <li>
                       <button onClick={() => appcontext.logout()}>
@@ -56,10 +56,10 @@ const LoginSwitch = () => {
 
                 {menuContent === "cart" && (
                   <div>
-                    <p>Tu będą produkty</p>{" "}
+                    <p>Products</p>{" "}
                     <NavLink to="/usercart">
                       {" "}
-                      <button>Przejdz do koszyka</button>{" "}
+                      <button>Cart</button>{" "}
                     </NavLink>{" "}
                   </div>
                 )}
