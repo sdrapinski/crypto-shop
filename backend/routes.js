@@ -3,18 +3,19 @@ const Users = require("./scripts/users.js");
 
 const Cors = require("./scripts/cors.js");
 const Offers = require("./scripts/offers-db.js");
-
+const shopping_cart = require("./scripts/shopping-cart.js")
 const jwtUtils = require("./services/jwt.js");
 const Categories = require("./scripts/Categories-db.js");
 const Category = new Categories();
 const user = new Users();
+const cart = new shopping_cart();
 const offer = new Offers();
 module.exports = function (app) {
   const cors = new Cors(app);
   cors.setCors();
 
   app.use(bodyParser.json());
-
+  
   app.post("/login", async (req, res) => {
     const userFromDB = await user.getUserByLoginAndPassword(req.body);
 
@@ -27,7 +28,21 @@ module.exports = function (app) {
 
     res.json({ accessToken, refreshToken });
   });
-
+  app.post("/removefromcart", async (req, res) => {
+    cart.deleteFromCart(req.params.cart,req.params.product)
+  });
+  app.post("/addtocart", async (req, res) => {
+    cart.addtocart(req.params.cart,req.params.product)
+  });
+  app.post("/clearcart", async (req, res) => {
+    cart.clearcart()
+  });
+  app.route("/showcartitems").get((req, res) => {
+    console.log(req.params.cart_id);
+    Category.getcart(req.params.cart_id).then((response) => {
+      res.send(response);
+    });
+  });
   app.post("/ChceckIfUserDoesNotExist", async (req, res) => {
     user.checkIfUserNotExistByEmail(req.body.email).then((val) => {
       res.send(val);

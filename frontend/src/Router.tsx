@@ -1,7 +1,7 @@
 import React from "react";
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
-import Homepage from "./pages/homePage/Homepage";
+import Homepage from "./pages/homepage/Homepage";
 import LoginPage from "./pages/loginPage/LoginPage";
 import RegisterPage from "./pages/registerPage/RegisterPage";
 import AppProvider from "./state/AppContext";
@@ -10,9 +10,9 @@ import "./styles/style.scss";
 import DashboardHeader from "./components/dashboardHeader/DashboardHeader";
 import UserDetails from "./pages/userDetails/UserDetails";
 import UserCart from "./pages/userCart/UserCart";
-import ProductDetails from "./pages/productDetails/ProductDetails";
-import ProductsByCategoryPage from "./pages/productsByCategoryPage/ProductsByCategoryPage";
-import ProductsBySearchPage from "./pages/productsBySearchPage/ProductsBySearchPage";
+import ProductDetails from "./pages/ProductDetails/ProductDetails";
+import ProductsByCategoryPage from "./pages/ProductsByCategoryPage/ProductsByCategoryPage";
+import ProductsBySearchPage from "./pages/ProductsBySearchPage/ProductsBySearchPage";
 import AddProductPage from "./pages/addProduct/AddProductPage";
 
 function Router() {

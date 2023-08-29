@@ -1,15 +1,19 @@
 const DB = require("./db.js");
 const { PrismaClient } = require("@prisma/client");
+const shopping_cart = require("./shopping-cart.js");
 class Users {
+  cart = new shopping_cart();
   #prisma;
   constructor() {
     this.#prisma = new PrismaClient();
+    
   }
 
   async createUser(user) {
     const newUser = await this.#prisma.users.create({
       data: user,
     });
+    this.cart.createcart(user_id)
     return newUser;
   }
 
