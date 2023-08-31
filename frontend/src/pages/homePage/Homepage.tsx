@@ -13,11 +13,17 @@ const Homepage = () => {
   const appContext = useContext(AppContext);
   useEffect(() => {
     axios
-      .get(`${appContext?.backendUrl}/Categories`, {
+      .post(`${appContext?.backendUrl}/addtocart`, 
+      {
+        cart_id: 'e7727387-b974-4931-9edf-32df267c2cdd',
+        product_id:['1988d626-2370-47c2-b370-ec12a7656fef'] 
+      },
+      {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        
       })
       .then((resp) => {
         console.log(resp);

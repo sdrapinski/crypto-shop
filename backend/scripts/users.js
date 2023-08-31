@@ -13,7 +13,7 @@ class Users {
     const newUser = await this.#prisma.users.create({
       data: user,
     });
-    this.cart.createcart(user_id)
+    this.cart.createCart(newUser.user_id)
     return newUser;
   }
 

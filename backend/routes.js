@@ -29,17 +29,19 @@ module.exports = function (app) {
     res.json({ accessToken, refreshToken });
   });
   app.post("/removefromcart", async (req, res) => {
-    cart.deleteFromCart(req.params.cart,req.params.product)
+    cart.deleteFromCart(req.body.cart_id,req.body.product_id)
   });
   app.post("/addtocart", async (req, res) => {
-    cart.addtocart(req.params.cart,req.params.product)
+    cart.addtoCart(req.body.cart_id,req.body.product_id).then((response)=> {
+      res.send(response);
+    });
   });
   app.post("/clearcart", async (req, res) => {
-    cart.clearcart()
+    cart.clearCart(req.body.cart_id)
   });
   app.route("/showcartitems").get((req, res) => {
     console.log(req.params.cart_id);
-    Category.getcart(req.params.cart_id).then((response) => {
+    Category.getCart(req.params.cart_id).then((response) => {
       res.send(response);
     });
   });

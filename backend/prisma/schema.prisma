@@ -59,7 +59,6 @@ model Products {
   product_dollar_price Float
   product_crypto_prices CryptoProductPrice[]
   product_quantity Int
-  cart Cart[]
   product_watchedBy Users @relation("WatchedProducts", fields: [product_watched_by_id], references: [user_id])
   product_watched_by_id String
   product_sold ProductsSold[]
@@ -87,11 +86,19 @@ model CryptoProductPrice {
 
 model Cart {
   cart_id String @id @default(uuid())
-  products Products[]
   user_id String @unique
   user Users @relation(fields: [user_id], references: [user_id])
-
+  cartItems CartItem[]
 }
+
+model CartItem {
+  id        Int      @id @default(autoincrement())
+  cart      Cart     @relation(fields: [cart_id], references: [cart_id])
+  cart_id   String
+  product   String 
+  quantity Int
+}
+
 
 model ProductsSold{
   product_sold_id String @id @default(uuid())
