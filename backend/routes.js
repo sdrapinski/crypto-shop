@@ -6,8 +6,10 @@ const Offers = require("./scripts/offers-db.js");
 
 const jwtUtils = require("./services/jwt.js");
 const Categories = require("./scripts/Categories-db.js");
+const shopping_cart = require("./scripts/shopping-cart.js");
 const Category = new Categories();
 const user = new Users();
+const cart = new shopping_cart();
 const offer = new Offers();
 module.exports = function (app) {
   const cors = new Cors(app);
@@ -26,6 +28,26 @@ module.exports = function (app) {
     const refreshToken = jwtUtils.generateRefreshToken(userFromDB);
 
     res.json({ accessToken, refreshToken });
+  });
+
+  // cart
+
+  app.post("/removefromcart", async (req, res) => {
+    cart.deleteFromCart(req.body.cart_id, req.body.product_id);
+  });
+  app.post("/addtocart", async (req, res) => {
+    cart.addtoCart(req.body.cart_id, req.body.product_id).then((response) => {
+      res.send(response);
+    });
+  });
+  app.post("/clearcart", async (req, res) => {
+    cart.clearCart(req.body.cart_id);
+  });
+  app.route("/showcartitems").get((req, res) => {
+    console.log(req.params.cart_id);
+    Category.getCart(req.params.cart_id).then((response) => {
+      res.send(response);
+    });
   });
 
   app.post("/ChceckIfUserDoesNotExist", async (req, res) => {
