@@ -20,7 +20,7 @@ const UserProducts = () => {
   useEffect(() => {
     axios
       .get<ProductDetailsInterface[]>(
-        `${appContext?.backendUrl}/getUserProducts/${userID}`,
+        `${appContext?.backendUrl}/offer/getUserProducts/${userID}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -37,7 +37,7 @@ const UserProducts = () => {
 
   const handleDeleteProduct = async (product_id: string) => {
     await axios
-      .delete(`${appContext?.backendUrl}/deleteOffer/${product_id}`, {
+      .delete(`${appContext?.backendUrl}/offer/deleteOffer/${product_id}`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

@@ -12,7 +12,7 @@ const ProductDetails = () => {
   useEffect(() => {
     axios
       .get<ProductDetailsInterface>(
-        `${appcontext?.backendUrl}/product/${productId}`,
+        `${appcontext?.backendUrl}/offer/product/${productId}`,
         {
           headers: {
             "Content-Type": "application/json",

@@ -12,7 +12,7 @@ const MainPageProducts = () => {
   useEffect(() => {
     axios
       .get<Array<Array<mainPageProductsInterface>>>(
-        `${appContext?.backendUrl}/mainPageProducts`,
+        `${appContext?.backendUrl}/offer/mainPageProducts`,
         {
           headers: {
             "Content-Type": "application/json",

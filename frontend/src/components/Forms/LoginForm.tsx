@@ -28,7 +28,7 @@ const LoginForm = () => {
 
     axios
       .post<JwtInteface>(
-        `${appContext?.backendUrl}/login`,
+        `${appContext?.backendUrl}/user/login`,
         {
           email: email,
           password: password,

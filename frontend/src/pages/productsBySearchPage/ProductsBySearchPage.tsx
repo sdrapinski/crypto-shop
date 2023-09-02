@@ -13,7 +13,7 @@ const ProductsBySearchPage = () => {
   useEffect(() => {
     axios
       .get<mainPageProductsInterface[]>(
-        `${appcontext?.backendUrl}/searchProduct/${query}`,
+        `${appcontext?.backendUrl}/offer/searchProduct/${query}`,
         {
           headers: {
             "Content-Type": "application/json",

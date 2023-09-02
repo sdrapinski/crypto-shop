@@ -72,7 +72,7 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
 
     axios
       .post(
-        `${backendUrl}/registerUser`,
+        `${backendUrl}/user/registerUser`,
         {
           user_name: userName,
           user_surname: userSurname,

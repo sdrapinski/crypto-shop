@@ -11,7 +11,7 @@ const Filters: React.FC<FilterProps> = (props) => {
   const appcontext = useContext(AppContext);
   useEffect(() => {
     axios
-      .get(`${appcontext?.backendUrl}/filters/${category}`, {
+      .get(`${appcontext?.backendUrl}/offer/filters/${category}`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

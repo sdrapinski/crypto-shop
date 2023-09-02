@@ -13,7 +13,7 @@ const Categories = () => {
 
   useEffect(() => {
     axios
-      .get(`${backendUrl}/Categories`, {
+      .get(`${backendUrl}/offer/Categories`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",

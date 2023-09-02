@@ -48,7 +48,7 @@ const RegisterForm: React.FC<RegisterFormProps> = (props) => {
 
     axios
       .post<UserProps>(
-        `${appContext?.backendUrl}/ChceckIfUserDoesNotExist`,
+        `${appContext?.backendUrl}/user/ChceckIfUserDoesNotExist`,
         {
           email: email,
         },

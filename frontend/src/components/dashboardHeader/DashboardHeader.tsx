@@ -26,7 +26,7 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
     if (event.target.value.length > 2) {
       axios
         .get(
-          `${process.env.REACT_APP_BACKEND_URL}/searchProduct/${event.target.value}`
+          `${process.env.REACT_APP_BACKEND_URL}/offer/searchProduct/${event.target.value}`
         )
         .then((response) => {
           console.log(response);

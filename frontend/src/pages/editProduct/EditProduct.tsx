@@ -13,7 +13,7 @@ const EditProduct = () => {
   useEffect(() => {
     axios
       .get<ProductDetailsInterface>(
-        `${appContext?.backendUrl}/product/${productId}`,
+        `${appContext?.backendUrl}/offer/product/${productId}`,
         {
           headers: {
             "Content-Type": "application/json",
@@ -34,7 +34,7 @@ const EditProduct = () => {
     try {
       if (product) {
         await axios.put(
-          `${appContext?.backendUrl}/product/${productId}`,
+          `${appContext?.backendUrl}/offer/product/${productId}`,
           product,
           {
             headers: {

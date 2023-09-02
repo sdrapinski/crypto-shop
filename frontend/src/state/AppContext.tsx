@@ -62,7 +62,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
       console.log(refreshToken);
       await axios
         .post(
-          `${backendUrl}/token/refresh`,
+          `${backendUrl}/user/token/refresh`,
           { refresh: refreshToken },
           {
             headers: {
@@ -108,7 +108,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
     updatedCart.products_id = [...updatedCart.products_id, product_id];
     setCart(updatedCart);
 
-    axios.post(`${backendUrl}/addtocart`, {
+    axios.post(`${backendUrl}/cart/addtocart`, {
       cart_id: updatedCart.cart_id,
       product_id: updatedCart,
     });
