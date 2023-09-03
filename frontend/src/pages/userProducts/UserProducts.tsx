@@ -13,7 +13,7 @@ const UserProducts = () => {
   const appContext = useContext(AppContext);
 
   const userID =
-    appContext?.user?.user_id || "4d5686cf-c756-445e-a6f7-b04f2c615d2e";
+    appContext?.user?.user_id || "066a9388-56f0-4940-a0d0-a2d46d49db42";
 
   const navigate = useNavigate();
 

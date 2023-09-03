@@ -110,7 +110,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 
     axios.post(`${backendUrl}/cart/addtocart`, {
       cart_id: updatedCart.cart_id,
-      product_id: updatedCart,
+      product_id: product_id,
     });
   };
 

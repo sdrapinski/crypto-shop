@@ -7,7 +7,7 @@ router.post("/removefromcart", async (req, res) => {
   cart.deleteFromCart(req.body.cart_id, req.body.product_id);
 });
 router.post("/addtocart", async (req, res) => {
-  cart.addtoCart(req.body.cart_id, req.body.product_id).then((response) => {
+  cart.addToCart(req.body.cart_id, req.body.product_id).then((response) => {
     res.send(response);
   });
 });

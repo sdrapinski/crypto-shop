@@ -34,16 +34,32 @@ class shopping_cart {
     return clearedCart;
   }
 
-  async addtoCart(cart_id, product_ids) {
+  async addToCart(cart_id, product_id) {
+    // Pobierz aktualny koszyk
+
     const updatedCart = await this.#prisma.cart.update({
       where: {
         cart_id: cart_id,
       },
       data: {
-        products: {
-          connect: product_ids.map((product_id) => ({
-            product_id: product_id,
-          })),
+        cartItems: {
+          createMany: {
+            data: {
+              product: {
+                connect: {
+                  product_id: product_id,
+                },
+              },
+              quantity: 1, // Ustaw ilość na 1 lub odpowiednio, jeśli jest inaczej
+            },
+          },
+        },
+        include: {
+          cartItems: {
+            include: {
+              product: true,
+            },
+          },
         },
       },
     });
