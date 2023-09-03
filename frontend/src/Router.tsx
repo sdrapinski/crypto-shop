@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useContext} from "react";
 import { Route, Routes } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 import Homepage from "./pages/homePage/Homepage";
@@ -38,6 +38,8 @@ function Router() {
               />
               <Route path="search/:query" element={<ProductsBySearchPage />} />
             </Route>
+
+            <Route path="/account" element={<UserDetails />} />
           </Route>
         </Routes>
       </BrowserRouter>

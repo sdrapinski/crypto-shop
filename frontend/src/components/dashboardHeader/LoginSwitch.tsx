@@ -44,7 +44,7 @@ const LoginSwitch = () => {
                 {menuContent === "user" && (
                   <ul className="menu__userOptions">
                     <li>
-                      <NavLink to="/account">Szczegóły konta</NavLink>
+                      <NavLink to={"/account"}>Szczegóły konta</NavLink>
                     </li>
                     <li>
                       <button onClick={() => appcontext.logout()}>

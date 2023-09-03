@@ -16,13 +16,9 @@ const Product: React.FC<ProductProps> = (props) => {
       : product.product_popularity < 7
       ? "text-warning"
       : "text-success";
-  console.log(product);
   return (
     <div className="container">
-      <div className="card my-3">
-        <div className="card-header">
-          <h5>{product.product_name}</h5>
-        </div>
+      <div className="card my-3 border border-0 productCardBorder">
         <div className="card-body">
           <div className="row">
             <div className="col-6">
@@ -32,11 +28,14 @@ const Product: React.FC<ProductProps> = (props) => {
               ></img>
             </div>
             <div className="col-6">
-              <div className="card mb-2">
-                <div className="card-header">
-                  <strong>Description:</strong>
-                </div>
+              <div className="card mb-2 border border-0">
                 <div className="card-body">
+                  <div className="mb-2">
+                    <h5>{product.product_name}</h5>
+                  </div>
+                  <div>
+                    <strong>Description:</strong>
+                  </div>
                   <div className="mb-2">{product.product_description}</div>
                   <div>
                     <strong>Data added:</strong>
@@ -46,28 +45,21 @@ const Product: React.FC<ProductProps> = (props) => {
                     <strong>Added by:</strong>
                   </div>
                   <div>{product.user_id}</div>
-                </div>
-              </div>
-              <div className="card mt-3">
-                <div className="card-header">
-                  <strong>Details:</strong>
-                </div>
-                <div className="card-body d-flex justify-content-between">
-                  <div>
-                    <strong>Price: </strong>
-                    <strong className="text-success">
+                  <div className="my-2 row d-flex align-items-center">
+                    <strong className="col-3">Price: </strong>
+                    <strong className="col-2 text-success">
                       {product.product_dollar_price} $
                     </strong>
                   </div>
-                  <div>
-                    <strong>Quantity: </strong>
-                    <strong className="text-primary">
+                  <div className="mb-2 row d-flex align-items-center">
+                    <strong className="col-3">Quantity: </strong>
+                    <strong className="col-2 text-primary">
                       {product.product_quantity}
                     </strong>
                   </div>
-                  <div>
-                    <strong>Popularity: </strong>
-                    <strong className={popularityClass}>
+                  <div className="mb-2 row d-flex align-items-center">
+                    <strong className="col-3">Popularity: </strong>
+                    <strong className={"col-2" + " " + popularityClass}>
                       {product.product_popularity}
                     </strong>
                   </div>
@@ -75,9 +67,8 @@ const Product: React.FC<ProductProps> = (props) => {
               </div>
             </div>
           </div>
-        </div>
-        <div className="card-footer d-flex justify-content-end">
-          <NavLink to={`/product/${product.product_id}`}>
+          <div className="row mt-2">
+          <NavLink className={"d-flex justify-content-end"} to={`/product/${product.product_id}`}>
             <button
               className="btn btn-primary d-flex align-items-center hstack gap-1"
               title="Show more details"
@@ -96,6 +87,7 @@ const Product: React.FC<ProductProps> = (props) => {
               Show
             </button>
           </NavLink>
+          </div>
         </div>
       </div>
     </div>
