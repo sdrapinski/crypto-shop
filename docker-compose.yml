@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 services:
   backend:
     build:
@@ -8,6 +8,16 @@ services:
       - "8000:3001"
     depends_on:
       - db
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    command:
+      - node
+      - --watch
+      - index.js
+
   frontend:
     build:
       context: ./frontend
