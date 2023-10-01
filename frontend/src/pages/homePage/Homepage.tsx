@@ -9,6 +9,7 @@ import MainPageProducts from "../../components/Products/mainPageProducts/MainPag
 import Footer from "../../components/footer/Footer";
 import { AppContext } from "../../state/AppContext";
 
+//test
 const Homepage = () => {
   const appContext = useContext(AppContext);
   useEffect(() => {
