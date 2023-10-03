@@ -1,4 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
+const shopping_cart = require("../scripts/shopping-cart.js");
+const cart = new shopping_cart();
 const prisma = new PrismaClient();
 const records = require("./records.json");
 
@@ -23,6 +25,7 @@ async function addRecords() {
     const userRegion = await prisma.region.create({
       data: { user_id: newUser.user_id, ...records.region[index] },
     });
+    const userCart = await cart.createCart(newUser.user_id);
 
     newUsers.push(newUser);
   }
