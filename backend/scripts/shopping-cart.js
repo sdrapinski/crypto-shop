@@ -83,6 +83,15 @@ class shopping_cart {
 
     return updatedCart;
   }
+  async getCartFromUserID(user_id) {
+    const cart = await this.#prisma.Cart.findMany({
+      where: {
+        user_id: user_id,
+      },
+    });
+    return cart;
+  }
+
   async getCart(Cart_id) {
     const cart = await this.#prisma.Cart.findMany({
       where: {

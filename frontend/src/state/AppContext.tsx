@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import {
   AppContextInterface,
   AppProviderProps,
@@ -106,10 +106,11 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const addToCart = (product_id: string) => {
     const updatedCart = { ...cart };
     updatedCart.products_id = [...updatedCart.products_id, product_id];
+    updatedCart.cart_id = user!.user_cart.cart_id;
     setCart(updatedCart);
 
     axios.post(`${backendUrl}/cart/addtocart`, {
-      cart_id: updatedCart.cart_id,
+      cart_id: user?.user_cart.cart_id,
       product_id: product_id,
     });
   };

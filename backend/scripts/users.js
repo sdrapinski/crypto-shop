@@ -22,6 +22,9 @@ class Users {
         user_email: user.email,
         user_password: user.password,
       },
+      include: {
+        user_cart: true,
+      },
     });
     return findedUser;
   }
@@ -36,6 +39,9 @@ class Users {
       where: {
         user_email: email,
       },
+      include: {
+        user_cart: true,
+      },
     });
     return findedUser;
   }
@@ -44,6 +50,9 @@ class Users {
     const findedUser = await this.#prisma.users.findUnique({
       where: {
         user_id: user.id,
+      },
+      include: {
+        user_cart: true,
       },
     });
     return findedUser;

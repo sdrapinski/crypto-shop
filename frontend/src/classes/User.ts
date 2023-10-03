@@ -14,6 +14,10 @@ export class User {
   street: string;
   user_password: string;
   user_login: string;
+  user_cart: {
+    cart_id: string;
+    user_id: string;
+  };
 
   constructor(token: string) {
     const decodedToken: User = jwt_decode(token);
@@ -30,5 +34,6 @@ export class User {
     this.street = decodedToken.street;
     this.user_password = decodedToken.user_password;
     this.user_login = decodedToken.user_login;
+    this.user_cart = decodedToken.user_cart;
   }
 }

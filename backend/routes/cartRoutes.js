@@ -7,6 +7,8 @@ router.post("/removefromcart", async (req, res) => {
   cart.deleteFromCart(req.body.cart_id, req.body.product_id);
 });
 router.post("/addtocart", async (req, res) => {
+  console.log("Cart id: " + req.body.cart_id);
+  console.log("product id: " + req.body.product_id);
   cart.addToCart(req.body.cart_id, req.body.product_id).then((response) => {
     res.send(response);
   });
@@ -14,6 +16,11 @@ router.post("/addtocart", async (req, res) => {
 router.post("/clearcart", async (req, res) => {
   cart.clearCart(req.body.cart_id);
 });
+
+router.get("/getCartFromUserId/:user_id", async (req, res) => {
+  cart.getCartFromUserID(req.params.user_id);
+});
+
 router.route("/showcartitems").get((req, res) => {
   console.log(req.params.cart_id);
   Category.getCart(req.params.cart_id).then((response) => {
