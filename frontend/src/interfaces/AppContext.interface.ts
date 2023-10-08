@@ -2,6 +2,7 @@ import { User } from "../classes/User";
 import { CartInterface } from "./CartInterface";
 import { JwtInteface } from "./jwt.interface";
 export interface AppContextInterface {
+  checkAccessToken: () => void;
   user: User | null;
   cart: CartInterface;
   loginUser: (data: JwtInteface) => void;

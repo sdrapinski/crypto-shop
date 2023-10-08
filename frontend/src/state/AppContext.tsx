@@ -62,18 +62,22 @@ const AppProvider = ({ children }: AppProviderProps) => {
       console.log(refreshToken);
       await axios
         .post(
-          `${backendUrl}/user/token/refresh`,
+          `${backendUrl}/user/refresh-token`,
           { refresh: refreshToken },
           {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
+              "Access-Control-Allow-Origin": "http://localhost:3000",
+              authorization: "Bearer " + refreshToken,
             },
           }
         )
         .then((response) => {
           token = response.data;
-          loginUser(token);
+          console.log(token);
+
+          // loginUser(token);
         })
         .catch((error) => {
           console.error(error);
@@ -116,6 +120,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   };
 
   const appContextValue: AppContextInterface = {
+    checkAccessToken,
     user,
     loginUser,
     backendUrl,

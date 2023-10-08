@@ -31,22 +31,23 @@ router.post("/registerUser", async (req, res) => {
 });
 
 router.post("/refresh-token", (req, res) => {
-  const { token } = req.body;
-  const data = jwtUtils.verifyRefreshToken(token);
+  const { refresh } = req.body;
+  const data = jwtUtils.verifyRefreshToken(refresh);
   res.json(data);
-  // if (!data) {
-  //   return res.sendStatus(403);
-  // }
-  // jwt.verify(token, REFRESH_TOKEN, (err, data) => {
-  //   if (err) {
-  //     return res.sendStatus(403);
-  //   }
-  //   const payload = { id: data.id, name: data.name, email: data.email };
-  //   const newAccessToken = jwt.sign(payload, ACCESS_TOKEN, {
-  //     expiresIn: "3m",
-  //   });
-  //   res.json({ accessToken: newAccessToken });
-  // });
+  if (!data) {
+    return res.sendStatus(403);
+  }
+  jwt.verify(refresh, jwtUtils.REFRESH_TOKEN, (err, data) => {
+    if (err) {
+      return res.sendStatus(403);
+    }
+    const payload = { id: data.id, name: data.name, email: data.email };
+    const newAccessToken = jwt.sign(payload, jwtUtils.ACCESS_TOKEN, {
+      expiresIn: "10m",
+    });
+    let obj = { accessToken: newAccessToken };
+    res.send(obj);
+  });
 });
 
 module.exports = router;

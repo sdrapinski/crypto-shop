@@ -35,6 +35,8 @@ const verifyRefreshToken = (token) => {
 };
 
 module.exports = {
+  ACCESS_TOKEN,
+  REFRESH_TOKEN,
   generateAccessToken,
   generateRefreshToken,
   verifyAccessToken,
