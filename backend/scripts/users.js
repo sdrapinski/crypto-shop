@@ -57,6 +57,17 @@ class Users {
     });
     return findedUser;
   }
+  async getUserByUser_id(user_id) {
+    const findedUser = await this.#prisma.users.findUnique({
+      where: {
+        user_id: user_id,
+      },
+      include: {
+        user_cart: true,
+      },
+    });
+    return findedUser;
+  }
 }
 
 module.exports = Users;

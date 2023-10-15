@@ -32,7 +32,6 @@ const AppProvider = ({ children }: AppProviderProps) => {
     setUser(newUser);
 
     const refreshToken: DecodedToken = jwt(data.refreshToken);
-    console.log(refreshToken);
 
     setaccessToken(data.accessToken);
 
@@ -51,7 +50,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
         return null;
       }
     }
-    console.log(token);
+
     return token;
   };
 
@@ -59,21 +58,25 @@ const AppProvider = ({ children }: AppProviderProps) => {
     const refreshToken = cookie.get("jwt_RefreshToken");
     let token: JwtInteface = { accessToken: "", refreshToken: "" };
     if (refreshToken) {
-      console.log(refreshToken);
       await axios
         .post(
-          `${backendUrl}/user/token/refresh`,
+          `${backendUrl}/user/refreshToken`,
           { refresh: refreshToken },
           {
             headers: {
               "Content-Type": "application/json",
               Accept: "application/json",
+              authorization: "Bearer " + refreshToken,
             },
           }
         )
         .then((response) => {
           token = response.data;
-          loginUser(token);
+
+          loginUser({
+            accessToken: token.accessToken,
+            refreshToken: refreshToken,
+          });
         })
         .catch((error) => {
           console.error(error);
@@ -116,6 +119,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   };
 
   const appContextValue: AppContextInterface = {
+    checkAccessToken,
     user,
     loginUser,
     backendUrl,

@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 
 import MobileMenu from "./MobileMenu";
 import { NavLink, useNavigate, Outlet } from "react-router-dom";
 import axios from "axios";
 import LoginSwitch from "./LoginSwitch";
+import { AppContext } from "../../state/AppContext";
 
 interface HeaderProps {
   // deklarujemy propsy, których będziemy używać
@@ -13,9 +14,17 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showOptions, setShowOptions] = useState(false);
   const [showMobileMenu, setshowMobileMenu] = useState(false);
+  const appContext = useContext(AppContext);
   const navigate = useNavigate();
 
   const options = ["Wszystko", "Książki", "Filmy"];
+
+  useEffect(() => {
+    async function checkToken() {
+      await appContext?.checkAccessToken();
+    }
+    checkToken();
+  }, []);
 
   const filteredOptions = options.filter((option) =>
     option.toLowerCase().includes(searchValue.toLowerCase())
