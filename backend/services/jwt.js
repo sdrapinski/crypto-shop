@@ -19,7 +19,7 @@ const authMiddleware = (req, res, next) => {
 };
 
 const generateAccessToken = (payload) => {
-  return jwt.sign(payload, ACCESS_TOKEN, { expiresIn: "3m" });
+  return jwt.sign(payload, ACCESS_TOKEN, { expiresIn: "10m" });
 };
 
 const generateRefreshToken = (payload) => {

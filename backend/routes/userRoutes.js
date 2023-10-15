@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Users = require("../scripts/users");
+const jwt = require("jsonwebtoken");
 const jwtUtils = require("../services/jwt.js");
 const user = new Users();
 
@@ -30,24 +31,20 @@ router.post("/registerUser", async (req, res) => {
   });
 });
 
-router.post("/refresh-token", (req, res) => {
+router.post("/refreshToken", async (req, res) => {
   const { refresh } = req.body;
   const data = jwtUtils.verifyRefreshToken(refresh);
-  res.json(data);
+  console.log(data);
   if (!data) {
     return res.sendStatus(403);
   }
-  jwt.verify(refresh, jwtUtils.REFRESH_TOKEN, (err, data) => {
-    if (err) {
-      return res.sendStatus(403);
-    }
-    const payload = { id: data.id, name: data.name, email: data.email };
-    const newAccessToken = jwt.sign(payload, jwtUtils.ACCESS_TOKEN, {
-      expiresIn: "10m",
-    });
-    let obj = { accessToken: newAccessToken };
-    res.send(obj);
-  });
+
+  const user_new_data = await user.getUserByUser_id(data.user_id);
+
+  const accessToken = jwtUtils.generateAccessToken(user_new_data);
+
+  let obj = { accessToken: accessToken };
+  res.send(obj);
 });
 
 module.exports = router;
