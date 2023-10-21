@@ -29,6 +29,7 @@ const Product: React.FC<ProductProps> = (props) => {
               <img
                 src="https://via.placeholder.com/400x300"
                 className="card-img"
+                alt=""
               ></img>
             </div>
             <div className="col-6">

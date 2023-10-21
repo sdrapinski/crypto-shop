@@ -6,6 +6,7 @@ import axios from "axios";
 import { AppContext } from "../../state/AppContext";
 import { mainPageProductsInterface } from "../../interfaces/product.interface";
 import DisplayProducts from "../../components/Products/productsPage/DisplayProducts";
+import { Row } from "react-bootstrap";
 
 const ProductsByCategoryPage = () => {
   const { categoryId } = useParams();
@@ -32,8 +33,10 @@ const ProductsByCategoryPage = () => {
   }, []);
   return (
     <div className="productsListPage">
-      <Filters category={categoryId!} />
-      <DisplayProducts products={products!} />
+      <Row>
+        <Filters category={categoryId!} />
+        <DisplayProducts products={products!} />
+      </Row>
     </div>
   );
 };
