@@ -1,0 +1,14 @@
+.shadow-left {
+    border-radius: 10px;
+    box-shadow: 0 0 6px rgb(49, 0, 43);
+  }
+
+  button{
+    &.active{
+        background-color: rgb(151, 17, 136) !important;
+      }
+  }
+
+  .nav-link:not(.active){ 
+    color: rgb(151, 17, 136) !important;
+  }

@@ -71,11 +71,12 @@ const LoginSwitch = () => {
         </div>
       ) : (
         <NavLink to="/login">
-          <button className="button --login">Login</button>
+          {/* <button className="button --login">Login</button> */}
+          <NavLink to="/account">Account Details</NavLink>
         </NavLink>
       )}
     </>
-  );
+   );
 };
 
 export default LoginSwitch;
