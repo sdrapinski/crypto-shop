@@ -1,9 +1,23 @@
-.shadow-left {
-    border-radius: 10px;
-    box-shadow: 0 0 6px rgb(49, 0, 43);
+.form-check-input{
+  padding-top: 1.1em !important;
+  padding-inline: 1.2em !important;
+  &:checked{
+    background-color:  rgb(151, 17, 136);
+    border-color:  rgb(151, 17, 136);
   }
+}
 
-  button{
+
+.btn-custom {
+  background-color:  rgb(151, 17, 136);
+  color: #fff;
+}
+.btn-custom:hover {
+  background-color:  rgba(151, 17, 135, 0.836);
+  color: #fff;
+}
+
+button{
     &.active{
         background-color: rgb(151, 17, 136) !important;
       }
