@@ -45,6 +45,9 @@ user_premium_tokens Float?
 user_cart Cart?
 user_watched_products Products[] @relation("WatchedProducts")
 user_products_purchased ProductsSold[]
+user_messages_send Message[] @relation("sender")
+user_messages_recived Message[] @relation("recipient")
+user_notifications Notification[]
 
 }
 
@@ -67,6 +70,9 @@ model Products {
   product_popularity Float?
   product_added_time DateTime @default(now())
   product_promotion DateTime?
+  product_messages Message[]
+  product_notifications Notification[]
+
 
 }
 
@@ -109,4 +115,34 @@ model ProductsSold{
   user Users @relation(fields: [user_id], references: [user_id])
   sale_time DateTime
 
+}
+
+model Message {
+  message_id String @id @default(uuid())
+  sender_id String
+  sender Users @relation("sender",fields: [sender_id], references: [user_id])
+  recipient_id String
+  recipient Users @relation("recipient",fields: [recipient_id], references: [user_id])
+  product_id String
+  product Products @relation(fields: [product_id], references: [product_id])
+  content String
+  sent_time DateTime @default(now())
+  is_read Boolean @default(false)
+}
+
+model Notification {
+  notification_id String @id @default(uuid())
+  user_id String
+  user Users? @relation(fields: [user_id], references: [user_id])
+  product_id String?
+  product Products? @relation(fields: [product_id], references: [product_id])
+  content String
+  created_at DateTime @default(now())
+  is_read Boolean @default(false)
+}
+
+model GlobalNotification {
+  global_notification_id String @id @default(uuid())
+  content String
+  created_at DateTime @default(now())
 }
