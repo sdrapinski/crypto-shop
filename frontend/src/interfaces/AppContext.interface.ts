@@ -8,6 +8,7 @@ export interface AppContextInterface {
   loginUser: (data: JwtInteface) => void;
   backendUrl: string | undefined;
   logout: () => void;
+  getCart: (user_id: string) => void;
   addToCart: (product_id: string) => void;
 }
 

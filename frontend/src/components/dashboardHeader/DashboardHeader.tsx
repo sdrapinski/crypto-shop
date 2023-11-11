@@ -26,6 +26,16 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
     checkToken();
   }, []);
 
+  useEffect(() => {
+    const user_id = appContext?.user?.user_id;
+    async function getCart() {
+      await appContext?.getCart(user_id!);
+    }
+    if (appContext?.user) {
+      getCart();
+    }
+  }, [appContext?.user]);
+
   const filteredOptions = options.filter((option) =>
     option.toLowerCase().includes(searchValue.toLowerCase())
   );

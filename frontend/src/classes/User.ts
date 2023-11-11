@@ -3,7 +3,7 @@ import jwt_decode from "jwt-decode";
 export class User {
   user_name: string;
   user_surname: string;
-  user_id: Number;
+  user_id: string;
   user_age: number;
   user_email: string;
   user_phone_number: string;

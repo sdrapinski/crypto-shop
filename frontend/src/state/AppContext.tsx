@@ -16,7 +16,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const initialCart: CartInterface = {
   cart_id: "",
-  products_id: [],
+  cartItems: [],
 };
 
 const AppProvider = ({ children }: AppProviderProps) => {
@@ -27,7 +27,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
 
   const cookie = new Cookies();
 
-  const loginUser = (data: JwtInteface) => {
+  const loginUser = async (data: JwtInteface) => {
     const newUser = new User(data.accessToken);
     setUser(newUser);
 
@@ -70,13 +70,15 @@ const AppProvider = ({ children }: AppProviderProps) => {
             },
           }
         )
-        .then((response) => {
+        .then(async (response) => {
           token = response.data;
+          console.log("login user");
 
-          loginUser({
+          await loginUser({
             accessToken: token.accessToken,
             refreshToken: refreshToken,
           });
+          console.log("login user2");
         })
         .catch((error) => {
           console.error(error);
@@ -106,16 +108,35 @@ const AppProvider = ({ children }: AppProviderProps) => {
   };
   //
 
-  const addToCart = (product_id: string) => {
-    const updatedCart = { ...cart };
-    updatedCart.products_id = [...updatedCart.products_id, product_id];
-    updatedCart.cart_id = user!.user_cart.cart_id;
-    setCart(updatedCart);
+  const addToCart = async (product_id: string) => {
+    await axios
+      .post<CartInterface>(`${backendUrl}/cart/addtocart`, {
+        cart_id: user?.user_cart.cart_id,
+        product_id: product_id,
+      })
+      .then((resp) => {
+        setCart(resp.data);
+      });
+  };
 
-    axios.post(`${backendUrl}/cart/addtocart`, {
-      cart_id: user?.user_cart.cart_id,
-      product_id: product_id,
-    });
+  const getCart = async (user_id: string) => {
+    try {
+      let cart: any;
+      await axios
+        .get<CartInterface>(`${backendUrl}/cart/getCartFromUserId/${user_id}`)
+        .then((resp) => {
+          setCart(resp.data);
+          cart = resp.data;
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+
+      return cart;
+    } catch (error) {
+      console.error("getCart - error", error);
+      return null;
+    }
   };
 
   const appContextValue: AppContextInterface = {
@@ -126,6 +147,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
     logout,
     addToCart,
     cart,
+    getCart,
   };
 
   return (

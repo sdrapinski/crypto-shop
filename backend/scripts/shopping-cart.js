@@ -34,25 +34,12 @@ class shopping_cart {
     return clearedCart;
   }
 
-  async addToCart(cart_id, product_id) {
-    // Pobierz aktualny koszyk
-
-    const updatedCart = await this.#prisma.cart.update({
-      where: {
-        cart_id: cart_id,
-      },
-      data: {
-        cartItems: {
-          createMany: {
-            data: {
-              product: {
-                connect: {
-                  product_id: product_id,
-                },
-              },
-              quantity: 1, // Ustaw ilość na 1 lub odpowiednio, jeśli jest inaczej
-            },
-          },
+  async addToCart(cart_id, product_id, quantity = 1) {
+    try {
+      // Pobierz aktualny koszyk
+      const cart = await this.#prisma.cart.findUnique({
+        where: {
+          cart_id: cart_id,
         },
         include: {
           cartItems: {
@@ -61,10 +48,54 @@ class shopping_cart {
             },
           },
         },
-      },
-    });
+      });
 
-    return updatedCart;
+      // Sprawdź, czy produkt już istnieje w koszyku
+      const existingCartItem = cart.cartItems.find(
+        (item) => item.product.product_id === product_id
+      );
+
+      if (existingCartItem) {
+        // Jeśli produkt istnieje w koszyku, zaktualizuj jego ilość
+        const updatedCart = await this.#prisma.cartToItem.update({
+          where: {
+            cart_item_id: existingCartItem.cart_item_id,
+          },
+          data: {
+            quantity: existingCartItem.quantity + quantity,
+          },
+        });
+
+        return updatedCart;
+      } else {
+        // Jeśli produkt nie istnieje w koszyku, dodaj nowy wpis
+        const updatedCart = await this.#prisma.cart.update({
+          where: {
+            cart_id: cart_id,
+          },
+          data: {
+            cartItems: {
+              create: {
+                quantity: quantity,
+                product: {
+                  connect: {
+                    product_id: product_id,
+                  },
+                },
+              },
+            },
+          },
+          include: {
+            cartItems: true,
+          },
+        });
+
+        return updatedCart;
+      }
+    } catch (error) {
+      console.error("Wystąpił błąd podczas dodawania do koszyka:", error);
+      throw new Error("Wystąpił błąd podczas dodawania do koszyka.");
+    }
   }
 
   async deleteFromCart(cart_id, product_id) {
@@ -84,18 +115,32 @@ class shopping_cart {
     return updatedCart;
   }
   async getCartFromUserID(user_id) {
-    const cart = await this.#prisma.Cart.findMany({
+    const cart = await this.#prisma.Cart.findUnique({
       where: {
         user_id: user_id,
+      },
+      include: {
+        cartItems: {
+          include: {
+            product: true,
+          },
+        },
       },
     });
     return cart;
   }
 
   async getCart(Cart_id) {
-    const cart = await this.#prisma.Cart.findMany({
+    const cart = await this.#prisma.Cart.findUnique({
       where: {
         cart_id: Cart_id,
+      },
+      include: {
+        cartItems: {
+          include: {
+            product: true,
+          },
+        },
       },
     });
     return cart;
