@@ -19,11 +19,12 @@ class Offers {
     photo_id,
     added_when,
     popularity,
-    promoted_for
+    promoted_for,
+    product_used
   ) {
     const query = `
-          INSERT INTO Products (user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_description, photo_id, added_when,promoted_for) 
-          VALUES (${user_id}, ${product_name}, ${products_category_id}, ${product_cost_cash}, ${product_cost_crypto}, ${product_quantity}, ${product_description}, ${photo_id}, ${photo_id}, ${added_when},${promoted_for})
+          INSERT INTO Products (user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_description, photo_id, added_when,promoted_for, product_used) 
+          VALUES (${user_id}, ${product_name}, ${products_category_id}, ${product_cost_cash}, ${product_cost_crypto}, ${product_quantity}, ${product_description}, ${photo_id}, ${photo_id}, ${added_when},${promoted_for},${product_used})
         `;
     return this.#db.INSERT(query);
   }
@@ -44,10 +45,11 @@ class Offers {
     product_description,
     photo_id,
     added_when,
-    promoted_for
+    promoted_for,
+    product_used
   ) {
     const query = `
-          UPDATE Products SET product_name=${product_name} ,product_cost_cash=${product_cost_cash}, product_cost_crypto= ${product_cost_crypto}, product_quantity=${product_quantity}, product_description=${product_description} , photo_id=  ${photo_id}, added_when=${added_when}, promoted_for=${promoted_for}
+          UPDATE Products SET product_name=${product_name} ,product_cost_cash=${product_cost_cash}, product_cost_crypto= ${product_cost_crypto}, product_quantity=${product_quantity}, product_description=${product_description} , photo_id=  ${photo_id}, added_when=${added_when}, promoted_for=${promoted_for}, product_used=${product_used}
           WHERE products_id=${products_id}
         `;
     return this.#db.INSERT(query);
@@ -152,6 +154,95 @@ class Offers {
       where: {
         user_id: user_id,
       },
+    });
+    return products;
+  }
+  async getFilteredProducts(price_max, price_min, crypto_max, crypto_min, days_limit,Condition, Rating,category,Searched_pharse) {
+    if (price_min!== null && price_max !== null) {
+      where.AND.push({
+        product_dollar_price: {
+          gte: price_min,
+          lte: price_max,
+        },
+      });
+    }
+    else if(price_min == null && price_max !== null)
+    {
+      where.AND.push({
+        product_dollar_price: {
+          lte: price_max,
+        },
+      });
+    }
+    else if(price_min !== null && price_max == null)
+    {
+      where.AND.push({
+        product_dollar_price: {
+          gte: price_min,
+        },
+      });
+    }
+    if (crypto_min!== null && crypto_max !== null) {
+      where.AND.push({
+        product_dollar_price: {
+          gte: crypto_min,
+          lte: crypto_max,
+        },
+      });
+    }
+    else if(crypto_min == null && price_mcrypto_maxax !== null)
+    {
+      where.AND.push({
+        product_dollar_price: {
+          lte: crypto_max,
+        },
+      });
+    }
+    else if(crypto_min !== null && price_crypto_maxax == null)
+    {
+      where.AND.push({
+        product_crypto_price: {
+          gte: crypto_min,
+        },
+      });
+    }
+    if (Rating !== null) {
+      where.AND.push({
+        popularity: {
+          gte: Rating,
+        },
+      });
+    }
+    if (days_limit !== null) {
+      const targetDate = new Date(currentDate);
+      targetDate.setDate(currentDate.getDate() - daysLimit);
+      where.AND.push({
+        product_added_time: days_limit,
+      });
+    }
+    if (Condition !== null) {
+      where.AND.push({
+        product_added_time: {
+          gte: targetDate,
+          lte: currentDate,
+        },
+      });
+    }
+    if (category !== null) {
+      where.AND.push({
+        products_category_id: category,
+      });
+    }
+    if (Searched_pharse !== null) {
+      where.AND.push({
+        OR: [
+          { name: { contains: search, mode: 'insensitive' } },
+          { description: { contains: search, mode: 'insensitive' } },
+        ],
+      });
+    }
+    const products = await prisma.product.findMany({
+      where,
     });
     return products;
   }

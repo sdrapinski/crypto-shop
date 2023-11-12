@@ -14,7 +14,7 @@ const Homepage = () => {
   const appContext = useContext(AppContext);
   useEffect(() => {
     axios
-      .get(`${appContext?.backendUrl}/offer/Categories`, {
+      .get(`${appContext?.backendUrl}/offer/getFilteredProducts/:100`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
