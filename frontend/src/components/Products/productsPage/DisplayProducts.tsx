@@ -8,10 +8,12 @@ const DisplayProducts: React.FC<ProductsArrayInterface> = (props) => {
 
   return (
     <div>
+      <div className="container">
       {products &&
         products.map((product) => (
           <Product key={product.product_id} product={product} />
         ))}
+      </div>
     </div>
   );
 };

@@ -82,6 +82,7 @@ const UserAccountPage = () => {
               <button className="nav-link" id="userCart-tab" data-bs-target="#userCart-content" type="button">Your Cart</button>
               <button className="nav-link" id="userOrderHistory-tab" data-bs-target="#userOrderHistory-content" type="button">History of Orders</button>
               <button className="nav-link" id="settings-tab" data-bs-target="#settings-content" type="button">Settings</button>
+              
             </div>
           </div>
         </div>

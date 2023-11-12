@@ -12,12 +12,11 @@ const Product: React.FC<ProductProps> = (props) => {
   const formattedDate = date.toLocaleDateString("pl-PL");
   const popularityClass =
     product.product_popularity < 4
-      ? "text-danger"
+      ? "badge bg-low-priority rounded-pill d-flex justify-content-center align-items-center mw-50"
       : product.product_popularity < 7
-      ? "text-warning"
-      : "text-success";
-  console.log(product);
-  return (
+      ? "badge bg-mid-priority rounded-pill d-flex justify-content-center align-items-center mw-50"
+      : "badge bg-high-priority rounded-pill d-flex justify-content-center align-items-center mw-50";
+  // return (
     <div className="container">
       <div className="card my-3">
         <div className="card-header">
@@ -99,6 +98,54 @@ const Product: React.FC<ProductProps> = (props) => {
         </div>
       </div>
     </div>
+  // );
+  return(
+    // <div className="container">
+      <div className="p-3 my-2 border">
+        <div className="row">
+          <div className="col-3">
+            <img src="https://via.placeholder.com/400x300" className="card-img"></img>
+          </div>
+          <div className="col-9">
+            <div className="d-flex flex-column h-100">
+            <div className="row mb-1">
+              <div className="col-10">
+                <h5>{product.product_name}</h5>
+              </div>
+              <div className="col-2 d-flex justify-content-end">
+                <span className={popularityClass}><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-star-fill me-1" viewBox="0 0 16 16">
+                  <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/></svg>{product.product_popularity}</span>
+              </div>
+            </div>
+            <div className="row my-1">
+              <div className="col-2">
+                Data added:
+              </div>
+              <div className="col-10">
+                {formattedDate}
+              </div>
+            </div>
+            <div className="row my-1">
+              <div className="col-2">
+                Added by:
+              </div>
+              <div className="col-10">
+                {product.user_id}
+              </div>
+            </div>
+            <div className="row mt-auto">
+              <div className="col-2">
+                Price:
+              </div>
+              <div className="col-10">
+                <strong>{product.product_dollar_price} $</strong>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    // </div>
   );
 };
 
