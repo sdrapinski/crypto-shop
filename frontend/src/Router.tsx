@@ -14,7 +14,7 @@ import ProductDetails from "./pages/productDetails/ProductDetails";
 import ProductsByCategoryPage from "./pages/productsByCategoryPage/ProductsByCategoryPage";
 import ProductsBySearchPage from "./pages/productsBySearchPage/ProductsBySearchPage";
 import AddProductPage from "./pages/addProduct/AddProductPage";
-import UserProducts from "./pages/userProducts/UserProducts";
+import UserProducts from "./pages/userAccountPage/subPages/UserProducts";
 import EditProduct from "./pages/editProduct/EditProduct";
 
 function Router() {
