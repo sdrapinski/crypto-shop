@@ -46,7 +46,7 @@ const UserProducts = () => {
       .then((resp) => {
         console.log(resp);
       });
-    navigate("/account/userProducts");
+    navigate("/account");
   };
 
   return (

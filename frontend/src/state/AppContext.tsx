@@ -116,6 +116,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
       })
       .then((resp) => {
         setCart(resp.data);
+        console.log("Cart");
+        console.log(resp.data);
       });
   };
 
@@ -125,6 +127,8 @@ const AppProvider = ({ children }: AppProviderProps) => {
       await axios
         .get<CartInterface>(`${backendUrl}/cart/getCartFromUserId/${user_id}`)
         .then((resp) => {
+          console.log(resp.data);
+
           setCart(resp.data);
           cart = resp.data;
         })
