@@ -3,14 +3,14 @@ export interface CartInterface {
   cartItems: CartItem[];
 }
 
-interface CartItem {
+export interface CartItem {
   cart_item_id: string;
   product_id: string;
-  quntity: number;
+  quantity: number;
   product: Product;
 }
 
-interface Product {
+export interface Product {
   product_name: string;
   product_dollar_price: number;
 }
