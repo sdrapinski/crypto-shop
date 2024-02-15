@@ -32,7 +32,7 @@ function Router() {
 
             <Route path="/account/userProducts" element={<UserProducts />} />
             <Route
-              path="/account/userProducts/editProduct/:productId"
+              path="/account/editProduct/:productId"
               element={<EditProduct />}
             />
 

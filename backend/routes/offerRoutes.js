@@ -7,14 +7,23 @@ const Category = new Categories();
 const offer = new Offers();
 
 router.route("/createOffer").post((req, res) => {
-  offer.addOffer("");
+  // offer.addOffer("");
 
   res.send("offer added");
 });
 
-router.route("/deleteOffer/:offerId").delete((req, res) => {
-  const outserch = offer.removeOffer(req.params.offerId);
-  res.send(outserch);
+router.route("/deleteOffer/:offerId").delete(async (req, res) => {
+  try {
+    const response = await offer.removeOffer(req.params.offerId);
+    if (response) {
+      res.status(200).send("Offer deleted successfully");
+    } else {
+      res.status(404).send("Offer not found");
+    }
+  } catch (error) {
+    console.error("Error deleting offer:", error);
+    res.status(500).send("Internal Server Error");
+  }
 });
 
 router.route("/searchProduct/:offerName").get((req, res) => {
@@ -27,7 +36,7 @@ router.route("/searchProductWL/:offerName").get((req, res) => {
     res.send(response);
   });
 });
-router.route("/Updateproduct/:offerId").post((req, res) => {
+router.route("/product/:offerId").put((req, res) => {
   offer.overwrite_Offer(req.params.offerId).then((response) => {
     res.send(response);
   });

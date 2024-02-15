@@ -28,13 +28,46 @@ class Offers {
     return this.#db.INSERT(query);
   }
   async removeOffer(product_id) {
-    const product = await this.#prisma.products.delete({
-      where: {
-        product_id: product_id,
-      },
-    });
-    return product;
+    try {
+      // Usuwanie związanych rekordów z innych tabel
+      await this.#prisma.cartToItem.deleteMany({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      await this.#prisma.productsSold.deleteMany({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      await this.#prisma.message.deleteMany({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      await this.#prisma.notification.deleteMany({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      // Usuwanie samego produktu
+      const deletedProduct = await this.#prisma.products.delete({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      return deletedProduct;
+    } catch (error) {
+      // Obsługa błędów
+      console.error("Error removing offer:", error);
+    }
   }
+
   overwrite_Offer(
     products_id,
     product_name,
