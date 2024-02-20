@@ -34,7 +34,6 @@ router.post("/registerUser", async (req, res) => {
 router.post("/refreshToken", async (req, res) => {
   const { refresh } = req.body;
   const data = jwtUtils.verifyRefreshToken(refresh);
-  console.log(data);
   if (!data) {
     return res.sendStatus(403);
   }
@@ -46,5 +45,12 @@ router.post("/refreshToken", async (req, res) => {
   let obj = { accessToken: accessToken };
   res.send(obj);
 });
+
+router.get("/account",async (req, res) =>{
+  const data = {}
+  data.append("test","test")
+
+  res.send(data)
+})
 
 module.exports = router;
