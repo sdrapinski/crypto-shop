@@ -70,6 +70,7 @@ model Products {
   product_popularity Float?
   product_added_time DateTime @default(now())
   product_promotion DateTime?
+  product_used Boolean
   product_messages Message[]
   product_notifications Notification[]
 

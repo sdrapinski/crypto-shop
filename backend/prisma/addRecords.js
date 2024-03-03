@@ -51,6 +51,7 @@ async function addRecords() {
         product_quantity: records.products[index].product_quantity,
         product_popularity: records.products[index].product_popularity,
         product_promotion: records.products[index].product_promotion,
+        product_used: records.products[index].product_used,
       },
     });
 
