@@ -12,18 +12,23 @@ class Offers {
   ) {
     const products = await this.#prisma.products.create({
       data:{
-        product_id:Productinfo.products_id,
-        user_id:Productinfo.user_id,
-        products_category_id:Productinfo.products_category_id,
+        user:{ connect: { user_id: Productinfo.user_id } },
+        products_category: {
+          connect: {
+            product_category_id: Productinfo.products_category_id,
+          },
+        },
+        product_watchedBy: {
+          connect: { user_id: Productinfo.user_id },
+        },
         product_name:Productinfo.product_name,
         product_description:Productinfo.product_description,
-        product_images:Productinfo.photo_id,
-        product_dollar_price:Productinfo.product_cost_cash,
-        product_crypto_prices:Productinfo.product_cost_crypto,
+        product_images:Productinfo.product_images,
+        product_dollar_price:Productinfo.product_dollar_price,
+       // product_crypto_prices:Productinfo.product_cost_crypto,
         product_quantity:Productinfo.product_quantity,
-        product_popularity:Productinfo.popularity,
-        product_added_time:Productinfo.added_when,
-        product_promotion:Productinfo.promoted_for,
+        product_popularity:Productinfo.product_popularity,
+        product_promotion:Productinfo.product_promotion,
         product_used:Productinfo.product_used,
       },
     });

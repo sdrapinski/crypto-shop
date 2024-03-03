@@ -19,6 +19,7 @@ const AddProductPage = () => {
   const [productQuantity, setProductQuantity] = useState(0);
   const [isProductPromoted, setIsProductPromoted] = useState(false);
   const [productPromotion, setProductPromotion] = useState("");
+  const [isUsed, setisUsed] = useState<boolean>(false)
   const [productImages, setProductImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
@@ -64,20 +65,25 @@ const AddProductPage = () => {
 
   const handleAddProduct = () => {
     // Tworzenie obiektu reprezentującego nowy produkt
-    const newProduct = {
-      productName,
-      productDescription,
-      products_category_id: selectedCategoryId, // Załóżmy, że masz wybrany identyfikator kategorii produktu
-      productDollarPrice,
-      productQuantity,
-      productPromotion: isProductPromoted ? productPromotion : null,
-      // Tutaj załóżmy, że identyfikator użytkownika (user_id) jest dostępny w appContext
+    const Productinfo = {
+      product_name: productName,
+      product_description: productDescription,
+      products_category_id: parseInt(selectedCategoryId), 
+      product_dollar_price:productDollarPrice,
+      product_quantity:productQuantity,
+      product_promotion: isProductPromoted ? new Date(productPromotion) : null,
+      product_images: JSON.stringify("dziala ale ftp potrzebne bo za dlugie i wywala"),
+      product_used:isUsed,
+      product_popularity:0,
+      
       user_id: appContext?.user?.user_id,
     };
+    console.log(Productinfo);
+    
 
-    // Wysłanie zapytania POST do serwera w celu dodania produktu
+    
     axios
-      .post(`${backendUrl}/offer/createOffer`, newProduct, {
+      .post(`${backendUrl}/offer/createOffer`, Productinfo, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -209,6 +215,14 @@ const AddProductPage = () => {
           onChange={(e) => setProductQuantity(parseInt(e.target.value))}
         />
         <br />
+        <label>
+          Is Product Used?
+          <input
+            type="checkbox"
+            checked={isUsed}
+            onChange={(e) => setisUsed(e.target.checked)}
+          />{" "}
+        </label>
 
         <label>
           Is Product Promoted?

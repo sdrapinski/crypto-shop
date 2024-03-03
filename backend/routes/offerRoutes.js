@@ -7,9 +7,12 @@ const Category = new Categories();
 const offer = new Offers();
 
 router.route("/createOffer").post((req, res) => {
-  // offer.addOffer("");
 
-  res.send("offer added");
+  offer.addOffer(req.body).then((response) => {
+    res.send(response);
+  });
+  
+  
 });
 
 router.route("/deleteOffer/:offerId").delete(async (req, res) => {
