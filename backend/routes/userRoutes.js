@@ -46,7 +46,7 @@ router.post("/refreshToken", async (req, res) => {
   res.send(obj);
 });
 
-router.get("/account",async (req, res) =>{
+router.get("/account/user",async (req, res) =>{
   const data = {}
   data.append("test","test")
 
