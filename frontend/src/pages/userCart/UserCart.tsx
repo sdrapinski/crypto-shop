@@ -5,6 +5,8 @@ import {
   CartItem,
   Product,
 } from "../../interfaces/CartInterface";
+import UserCartPaymentAction from "./UserCartPaymentAction";
+
 
 const UserCart = () => {
   const appContext = useContext(AppContext);
@@ -19,27 +21,35 @@ const UserCart = () => {
   };
 
   return (
-    <div className="user-cart-container">
+    <div className="userCart__flex">
+    <div className="userCart__container">
       {Object.entries(groupByProductId(cart?.cartItems || [])).map(
         ([productId, quantity]) => {
           const product: Product | undefined = cart?.cartItems.find(
             (item) => item.product_id === productId
           )?.product;
           return (
-            <div className="cart-item" key={productId}>
-              {" "}
-              {/* Dodaj klasę dla elementu koszyka */}
-              <span className="product-name">{product?.product_name}</span>{" "}
-              <span className="product-price">
+            <div className="userCart__item" key={productId}>
+            <img
+                src="https://via.placeholder.com/150"
+                alt={product?.product_name}
+              />
+              <span className="userCart__product-name">{product?.product_name}</span>{" "}
+              <span className="userCart__product-price">
                 {product?.product_dollar_price}$
               </span>
-              {quantity > 1 && (
-                <span className="quantity"> - Quantity: {quantity}</span>
+              {quantity  && (
+                <span className="userCart__quantity"> Quantity: {quantity}</span>
               )}
+               {quantity && product!.product_dollar_price  &&(
+              <span className="userCart__toal-per-item">  Total cost: <span> {quantity * product!.product_dollar_price}$ </span> </span>
+               )}
             </div>
           );
         }
       )}
+    </div>
+    <UserCartPaymentAction />
     </div>
   );
 };
