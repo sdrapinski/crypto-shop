@@ -50,7 +50,7 @@
             height: 20%;
             background-color: rgba(255, 255, 255, 0.527);
             border-radius: 8px;
-            box-shadow: 4px 8px 3px rgba(37, 36, 36, 0.329);
+            box-shadow: 0 8px 3px rgba(37, 36, 36, 0.329);
         }
 
         .edit{
@@ -97,4 +97,66 @@
 .wallets-content>div:hover{
     transition: 0.3s;
     box-shadow: 0 0 0 #0060df;
+}
+
+.watchlist-content>div{
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    box-shadow: 0 0 20px royalblue;
+    border: 2px solid royalblue;
+    transition: box-shadow .3s ease 0s;
+
+    &:hover{
+        box-shadow: 0 0 0 royalblue;
+    }
+    &button, p{
+        display: block;
+    }
+
+    button{
+        transition: 0.3s;
+        width: 4.75rem;
+        height: 2.25rem;
+        background-color: rgba(255, 255, 255, 0.527);
+        border-radius: 8px;
+        box-shadow: 0 8px 3px rgba(37, 36, 36, 0.329);
+        margin: 0 .25rem;
+    }
+
+    p{
+        font-size: 1.25rem;
+        margin-right: auto;
+    }
+
+    .show{
+        transition: 0.3s;
+        border: 2px solid #0060df;
+        color: #0060df;
+    }
+    .show:hover{
+        transition: 0.3s;
+        border: 2px solid white;
+        background-color:  #0060df;
+        color: white;
+    }
+
+    .remove{
+        transition: 0.3s;
+        border: 2px solid red;
+        color: red;
+    }
+    .remove:hover{
+        transition: 0.3s;
+        border: 2px solid white;
+        background-color: red;
+        color: white;
+    }
+
+    button:hover{
+        transition: 0.3s;
+        box-shadow: 0 0 0 rgba(37, 36, 36, 0.329);
+    }
 }

@@ -27,54 +27,54 @@ const UserWallets = () => {
         <p>1# wallet</p>
         
           <div className="btn-footer">
-            <button type="button" className="edit">Edytuj</button>
-            <button type="button" className="remove">Usuń</button>
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
           </div>
         </div>
         <div>
         <p>2# wallet</p>
         
           <div className="btn-footer">
-            <button type="button" className="edit">Edytuj</button>
-            <button type="button" className="remove">Usuń</button>
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
           </div>
         </div>
         <div>
         <p>3# wallet</p>
         
           <div className="btn-footer">
-            <button type="button" className="edit">Edytuj</button>
-            <button type="button" className="remove">Usuń</button>
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
           </div>
         </div>
         <div>
         <p>4# wallet</p>
         
           <div className="btn-footer">
-            <button type="button" className="edit">Edytuj</button>
-            <button type="button" className="remove">Usuń</button>
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
           </div>
         </div>
         <div>
         <p>5# wallet</p>
         
           <div className="btn-footer">
-            <button type="button" className="edit">Edytuj</button>
-            <button type="button" className="remove">Usuń</button>
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
           </div>
         </div>
         <div>
         <p>6# wallet</p>
         
           <div className="btn-footer">
-            <button type="button" className="edit">Edytuj</button>
-            <button type="button" className="remove">Usuń</button>
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
           </div>
         </div>
         <div className="new">
         <p>New wallet</p>
           <div className="btn-footer">
-            <button type="button" className="add">Dodaj</button>
+            <button type="button" className="add">Add</button>
           </div>
         </div>
     </section>
