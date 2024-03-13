@@ -100,13 +100,21 @@
 }
 
 .watchlist-content>div{
+    box-shadow: 0 0 20px royalblue;
+    border: 2px solid royalblue;
+}
+
+.userorders-content>div{
+    box-shadow: 0 0 20px #ab00df;
+    border: 2px solid #ab00df;
+}
+
+.watchlist-content>div, .userorders-content>div{
     display: flex;
     align-items: center;
     padding: 2rem;
     margin: 2rem 0;
     border-radius: 8px;
-    box-shadow: 0 0 20px royalblue;
-    border: 2px solid royalblue;
     transition: box-shadow .3s ease 0s;
 
     &:hover{
@@ -140,6 +148,18 @@
         transition: 0.3s;
         border: 2px solid white;
         background-color:  #0060df;
+        color: white;
+    }
+
+    .view{
+        transition: 0.3s;
+        border: 2px solid #ab00df;
+        color: #ab00df;
+    }
+    .view:hover{
+        transition: 0.3s;
+        border: 2px solid white;
+        background-color:  #ab00df;
         color: white;
     }
 
