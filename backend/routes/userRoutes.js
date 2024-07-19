@@ -7,6 +7,7 @@ const user = new Users();
 
 router.post("/login", async (req, res) => {
   const userFromDB = await user.getUserByLoginAndPassword(req.body);
+  console.log(userFromDB);
 
   if (!userFromDB || userFromDB.length === 0) {
     return res.sendStatus(401);

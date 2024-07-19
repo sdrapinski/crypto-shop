@@ -26,6 +26,7 @@ class Users {
         user_cart: true,
       },
     });
+   
     return findedUser;
   }
 

@@ -31,10 +31,13 @@ const ProductsByCategoryPage = () => {
 
     return () => {};
   }, []);
+  
+ 
+  
   return (
     <div className="productsListPage">
       <Row>
-        <Filters category={categoryId!} />
+        <Filters category={categoryId!}  />
         <DisplayProducts products={products!} />
       </Row>
     </div>

@@ -6,18 +6,28 @@ import InputForm from "../../Forms/InputForm";
 
 interface FilterProps {
   category: string;
+  
 }
 
 const Filters: React.FC<FilterProps> = (props) => {
+  const [minPrice, setminPrice] = useState(0)
+
+  const chandleMinPrice =(event:React.ChangeEvent<HTMLInputElement>)=>{
+    setminPrice(parseFloat( event.target.value))
+  }
+ 
+
   const { category } = props;
+  const body ={}
   const appcontext = useContext(AppContext);
   useEffect(() => {
     axios
-      .get(`${appcontext?.backendUrl}/offer/filters/${category}`, {
+      .post(`${appcontext?.backendUrl}/offer/filters/${category}`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
+        body
       })
       .then((resp) => {
         console.log(resp);
@@ -26,13 +36,19 @@ const Filters: React.FC<FilterProps> = (props) => {
     return () => {};
   }, []);
 
+
+
   return (
     <Col md={2} className="filters">
       Price <br />
       <InputGroup>
-        <Form.Control placeholder="min" />
+        <Form.Control type="number" placeholder="min" value={minPrice} onChange={chandleMinPrice}/>
         <Form.Control placeholder="max" />
+        
+        
       </InputGroup>
+
+      <button >apply</button>
     </Col>
   );
 };
