@@ -1,6 +1,7 @@
 const DB = require("./db.js");
 const { PrismaClient } = require("@prisma/client");
 const shopping_cart = require("./shopping-cart.js");
+const bcrypt = require("bcryptjs");
 class Users {
   cart = new shopping_cart();
   #prisma;
@@ -9,8 +10,19 @@ class Users {
   }
 
   async createUser(user) {
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(user.user_password, salt);
+
     const newUser = await this.#prisma.users.create({
-      data: user,
+      data: {
+          user_name: user.user_name,
+          user_surname: user.user_surname,
+          user_email: user.user_email,
+          user_date_of_birth: user.user_date_of_birth,
+          user_phone_number: user.user_phone_number,
+          user_login: user.user_login,
+          user_password: hashedPassword,
+      }
     });
     this.cart.createCart(newUser.user_id);
     return newUser;

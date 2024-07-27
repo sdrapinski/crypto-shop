@@ -26,7 +26,6 @@ router.post("/ChceckIfUserDoesNotExist", async (req, res) => {
 });
 
 router.post("/registerUser", async (req, res) => {
-  console.log(req.body);
   user.createUser(req.body).then((resp) => {
     res.send(resp);
   });
