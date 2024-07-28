@@ -7,14 +7,16 @@ const user = new Users();
 
 router.post("/login", async (req, res) => {
   const userFromDB = await user.getUserByLoginAndPassword(req.body);
-  console.log(userFromDB);
+  if(userFromDB.code===400){
+    return res.sendStatus(400);
+  }
 
-  if (!userFromDB || userFromDB.length === 0) {
+  if (!userFromDB.findedUser || userFromDB.findedUser.length === 0) {
     return res.sendStatus(401);
   }
 
-  const accessToken = jwtUtils.generateAccessToken(userFromDB);
-  const refreshToken = jwtUtils.generateRefreshToken(userFromDB);
+  const accessToken = jwtUtils.generateAccessToken(userFromDB.findedUser);
+  const refreshToken = jwtUtils.generateRefreshToken(userFromDB.findedUser);
 
   res.json({ accessToken, refreshToken });
 });
@@ -34,7 +36,6 @@ router.post("/registerUser", async (req, res) => {
 router.post("/refreshToken", async (req, res) => {
   const { refresh } = req.body;
   const data = jwtUtils.verifyRefreshToken(refresh);
-  console.log(data);
   if (!data) {
     return res.sendStatus(403);
   }

@@ -32,14 +32,19 @@ class Users {
     const findedUser = await this.#prisma.users.findFirst({
       where: {
         user_email: user.email,
-        user_password: user.password,
       },
       include: {
         user_cart: true,
       },
     });
+
+    
+    if (!(await bcrypt.compare(user.password, findedUser.user_password))) {
+      
+      return { findedUser:[],code:400 };
+    }
    
-    return findedUser;
+    return {findedUser:findedUser,code:200};
   }
 
   async checkIfUserNotExistByEmail(email) {
