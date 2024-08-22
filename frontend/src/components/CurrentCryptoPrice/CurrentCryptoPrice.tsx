@@ -1,12 +1,14 @@
 import React, { useEffect,useState } from 'react'
 import useAxiosCrypto from '../../hooks/useAxiosCrypto';
 import { CurrentCryptoPriceInterface } from '../../interfaces/CurrentCryptoPrice.Interface';
+import CurrentCryptoPriceItem from './CurrentCryptoPriceItem';
 
 const CurrentCryptoPrice = () => {
   const api = useAxiosCrypto()
 
   const [bitcoin, setBitcoin] = useState<CurrentCryptoPriceInterface | null>(null)
   const [ethereum, setEthereum] = useState<CurrentCryptoPriceInterface | null>(null)
+  const [solana, setSolana] = useState<CurrentCryptoPriceInterface | null>(null)
 
   useEffect(() => {
     api
@@ -14,12 +16,35 @@ const CurrentCryptoPrice = () => {
       .then((resp) => {
        setBitcoin(resp.data)
       });
+    api
+      .get<CurrentCryptoPriceInterface>(`/coins/ethereum`)
+      .then((resp) => {
+       setEthereum(resp.data)
+      });
+    api
+      .get<CurrentCryptoPriceInterface>(`/coins/solana`)
+      .then((resp) => {
+       setSolana(resp.data)
+      });
 
     return () => {};
   }, []);
 
   return (
-    <div>Btc price: {bitcoin!.market_data.current_price.usd}</div>
+    <div className='currentCryptoPrice__row'>
+        {!bitcoin || !ethereum || !solana ? <div> Ładowanie danych blockchain</div> : 
+        <>
+        <CurrentCryptoPriceItem coin={bitcoin} key={bitcoin.name}/>
+        <CurrentCryptoPriceItem coin={ethereum} key={ethereum.name}/>
+        <CurrentCryptoPriceItem coin={solana} key={solana.name}/>
+      
+        </>
+        
+        
+        }
+
+        
+    </div>
   )
 }
 

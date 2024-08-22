@@ -1,6 +1,7 @@
 export interface CurrentCryptoPriceInterface {
 image:image;
 market_data:market_data
+name:string
 }
 interface image {
     large:string;

@@ -1,0 +1,22 @@
+.currentCryptoPrice__row{
+    display: flex;
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.CurrentCryptoPriceItem{
+    &__wrapper{
+        width: 200px;
+        align-items: center;
+        display: flex;
+        flex-direction: column;
+    }
+    &__img{
+        width: 50px;
+    }
+    &__text{
+        font-size: 16px;
+        margin-top: 5px;
+        text-align: center;
+    }
+}
