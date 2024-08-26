@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { E164Number } from 'libphonenumber-js';
 import InputForm from "./InputForm";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -14,7 +15,7 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
   const [userName, setUserName] = useState("");
   const [userSurname, setUserSurname] = useState("");
   const [userBirthday, setUserBirthday] = useState("");
-  const [userPhoneNumber, setPhoneNumber] = useState("");
+  const [userPhoneNumber, setPhoneNumber] = useState<E164Number | undefined>(undefined);
   const [country, setCountry] = useState("");
   const [city, setCity] = useState("");
   const [postCode, setPostCode] = useState("");
@@ -30,9 +31,9 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
     setUserBirthday(e.currentTarget.value);
     // calculateAge(e.currentTarget.value);
   };
-  const handleUserPhoneChange = (phoneNumber: string) => {
-    phoneNumber = phoneNumber !== userPhoneNumber ? phoneNumber : "";
-    setPhoneNumber(phoneNumber);
+  const handleUserPhoneChange = (phoneNumber: E164Number | undefined) => {
+    // phoneNumber = phoneNumber !== userPhoneNumber ? phoneNumber : "";
+    setPhoneNumber(phoneNumber || undefined);
   };
   const handleCountryChange = (val: string) => {
     // console.log(val)
@@ -135,7 +136,7 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
             id="phone-input"
             international
             placeholder="Phone number:"
-            value={userPhoneNumber}
+            value={userPhoneNumber || undefined}
             onChange={handleUserPhoneChange}
           />
         </div>
