@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { E164Number } from 'libphonenumber-js';
+import { useNavigate } from 'react-router-dom';
 import InputForm from "./InputForm";
 import "react-phone-number-input/style.css";
 import PhoneInput from "react-phone-number-input";
@@ -11,7 +12,7 @@ const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
   const { login, email, password } = props;
-
+  const navigate = useNavigate();
   const [userName, setUserName] = useState("");
   const [userSurname, setUserSurname] = useState("");
   const [userBirthday, setUserBirthday] = useState("");
@@ -20,6 +21,7 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
   const [city, setCity] = useState("");
   const [postCode, setPostCode] = useState("");
   const [street, setStreet] = useState("");
+  const [registrationStatus, setRegistrationStatus] = useState<null | number>()
 
   const handleUserNameChange = (e: React.FormEvent<HTMLInputElement>) => {
     setUserName(e.currentTarget.value);
@@ -91,7 +93,12 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
         }
       )
       .then((response) => {
-        console.log(response);
+        setRegistrationStatus(response.status)
+        if(response.status===200){
+          setTimeout(()=>{
+            navigate('/login');
+          },3000)
+        } 
       });
   };
 
@@ -182,6 +189,19 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
             Send{" "}
           </button>
         </div>
+        {
+          registrationStatus===200 ?
+            <div style={{color:"green"}}>
+              successful registration in 3 seconds you will be redirected to the login page
+            </div>
+            : registrationStatus === 400 ?
+            <div style={{color:"red"}}>
+              Something went wrong, try again
+            </div>
+            :
+            <></>
+          
+        }
       </div>
     </form>
   );
