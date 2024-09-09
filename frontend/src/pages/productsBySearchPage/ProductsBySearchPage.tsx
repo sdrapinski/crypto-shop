@@ -5,11 +5,13 @@ import axios from "axios";
 import Filters from "../../components/Products/productsPage/Filters";
 import DisplayProducts from "../../components/Products/productsPage/DisplayProducts";
 import { mainPageProductsInterface } from "../../interfaces/product.interface";
+
 const ProductsBySearchPage = () => {
   const { query } = useParams();
-  const [products, setproducts] = useState<mainPageProductsInterface[]>();
+  const [products, setProducts] = useState<mainPageProductsInterface[]>();
 
   const appcontext = useContext(AppContext);
+
   useEffect(() => {
     axios
       .get<mainPageProductsInterface[]>(
@@ -23,15 +25,15 @@ const ProductsBySearchPage = () => {
       )
       .then((resp) => {
         console.log(resp);
-
-        setproducts(resp.data);
+        setProducts(resp.data);
       });
 
     return () => {};
-  }, []);
+  }, [query, appcontext?.backendUrl]);
+
   return (
     <div className="productsListPage">
-      <Filters category={query!} />
+      <Filters category={query!} setProducts={setProducts} />
       <DisplayProducts products={products!} />
     </div>
   );

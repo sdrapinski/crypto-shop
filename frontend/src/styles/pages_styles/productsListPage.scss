@@ -1,3 +1,21 @@
 .productsListPage {
   margin: 10px;
 }
+
+.productsListContainer {
+  display: flex;
+  flex-direction: row-reverse; /* Ustawienie filtrów po prawej stronie */
+  width: 100%;
+}
+
+.productsColumn {
+  flex: 1; /* Produkty zajmują resztę dostępnej przestrzeni */
+  padding: 20px;
+}
+
+.filtersColumn {
+  width: 20%; /* Kolumna filtrów zajmuje 20% szerokości */
+  padding: 20px;
+  background-color: #f8f9fa; /* Opcjonalnie, tło dla kolumny z filtrami */
+  border-left: 1px solid #ddd; /* Opcjonalnie, oddzielnie kolumny */
+}

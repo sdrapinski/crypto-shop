@@ -17,9 +17,6 @@ COPY . .
 # Instalujemy Nodemon globalnie
 RUN npm install nodemon --global
 
-# Start prisma
-RUN npx prisma generate
-
 # Expose port
 EXPOSE 8000
 
