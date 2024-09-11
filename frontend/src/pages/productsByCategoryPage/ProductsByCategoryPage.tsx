@@ -10,7 +10,7 @@ import { Row } from "react-bootstrap";
 
 const ProductsByCategoryPage = () => {
   const { categoryId } = useParams();
-  const [products, setproducts] = useState<mainPageProductsInterface[]>();
+  const [products, setProducts] = useState<mainPageProductsInterface[]>();
 
   const appcontext = useContext(AppContext);
   useEffect(() => {
@@ -26,20 +26,24 @@ const ProductsByCategoryPage = () => {
       )
       .then((resp) => {
         console.log(resp);
-        setproducts(resp.data);
+        setProducts(resp.data);
       });
 
     return () => {};
-  }, []);
+  }, [categoryId,appcontext?.backendUrl]);
   
  
   
   return (
     <div className="productsListPage">
-      <Row>
-        <Filters category={categoryId!}  />
-        <DisplayProducts products={products!} />
-      </Row>
+      <div className="productsListContainer">
+        <div className="productsColumn">
+          <DisplayProducts products={products!} />
+        </div>
+        <div className="filtersColumn">
+          <Filters category={categoryId!} setProducts={setProducts} />
+        </div>
+      </div>
     </div>
   );
 };

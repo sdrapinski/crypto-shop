@@ -80,7 +80,7 @@ const ProductDetails = () => {
             Quantity: {product.product_quantity}
           </p>
           <hr className="separator" />
-          <button onClick={handleAddProduct} disabled={!appcontext?.user}> {appcontext?.user? "Buy Now" : "Login first"}</button>
+          <button onClick={handleAddProduct} disabled={!appcontext?.user}> {appcontext?.user? "Add to cart" : "Login first"}</button>
         </div>
       </div>
       <div className="product-additionalInfo">

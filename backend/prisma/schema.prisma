@@ -48,6 +48,7 @@ user_products_purchased ProductsSold[]
 user_messages_send Message[] @relation("sender")
 user_messages_recived Message[] @relation("recipient")
 user_notifications Notification[]
+user_wallet_address String
 
 }
 
@@ -73,6 +74,7 @@ model Products {
   product_used Boolean
   product_messages Message[]
   product_notifications Notification[]
+  product_crypto Boolean
 
 
 }

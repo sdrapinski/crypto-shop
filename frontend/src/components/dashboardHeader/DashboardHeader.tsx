@@ -58,7 +58,10 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
   };
 
   const handleFromSubmit = (e: React.FormEvent) => {
-    navigate(`products/search/${searchValue}`);
+    e.preventDefault()
+    if(searchValue && searchValue.length >0){
+      navigate(`products/search/${searchValue}`);
+      }
   };
 
   return (

@@ -16,17 +16,22 @@ import CurrentCryptoPrice from "../../components/CurrentCryptoPrice/CurrentCrypt
 //test
 const Homepage = () => {
   const appContext = useContext(AppContext);
-  useEffect(() => {
-    // axios
-    //   .get(`https://api.coingecko.com/api/v3/ping`, {
-    //     headers:  {accept: 'application/json', 'x-cg-demo-api-key': 'CG-vzU3EaiofQxbZ9GoJR1pTxTV'}
-    //   })
-    //   .then((resp) => {
-    //     console.log(resp);
-    //   });
+  
+  // useEffect(() => {
+  //   console.log(appContext?.user)
+  //   axios
+  //     .get(`${appContext?.backendUrl}/user/getUserAndProducts/${appContext?.user?.user_id}`,{
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //     })
+  //     .then((resp) => {
+  //       console.log(resp);
+  //     });
 
-    return () => {};
-  }, []);
+  //   return () => {};
+  // }, []);
 
   return (
     <>

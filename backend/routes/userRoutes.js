@@ -48,4 +48,10 @@ router.post("/refreshToken", async (req, res) => {
   res.send(obj);
 });
 
+router.route("/getUserAndProducts/:user_id").get((req, res) => {
+  user.getUserAndProductsPurchasedByUser_id(req.params.user_id).then((response) => {
+    res.send(response);
+  });
+});
+
 module.exports = router;

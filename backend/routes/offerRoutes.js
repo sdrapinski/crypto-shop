@@ -81,8 +81,8 @@ router.route("/getUserProducts/:userId").get((req, res) => {
     res.send(response);
   });
 });
-router.route("/getFilteredProducts/:price_max /:price_min /:crypto_max /:crypto_min /:days_limit /:Condition /:Rating,category /:Searched_pharse").get((req, res) => {
-  offer.getFilteredProducts(req.params.price_max, price_min, crypto_max, crypto_min, days_limit,Condition, Rating,category,Searched_pharse).then((response) => {
+router.route("/getFilteredProducts").post((req, res) => {
+  offer.getFilteredProducts(req.body).then((response) => {
     res.send(response);
   });
 });

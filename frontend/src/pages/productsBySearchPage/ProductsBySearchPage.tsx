@@ -7,7 +7,7 @@ import DisplayProducts from "../../components/Products/productsPage/DisplayProdu
 import { mainPageProductsInterface } from "../../interfaces/product.interface";
 const ProductsBySearchPage = () => {
   const { query } = useParams();
-  const [products, setproducts] = useState<mainPageProductsInterface[]>();
+  const [products, setProducts] = useState<mainPageProductsInterface[]>();
 
   const appcontext = useContext(AppContext);
   useEffect(() => {
@@ -24,15 +24,21 @@ const ProductsBySearchPage = () => {
       .then((resp) => {
         console.log(resp);
 
-        setproducts(resp.data);
+        setProducts(resp.data);
       });
 
     return () => {};
-  }, []);
+  }, [query, appcontext?.backendUrl]);
   return (
     <div className="productsListPage">
-      <Filters category={query!} />
-      <DisplayProducts products={products!} />
+      <div className="productsListContainer">
+        <div className="productsColumn">
+          <DisplayProducts products={products!} />
+        </div>
+        <div className="filtersColumn">
+          <Filters category={query!} setProducts={setProducts} />
+        </div>
+      </div>
     </div>
   );
 };

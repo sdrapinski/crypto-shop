@@ -30,6 +30,7 @@ class Offers {
         product_popularity:Productinfo.product_popularity,
         product_promotion:Productinfo.product_promotion,
         product_used:Productinfo.product_used,
+        product_crypto:Productinfo.crypto,
       },
     });
     return products;
@@ -92,6 +93,7 @@ class Offers {
         product_quantity:Productinfo.product_quantity,
         product_promotion:Productinfo.promoted_for,
         product_used:Productinfo.product_used,
+        product_crypto:Productinfo.crypto,
       },
     });
     return product;
@@ -207,95 +209,55 @@ class Offers {
     });
     return products;
   }
-
-  async getFilteredProducts(price_max, price_min, crypto_max, crypto_min, days_limit,Condition, Rating,category,Searched_pharse) {
-    if (price_min!== null && price_max !== null) {
-      where.AND.push({
-        product_dollar_price: {
-          gte: price_min,
-          lte: price_max,
-        },
-      });
+  async getFilteredProducts(Productinfo) {
+    const where = {};
+  
+    if (Productinfo.price_min && !isNaN(parseFloat(Productinfo.price_min))) {
+      where.product_dollar_price = {
+        ...where.product_dollar_price,
+        gte: parseFloat(Productinfo.price_min),
+      };
     }
-    else if(price_min == null && price_max !== null)
-    {
-      where.AND.push({
-        product_dollar_price: {
-          lte: price_max,
-        },
-      });
+    if (Productinfo.price_max  && !isNaN(parseFloat(Productinfo.price_max))) {
+      where.product_dollar_price = {
+        ...where.product_dollar_price,
+        lte: parseFloat(Productinfo.price_max),
+      };
     }
-    else if(price_min !== null && price_max == null)
-    {
-      where.AND.push({
-        product_dollar_price: {
-          gte: price_min,
-        },
-      });
+  
+    if (Productinfo.crypto ==true) {
+      where.product_crypto = true;
     }
-    if (crypto_min!== null && crypto_max !== null) {
-      where.AND.push({
-        product_dollar_price: {
-          gte: crypto_min,
-          lte: crypto_max,
-        },
-      });
+  
+    if (Productinfo.rating  && !isNaN(parseFloat(Productinfo.rating))) {
+      where.product_popularity = {
+        gte: parseFloat(Productinfo.rating),
+      };
     }
-    else if(crypto_min == null && price_mcrypto_maxax !== null)
-    {
-      where.AND.push({
-        product_dollar_price: {
-          lte: crypto_max,
-        },
-      });
+  
+    if (Productinfo.days_limit>0) {
+      const currentDate = new Date();
+      const targetDate = new Date();
+      targetDate.setDate(currentDate.getDate() - Productinfo.days_limit);
+      where.product_added_time = {
+        gte: targetDate,
+        lte: currentDate,
+      };
     }
-    else if(crypto_min !== null && price_crypto_maxax == null)
-    {
-      where.AND.push({
-        product_crypto_price: {
-          gte: crypto_min,
-        },
-      });
+  
+    if (Productinfo.category  && !isNaN(Number(Productinfo.category))) {
+      where.products_category_id = Number(Productinfo.category);
     }
-    if (Rating !== null) {
-      where.AND.push({
-        popularity: {
-          gte: Rating,
-        },
-      });
-    }
-    if (days_limit !== null) {
-      const targetDate = new Date(currentDate);
-      targetDate.setDate(currentDate.getDate() - daysLimit);
-      where.AND.push({
-        product_added_time: days_limit,
-      });
-    }
-    if (Condition !== null) {
-      where.AND.push({
-        product_added_time: {
-          gte: targetDate,
-          lte: currentDate,
-        },
-      });
-    }
-    if (category !== null) {
-      where.AND.push({
-        products_category_id: category,
-      });
-    }
-    if (Searched_pharse !== null) {
-      where.AND.push({
-        OR: [
-          { name: { contains: search, mode: 'insensitive' } },
-          { description: { contains: search, mode: 'insensitive' } },
-        ],
-      });
-    }
-    const products = await prisma.product.findMany({
+    console.log(where);
+    const products = await this.#prisma.products.findMany({
       where,
     });
+  
     return products;
   }
+  
+
+
+ 
 }
 module.exports = Offers;
