@@ -1,6 +1,9 @@
-import React from 'react'
+import React,{useContext,useState} from 'react'
+import { AppContext } from '../../state/AppContext';
 
 const PaymentPage = () => {
+  const appContext = useContext(AppContext);
+  console.log(appContext?.user)
   return (
     <div>
       strona do płatnosci i dostawy

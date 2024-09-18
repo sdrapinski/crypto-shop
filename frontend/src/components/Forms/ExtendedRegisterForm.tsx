@@ -22,6 +22,7 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
   const [postCode, setPostCode] = useState("");
   const [street, setStreet] = useState("");
   const [registrationStatus, setRegistrationStatus] = useState<null | number>()
+  const [disableButton, setdisableButton] = useState(false)
 
   const handleUserNameChange = (e: React.FormEvent<HTMLInputElement>) => {
     setUserName(e.currentTarget.value);
@@ -84,6 +85,13 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
           user_phone_number: userPhoneNumber,
           user_login: login,
           user_password: password,
+          user_region : {
+            country:country,
+            city:city,
+            street:street,
+            postCode:postCode
+
+          }
         },
         {
           headers: {
@@ -95,6 +103,7 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
       .then((response) => {
         setRegistrationStatus(response.status)
         if(response.status===200){
+          setdisableButton(true)
           setTimeout(()=>{
             navigate('/login');
           },3000)
@@ -185,7 +194,7 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
           />
         </div>
         <div className="col-12 my-3">
-          <button type="submit" className="extendedRegister__submit">
+          <button type="submit" className="extendedRegister__submit" disabled={disableButton}>
             Send{" "}
           </button>
         </div>

@@ -22,8 +22,19 @@ class Users {
           user_phone_number: user.user_phone_number,
           user_login: user.user_login,
           user_password: hashedPassword,
+          
       }
     });
+  
+    const newRegion = await this.#prisma.region.create({
+      data:{
+        city:user.user_region.city,
+        country:user.user_region.country,
+        street:user.user_region.street,
+       // postCode:user.user_region.postCode,
+        user_id:newUser.user_id
+      }
+    })
     this.cart.createCart(newUser.user_id);
     return newUser;
   }
@@ -35,8 +46,12 @@ class Users {
       },
       include: {
         user_cart: true,
+        user_region:true
       },
     });
+    console.log(findedUser);
+    
+   
 
     
     if (!(await bcrypt.compare(user.password, findedUser.user_password))) {
@@ -59,6 +74,7 @@ class Users {
       },
       include: {
         user_cart: true,
+        user_region:true
       },
     });
     return findedUser;
@@ -71,6 +87,7 @@ class Users {
       },
       include: {
         user_cart: true,
+        user_region:true
       },
     });
     return findedUser;
@@ -82,6 +99,7 @@ class Users {
       },
       include: {
         user_cart: true,
+        user_region:true
       },
     });
     return findedUser;
@@ -93,6 +111,7 @@ class Users {
       },
       include: {
         user_products_purchased: true,
+        user_region:true
       },
     });
     return findedUser;
