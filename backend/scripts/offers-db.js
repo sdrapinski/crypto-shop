@@ -7,57 +7,107 @@ class Offers {
   constructor() {
     this.#prisma = new PrismaClient();
   }
-  addOffer(
-    user_id,
-    products_id,
-    products_category_id,
-    product_name,
-    product_cost_cash,
-    product_cost_crypto,
-    product_quantity,
-    product_description,
-    photo_id,
-    added_when,
-    popularity,
-    promoted_for
+  async addOffer(
+    Productinfo
   ) {
-    const query = `
-          INSERT INTO Products (user_id, product_name, products_category_id, product_cost_cash, product_cost_crypto, product_quantity, product_description, photo_id, added_when,promoted_for) 
-          VALUES (${user_id}, ${product_name}, ${products_category_id}, ${product_cost_cash}, ${product_cost_crypto}, ${product_quantity}, ${product_description}, ${photo_id}, ${photo_id}, ${added_when},${promoted_for})
-        `;
-    return this.#db.INSERT(query);
+    const products = await this.#prisma.products.create({
+      data:{
+        user:{ connect: { user_id: Productinfo.user_id } },
+        products_category: {
+          connect: {
+            product_category_id: Productinfo.products_category_id,
+          },
+        },
+        product_watchedBy: {
+          connect: { user_id: Productinfo.user_id },
+        },
+        product_name:Productinfo.product_name,
+        product_description:Productinfo.product_description,
+        product_images:Productinfo.product_images,
+        product_dollar_price:Productinfo.product_dollar_price,
+       // product_crypto_prices:Productinfo.product_cost_crypto,
+        product_quantity:Productinfo.product_quantity,
+        product_popularity:Productinfo.product_popularity,
+        product_promotion:Productinfo.product_promotion,
+        product_used:Productinfo.product_used,
+        product_crypto:Productinfo.crypto,
+      },
+    });
+    return products;
   }
   async removeOffer(product_id) {
-    const product = await this.#prisma.products.delete({
+    try {
+      // Usuwanie związanych rekordów z innych tabel
+      await this.#prisma.cartToItem.deleteMany({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      await this.#prisma.productsSold.deleteMany({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      await this.#prisma.message.deleteMany({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      await this.#prisma.notification.deleteMany({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      // Usuwanie samego produktu
+      const deletedProduct = await this.#prisma.products.delete({
+        where: {
+          product_id: product_id,
+        },
+      });
+
+      return deletedProduct;
+    } catch (error) {
+      // Obsługa błędów
+      console.error("Error removing offer:", error);
+    }
+  }
+
+  async overwrite_Offer(
+    Productinfo
+  ) {
+    const product = await this.#prisma.products.update({
       where: {
         product_id: product_id,
+      },
+      data:{
+        products_category_id:Productinfo.products_category_id,
+        product_name:Productinfo.product_name,
+        product_description:Productinfo.product_description,
+        product_images:Productinfo.photo_id,
+        product_dollar_price:Productinfo.product_cost_cash,
+        product_crypto_prices:Productinfo.product_cost_crypto,
+        product_quantity:Productinfo.product_quantity,
+        product_promotion:Productinfo.promoted_for,
+        product_used:Productinfo.product_used,
+        product_crypto:Productinfo.crypto,
       },
     });
     return product;
   }
-  overwrite_Offer(
-    products_id,
-    product_name,
-    product_cost_cash,
-    product_cost_crypto,
-    product_quantity,
-    product_description,
-    photo_id,
-    added_when,
-    promoted_for
-  ) {
-    const query = `
-          UPDATE Products SET product_name=${product_name} ,product_cost_cash=${product_cost_cash}, product_cost_crypto= ${product_cost_crypto}, product_quantity=${product_quantity}, product_description=${product_description} , photo_id=  ${photo_id}, added_when=${added_when}, promoted_for=${promoted_for}
-          WHERE products_id=${products_id}
-        `;
-    return this.#db.INSERT(query);
-  }
-  PromoUpdate(product_id, promoted_for) {
-    const query = `
-          UPDATE Products SET promoted_for=${promoted_for}
-          WHERE products_id=${products_id}
-          `;
-    return this.#db.INSERT(query);
+  async PromoUpdate(product_id, promoted_for) {
+    const product = await this.#prisma.products.update({
+      where: {
+        product_id: product_id,
+      },
+      data:{
+        product_promotion:promoted_for,
+      },
+    });
+    return product;
   }
   OfferSearch(Searched_pharse) {
     const query = `
@@ -71,11 +121,15 @@ class Offers {
           `;
     return this.#db.SELECT(query);
   }
-  PromotedOffers() {
-    const query = `
-           SELECT * from Products WHERE promoted_for>CURDATE() ORDER BY RAND() LIMIT 6
-          `;
-    return this.#db.SELECT(query);
+  async PromotedOffers() {
+    const products = await this.#prisma.products.findMany({
+      take: 20,
+      where: {
+        products_category_id: parseInt(CategoryId),
+      },
+      order
+    });
+    return products;
   }
 
   async offersinCategory(CategoryId) {
@@ -155,5 +209,55 @@ class Offers {
     });
     return products;
   }
+  async getFilteredProducts(Productinfo) {
+    const where = {};
+  
+    if (Productinfo.price_min && !isNaN(parseFloat(Productinfo.price_min))) {
+      where.product_dollar_price = {
+        ...where.product_dollar_price,
+        gte: parseFloat(Productinfo.price_min),
+      };
+    }
+    if (Productinfo.price_max  && !isNaN(parseFloat(Productinfo.price_max))) {
+      where.product_dollar_price = {
+        ...where.product_dollar_price,
+        lte: parseFloat(Productinfo.price_max),
+      };
+    }
+  
+    if (Productinfo.crypto ==true) {
+      where.product_crypto = true;
+    }
+  
+    if (Productinfo.rating  && !isNaN(parseFloat(Productinfo.rating))) {
+      where.product_popularity = {
+        gte: parseFloat(Productinfo.rating),
+      };
+    }
+  
+    if (Productinfo.days_limit>0) {
+      const currentDate = new Date();
+      const targetDate = new Date();
+      targetDate.setDate(currentDate.getDate() - Productinfo.days_limit);
+      where.product_added_time = {
+        gte: targetDate,
+        lte: currentDate,
+      };
+    }
+  
+    if (Productinfo.category  && !isNaN(Number(Productinfo.category))) {
+      where.products_category_id = Number(Productinfo.category);
+    }
+    console.log(where);
+    const products = await this.#prisma.products.findMany({
+      where,
+    });
+  
+    return products;
+  }
+  
+
+
+ 
 }
 module.exports = Offers;

@@ -29,7 +29,10 @@ const ProductDetails = () => {
   }, []);
 
   const handleAddProduct = () => {
-    appcontext?.addToCart(productId!.toString());
+    if(appcontext?.user){
+      appcontext?.addToCart(productId!.toString());
+    }
+   
   };
 
   if (!product) {
@@ -77,7 +80,7 @@ const ProductDetails = () => {
             Quantity: {product.product_quantity}
           </p>
           <hr className="separator" />
-          <button onClick={handleAddProduct}>Buy Now</button>
+          <button onClick={handleAddProduct} disabled={!appcontext?.user}> {appcontext?.user? "Add to cart" : "Login first"}</button>
         </div>
       </div>
       <div className="product-additionalInfo">

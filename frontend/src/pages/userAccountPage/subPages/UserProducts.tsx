@@ -44,9 +44,15 @@ const UserProducts = () => {
         },
       })
       .then((resp) => {
-        console.log(resp);
+        if (resp.status === 200) {
+          const filteredProducts = products.filter(
+            (product) => product_id !== product.product_id
+          );
+          setproducts(filteredProducts);
+        } else {
+          console.error("unable to delete a product");
+        }
       });
-    navigate("/account/userProducts");
   };
 
   return (

@@ -7,13 +7,16 @@ const user = new Users();
 
 router.post("/login", async (req, res) => {
   const userFromDB = await user.getUserByLoginAndPassword(req.body);
+  if(userFromDB.code===400){
+    return res.sendStatus(400);
+  }
 
-  if (!userFromDB || userFromDB.length === 0) {
+  if (!userFromDB.findedUser || userFromDB.findedUser.length === 0) {
     return res.sendStatus(401);
   }
 
-  const accessToken = jwtUtils.generateAccessToken(userFromDB);
-  const refreshToken = jwtUtils.generateRefreshToken(userFromDB);
+  const accessToken = jwtUtils.generateAccessToken(userFromDB.findedUser);
+  const refreshToken = jwtUtils.generateRefreshToken(userFromDB.findedUser);
 
   res.json({ accessToken, refreshToken });
 });
@@ -25,7 +28,7 @@ router.post("/ChceckIfUserDoesNotExist", async (req, res) => {
 });
 
 router.post("/registerUser", async (req, res) => {
-  console.log(req.body);
+  console.log(req.body)
   user.createUser(req.body).then((resp) => {
     res.send(resp);
   });
@@ -34,7 +37,6 @@ router.post("/registerUser", async (req, res) => {
 router.post("/refreshToken", async (req, res) => {
   const { refresh } = req.body;
   const data = jwtUtils.verifyRefreshToken(refresh);
-  console.log(data);
   if (!data) {
     return res.sendStatus(403);
   }
@@ -45,6 +47,12 @@ router.post("/refreshToken", async (req, res) => {
 
   let obj = { accessToken: accessToken };
   res.send(obj);
+});
+
+router.route("/getUserAndProducts/:user_id").get((req, res) => {
+  user.getUserAndProductsPurchasedByUser_id(req.params.user_id).then((response) => {
+    res.send(response);
+  });
 });
 
 module.exports = router;

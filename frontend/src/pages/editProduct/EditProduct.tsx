@@ -33,16 +33,20 @@ const EditProduct = () => {
 
     try {
       if (product) {
-        await axios.put(
-          `${appContext?.backendUrl}/offer/product/${productId}`,
-          product,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              Accept: "application/json",
-            },
-          }
-        );
+        await axios
+          .put(
+            `${appContext?.backendUrl}/offer/product/${productId}`,
+            product,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+              },
+            }
+          )
+          .then((resp) => {
+            console.log(resp.data);
+          });
 
         // Po zaktualizowaniu przekieruj na stronę z listą produktów lub gdziekolwiek chcesz
       }

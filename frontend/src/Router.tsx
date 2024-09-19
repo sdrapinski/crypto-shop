@@ -16,6 +16,8 @@ import ProductsBySearchPage from "./pages/productsBySearchPage/ProductsBySearchP
 import AddProductPage from "./pages/addProduct/AddProductPage";
 import UserProducts from "./pages/userAccountPage/subPages/UserProducts";
 import EditProduct from "./pages/editProduct/EditProduct";
+import PaymentPage from "./pages/paymentPage/PaymentPage";
+import PaymentSummary from "./pages/PaymentSummary/PaymentSummary";
 
 function Router() {
   return (
@@ -32,11 +34,13 @@ function Router() {
 
             <Route path="/account/userProducts" element={<UserProducts />} />
             <Route
-              path="/account/userProducts/editProduct/:productId"
+              path="/account/editProduct/:productId"
               element={<EditProduct />}
             />
 
             <Route path="/usercart" element={<UserCart />} />
+            <Route path="/payment" element={<PaymentPage />} />
+            <Route path="/paymentSummary" element={<PaymentSummary/>} />
 
             <Route path="/product/:productId" element={<ProductDetails />} />
             <Route path="/product/addProduct" element={<AddProductPage />} />

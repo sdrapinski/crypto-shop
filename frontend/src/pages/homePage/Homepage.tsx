@@ -8,29 +8,36 @@ import Categories from "../../components/Categories/Categories";
 import MainPageProducts from "../../components/Products/mainPageProducts/MainPageProducts";
 import Footer from "../../components/footer/Footer";
 import { AppContext } from "../../state/AppContext";
+import CurrentCryptoPrice from "../../components/CurrentCryptoPrice/CurrentCryptoPrice";
+
+
+
 
 //test
 const Homepage = () => {
   const appContext = useContext(AppContext);
-  useEffect(() => {
-    axios
-      .get(`${appContext?.backendUrl}/offer/Categories`, {
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-      })
-      .then((resp) => {
-        console.log(resp);
-      });
+  
+  // useEffect(() => {
+  //   console.log(appContext?.user)
+  //   axios
+  //     .get(`${appContext?.backendUrl}/user/getUserAndProducts/${appContext?.user?.user_id}`,{
+  //       headers: {
+  //         "Content-Type": "application/json",
+  //         Accept: "application/json",
+  //       },
+  //     })
+  //     .then((resp) => {
+  //       console.log(resp);
+  //     });
 
-    return () => {};
-  }, []);
+  //   return () => {};
+  // }, []);
 
   return (
     <>
       <Container fluid style={{ padding: "0px 30px" }}>
         <SponsoredPosts />
+        <CurrentCryptoPrice />
         <Categories />
         <MainPageProducts />
       </Container>

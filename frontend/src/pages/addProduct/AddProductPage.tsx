@@ -1,26 +1,49 @@
-import React, { useState, useEffect, useRef } from "react";
+import axios from "axios";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import Form from "react-bootstrap/Form";
+import { CategoriesInterface } from "../../interfaces/categories.interface";
+import { AppContext } from "../../state/AppContext";
+
+const categoriesInit = {
+  data: [{ product_category_id: 0, product_category_name: "" }],
+};
 
 const AddProductPage = () => {
+  const appContext = useContext(AppContext);
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
+  const [categories, setcategories] =
+    useState<CategoriesInterface>(categoriesInit);
 
   const [productDollarPrice, setProductDollarPrice] = useState(0);
   const [productQuantity, setProductQuantity] = useState(0);
   const [isProductPromoted, setIsProductPromoted] = useState(false);
   const [productPromotion, setProductPromotion] = useState("");
+  const [isUsed, setisUsed] = useState<boolean>(false)
   const [productImages, setProductImages] = useState<File[]>([]);
   const [imagePreviews, setImagePreviews] = useState<string[]>([]);
 
-  //// testowanko
+  const [selectedCategoryId, setSelectedCategoryId] = useState("");
 
-  // Lista predefiniowanych kategorii
-  const predefinedCategories = [
-    "Category 1",
-    "Category 2",
-    "food",
-    // Dodaj tutaj pozostałe predefiniowane kategorie z bazy danych
-  ];
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSelectedCategoryId(e.target.value);
+  };
+
+  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  useEffect(() => {
+    axios
+      .get(`${backendUrl}/offer/Categories`, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then((resp) => {
+        setcategories(resp);
+      });
+
+    return () => {};
+  }, []);
 
   const handleThumbnailClick = (index: number) => {
     setImagePreviews((prevPreviews) => {
@@ -41,25 +64,42 @@ const AddProductPage = () => {
   };
 
   const handleAddProduct = () => {
-    // Podobnie jak wcześniej, dodaj logikę do wysłania danych produktu na serwer
-    // Pamiętaj, że musisz również przekazać identyfikator użytkownika (user_id) dla danego produktu,
-    // który możesz uzyskać z appContext.
-    // Przykład:
-    // const newProduct = {
-    //
-    //   productName,
-    //   productDescription,
-    //   productDollarPrice,
-    //   productQuantity,
-    //   productPromotion: isProductPromoted ? productPromotion : undefined,
-    //   user_id: appContext.userId
-    // };
-    // Wyślij zapytanie POST do serwera, aby dodać produkt
-    // axios.post("/api/products", newProduct).then((response) => {
-    //   // Obsłuż odpowiedź serwera, np. wyświetl komunikat o powodzeniu dodania produktu.
-    // }).catch((error) => {
-    //   // Obsłuż błąd, np. wyświetl komunikat o niepowodzeniu dodania produktu.
-    // });
+    // Tworzenie obiektu reprezentującego nowy produkt
+    const Productinfo = {
+      product_name: productName,
+      product_description: productDescription,
+      products_category_id: parseInt(selectedCategoryId), 
+      product_dollar_price:productDollarPrice,
+      product_quantity:productQuantity,
+      product_promotion: isProductPromoted ? new Date(productPromotion) : null,
+      product_images: JSON.stringify("dziala ale ftp potrzebne bo za dlugie i wywala"),
+      product_used:isUsed,
+      product_popularity:0,
+      
+      user_id: appContext?.user?.user_id,
+    };
+    console.log(Productinfo);
+    
+
+    
+    axios
+      .post(`${backendUrl}/offer/createOffer`, Productinfo, {
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      })
+      .then((response) => {
+        // Obsługa odpowiedzi serwera po pomyślnym dodaniu produktu
+        console.log("Product added successfully:", response.data);
+        // Tutaj możesz wykonać odpowiednie akcje po dodaniu produktu, np. zresetować formularz
+        // lub wyświetlić powiadomienie o sukcesie
+      })
+      .catch((error) => {
+        // Obsługa błędów podczas dodawania produktu
+        console.error("Error adding product:", error);
+        // Tutaj możesz wyświetlić odpowiedni komunikat błędu dla użytkownika
+      });
   };
 
   useEffect(() => {
@@ -143,15 +183,21 @@ const AddProductPage = () => {
         />
         <br />
         <label>Product Category:</label>
-        <Form.Select aria-label="Default select example">
-          <option>Open this select menu</option>
-          {predefinedCategories.map((category) => (
-            <option key={category} value={category}>
-              {category}
+        <Form.Select
+          aria-label="Select product category"
+          value={selectedCategoryId}
+          onChange={handleCategoryChange}
+        >
+          <option value="">Select category</option>
+          {categories.data.map((category) => (
+            <option
+              key={category.product_category_id}
+              value={category.product_category_id}
+            >
+              {category.product_category_name}
             </option>
           ))}
         </Form.Select>
-
         {/* Dodaj nowe pole do wprowadzenia niestandardowej kategorii */}
 
         <label>Product Dollar Price:</label>
@@ -169,6 +215,14 @@ const AddProductPage = () => {
           onChange={(e) => setProductQuantity(parseInt(e.target.value))}
         />
         <br />
+        <label>
+          Is Product Used?
+          <input
+            type="checkbox"
+            checked={isUsed}
+            onChange={(e) => setisUsed(e.target.checked)}
+          />{" "}
+        </label>
 
         <label>
           Is Product Promoted?

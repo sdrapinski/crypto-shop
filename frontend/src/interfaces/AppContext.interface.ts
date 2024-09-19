@@ -1,8 +1,9 @@
 import { User } from "../classes/User";
 import { CartInterface } from "./CartInterface";
+import { CurrentCryptoPriceInterface } from "./CurrentCryptoPrice.Interface";
 import { JwtInteface } from "./jwt.interface";
 export interface AppContextInterface {
-  checkAccessToken: () => void;
+  checkAccessToken: () => Promise< string | null |undefined>;
   user: User | null;
   cart: CartInterface;
   loginUser: (data: JwtInteface) => void;
@@ -10,6 +11,8 @@ export interface AppContextInterface {
   logout: () => void;
   getCart: (user_id: string) => void;
   addToCart: (product_id: string) => void;
+  setEthPrice:(eth:CurrentCryptoPriceInterface) => void
+  ethereum:CurrentCryptoPriceInterface | null
 }
 
 export interface UserProps {

@@ -92,9 +92,10 @@
       "product_images": {},
       "product_dollar_price": 100,
       "product_quantity": 4,
-
       "product_popularity": 2,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
     {
       "product_name": "Skuter",
@@ -103,9 +104,10 @@
       "product_images": {},
       "product_dollar_price": 300,
       "product_quantity": 1,
-
       "product_popularity": 6,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
     {
       "product_name": "Motocykl",
@@ -115,7 +117,9 @@
       "product_dollar_price": 750,
       "product_quantity": 1,
       "product_popularity": 9,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
     {
       "product_name": "Opel",
@@ -125,7 +129,9 @@
       "product_dollar_price": 1000,
       "product_quantity": 1,
       "product_popularity": 5,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
     {
       "product_name": "Harry potter",
@@ -136,7 +142,9 @@
       "product_quantity": 10,
 
       "product_popularity": 6.7,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
     {
       "product_name": "Horror z Dunwich",
@@ -147,7 +155,9 @@
       "product_quantity": 10,
 
       "product_popularity": 10,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
     {
       "product_name": "Władca Pierścieni:Dwie wieże",
@@ -158,7 +168,9 @@
       "product_quantity": 10,
 
       "product_popularity": 10,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
     {
       "product_name": "Karton",
@@ -169,7 +181,9 @@
       "product_quantity": 100,
 
       "product_popularity": 3,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
     {
       "product_name": "kołpak",
@@ -180,7 +194,9 @@
       "product_quantity": 4,
 
       "product_popularity": 4.5,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
 
     {
@@ -192,7 +208,9 @@
       "product_quantity": 1,
 
       "product_popularity": 7.8,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":true
     },
 
     {
@@ -204,7 +222,9 @@
       "product_quantity": 1,
 
       "product_popularity": 6.8,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
     {
       "product_name": "Sześcian",
@@ -215,7 +235,9 @@
       "product_quantity": 1,
 
       "product_popularity": 4.8,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
     {
       "product_name": "Pasat",
@@ -226,7 +248,9 @@
       "product_quantity": 1,
 
       "product_popularity": 8.8,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
     {
       "product_name": "Pizza",
@@ -237,7 +261,9 @@
       "product_quantity": 10,
 
       "product_popularity": 9.3,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
     
     {
@@ -249,7 +275,9 @@
       "product_quantity": 10,
 
       "product_popularity": 6.8,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
     {
       "product_name": "Czapka z draszkiem",
@@ -260,7 +288,9 @@
       "product_quantity": 50,
 
       "product_popularity": 5.3,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
 
     {
@@ -272,7 +302,9 @@
       "product_quantity": 15,
 
       "product_popularity": 8.2,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
 
     {
@@ -284,7 +316,9 @@
       "product_quantity": 1,
 
       "product_popularity": 7.8,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
     {
       "product_name": "Skateboard",
@@ -295,7 +329,9 @@
       "product_quantity": 10,
 
       "product_popularity": 9.8,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     },
     {
       "product_name": "Villa",
@@ -305,7 +341,9 @@
       "product_dollar_price": 50000,
       "product_quantity": 10,
       "product_popularity": 10,
-      "product_promotion": null
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto":false
     }
   ],
   "crypto": [
