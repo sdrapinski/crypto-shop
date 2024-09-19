@@ -1,7 +1,11 @@
 import React, { useContext } from "react";
 import { AppContext } from "../../state/AppContext";
 
-const UserCartPaymentAction = () => {
+interface UserCartPaymentActionProps {
+  cartQuantity:number
+}
+
+const UserCartPaymentAction:React.FC<UserCartPaymentActionProps> = ({cartQuantity}) => {
     const appContext = useContext(AppContext);
     const delivery = 5
     const cart = appContext?.cart;
@@ -12,7 +16,10 @@ const UserCartPaymentAction = () => {
     <div className='userCart__container-payment'>
         <div className="userCart__valueOfProducts">Value of products: <span>{cartValue}$</span> </div>
         <div className="userCart__valueOfProducts">delivery from: <span>{delivery}$</span> </div>
-        <a href="/payment"><button>Go to payments</button> </a> 
+        {
+          cartQuantity > 0 ? <a href="/payment"><button>Go to payments</button> </a>  : <button disabled>You have nothing in your cart</button>
+        }
+        
     </div>
   )
 }

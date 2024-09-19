@@ -118,7 +118,7 @@ model ProductsSold{
   product Products @relation(fields: [product_id], references: [product_id])
   user Users @relation(fields: [user_id], references: [user_id])
   sale_time DateTime
-  delivered Boolean
+  deliveryStatus String
 
 }
 

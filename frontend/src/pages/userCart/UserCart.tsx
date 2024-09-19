@@ -49,7 +49,7 @@ const UserCart = () => {
         }
       )}
     </div>
-    <UserCartPaymentAction />
+    <UserCartPaymentAction cartQuantity={cart?.cartItems.length || 0}/>
     </div>
   );
 };

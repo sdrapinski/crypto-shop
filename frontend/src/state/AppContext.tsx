@@ -9,6 +9,7 @@ import jwt from "jwt-decode";
 import Cookies from "universal-cookie";
 import axios from "axios";
 import { CartInterface } from "../interfaces/CartInterface";
+import { CurrentCryptoPriceInterface } from "../interfaces/CurrentCryptoPrice.Interface";
 
 export const AppContext = createContext<AppContextInterface | null>(null);
 
@@ -24,6 +25,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const [expirationDate, setexpirationDate] = useState<Date>();
   const [accessToken, setaccessToken] = useState<string | null>();
   const [cart, setCart] = useState<CartInterface>(initialCart);
+  const [ethereum, setEthereum] = useState<CurrentCryptoPriceInterface | null>(null)
 
   const cookie = new Cookies();
 
@@ -108,6 +110,10 @@ const AppProvider = ({ children }: AppProviderProps) => {
   };
   //
 
+  const setEthPrice = (eth:CurrentCryptoPriceInterface) =>{ 
+    setEthereum(eth)
+  }
+
   const addToCart = async (product_id: string) => {
     await axios
       .post<CartInterface>(`${backendUrl}/cart/addtocart`, {
@@ -144,6 +150,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   };
 
   const appContextValue: AppContextInterface = {
+    setEthPrice,
     checkAccessToken,
     user,
     loginUser,
@@ -151,6 +158,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
     logout,
     addToCart,
     cart,
+    ethereum,
     getCart,
   };
 
