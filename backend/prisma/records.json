@@ -3,22 +3,26 @@
     {
       "country": "Poland",
       "city": "Warsaw",
-      "street": "Marszałkowska 1"
+      "street": "Marszałkowska 1",
+      "postCode":"12-321"
     },
     {
       "country": "Poland",
       "city": "Poznan",
-      "street": "szkolna 1"
+      "street": "szkolna 1",
+       "postCode":"13-221"
     },
     {
       "country": "USA",
       "city": "Ohaio",
-      "street": "lump 1"
+      "street": "lump 1",
+       "postCode":"75-221"
     },
     {
       "country": "Japan",
       "city": "Tokyo",
-      "street": "kiriko 12"
+      "street": "kiriko 12",
+      "postCode":"11-221"
     }
   ],
   "products_category": [

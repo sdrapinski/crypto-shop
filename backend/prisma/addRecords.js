@@ -11,11 +11,6 @@ async function addRecords() {
     });
   }
 
-  for (const crypto of records.crypto) {
-    const coin = await prisma.crypto.create({
-      data: crypto,
-    });
-  }
 
   const newUsers = [];
   for (const [index, user] of records.users.entries()) {
