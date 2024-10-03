@@ -15,7 +15,7 @@ const UserSettings = () => {
       <div className="row my-1">
         <div className="col-4">Edit data</div>
         <div className="col-4 d-flex justify-content-end">
-          <button type="button" className="btn btn-custom btn-sm">
+          <button type="button" className="btn btn-primary btn-sm">
             Edit
           </button>
         </div>

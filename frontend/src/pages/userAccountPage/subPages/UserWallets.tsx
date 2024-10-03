@@ -1,7 +1,84 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useContext } from "react";
+import { AppContext } from "../../../state/AppContext";
 
 const UserWallets = () => {
-  return <div className="tab-pane fade show active">Wallets</div>;
+
+  const appContext = useContext(AppContext);
+    useEffect(() => {
+      axios
+        .get(`${appContext?.backendUrl}/user/account`, {
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+        })
+        .then((resp) => {
+          console.log(resp);
+        });
+  
+      return () => {};
+    }, []);
+    
+  
+  return (
+    <section className="tab-pane fade show active wallets-content">
+       <div>
+        <p>1# wallet</p>
+        
+          <div className="btn-footer">
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
+          </div>
+        </div>
+        <div>
+        <p>2# wallet</p>
+        
+          <div className="btn-footer">
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
+          </div>
+        </div>
+        <div>
+        <p>3# wallet</p>
+        
+          <div className="btn-footer">
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
+          </div>
+        </div>
+        <div>
+        <p>4# wallet</p>
+        
+          <div className="btn-footer">
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
+          </div>
+        </div>
+        <div>
+        <p>5# wallet</p>
+        
+          <div className="btn-footer">
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
+          </div>
+        </div>
+        <div>
+        <p>6# wallet</p>
+        
+          <div className="btn-footer">
+            <button type="button" className="edit">Edit</button>
+            <button type="button" className="remove">Remove</button>
+          </div>
+        </div>
+        <div className="new">
+        <p>New wallet</p>
+          <div className="btn-footer">
+            <button type="button" className="add">Add</button>
+          </div>
+        </div>
+    </section>
+    );
 };
 
 export default UserWallets;
