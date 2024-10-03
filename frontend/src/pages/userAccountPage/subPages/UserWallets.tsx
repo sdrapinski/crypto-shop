@@ -1,84 +1,51 @@
 import axios from "axios";
-import React, { useEffect, useContext } from "react";
+import React, {useEffect, useContext, useState} from "react";
 import { AppContext } from "../../../state/AppContext";
 
 const UserWallets = () => {
 
   const appContext = useContext(AppContext);
-    useEffect(() => {
+  const [userWallet, setUserWallet] = useState(appContext?.user?.user_wallet_address || '');
+
+  const walletInputHandler = (e:React.FormEvent<HTMLInputElement>) =>{
+      setUserWallet(e.currentTarget.value);
+  };
+
+  const saveUserWallet = (e:React.FormEvent<HTMLButtonElement>) =>{
+      const backendUrl = appContext?.backendUrl;
+      const userId = appContext?.user?.user_id;
+
       axios
-        .get(`${appContext?.backendUrl}/user/account`, {
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-        })
-        .then((resp) => {
-          console.log(resp);
-        });
-  
-      return () => {};
-    }, []);
-    
-  
+          .put(
+              `${backendUrl}/user/update/wallet`,
+              {
+                  user_wallet_address: userWallet,
+                  user_id:userId
+              },
+              {
+                  headers: {
+                      "Content-Type": "application/json",
+                      Accept: "application/json",
+                  },
+              }
+          )
+          .then(response => {
+              setUserWallet(response.data);
+          });
+  }
+
   return (
-    <section className="tab-pane fade show active wallets-content">
-       <div>
-        <p>1# wallet</p>
-        
-          <div className="btn-footer">
-            <button type="button" className="edit">Edit</button>
-            <button type="button" className="remove">Remove</button>
-          </div>
-        </div>
-        <div>
-        <p>2# wallet</p>
-        
-          <div className="btn-footer">
-            <button type="button" className="edit">Edit</button>
-            <button type="button" className="remove">Remove</button>
-          </div>
-        </div>
-        <div>
-        <p>3# wallet</p>
-        
-          <div className="btn-footer">
-            <button type="button" className="edit">Edit</button>
-            <button type="button" className="remove">Remove</button>
-          </div>
-        </div>
-        <div>
-        <p>4# wallet</p>
-        
-          <div className="btn-footer">
-            <button type="button" className="edit">Edit</button>
-            <button type="button" className="remove">Remove</button>
-          </div>
-        </div>
-        <div>
-        <p>5# wallet</p>
-        
-          <div className="btn-footer">
-            <button type="button" className="edit">Edit</button>
-            <button type="button" className="remove">Remove</button>
-          </div>
-        </div>
-        <div>
-        <p>6# wallet</p>
-        
-          <div className="btn-footer">
-            <button type="button" className="edit">Edit</button>
-            <button type="button" className="remove">Remove</button>
-          </div>
-        </div>
-        <div className="new">
-        <p>New wallet</p>
-          <div className="btn-footer">
-            <button type="button" className="add">Add</button>
-          </div>
-        </div>
+    <section className="tab-pane fade show active d-flex w-100">
+       <div className='card card-body row col-12'>
+           <div className='col-12'>
+               <input type="text" value={userWallet} className='form-control form-control-sm' onChange={walletInputHandler}/>
+           </div>
+           <div className='col-2 mt-2 ms-auto d-flex justify-content-end'>
+               <button id='save-wallet' type='button' className='btn btn-primary' onClick={saveUserWallet}>Zapisz</button>
+           </div>
+       </div>
     </section>
-    );
+  );
 };
 
 export default UserWallets;

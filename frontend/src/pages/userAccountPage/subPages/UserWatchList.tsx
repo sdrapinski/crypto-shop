@@ -1,14 +1,19 @@
 import React from "react";
 
 const UserWatchList = () => {
-  return <div className="watchlist-content tab-pane fade show active">
-    <div><p>#1 product</p><button className="show">Show</button><button className="remove">Remove</button></div>
-    <div><p>#2 product</p><button className="show">Show</button><button className="remove">Remove</button></div>
-    <div><p>#3 product</p><button className="show">Show</button><button className="remove">Remove</button></div>
-    <div><p>#4 product</p><button className="show">Show</button><button className="remove">Remove</button></div>
-    <div><p>#5 product</p><button className="show">Show</button><button className="remove">Remove</button></div>
-    <div><p>#6 product</p><button className="show">Show</button><button className="remove">Remove</button></div>
-  </div>;
+    return <div className="tab-pane fade show active row justify-content-center align-items-center flex-column">
+        <div className={"card card-body row"}>
+            <div className={"row col-12"}>
+                    <span className="d-flex flex-wrap col-12" style={{wordWrap: "break-word", wordBreak: "break-all"}}>
+                        test
+                    </span>
+            </div>
+            <div className={"col-12 d-flex justify-content-end align-items-center mt-2"}>
+                <button type={"button"} className={"btn btn-primary me-2"}>Show</button>
+                <button type={"button"} className={"btn btn-danger"}>Delete</button>
+            </div>
+        </div>
+    </div>;
 };
 
 export default UserWatchList;
