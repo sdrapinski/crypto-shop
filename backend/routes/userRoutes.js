@@ -79,7 +79,7 @@ router.route("/getUserData/:user_id").get((req, res) => {
             );
         });
 });
-
+// pobranie walleta
 router.route("/update/wallet").put((req, res) => {
     const userId = req.body.user_id;
     const wallet = req.body.user_wallet_address;
