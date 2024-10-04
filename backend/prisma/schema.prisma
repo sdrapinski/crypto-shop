@@ -120,7 +120,6 @@ model ProductsSold{
   sale_time DateTime
   deliveryStatus String
   deliveryOption String
-
 }
 
 model Message {

@@ -41,7 +41,6 @@ const LoginForm = () => {
         }
       )
       .then((response) => {
-        console.log(response);
         appContext?.loginUser(response.data);
         navigate("/");
       })

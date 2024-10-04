@@ -116,6 +116,76 @@ class Users {
     });
     return findedUser;
   }
+  async updateWallet(userId, wallet) {
+    const updatedWallet = await this.#prisma.users.update(
+        {
+            where: {
+                user_id: userId
+            },
+            data: {
+                user_wallet_address: wallet
+            }
+        }
+    );
+
+    return updatedWallet;
+}
+
+async getOrdersHistory(userId) {
+    const productsSold = await this.#prisma.productsSold.findMany(
+        {
+            where: {
+                user_id: userId
+            }
+        }
+    );
+
+    if(productsSold.length === 0) {
+        return [];
+    }
+
+    const orders = [];
+
+    for (let productSold of productsSold) {
+       const product = await this.#prisma.products.findUnique({where: {product_id: productSold.product_id}});
+       orders.push(product);
+    }
+
+    return orders;
+}
+
+async getUserMessages(userId) {
+    const messages = await this.#prisma.message.findMany({
+        where: {
+            recipient_id: userId
+        }
+    });
+
+    if(messages.length === 0) {
+        return [];
+    }
+
+    const chats = [];
+
+    for (let message of messages) {
+        const sender = await this.#prisma.users.findUnique({where: {user_id: message.sender_id}});
+        chats.push({
+            sender:{
+                user_name: sender.user_name,
+                user_surname: sender.user_surname,
+                user_email: sender.user_email
+            },
+            message: {
+                content: message.content,
+                is_read: message.is_read
+            }
+        });
+    }
+
+    return chats;
+  }
+
+
 }
 
 module.exports = Users;
