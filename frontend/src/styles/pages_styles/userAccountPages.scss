@@ -1,0 +1,182 @@
+.tab-content{
+    width: 100%;
+    height: 100%;
+}
+.wallets-content{
+    display: flex !important;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+}
+.wallets-content>div{
+    transition: 0.3s;
+    position: relative;
+    width: 25%;
+    height: 75%;
+    background-color: rgba(255, 255, 255, 0.527);
+    padding: 0.5rem 1rem;
+    margin: 0.5rem 1rem;
+    border-radius: 12px;
+    box-shadow: 0 0 12px #0060df;
+    border: 2px solid #0060df;
+
+    &.new{
+        box-shadow: 0 0 12px #0a866c;
+        border: 2px solid #0a866c;
+    }
+
+    p{
+        display: block;
+        position: absolute;
+        top:40%;
+        left: 50%;
+        transform: translate(-50% ,-50%);
+        font-size: 20px;
+    }
+
+    .btn-footer{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: end;
+        width: 100%;
+        height: 90%;
+        button{
+            transition: 0.3s;
+            width: 46%;
+            height: 20%;
+            background-color: rgba(255, 255, 255, 0.527);
+            border-radius: 8px;
+            box-shadow: 0 8px 3px rgba(37, 36, 36, 0.329);
+        }
+
+        .edit{
+            transition: 0.3s;
+            border: 2px solid #0060df;
+            color: #0060df;
+        }
+        .edit:hover{
+            transition: 0.3s;
+            border: 2px solid white;
+            background-color:  #0060df;
+            color: white;
+        }
+        .remove{
+            transition: 0.3s;
+            border: 2px solid red;
+            color: red;
+        }
+        .remove:hover{
+            transition: 0.3s;
+            border: 2px solid white;
+            background-color: red;
+            color: white;
+        }
+        .add{
+            transition: 0.3s;
+            border: 2px solid #0a866c;
+            color: #0a866c;
+        }
+        .add:hover{
+            transition: 0.3s;
+            border: 2px solid white;
+            background-color:  #0a866c;
+            color: white;
+        }
+
+        button:hover{
+            transition: 0.3s;
+            box-shadow: 0 0 0 rgba(37, 36, 36, 0.329);
+        }
+    }
+}
+
+.wallets-content>div:hover{
+    transition: 0.3s;
+    box-shadow: 0 0 0 #0060df;
+}
+
+.watchlist-content>div{
+    box-shadow: 0 0 20px royalblue;
+    border: 2px solid royalblue;
+}
+
+.userorders-content>div{
+    box-shadow: 0 0 20px #ab00df;
+    border: 2px solid #ab00df;
+}
+
+.watchlist-content>div, .userorders-content>div{
+    display: flex;
+    align-items: center;
+    padding: 2rem;
+    margin: 2rem 0;
+    border-radius: 8px;
+    transition: box-shadow .3s ease 0s;
+
+    &:hover{
+        box-shadow: 0 0 0 royalblue;
+    }
+    &button, p{
+        display: block;
+    }
+
+    button{
+        transition: 0.3s;
+        width: 4.75rem;
+        height: 2.25rem;
+        background-color: rgba(255, 255, 255, 0.527);
+        border-radius: 8px;
+        box-shadow: 0 8px 3px rgba(37, 36, 36, 0.329);
+        margin: 0 .25rem;
+    }
+
+    p{
+        font-size: 1.25rem;
+        margin-right: auto;
+    }
+
+    .show{
+        transition: 0.3s;
+        border: 2px solid #0060df;
+        color: #0060df;
+    }
+    .show:hover{
+        transition: 0.3s;
+        border: 2px solid white;
+        background-color:  #0060df;
+        color: white;
+    }
+
+    .view{
+        transition: 0.3s;
+        border: 2px solid #ab00df;
+        color: #ab00df;
+    }
+    .view:hover{
+        transition: 0.3s;
+        border: 2px solid white;
+        background-color:  #ab00df;
+        color: white;
+    }
+
+    .remove{
+        transition: 0.3s;
+        border: 2px solid red;
+        color: red;
+    }
+    .remove:hover{
+        transition: 0.3s;
+        border: 2px solid white;
+        background-color: red;
+        color: white;
+    }
+
+    button:hover{
+        transition: 0.3s;
+        box-shadow: 0 0 0 rgba(37, 36, 36, 0.329);
+    }
+}

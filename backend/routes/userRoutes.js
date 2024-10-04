@@ -3,38 +3,39 @@ const router = express.Router();
 const Users = require("../scripts/users");
 const jwt = require("jsonwebtoken");
 const jwtUtils = require("../services/jwt.js");
+const {response} = require("express");
 const user = new Users();
 
 router.post("/login", async (req, res) => {
-  const userFromDB = await user.getUserByLoginAndPassword(req.body);
-  if(userFromDB.code===400){
-    return res.sendStatus(400);
-  }
+    const userFromDB = await user.getUserByLoginAndPassword(req.body);
+    if (userFromDB.code === 400) {
+        return res.sendStatus(400);
+    }
 
-  if (!userFromDB.findedUser || userFromDB.findedUser.length === 0) {
-    return res.sendStatus(401);
-  }
+    if (!userFromDB.findedUser || userFromDB.findedUser.length === 0) {
+        return res.sendStatus(401);
+    }
 
-  const accessToken = jwtUtils.generateAccessToken(userFromDB.findedUser);
-  const refreshToken = jwtUtils.generateRefreshToken(userFromDB.findedUser);
+    const accessToken = jwtUtils.generateAccessToken(userFromDB.findedUser);
+    const refreshToken = jwtUtils.generateRefreshToken(userFromDB.findedUser);
 
-  res.json({ accessToken, refreshToken });
+    res.json({accessToken, refreshToken});
 });
 
 router.post("/ChceckIfUserDoesNotExist", async (req, res) => {
-  user.checkIfUserNotExistByEmail(req.body.email).then((val) => {
-    res.send(val);
-  });
+    user.checkIfUserNotExistByEmail(req.body.email).then((val) => {
+        res.send(val);
+    });
 });
 
 router.post("/registerUser", async (req, res) => {
-  console.log(req.body)
-  user.createUser(req.body).then((resp) => {
-    res.send(resp);
-  });
+    user.createUser(req.body).then((resp) => {
+        res.send(resp);
+    });
 });
 
 router.post("/refreshToken", async (req, res) => {
+
   const { refresh } = req.body;
   const data = jwtUtils.verifyRefreshToken(refresh);
   
@@ -48,16 +49,54 @@ router.post("/refreshToken", async (req, res) => {
   }
   
 
-  const accessToken = jwtUtils.generateAccessToken(user_new_data);
 
-  let obj = { accessToken: accessToken };
-  res.send(obj);
+    const accessToken = jwtUtils.generateAccessToken(user_new_data);
+
+    let obj = {accessToken: accessToken};
+    res.send(obj);
 });
 
 router.route("/getUserAndProducts/:user_id").get((req, res) => {
-  user.getUserAndProductsPurchasedByUser_id(req.params.user_id).then((response) => {
-    res.send(response);
-  });
+    user.getUserAndProductsPurchasedByUser_id(req.params.user_id).then((response) => {
+        res.send(response);
+    });
+});
+
+router.route("/getUserData/:user_id").get((req, res) => {
+    const userId = req.params.user_id;
+    user.getUserByUser_id(userId)
+        .then((user) => {
+            const {user_name, user_surname, user_email, user_phone_number, user_login, user_date_of_birth} = user;
+            res.send(
+                {
+                    user_name,
+                    user_surname,
+                    user_email,
+                    user_phone_number,
+                    user_login,
+                    user_date_of_birth
+                }
+            );
+        });
+});
+
+router.route("/update/wallet").put((req, res) => {
+    const userId = req.body.user_id;
+    const wallet = req.body.user_wallet_address;
+
+    user.updateWallet(userId, wallet).then((response) => {
+        res.send(response?.user_wallet_address)
+    });
+});
+
+router.route("/getOrdersHistory/:userId").get((req, res) => {
+    user.getOrdersHistory(req.params.userId).then((response) => {
+        res.send(response)
+    });
+});
+
+router.route("/getUserMessages/:userId").get((req, res) => {
+    user.getUserMessages(req.params.userId).then((response) => {res.send(response)});
 });
 
 module.exports = router;
