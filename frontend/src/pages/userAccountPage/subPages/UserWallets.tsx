@@ -1,25 +1,33 @@
 import axios from "axios";
 import React, {useEffect, useContext, useState} from "react";
 import { AppContext } from "../../../state/AppContext";
+import { getUserWalletAddress } from "../../../services/Blockchain";
+import { Row,Col } from "react-bootstrap";
+
 
 const UserWallets = () => {
 
   const appContext = useContext(AppContext);
   const [userWallet, setUserWallet] = useState(appContext?.user?.user_wallet_address || '');
 
-  const walletInputHandler = (e:React.FormEvent<HTMLInputElement>) =>{
-      setUserWallet(e.currentTarget.value);
-  };
+  useEffect(() => {
+    
+  }, [userWallet])
+  
+
+
+
 
   const saveUserWallet = (e:React.FormEvent<HTMLButtonElement>) =>{
       const backendUrl = appContext?.backendUrl;
       const userId = appContext?.user?.user_id;
 
-      axios
-          .put(
-              `${backendUrl}/user/update/wallet`,
+      getUserWalletAddress().then((wallet)=>{
+        axios
+          .post(
+              `${backendUrl}/user/createWallet`,
               {
-                  user_wallet_address: userWallet,
+                  user_wallet_address: wallet,
                   user_id:userId
               },
               {
@@ -32,18 +40,45 @@ const UserWallets = () => {
           .then(response => {
               setUserWallet(response.data);
           });
+    })
+
+      
   }
 
   return (
-    <section className="tab-pane fade show active d-flex w-100">
-       <div className='card card-body row col-12'>
-           <div className='col-12'>
+    <section className="userWallets tab-pane fade show active  w-100">
+       <Row>
+           {/* <div className='col-12'>
                <input type="text" value={userWallet} className='form-control form-control-sm' onChange={walletInputHandler}/>
-           </div>
-           <div className='col-2 mt-2 ms-auto d-flex justify-content-end'>
-               <button id='save-wallet' type='button' className='btn btn-primary' onClick={saveUserWallet}>Zapisz</button>
-           </div>
-       </div>
+           </div> */}
+           <Col>
+           <img src="./MetaMask.png" alt="MetaMask wallet" className="userWallets__MetaMask" />
+               <button id='save-wallet' type='button' className='btn btn-primary' onClick={saveUserWallet}>
+                {
+                    userWallet? <>{userWallet}</> : <>  Add your MetaMask wallet address</>
+                }
+               
+                </button>
+           </Col>
+       </Row>
+       
+       <Row>
+       <div className={"card card-body row"}>
+            <div className={"row col-12"}>
+                    <span className="d-flex flex-wrap col-12" style={{wordWrap: "break-word", wordBreak: "break-all",marginBottom:"5px"}}>
+                    Your saved Wallets
+                    </span>
+                    <span className="d-flex flex-wrap col-12" style={{wordWrap: "break-word", wordBreak: "break-all"}}>
+                        {userWallet}
+                    </span>
+            </div>
+            <div className={"col-12 d-flex justify-content-end align-items-center mt-2"}>
+                <button type={"button"} className={"btn btn-success me-2"}>Activate this wallet at blockchain</button>
+                <button type={"button"} className={"btn btn-danger"}>Delete</button>
+            </div>
+        </div>
+       </Row>
+
     </section>
   );
 };

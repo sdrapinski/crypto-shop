@@ -12,6 +12,8 @@ interface Seller {
     balance: string;
 }
 
+
+
 // Typowanie dla kontraktu
 interface CryptoShopContract {
     registerSeller: (sellerId: string, wallet: string) => Promise<void>;
@@ -40,6 +42,24 @@ async function getContract(): Promise<ethers.Contract | null> {
         return null;
     }
 }
+
+export async function getUserWalletAddress() {
+    if (typeof window.ethereum !== 'undefined') {
+      try {
+        // Poproś użytkownika o podłączenie portfela
+        const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+        
+        // Zwróć pierwszy adres (bo użytkownik może mieć więcej portfeli)
+        return accounts[0];
+      } catch (error) {
+        console.error('Błąd podczas uzyskiwania adresu portfela:', error);
+        return null;
+      }
+    } else {
+      console.log('MetaMask nie jest zainstalowany');
+      return null;
+    }
+  }
 
 // Implementacja funkcji interakcji z kontraktem
 const blockchainService: CryptoShopContract = {

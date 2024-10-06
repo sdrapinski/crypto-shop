@@ -116,19 +116,17 @@ class Users {
     });
     return findedUser;
   }
-  async updateWallet(userId, wallet) {
-    const updatedWallet = await this.#prisma.users.update(
+  async createWallet(userId, walletAddress) {
+    const newWallet = await this.#prisma.cryptoWallet.create(
         {
-            where: {
-                user_id: userId
-            },
             data: {
-                user_wallet_address: wallet
+              wallet_address: walletAddress,
+              user_id:userId,
             }
         }
     );
 
-    return updatedWallet;
+    return newWallet;
 }
 
 async getOrdersHistory(userId) {

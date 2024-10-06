@@ -80,11 +80,11 @@ router.route("/getUserData/:user_id").get((req, res) => {
         });
 });
 // pobranie walleta
-router.route("/update/wallet").put((req, res) => {
+router.route("/createWallet").post((req, res) => {
     const userId = req.body.user_id;
     const wallet = req.body.user_wallet_address;
 
-    user.updateWallet(userId, wallet).then((response) => {
+    user.createWallet(userId, wallet).then((response) => {
         res.send(response?.user_wallet_address)
     });
 });

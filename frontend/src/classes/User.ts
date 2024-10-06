@@ -1,5 +1,12 @@
 import jwt_decode from "jwt-decode";
 
+interface cryptoWallet{
+  wallet_id: string
+  wallet_address: string
+  wallet_status: string 
+  wallet_ETH_balance: number
+}
+
 export class User {
   user_name: string;
   user_surname: string;
@@ -22,6 +29,7 @@ export class User {
     cart_id: string;
     user_id: string;
   };
+  user_wallets:Array<cryptoWallet>
   
 
   constructor(token: string) {
@@ -39,5 +47,6 @@ export class User {
     this.user_region = decodedToken.user_region;
     this.user_access_token = token;
     this.user_wallet_address = decodedToken.user_wallet_address;
+    this.user_wallets = decodedToken.user_wallets
   }
 }
