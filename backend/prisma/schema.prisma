@@ -63,7 +63,6 @@ model Products {
   product_description  String? @db.VarChar(1000)
   product_images        Json
   product_dollar_price Float
-  //product_crypto_prices CryptoProductPrice[]
   product_quantity Int
   cartToItem_id CartToItem[]
   product_watchedBy Users @relation("WatchedProducts", fields: [product_watched_by_id], references: [user_id])
