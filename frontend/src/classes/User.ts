@@ -18,7 +18,6 @@ export class User {
   user_password: string;
   user_login: string;
   user_access_token:string;
-  user_wallet_address:string;
   user_region:{
     country:string,
     city:string,
@@ -46,7 +45,6 @@ export class User {
     this.user_cart = decodedToken.user_cart;
     this.user_region = decodedToken.user_region;
     this.user_access_token = token;
-    this.user_wallet_address = decodedToken.user_wallet_address;
     this.user_wallets = decodedToken.user_wallets
   }
 }

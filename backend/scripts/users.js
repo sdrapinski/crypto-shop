@@ -87,7 +87,8 @@ class Users {
       },
       include: {
         user_cart: true,
-        user_region:true
+        user_region:true,
+        user_wallets:true
       },
     });
     return findedUser;
@@ -99,7 +100,8 @@ class Users {
       },
       include: {
         user_cart: true,
-        user_region:true
+        user_region:true,
+        user_wallets:true
       },
     });
     return findedUser;

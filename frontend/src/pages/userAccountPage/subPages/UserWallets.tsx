@@ -8,11 +8,12 @@ import { Row,Col } from "react-bootstrap";
 const UserWallets = () => {
 
   const appContext = useContext(AppContext);
-  const [userWallet, setUserWallet] = useState(appContext?.user?.user_wallet_address || '');
+  const [userWallets, setUserWallets] = useState(appContext?.user?.user_wallets|| []);
+  const [userWallet, setuserWallet] = useState<null| string>( appContext?.user?.user_wallets[0].wallet_address || null)
 
   useEffect(() => {
-    
-  }, [userWallet])
+    console.log(appContext?.user)
+  }, [])
   
 
 
@@ -38,7 +39,9 @@ const UserWallets = () => {
               }
           )
           .then(response => {
-              setUserWallet(response.data);
+            console.log(response)
+            
+            setuserWallet(response.data);
           });
     })
 
@@ -55,21 +58,21 @@ const UserWallets = () => {
            <img src="./MetaMask.png" alt="MetaMask wallet" className="userWallets__MetaMask" />
                <button id='save-wallet' type='button' className='btn btn-primary' onClick={saveUserWallet}>
                 {
-                    userWallet? <>{userWallet}</> : <>  Add your MetaMask wallet address</>
+                    userWallet? <>{userWallet}</> : userWallets.length > 0 ? <>{userWallets[0].wallet_address}</> : <>Add your wallet</>
                 }
                
                 </button>
            </Col>
        </Row>
-       
        <Row>
-       <div className={"card card-body row"}>
+        {userWallets && userWallets.length > 0 ? <div> <Row> <span>Your saved Wallets </span></Row> 
+        {
+            userWallets.map((wallet)=>(<Row>
+                <div className={"card card-body row"}>
             <div className={"row col-12"}>
-                    <span className="d-flex flex-wrap col-12" style={{wordWrap: "break-word", wordBreak: "break-all",marginBottom:"5px"}}>
-                    Your saved Wallets
-                    </span>
+                    
                     <span className="d-flex flex-wrap col-12" style={{wordWrap: "break-word", wordBreak: "break-all"}}>
-                        {userWallet}
+                        {wallet.wallet_address}
                     </span>
             </div>
             <div className={"col-12 d-flex justify-content-end align-items-center mt-2"}>
@@ -77,6 +80,10 @@ const UserWallets = () => {
                 <button type={"button"} className={"btn btn-danger"}>Delete</button>
             </div>
         </div>
+            </Row>))
+        }
+        
+        </div>  : <></>}
        </Row>
 
     </section>

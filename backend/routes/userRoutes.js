@@ -85,7 +85,7 @@ router.route("/createWallet").post((req, res) => {
     const wallet = req.body.user_wallet_address;
 
     user.createWallet(userId, wallet).then((response) => {
-        res.send(response?.user_wallet_address)
+        res.send(response)
     });
 });
 
