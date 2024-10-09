@@ -74,13 +74,13 @@ const AppProvider = ({ children }: AppProviderProps) => {
         )
         .then(async (response) => {
           token = response.data;
-          console.log("login user");
+         
 
           await loginUser({
             accessToken: token.accessToken,
             refreshToken: refreshToken,
           });
-          console.log("login user2");
+        
         })
         .catch((error) => {
           console.error(error);
@@ -121,9 +121,20 @@ const AppProvider = ({ children }: AppProviderProps) => {
         product_id: product_id,
       })
       .then((resp) => {
+        
         setCart(resp.data);
-        console.log("Cart");
-        console.log(resp.data);
+      });
+  };
+
+  const removeFromCart = async (product_id: string) => {
+    await axios
+      .post<CartInterface>(`${backendUrl}/cart/removefromcart`, {
+        cart_id: user?.user_cart.cart_id,
+        product_id: product_id,
+      })
+      .then((resp) => {
+        
+        setCart(resp.data);
       });
   };
 
@@ -157,6 +168,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
     backendUrl,
     logout,
     addToCart,
+    removeFromCart,
     cart,
     ethereum,
     getCart,
