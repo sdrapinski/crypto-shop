@@ -91,21 +91,10 @@ router.route("/createWallet").post((req, res) => {
 router.post("/activateWallet", async (req, res) => {
     const { user_id, wallet_address } = req.body;
   
-    if (!user_id || !wallet_address) {
-      return res.status(400).json({ message: "Brak wymaganych danych." });
-    }
   
-    try {
-      await prisma.cryptoWallet.updateMany({
-        where: { user_id, wallet_address },
-        data: { wallet_status: "Active" },
-      });
-  
-      res.status(200).json({ message: "Portfel został aktywowany." });
-    } catch (error) {
-      console.error("Błąd podczas aktualizacji portfela:", error);
-      res.status(500).json({ message: "Nie udało się aktywować portfela." });
-    }
+   user.activateUserWallet(user_id,wallet_address).then((response)=>{
+    res.status(response.status).send({ message: response.message });
+   })
   });
 
 

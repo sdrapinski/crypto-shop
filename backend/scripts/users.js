@@ -131,6 +131,29 @@ class Users {
     return newWallet;
 }
 
+async activateUserWallet (user_id, wallet_address){
+  if (!user_id || !wallet_address) {
+    return { message: "Brak wymaganych danych.",status:400 }
+  }
+ 
+  
+
+  try {
+    await this.#prisma.cryptoWallet.updateMany({
+      where: { user_id, wallet_address },
+      data: { wallet_status: "Active" },
+    });
+    
+    
+
+    return { message: "Portfel został aktywowany.",status:201 };
+  } catch (error) {
+    
+    
+    return { message: "Nie udało się aktywować portfela.",status :500 };
+  }
+
+}
 
 
 async getOrdersHistory(userId) {
