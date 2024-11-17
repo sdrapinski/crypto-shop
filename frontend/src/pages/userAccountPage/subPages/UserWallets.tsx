@@ -1,13 +1,17 @@
 import axios from "axios";
 import React, {useEffect, useContext, useState} from "react";
 import { AppContext } from "../../../state/AppContext";
-import { getUserWalletAddress } from "../../../services/Blockchain";
+import blockchainService ,{ getUserWalletAddress } from "../../../services/Blockchain";
 import { Row,Col } from "react-bootstrap";
+import useAxios from "../../../hooks/useAxios";
 
 
 const UserWallets = () => {
 
   const appContext = useContext(AppContext);
+  const axiosInstance = useAxios(appContext!);
+  const backendUrl = appContext?.backendUrl;
+  const userId = appContext?.user?.user_id;
   const [userWallets, setUserWallets] = useState(appContext?.user?.user_wallets|| []);
   const [userWallet, setuserWallet] = useState<null| string>( appContext?.user?.user_wallets[0].wallet_address || null)
 
@@ -15,34 +19,55 @@ const UserWallets = () => {
     console.log(appContext?.user)
   }, [])
   
-
+  const activateWallet = async (wallet: string) => {
+    const userId = appContext?.user?.user_id;
+    if (!userId || !wallet) {
+      console.error("Brak danych użytkownika lub portfela");
+      return;
+    }
+    try {
+      await blockchainService.registerSeller(userId, wallet);
+      const response = await axiosInstance.post("/wallet/activate", {
+        user_id: userId,
+        wallet_address: wallet,
+      });
+  
+      if (response.status === 200) {
+        // Zmień status portfela w interfejsie
+        setUserWallets((prevWallets) =>
+          prevWallets.map((w) =>
+            w.wallet_address === wallet ? { ...w, wallet_status: "Active" } : w
+          )
+        );
+        alert("Portfel został aktywowany!");
+      }
+    } catch (error) {
+      console.error("Błąd podczas aktywacji portfela:", error);
+      alert("Nie udało się aktywować portfela.");
+    }
+  };
 
 
 
   const saveUserWallet = (e:React.FormEvent<HTMLButtonElement>) =>{
-      const backendUrl = appContext?.backendUrl;
-      const userId = appContext?.user?.user_id;
+ 
 
       getUserWalletAddress().then((wallet)=>{
-        axios
+        axiosInstance
           .post(
-              `${backendUrl}/user/createWallet`,
+              `/user/createWallet`,
               {
                   user_wallet_address: wallet,
                   user_id:userId
-              },
-              {
-                  headers: {
-                      "Content-Type": "application/json",
-                      Accept: "application/json",
-                  },
               }
           )
           .then(response => {
             console.log(response)
             
             setuserWallet(response.data);
-          });
+          })
+          .catch((err)=>console.error(err))
+          
     })
 
       
@@ -76,7 +101,14 @@ const UserWallets = () => {
                     </span>
             </div>
             <div className={"col-12 d-flex justify-content-end align-items-center mt-2"}>
-                <button type={"button"} className={"btn btn-success me-2"}>Activate this wallet at blockchain</button>
+            <button
+                type="button"
+                className={`btn ${wallet.wallet_status === "Active" ? "btn-secondary" : "btn-success"} me-2`}
+                onClick={() => wallet.wallet_status !== "Active" && activateWallet(wallet.wallet_address)}
+                disabled={wallet.wallet_status === "Active"}
+                >
+                {wallet.wallet_status === "Active" ? "Wallet Activated" : "Activate this wallet at blockchain"}
+            </button>
                 <button type={"button"} className={"btn btn-danger"}>Delete</button>
             </div>
         </div>

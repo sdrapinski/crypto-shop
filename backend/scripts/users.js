@@ -131,6 +131,8 @@ class Users {
     return newWallet;
 }
 
+
+
 async getOrdersHistory(userId) {
     const productsSold = await this.#prisma.productsSold.findMany(
         {
