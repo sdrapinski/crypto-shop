@@ -42,7 +42,10 @@ router.post("/refreshToken", async (req, res) => {
   }
 
   const user_new_data = await user.getUserByUser_id(data.user_id);
-
+  if(!user_new_data)
+  {
+    return res.sendStatus(403);
+  }
   const accessToken = jwtUtils.generateAccessToken(user_new_data);
 
   let obj = { accessToken: accessToken };

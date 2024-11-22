@@ -31,7 +31,7 @@ class Users {
         city:user.user_region.city,
         country:user.user_region.country,
         street:user.user_region.street,
-       // postCode:user.user_region.postCode,
+        postCode:user.user_region.postCode,
         user_id:newUser.user_id
       }
     })
