@@ -65,6 +65,8 @@ class shopping_cart {
             quantity: existingCartItem.quantity + quantity,
           },
         });
+        
+        
 
         return updatedCart;
       } else {
@@ -89,6 +91,7 @@ class shopping_cart {
             cartItems: true,
           },
         });
+        
 
         return updatedCart;
       }
@@ -98,22 +101,48 @@ class shopping_cart {
     }
   }
 
-  async deleteFromCart(cart_id, product_id) {
-    const updatedCart = await this.#prisma.Cart.update({
-      where: {
-        cart_id: cart_id,
-      },
-      data: {
-        products: {
-          disconnect: {
-            product_id: product_id,
+  async  deleteFromCart(cart_id, product_id) {
+    try {
+      // Sprawdź, czy dany produkt istnieje w koszyku
+      const cartItem = await this.#prisma.cartToItem.findFirst({
+        where: {
+          cart_id: cart_id,
+          product_id: product_id,
+        },
+      });
+  
+      if (!cartItem) {
+        throw new Error('Produkt nie istnieje w koszyku.');
+      }
+  
+      // Usuń element z koszyka
+      await this.#prisma.cartToItem.delete({
+        where: {
+          cart_item_id: cartItem.cart_item_id,
+        },
+      });
+  
+      // Pobierz zaktualizowany koszyk wraz z produktami
+      const updatedCart = await this.#prisma.cart.findUnique({
+        where: {
+          cart_id: cart_id,
+        },
+        include: {
+          cartItems: {
+            include: {
+              product: true,  // Zwraca szczegóły produktu dla każdego elementu koszyka
+            },
           },
         },
-      },
-    });
-
-    return updatedCart;
+      });
+  
+      return updatedCart; // Zwróć zaktualizowany koszyk
+    } catch (error) {
+      console.error('Błąd przy usuwaniu produktu z koszyka:', error);
+      throw error;
+    }
   }
+
   async getCartFromUserID(user_id) {
     const cart = await this.#prisma.Cart.findUnique({
       where: {

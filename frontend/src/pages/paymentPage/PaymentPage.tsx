@@ -55,7 +55,7 @@ const PaymentPage = () => {
           </div>
           <div className="section">
             <div className="section__title">Payment Methods</div>
-            <PaymentComponent />
+            <PaymentComponent amount={totalPriceUSD}/>
           </div>
         </div>
     

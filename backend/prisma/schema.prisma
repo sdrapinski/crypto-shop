@@ -49,7 +49,7 @@ user_products_purchased ProductsSold[]
 user_messages_send Message[] @relation("sender")
 user_messages_recived Message[] @relation("recipient")
 user_notifications Notification[]
-user_wallet_address String?
+user_wallets CryptoWallet[]
 
 }
 
@@ -63,7 +63,6 @@ model Products {
   product_description  String? @db.VarChar(1000)
   product_images        Json
   product_dollar_price Float
-  //product_crypto_prices CryptoProductPrice[]
   product_quantity Int
   cartToItem_id CartToItem[]
   product_watchedBy Users @relation("WatchedProducts", fields: [product_watched_by_id], references: [user_id])
@@ -80,21 +79,14 @@ model Products {
 
 }
 
-// model Crypto {
-//   crypto_id   String    @id @default(uuid())
-//   crypto_name String @unique
-//   crypto_usd_price Float
-//   crypto_product_price CryptoProductPrice[]
-// }
-
-// model CryptoProductPrice {
-//   crypto_product_price_id String  @id @default(uuid())
-//   product       Products @relation(fields: [product_Id], references: [product_id])
-//   product_Id     String
-//   crypto        Crypto  @relation(fields: [crypto_Id], references: [crypto_id])
-//   crypto_Id      String
-//   crypto_price  Float
-// }
+model CryptoWallet {
+  wallet_id String @id @default(uuid())
+  wallet_address String
+  wallet_status String @default("Inactive")
+  wallet_ETH_balance Float @default(0)
+  user_id String
+  user Users @relation(fields: [user_id], references: [user_id])
+}
 
 model Cart {
   cart_id String @id @default(uuid())

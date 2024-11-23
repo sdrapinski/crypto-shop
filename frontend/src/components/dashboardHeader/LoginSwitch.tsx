@@ -1,12 +1,13 @@
 import React, { useContext, useState, useEffect, useRef } from "react";
 import { FaUser, FaShoppingCart, FaBell, FaPlusSquare } from "react-icons/fa";
 import { AppContext } from "../../state/AppContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 const LoginSwitch = () => {
   const appcontext = useContext(AppContext);
   const [showMenu, setShowMenu] = useState(false);
   const [menuContent, setMenuContent] = useState("");
+  const navigate = useNavigate();
 
   const handleButtonClick = (content: string) => {
     if (content !== menuContent) {
@@ -16,6 +17,11 @@ const LoginSwitch = () => {
       setShowMenu(!showMenu);
     }
   };
+
+  const handleRedirectClick = (url:string) =>{
+    setShowMenu(false);
+    navigate(url)
+  }
 
   return (
     <>
@@ -44,7 +50,7 @@ const LoginSwitch = () => {
                 {menuContent === "user" && (
                   <ul className="menu__userOptions">
                     <li>
-                      <NavLink to="/account">Account Details</NavLink>
+                      <span className="menu__link" onClick={()=>handleRedirectClick("/account")} >Account Details</span>
                     </li>
                     <li>
                       <button onClick={() => appcontext.logout()}>
@@ -57,10 +63,10 @@ const LoginSwitch = () => {
                 {menuContent === "cart" && (
                   <div>
                     <p>Products: {appcontext.cart.cartItems.length}</p>{" "}
-                    <NavLink to="/usercart">
+                    <span className="menu__link" onClick={()=>handleRedirectClick("/usercart")}>
                       {" "}
                       <button>Cart</button>{" "}
-                    </NavLink>{" "}
+                    </span>{" "}
                   </div>
                 )}
 

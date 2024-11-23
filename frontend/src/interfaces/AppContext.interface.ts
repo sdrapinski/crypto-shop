@@ -11,6 +11,7 @@ export interface AppContextInterface {
   logout: () => void;
   getCart: (user_id: string) => void;
   addToCart: (product_id: string) => void;
+  removeFromCart: (product_id: string) => void;
   setEthPrice:(eth:CurrentCryptoPriceInterface) => void
   ethereum:CurrentCryptoPriceInterface | null
 }

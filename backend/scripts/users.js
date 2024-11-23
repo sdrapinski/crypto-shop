@@ -87,7 +87,8 @@ class Users {
       },
       include: {
         user_cart: true,
-        user_region:true
+        user_region:true,
+        user_wallets:true
       },
     });
     return findedUser;
@@ -99,7 +100,8 @@ class Users {
       },
       include: {
         user_cart: true,
-        user_region:true
+        user_region:true,
+        user_wallets:true
       },
     });
     return findedUser;
@@ -116,20 +118,43 @@ class Users {
     });
     return findedUser;
   }
-  async updateWallet(userId, wallet) {
-    const updatedWallet = await this.#prisma.users.update(
+  async createWallet(userId, walletAddress) {
+    const newWallet = await this.#prisma.cryptoWallet.create(
         {
-            where: {
-                user_id: userId
-            },
             data: {
-                user_wallet_address: wallet
+              wallet_address: walletAddress,
+              user_id:userId,
             }
         }
     );
 
-    return updatedWallet;
+    return newWallet;
 }
+
+async activateUserWallet (user_id, wallet_address){
+  if (!user_id || !wallet_address) {
+    return { message: "Brak wymaganych danych.",status:400 }
+  }
+ 
+  
+
+  try {
+    await this.#prisma.cryptoWallet.updateMany({
+      where: { user_id, wallet_address },
+      data: { wallet_status: "Active" },
+    });
+    
+    
+
+    return { message: "Portfel został aktywowany.",status:201 };
+  } catch (error) {
+    
+    
+    return { message: "Nie udało się aktywować portfela.",status :500 };
+  }
+
+}
+
 
 async getOrdersHistory(userId) {
     const productsSold = await this.#prisma.productsSold.findMany(

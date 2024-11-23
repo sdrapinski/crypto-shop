@@ -79,15 +79,24 @@ router.route("/getUserData/:user_id").get((req, res) => {
             );
         });
 });
-
-router.route("/update/wallet").put((req, res) => {
+// pobranie walleta
+router.route("/createWallet").post((req, res) => {
     const userId = req.body.user_id;
     const wallet = req.body.user_wallet_address;
 
-    user.updateWallet(userId, wallet).then((response) => {
-        res.send(response?.user_wallet_address)
+    user.createWallet(userId, wallet).then((response) => {
+        res.send(response)
     });
 });
+router.post("/activateWallet", async (req, res) => {
+    const { user_id, wallet_address } = req.body;
+  
+  
+   user.activateUserWallet(user_id,wallet_address).then((response)=>{
+    res.status(response.status).send({ message: response.message });
+   })
+  });
+
 
 router.route("/getOrdersHistory/:userId").get((req, res) => {
     user.getOrdersHistory(req.params.userId).then((response) => {
