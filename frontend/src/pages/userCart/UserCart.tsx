@@ -34,6 +34,7 @@ const UserCart = () => {
     appContext?.removeFromCart(product_id)
   }
 
+
   return (
     <div className="userCart__flex">
     <div className="userCart__container">

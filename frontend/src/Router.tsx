@@ -18,6 +18,7 @@ import UserProducts from "./pages/userAccountPage/subPages/UserProducts";
 import EditProduct from "./pages/editProduct/EditProduct";
 import PaymentPage from "./pages/paymentPage/PaymentPage";
 import PaymentSummary from "./pages/PaymentSummary/PaymentSummary";
+import NotificationsPage from "./pages/notificationsPage/NotificationsPage";
 
 function Router() {
   return (
@@ -41,6 +42,7 @@ function Router() {
             <Route path="/usercart" element={<UserCart />} />
             <Route path="/payment" element={<PaymentPage />} />
             <Route path="/paymentSummary" element={<PaymentSummary/>} />
+            <Route path="/notificationsPage" element={<NotificationsPage/>} />
 
             <Route path="/product/:productId" element={<ProductDetails />} />
             <Route path="/product/addProduct" element={<AddProductPage />} />

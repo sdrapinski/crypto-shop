@@ -151,11 +151,23 @@ class shopping_cart {
       include: {
         cartItems: {
           include: {
-            product: true,
+            product: {
+              include:{
+                user:{
+                  select:{
+                    user_id:true,
+                  user_name:true,
+                  user_surname:true,
+                  }
+                  
+                }
+              }
+            },
           },
         },
       },
     });
+    
     return cart;
   }
 

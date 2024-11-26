@@ -10,7 +10,7 @@ const UserCartPaymentAction:React.FC<UserCartPaymentActionProps> = ({cartQuantit
     const delivery = 5
     const cart = appContext?.cart;
 
-   const cartValue = cart?.cartItems.reduce((acc,curr)=>acc+ curr.product.product_dollar_price,0)
+   const cartValue = cart?.cartItems.reduce((acc,curr)=>acc+ curr.product.product_dollar_price * curr.quantity,0)
 
   return (
     <div className='userCart__container-payment'>

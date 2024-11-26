@@ -64,9 +64,6 @@ const LoginForm = () => {
         className="login__form"
       >
         <h3
-          onClick={() => {
-            console.log(appContext?.user);
-          }}
         >
           Sign In
         </h3>
