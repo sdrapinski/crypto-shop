@@ -22,7 +22,6 @@ const PaymentPage = () => {
       
       });
     }, [])
-    
 
   const calculateTotalPrice = () => {
     return cart.cartItems.reduce((total, item) => {

@@ -28,7 +28,7 @@ router.get("/getCartFromUserId/:user_id", async (req, res) => {
 });
 
 router.route("/showcartitems").get((req, res) => {
-  Category.getCart(req.params.cart_id).then((response) => {
+  cart.getCart(req.params.cart_id).then((response) => {
     res.send(response);
   });
 });

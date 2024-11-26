@@ -50,62 +50,64 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   const stripe = useStripe();
   const elements = useElements();
 
-  const handleSubmit = async (event: React.FormEvent) => {
-    event.preventDefault();
+  
 
-    if (!stripe || !elements) {
-      setPaymentError('Stripe.js has not loaded yet. Please try again later.');
-      return;
-    }
+  // const handleSubmit = async (event: React.FormEvent) => {
+  //   event.preventDefault();
 
-    setIsProcessing(true);
+  //   if (!stripe || !elements) {
+  //     setPaymentError('Stripe.js has not loaded yet. Please try again later.');
+  //     return;
+  //   }
 
-    const card = elements.getElement(CardElement);
-    if (!card) {
-      setPaymentError('Please enter valid card details.');
-      setIsProcessing(false);
-      return;
-    }
+  //   setIsProcessing(true);
 
-    try {
-      const response = await axios.post(`${appcontext?.backendUrl}/payment/create-payment-intent`, {
-        amount,
-      });
+  //   const card = elements.getElement(CardElement);
+  //   if (!card) {
+  //     setPaymentError('Please enter valid card details.');
+  //     setIsProcessing(false);
+  //     return;
+  //   }
 
-      if (response.status !== 200) {
-        throw new Error('Failed to create payment intent.');
-      }
+  //   try {
+  //     const response = await axios.post(`${appcontext?.backendUrl}/payment/create-payment-intent`, {
+  //       amount,
+  //     });
 
-      const { clientSecret } = response.data;
+  //     if (response.status !== 200) {
+  //       throw new Error('Failed to create payment intent.');
+  //     }
 
-      // Confirm the card payment
-      const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-        payment_method: {
-          card,
-        },
-      });
+  //     const { clientSecret } = response.data;
 
-      if (error) {
-        setPaymentError(error.message || 'Payment failed. Please try again.');
-      } else if (paymentIntent?.status === 'succeeded') {
-        alert('Payment succeeded!');
-      }
-    } catch (err) {
-      setPaymentError(err instanceof Error ? err.message : 'An unknown error occurred.');
-    } finally {
-      setIsProcessing(false);
-    }
-  };
+  //     // Confirm the card payment
+  //     const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+  //       payment_method: {
+  //         card,
+  //       },
+  //     });
+
+  //     if (error) {
+  //       setPaymentError(error.message || 'Payment failed. Please try again.');
+  //     } else if (paymentIntent?.status === 'succeeded') {
+  //       alert('Payment succeeded!');
+  //     }
+  //   } catch (err) {
+  //     setPaymentError(err instanceof Error ? err.message : 'An unknown error occurred.');
+  //   } finally {
+  //     setIsProcessing(false);
+  //   }
+  // };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form >
       <div>
         <CardElement />
       </div>
       {paymentError && <div style={{ color: 'red', marginTop: '10px' }}>{paymentError}</div>}
-      <button type="submit" disabled={isProcessing}>
+      {/* <button type="submit" disabled={isProcessing}>
         {isProcessing ? 'Processing...' : `Pay $${amount}`}
-      </button>
+      </button> */}
     </form>
   );
 };
