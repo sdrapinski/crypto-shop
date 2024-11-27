@@ -53,6 +53,25 @@ user_wallets CryptoWallet[]
 
 }
 
+model Delivers {
+id String @id @default(uuid())
+user_id String
+city String
+street String
+houseNumber Int
+postcode String
+phoneNumber Int
+email String
+delivery String
+status Int
+}
+
+model Suppliers{
+id String @id @default(uuid())
+name String
+delivery_price
+}
+
 model Products {
   product_id   String   @id @default(uuid())
   user_id String
