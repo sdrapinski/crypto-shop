@@ -30,7 +30,7 @@ class Offers {
         product_popularity:Productinfo.product_popularity,
         product_promotion:Productinfo.product_promotion,
         product_used:Productinfo.product_used,
-        product_crypto:Productinfo.crypto,
+        product_crypto:Productinfo.product_crypto,
       },
     });
     return products;

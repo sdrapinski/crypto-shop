@@ -25,7 +25,7 @@ const ProductsByCategoryPage = () => {
         }
       )
       .then((resp) => {
-        console.log(resp);
+        
         setProducts(resp.data);
       });
 
