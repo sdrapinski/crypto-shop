@@ -10,10 +10,13 @@ import Cookies from "universal-cookie";
 import axios from "axios";
 import { CartInterface } from "../interfaces/CartInterface";
 import { CurrentCryptoPriceInterface } from "../interfaces/CurrentCryptoPrice.Interface";
+import { useNavigate } from "react-router-dom";
+
 
 export const AppContext = createContext<AppContextInterface | null>(null);
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 
 const initialCart: CartInterface = {
   cart_id: "",
@@ -27,6 +30,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
   const [cart, setCart] = useState<CartInterface>(initialCart);
   const [ethereum, setEthereum] = useState<CurrentCryptoPriceInterface | null>(null)
 
+  
   const cookie = new Cookies();
 
   const loginUser = async (data: JwtInteface) => {
@@ -107,6 +111,7 @@ const AppProvider = ({ children }: AppProviderProps) => {
     setaccessToken(null);
     setUser(null);
     cookie.remove("jwt_RefreshToken");
+    
   };
   //
 

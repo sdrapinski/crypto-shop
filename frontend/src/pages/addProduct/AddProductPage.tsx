@@ -26,11 +26,11 @@ const categoriesInit = {
 
 const AddProductPage = () => {
   const appContext = useContext(AppContext);
+  const user = appContext?.user;
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [categories, setcategories] =
     useState<CategoriesInterface>(categoriesInit);
-  const navigate = useNavigate()
 
   const [productDollarPrice, setProductDollarPrice] = useState(0);
   const [productQuantity, setProductQuantity] = useState(0);
@@ -40,6 +40,7 @@ const AddProductPage = () => {
   const [cryptoAllowed, setiCryptoAllowed] = useState<boolean>(false)
   const [productImage, setProductImage] = useState<string>("")
   const [buttonStatus, setButtonStatus] = useState<{text:string,status:number }>({text:"Add Product",status:0 })
+  const [isUserWalletActive, setisUserWalletActive] = useState(false)
 
   const [selectedCategoryId, setSelectedCategoryId] = useState("");
 
@@ -49,6 +50,13 @@ const AddProductPage = () => {
 
   const backendUrl = process.env.REACT_APP_BACKEND_URL;
   useEffect(() => {
+
+    if(appContext?.user?.user_wallets && appContext.user.user_wallets.length > 0){
+      const activeWallets = appContext.user.user_wallets.filter((wallet)=>wallet.wallet_status === "Active")
+      activeWallets.length > 0 ? setisUserWalletActive(true) : setisUserWalletActive(false)
+    }
+    
+    
     axios
       .get(`${backendUrl}/offer/Categories`, {
         headers: {
@@ -209,8 +217,11 @@ const AddProductPage = () => {
             type="checkbox"
             checked={cryptoAllowed}
             onChange={(e) => setiCryptoAllowed(e.target.checked)}
+            disabled = {isUserWalletActive? false : true}
           />{" "}
+          {isUserWalletActive? <></> : <span style={{color:"red"}}>First assign and activate MetaMask wallet in your account wallet options </span>}
         </label>
+        
         <br />
 
         <label>

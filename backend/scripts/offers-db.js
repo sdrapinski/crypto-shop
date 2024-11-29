@@ -133,6 +133,8 @@ class Offers {
   }
 
   async offersinCategory(CategoryId) {
+    console.log(CategoryId);
+    
     const products = await this.#prisma.products.findMany({
       take: 20,
       where: {

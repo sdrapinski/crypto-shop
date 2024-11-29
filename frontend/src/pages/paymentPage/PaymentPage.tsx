@@ -5,6 +5,7 @@ import useAxiosCrypto from '../../hooks/useAxiosCrypto';
 import { CurrentCryptoPriceInterface } from '../../interfaces/CurrentCryptoPrice.Interface';
 import DeliveryComponent from '../../components/Delivery/DeliveryComponent';
 import PaymentComponent from '../../components/Payments/PaymentComponent';
+import PayWithEthComponent from '../../components/Payments/PayWithEthComponent';
 
 const PaymentPage = () => {
   const [ethereum, setEthereum] = useState<CurrentCryptoPriceInterface | null>(null)
@@ -67,7 +68,11 @@ const PaymentPage = () => {
                 <>Products ETH value: {totalPriceETH.toFixed(6)} ETH</>
               )}
             </div>
-            <button>Pay with the selected payment option</button>
+            <button>Pay with the selected payment option</button> <br />
+            {
+              ethereum && <PayWithEthComponent ethPrice={ethereum}/>
+            }
+            
           </div>
         </div>
       </div>

@@ -97,6 +97,21 @@ router.post("/activateWallet", async (req, res) => {
    })
   });
 
+  router.post("/deleteWallet", async (req, res) => {
+    const { wallet_id } = req.body;
+
+    if (!wallet_id) {
+        return res.status(400).send({ message: "Brak wymaganych danych." });
+    }
+
+    try {
+       const data =  await user.deleteWallet(wallet_id);
+        res.status(data.status).send( data.message );
+    } catch (error) {
+        res.status(500).send({ message: "Unable to remove wallet" });
+    }
+});
+
 
 router.route("/getOrdersHistory/:userId").get((req, res) => {
     user.getOrdersHistory(req.params.userId).then((response) => {

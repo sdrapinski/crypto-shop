@@ -9,7 +9,7 @@ const DisplayProducts: React.FC<ProductsArrayInterface> = (props) => {
 
   return (
     <Col>
-      {products.length > 0 ?
+      {products&& products.length > 0 ?
         products.map((product) => (
           <Product key={product.product_id} product={product} /> 
         )) : <div style={{color:"red"}}> No products to display</div>}

@@ -133,7 +133,7 @@ class Users {
 
 async activateUserWallet (user_id, wallet_address){
   if (!user_id || !wallet_address) {
-    return { message: "Brak wymaganych danych.",status:400 }
+    return { message: "Not enoguth data",status:400 }
   }
  
   
@@ -146,13 +146,27 @@ async activateUserWallet (user_id, wallet_address){
     
     
 
-    return { message: "Portfel został aktywowany.",status:201 };
+    return { message: "Wallet has been activated.",status:201 };
   } catch (error) {
     
     
-    return { message: "Nie udało się aktywować portfela.",status :500 };
+    return { message: "Wallet has not been activated.",status :500 };
   }
 
+}
+
+async deleteWallet(walletId) {
+  try {
+      await this.#prisma.cryptoWallet.delete({
+          where: { wallet_id: walletId },
+      });
+      return { message: "wallet deleted",status:200 };
+  } catch (error) {
+    console.error(error);
+    
+     return {message: "Unable to add wallet",status:400}
+      
+  }
 }
 
 
