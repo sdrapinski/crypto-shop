@@ -6,13 +6,19 @@ import { CurrentCryptoPriceInterface } from '../../interfaces/CurrentCryptoPrice
 import DeliveryComponent from '../../components/Delivery/DeliveryComponent';
 import PaymentComponent from '../../components/Payments/PaymentComponent';
 
+
 const PaymentPage = () => {
   const [ethereum, setEthereum] = useState<CurrentCryptoPriceInterface | null>(null)
   const api = useAxiosCrypto()
   const appContext = useContext(AppContext);
   const navigate = useNavigate();
+  const gatename="WK";
   const {user,cart} = appContext!
+  const [isPaymentVisible, setIsPaymentVisible] = useState(false);
 
+  const handleCheckboxChange = () => {
+    setIsPaymentVisible(!isPaymentVisible);
+  };
 
     useEffect(() => {
       api
@@ -55,7 +61,21 @@ const PaymentPage = () => {
           </div>
           <div className="section">
             <div className="section__title">Payment Methods</div>
-            <PaymentComponent amount={totalPriceUSD}/>
+            <div className="payment-options">
+            <label className="custom-checkbox">
+              <input
+                type="checkbox"
+                checked={isPaymentVisible}
+                onChange={handleCheckboxChange}
+              />
+              <span
+                className="custom-checkbox__image"
+                style={{
+                  backgroundImage: `url('https://drive.google.com/uc?export=view&id=1ztU-VxDx8ygTDl6LHEhuGRy0MqLnHPtE')`, // Background image URL
+                }}
+              ></span>
+            </label>
+          </div>
           </div>
         </div>
     
@@ -68,7 +88,9 @@ const PaymentPage = () => {
                 <>Products ETH value: {totalPriceETH.toFixed(6)} ETH</>
               )}
             </div>
-            <button>Pay with the selected payment option</button>
+              {isPaymentVisible && (
+                <PaymentComponent amount={totalPriceUSD} gate={gatename} />
+              )}
           </div>
         </div>
       </div>

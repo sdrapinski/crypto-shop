@@ -1,0 +1,31 @@
+.payment-options {
+    .custom-checkbox {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+  
+      input[type="checkbox"] {
+        appearance: none; // Hide the default checkbox
+        width: 0;
+        height: 0;
+        position: absolute;
+        opacity: 0; // Fully hide the checkbox
+      }
+  
+      &__image {
+        display: inline-block;
+        width: 50px; // Set width of the image
+        height: 50px; // Set height of the image
+        background-size: cover;
+        background-position: center;
+        border: 2px solid transparent; // Default border color
+        transition: border-color 0.3s ease;
+  
+        // Border color when the checkbox is checked
+        input[type="checkbox"]:checked + & {
+          border-color: #4caf50; // Green border when selected
+        }
+      }
+    }
+  }
+  

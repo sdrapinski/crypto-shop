@@ -4,14 +4,13 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-// Load your Stripe public key
-const stripePromise = loadStripe('pk_test_51QMcJ14MgBpXBJt0U21BAbjRPw4FCzghEWu29YjgNGocEColT0l6qebb49zfUUEdZDIxoEwNLPgsAHAzY0dHyhXW009zaT8K3Z');
-
+const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY as string);
 interface PaymentComponentProps {
   amount: number;
+  gate: string;
 }
 
-const PaymentComponent: React.FC<PaymentComponentProps> = ({ amount }) => {
+const PaymentComponent: React.FC<PaymentComponentProps> = ({ amount, gate }) => {
   const appcontext = useContext(AppContext);  // This should be inside the component
   const [paymentError, setPaymentError] = useState<string | null>(null);
   const [isProcessing, setIsProcessing] = useState(false);
@@ -24,7 +23,8 @@ const PaymentComponent: React.FC<PaymentComponentProps> = ({ amount }) => {
         setPaymentError={setPaymentError} 
         paymentError={paymentError} 
         isProcessing={isProcessing} 
-        appcontext={appcontext}  // Pass appcontext to CheckoutForm
+        appcontext={appcontext} 
+        gate={gate} // Pass appcontext to CheckoutForm
       />
     </Elements>
   );
@@ -36,7 +36,8 @@ interface CheckoutFormProps {
   setPaymentError: React.Dispatch<React.SetStateAction<string | null>>;
   paymentError: string | null;
   isProcessing: boolean;
-  appcontext: any;  // Add the appcontext prop here
+  appcontext: any;
+  gate:string;  // Add the appcontext prop here
 }
 
 const CheckoutForm: React.FC<CheckoutFormProps> = ({
@@ -46,6 +47,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
   paymentError,
   isProcessing,
   appcontext,
+  gate,
 }) => {
   const stripe = useStripe();
   const elements = useElements();
@@ -89,6 +91,17 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
         setPaymentError(error.message || 'Payment failed. Please try again.');
       } else if (paymentIntent?.status === 'succeeded') {
         alert('Payment succeeded!');
+        switch(gate){
+            case "WK":
+              
+            case "Promo":
+              return true;
+            break;
+            default:
+              return false;
+
+        }
+        //add other cases.
       }
     } catch (err) {
       setPaymentError(err instanceof Error ? err.message : 'An unknown error occurred.');
