@@ -6,6 +6,7 @@ import blockchainService, {
 } from "../../../services/Blockchain";
 import { Row, Col } from "react-bootstrap";
 import useAxios from "../../../hooks/useAxios";
+import { cryptoWallet } from "../../../classes/User";
 
 const UserWallets = () => {
   const appContext = useContext(AppContext);
@@ -13,26 +14,48 @@ const UserWallets = () => {
   const backendUrl = appContext?.backendUrl;
   const userId = appContext?.user?.user_id;
   const [loadingWallet, setLoadingWallet] = useState<string | null>(null);
-  const [userWallets, setUserWallets] = useState(
-    appContext?.user?.user_wallets || []
-  );
+  const [userWallets, setUserWallets] = useState<cryptoWallet[] | []>([]);
   const [userWallet, setuserWallet] = useState<null | string>(
-    appContext?.user?.user_wallets[0].wallet_address || null
+    appContext && appContext.user!.user_wallets.length > 0 ? appContext?.user!.user_wallets[0].wallet_address : null
   );
 
   useEffect(() => {
-    console.log(appContext?.user);
+    setUserWallets(appContext?.user?.user_wallets || []);
+    
+    const handleAccountsChanged = (accounts: string[]) => {
+      if (accounts.length > 0) {
+        // Aktualizuj stan portfela
+        setuserWallet(accounts[0]);
+        console.log("Zmieniono portfel na:", accounts[0]);
+      } else {
+        console.warn("Nie znaleziono podłączonych portfeli");
+      }
+    };
+  
+    // Nasłuchiwanie na zmianę portfela w MetaMask
+    if (window.ethereum) {
+      window.ethereum.on("accountsChanged", handleAccountsChanged);
+    } else {
+      console.warn("MetaMask is not installed!");
+    }
+  
+    // Sprzątanie nasłuchiwania przy unmount
+    return () => {
+      if (window.ethereum) {
+        window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
+      }
+    };
   }, []);
 
   const activateWallet = async (wallet: string) => {
     const userId = appContext?.user?.user_id;
     if (!userId || !wallet) {
-      console.error("Brak danych użytkownika lub portfela");
+      console.error("No user or wallet data");
       return;
     }
     setLoadingWallet(wallet);
     try {
-      // await blockchainService.registerSeller(userId, wallet);
+      await blockchainService.registerSeller(userId, wallet);
       const response = await axiosInstance.post("/user/activateWallet", {
         user_id: userId,
         wallet_address: wallet,
@@ -45,11 +68,11 @@ const UserWallets = () => {
             w.wallet_address === wallet ? { ...w, wallet_status: "Active" } : w
           )
         );
-        alert("Portfel został aktywowany!");
+        alert("The wallet has been activated!");
       }
     } catch (error) {
-      console.error("Błąd podczas aktywacji portfela:", error);
-      alert("Nie udało się aktywować portfela.");
+      console.error("Error activating wallet:", error);
+      alert("Failed to activate wallet.");
     } finally {
       setLoadingWallet(null);
     }
@@ -57,19 +80,50 @@ const UserWallets = () => {
 
   const saveUserWallet = (e: React.FormEvent<HTMLButtonElement>) => {
     getUserWalletAddress().then((wallet) => {
+      if (userWallets.some((w) => w.wallet_address === wallet)) {
+        alert("This wallet has already been added!");
+        return;
+      }
       axiosInstance
-        .post(`/user/createWallet`, {
+        .post<cryptoWallet>(`/user/createWallet`, {
           user_wallet_address: wallet,
           user_id: userId,
         })
         .then((response) => {
           console.log(response);
 
-          setuserWallet(response.data);
+          setUserWallets((prevWallets) => [
+            ...prevWallets,
+            response.data,
+          ]);
+
+          setuserWallet(response.data.wallet_address);
         })
         .catch((err) => console.error(err));
     });
   };
+
+  const deleteWallet = async (walletId: string) => {
+    try {
+      const response = await axiosInstance.post("/user/deleteWallet", {
+        wallet_id: walletId
+        
+      });
+  
+      if (response.status === 200) {
+        setUserWallets((prevWallets) =>
+          prevWallets.filter((wallet) => wallet.wallet_id !== walletId)
+        );
+        alert("Wallet has been deleted");
+      }
+    } catch (error) {
+      console.error("Unable to remove wallet", error);
+      alert("Unable to remove wallet");
+    }
+  };
+  
+
+
 
   return (
     <section className="userWallets tab-pane fade show active  w-100">
@@ -145,8 +199,11 @@ const UserWallets = () => {
                         ? "Loading..."
                         : "Activate this wallet at blockchain"}
                     </button>
-                    <button type={"button"} className={"btn btn-danger"}>
-                      Delete
+                    <button onClick={() => deleteWallet(wallet.wallet_id)} type={"button"} className={"btn btn-danger"} disabled={
+                        wallet.wallet_status === "Active" ||
+                        loadingWallet === wallet.wallet_address
+                      }>
+                    {wallet.wallet_status === "Active" ? <>You can't delete active wallet</> : <> Delete </>}  
                     </button>
                   </div>
                 </div>

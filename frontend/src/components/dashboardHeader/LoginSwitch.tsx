@@ -53,7 +53,10 @@ const LoginSwitch = () => {
                       <span className="menu__link" onClick={()=>handleRedirectClick("/account")} >Account Details</span>
                     </li>
                     <li>
-                      <button onClick={() => appcontext.logout()}>
+                      <button onClick={() => {
+                        appcontext.logout()
+                        navigate("/")
+                      }}>
                         Wyloguj
                       </button>
                     </li>

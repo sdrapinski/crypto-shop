@@ -55,6 +55,8 @@ router.route("/promotedProducts").get((req, res) => {
   });
 });
 router.route("/offersincategory/:Categoryid").get((req, res) => {
+  console.log(req.params.Categoryid);
+  
   offer.offersinCategory(req.params.Categoryid).then((response) => {
     res.send(response);
   });
