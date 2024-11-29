@@ -1,0 +1,23 @@
+.payment-options {
+    .custom-checkbox {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+  
+  
+      &__image {
+        display: inline-block;
+        width: 50px; // Set width of the image
+        height: 50px; // Set height of the image
+        background-size: cover;
+        background-position: center;
+        border: 2px solid transparent; // Default border color
+        transition: border-color 0.3s ease;  
+
+        &.payment--visible{
+          border-color: green;
+        }
+       
+      }
+    }
+  }

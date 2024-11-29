@@ -13,4 +13,12 @@ export interface CartItem {
 export interface Product {
   product_name: string;
   product_dollar_price: number;
+  user:User
+}
+
+interface User {
+  user_id: string;
+  user_name:string;
+  user_surname:string;
+  
 }

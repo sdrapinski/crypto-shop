@@ -17,7 +17,7 @@ interface Seller {
 // Typowanie dla kontraktu
 interface CryptoShopContract {
     registerSeller: (sellerId: string, wallet: string) => Promise<void>;
-    buyProduct: (sellerId: string, amount: string) => Promise<void>;
+    buyProduct: (sellerId: string, amount: string) => Promise<boolean>;
     withdrawFunds: (sellerId: string) => Promise<void>;
     checkBalance: (sellerId: string) => Promise<string>;
 }
@@ -87,10 +87,13 @@ const blockchainService: CryptoShopContract = {
                 });
                 await tx.wait();
                 console.log("Wpłata zakończona sukcesem!");
+                return true
             } catch (error) {
                 console.error("Błąd podczas wpłacania środków:", error);
+                return false
             }
         }
+        return false
     },
 
     // Wypłata środków

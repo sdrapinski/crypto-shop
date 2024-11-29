@@ -88,13 +88,6 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
               onBlur={() => setShowOptions(false)}
               onFocus={() => setShowOptions(true)}
             />
-            {showOptions && (
-              <ul className="header__autocomplete">
-                {filteredOptions.map((option) => (
-                  <li key={option}>{option}</li>
-                ))}
-              </ul>
-            )}
           </div>
         </form>
         {/* Ikony */}

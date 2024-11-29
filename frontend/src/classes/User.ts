@@ -1,6 +1,6 @@
 import jwt_decode from "jwt-decode";
 
-interface cryptoWallet{
+export interface cryptoWallet{
   wallet_id: string
   wallet_address: string
   wallet_status: string 

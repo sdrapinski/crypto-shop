@@ -1,86 +1,98 @@
-/* Dodaj stylowanie dla AddProductPage */
-
-/* Kontener główny */
 .add-product-container {
-  max-width: 600px;
+  max-width: 800px;
   margin: 0 auto;
-
   padding: 20px;
-}
+ 
 
-/* Nagłówek */
-.add-product-header {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-}
+  h2.add-product-header {
+    text-align: center;
+    margin-bottom: 10px;
+    font-size: 1.8rem;
+    color: #333;
+  }
 
-/* Formularz */
-.add-product-form {
   label {
     display: block;
-    margin-bottom: 5px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #555;
   }
 
   input[type="text"],
   input[type="number"],
-  textarea {
+  input[type="date"],
+  textarea,
+  select {
     width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
+    padding: 10px;
+    margin-bottom: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
+    font-size: 1rem;
+    color: #333;
+
+    &:focus {
+      border-color: #007bff;
+      outline: none;
+      box-shadow: 0 0 4px rgba(0, 123, 255, 0.25);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 100px;
   }
 
   input[type="checkbox"] {
-    margin-right: 5px;
+    margin-left: 10px;
+    transform: scale(1.2);
+    cursor: pointer;
   }
 
-  /* Stylowanie datalisty */
-  input[type="text"][list] {
-    appearance: none;
-    -moz-appearance: textfield;
+  button {
+    display: block;
+    width: 100%;
+    padding: 12px 20px;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #fff;
+    
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #0056b3;
+    }
+
+    &:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+
+    &.primary{
+      background-color: #007bff;
+    }
+    &.success{
+      background-color: #08a764;
+    }
+    &.danger{
+      background-color: #d80c0c;
+    }
   }
 
-  .image-preview-container {
+  .form-group {
     margin-bottom: 20px;
   }
 
-  .image-preview-selected {
-    display: flex;
-    max-width: 400px;
-    align-items: center;
-    position: relative;
-  }
+  .promotion-date {
+    margin-top: 10px;
 
-  .selected-image {
-    max-width: 400px;
-    height: auto;
-    margin-right: 10px;
-  }
-
-  .remove-image-btn {
-    top: 10px;
-    right: 10px;
-    position: absolute;
-    font-size: 20px;
-    padding: 4px 8px;
-    background-color: transparent;
-    color: rgb(255, 255, 255);
-    border: none;
-    cursor: pointer;
-    border-radius: 50%;
-  }
-
-  .image-preview-thumbnails {
-    display: flex;
-
-    .thumbnail {
-      max-width: 60px;
-      height: auto;
-      margin-right: 10px;
-      cursor: pointer;
+    label {
+      margin-bottom: 5px;
+      display: inline-block;
     }
   }
 }
-/* Podgląd wybranych zdjęć */

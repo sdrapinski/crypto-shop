@@ -5,13 +5,24 @@ import useAxiosCrypto from '../../hooks/useAxiosCrypto';
 import { CurrentCryptoPriceInterface } from '../../interfaces/CurrentCryptoPrice.Interface';
 import DeliveryComponent from '../../components/Delivery/DeliveryComponent';
 import PaymentComponent from '../../components/Payments/PaymentComponent';
+import PayWithEthComponent from '../../components/Payments/PayWithEthComponent';
+
+enum PaymentOption {
+  Null = "Null",
+  Stripe = "STRIPE",
+  Eth = "ETH"
+}
 
 const PaymentPage = () => {
   const [ethereum, setEthereum] = useState<CurrentCryptoPriceInterface | null>(null)
   const api = useAxiosCrypto()
   const appContext = useContext(AppContext);
   const navigate = useNavigate();
+  const gatename="WK";
   const {user,cart} = appContext!
+  const [isPaymentVisible, setIsPaymentVisible] = useState<PaymentOption>(PaymentOption.Null);
+
+  const productSuccessfullyBoughtFunction =()=>{}
 
 
     useEffect(() => {
@@ -22,6 +33,10 @@ const PaymentPage = () => {
       
       });
     }, [])
+
+    const handlePaymentVisibleChange = (option :PaymentOption) => {
+      setIsPaymentVisible(option);
+    };
 
   const calculateTotalPrice = () => {
     return cart.cartItems.reduce((total, item) => {
@@ -54,7 +69,28 @@ const PaymentPage = () => {
           </div>
           <div className="section">
             <div className="section__title">Payment Methods</div>
-            <PaymentComponent amount={totalPriceUSD}/>
+            <div className="payment-options">
+            <div className="custom-checkbox" >
+              <div
+              onClick={()=>handlePaymentVisibleChange(PaymentOption.Stripe)}
+              className={isPaymentVisible===PaymentOption.Stripe? "payment--visible custom-checkbox__image" : "custom-checkbox__image"}
+                style={{
+                  backgroundImage: `url('https://tap2pay.me/wp-content/uploads/2019/11/payment-methods-with-circle_23-2147674741-1-750x423@2x.jpg')`, // Background image URL
+                }}
+              />
+                
+            </div> <br />
+            <div className="custom-checkbox" >
+              <div
+              onClick={()=>handlePaymentVisibleChange(PaymentOption.Eth)}
+              className={isPaymentVisible===PaymentOption.Eth? "payment--visible custom-checkbox__image" : "custom-checkbox__image"}
+                style={{
+                  backgroundImage: `url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSwCAvSY0dYnw15GZ6eoDhKGOFIbT5pmfPfbw&s')`, // Background image URL
+                }}
+              />
+                
+            </div>
+          </div>
           </div>
         </div>
     
@@ -67,7 +103,16 @@ const PaymentPage = () => {
                 <>Products ETH value: {totalPriceETH.toFixed(6)} ETH</>
               )}
             </div>
-            <button>Pay with the selected payment option</button>
+            {isPaymentVisible===PaymentOption.Stripe ?
+              <div> 
+                <PaymentComponent amount={totalPriceUSD} gate={gatename} productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}/>
+                </div>
+              : ethereum ?
+                <PayWithEthComponent ethPrice={ethereum} productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}/>
+                :<div>Something went wrong</div>
+             }
+            
+            
           </div>
         </div>
       </div>
@@ -77,25 +122,3 @@ const PaymentPage = () => {
 
 export default PaymentPage
 
-/*
-<div>
-      strona do płatnosci i dostawy
-      <ol>
-        <li>rozdzielenie na poszczegolnych sprzedających</li>
-        <li>mozliwosc wyboru sposobu płatnosci dla nich (krypto ETH lub tradycyjnie) za wszystko jezeli chcesz w krypto a jakis produkt nie ma takiej opcji musisz go usunac</li>
-        <li>z wyglądu troche jak strona koszyka na allegro gdy masz kilku dostawcow</li>
-      </ol>
-      Na dole opcje dostawy
-      <ol>
-        <li>jakis inpost dhl itp</li>
-        <li>Pamietajcie ze przy tworzeniu konta są juz dodawane informacje o ulicy kraju itp ale mozliwosc edycji ich przy dostawanie byłba by git</li>
-      </ol>
-      Co dalej
-      <ol>
-        <li>pomyslne przejscie płatnosci tworzy zamówienie w bazie(nr zamowienie id przedmiotow)</li>
-        <li>przejscie na strone z podsumowaniem</li>
-        <li>powiadomienie dla sprzedającego</li>
-        <li>Mozliwe powiadomienie mailowe</li>
-      </ol>
-    </div>
-    */
