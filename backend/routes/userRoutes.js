@@ -8,6 +8,8 @@ const user = new Users();
 
 router.post("/login", async (req, res) => {
     const userFromDB = await user.getUserByLoginAndPassword(req.body);
+    console.log("logowanie");
+    
     if (userFromDB.code === 400) {
         return res.sendStatus(400);
     }

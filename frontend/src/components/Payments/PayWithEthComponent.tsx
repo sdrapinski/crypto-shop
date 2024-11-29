@@ -5,9 +5,10 @@ import { CurrentCryptoPriceInterface } from "../../interfaces/CurrentCryptoPrice
 
 interface PayWithEthComponentProps {
 ethPrice:CurrentCryptoPriceInterface
+productSuccessfullyBoughtFunction:()=>void
 }
 
-const PayWithEthComponent:React.FC<PayWithEthComponentProps> = ({ethPrice}) => {
+const PayWithEthComponent:React.FC<PayWithEthComponentProps> = ({ethPrice,productSuccessfullyBoughtFunction}) => {
   const [loading, setLoading] = useState(false);
   const appContext = useContext(AppContext);
   const [remainingOperations, setRemainingOperations] = useState<number>(0);
@@ -64,6 +65,7 @@ const PayWithEthComponent:React.FC<PayWithEthComponentProps> = ({ethPrice}) => {
           )}`
         );
       } else {
+        productSuccessfullyBoughtFunction()
         alert("Payment completed successfully!");
       }
     } catch (error) {

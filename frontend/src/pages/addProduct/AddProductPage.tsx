@@ -100,7 +100,7 @@ const AddProductPage = () => {
       product_dollar_price:productDollarPrice,
       product_quantity:productQuantity,
       product_promotion: isProductPromoted ? new Date(productPromotion) : null,
-      product_images: JSON.stringify(productImage),
+      product_images: JSON.stringify({src:productImage}),
       product_used:isUsed,
       product_popularity:0,
       product_crypto:cryptoAllowed,

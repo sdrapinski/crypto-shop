@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const port = process.env.port || 3001;
+
 
 const routes = require("./routes/routes");
 routes(app);
@@ -9,6 +9,7 @@ routes(app);
 // const data = new createData();
 // data.createDataBase();
 
-app.listen(port, () => {
+app.listen(3001, () => {
   console.log("it works!!!");
+
 });

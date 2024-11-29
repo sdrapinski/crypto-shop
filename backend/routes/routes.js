@@ -5,6 +5,7 @@ const userRoutes = require("./userRoutes");
 const cartRoutes = require("./cartRoutes");
 const offerRoutes = require("./offerRoutes");
 const paymentRoutes = require("./paymentRoutes"); 
+const postPaymentRoutes = require("./postPaymentRoutes"); 
 
 module.exports = function (app) {
   const cors = new Cors(app);
@@ -16,4 +17,5 @@ module.exports = function (app) {
   app.use("/cart", cartRoutes);
   app.use("/payment", paymentRoutes);
   app.use("/offer", offerRoutes);
+  app.use("/postPayment", postPaymentRoutes);
 };
