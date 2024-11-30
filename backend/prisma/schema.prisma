@@ -66,10 +66,10 @@ delivery String
 status Int
 }
 
-model Suppliers{
+model Suppliers {
 id String @id @default(uuid())
 name String
-delivery_price
+delivery_price Float
 }
 
 model Products {
