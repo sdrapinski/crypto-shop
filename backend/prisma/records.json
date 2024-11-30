@@ -42,6 +42,28 @@
       "product_category_name": "Houses"
     }
   ],
+  "suppliers": [
+    {
+      "name": "InPost",
+      "delivery_price" : 11.0
+    },
+    {
+      "name": "UPS",
+      "delivery_price" : 36.0
+    },
+    {
+      "name": "DHL",
+      "delivery_price" : 12.0
+    },
+    {
+      "name": "Courier",
+      "delivery_price" : 12.0
+    },
+    {
+      "name": "DPD",
+      "delivery_price" : 14.5
+    }
+  ],
   "users": [
     {
       "user_name": "John",

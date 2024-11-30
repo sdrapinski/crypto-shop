@@ -45,12 +45,31 @@ user_avatar_url String?
 user_premium_tokens Float?
 user_cart Cart?
 user_watched_products Products[] @relation("WatchedProducts")
-user_products_purchased ProductsBought[]@relation("buyer")
-user_products_sold ProductsBought[]@relation("seller")
+user_products_purchased ProductsSold[]
 user_messages_send Message[] @relation("sender")
 user_messages_recived Message[] @relation("recipient")
+user_notifications Notification[]
 user_wallets CryptoWallet[]
 
+}
+
+model Delivers {
+id String @id @default(uuid())
+user_id String
+city String
+street String
+houseNumber Int
+postcode String
+phoneNumber Int
+email String
+delivery String
+status Int
+}
+
+model Suppliers {
+id String @id @default(uuid())
+name String
+delivery_price Float
 }
 
 model Products {
@@ -67,12 +86,13 @@ model Products {
   cartToItem_id CartToItem[]
   product_watchedBy Users @relation("WatchedProducts", fields: [product_watched_by_id], references: [user_id])
   product_watched_by_id String
-  productBoughtItems_id ProductsBoughtItems[]
+  product_sold ProductsSold[]
   product_popularity Float?
   product_added_time DateTime @default(now())
   product_promotion DateTime?
   product_used Boolean
   product_messages Message[]
+  product_notifications Notification[]
   product_crypto Boolean
 
 
@@ -89,11 +109,11 @@ model CryptoWallet {
 
 model Cart {
   cart_id String @id @default(uuid())
-  cartItems CartToItem[] 
+  cartItems CartToItem[]
   user_id String @unique
   user Users @relation(fields: [user_id], references: [user_id])
 }
-model CartToItem {  
+model CartToItem {
   cart_item_id String @id @default(uuid())
   cart_id String
   product_id String
@@ -102,27 +122,15 @@ model CartToItem {
   quantity Int
 }
 
-model ProductsBought{
-  products_bought_id String @id @default(uuid())
-  buyer_id String 
-  buyer Users @relation("buyer",fields: [buyer_id], references: [user_id])
-  seller_id String 
-  seller Users @relation("seller",fields: [seller_id], references: [user_id])
-  products_bought_items ProductsBoughtItems[] @relation("ProductsBoughtItemsToProductsBought")
-  notification_id String
-  notification Notifications? @relation("Notification_ProductsBought_fk")
+model ProductsSold{
+  product_sold_id String @id @default(uuid())
+  user_id String
+  product_id String
+  product Products @relation(fields: [product_id], references: [product_id])
+  user Users @relation(fields: [user_id], references: [user_id])
   sale_time DateTime
   deliveryStatus String
   deliveryOption String
-}
-
-model ProductsBoughtItems{
-  products_bought_items_id String @id @default(uuid())
-  products_bought_id String 
-  product_id String
-  product Products @relation(fields: [product_id], references: [product_id])
-  productsBought ProductsBought @relation( "ProductsBoughtItemsToProductsBought",fields: [products_bought_id], references: [products_bought_id])
-  product_quantity Int
 }
 
 model Message {
@@ -138,10 +146,12 @@ model Message {
   is_read Boolean @default(false)
 }
 
-model Notifications {
+model Notification {
   notification_id String @id @default(uuid())
-  productsBought_id String @unique
-  productsBought ProductsBought @relation("Notification_ProductsBought_fk",fields: [productsBought_id], references: [products_bought_id])
+  user_id String
+  user Users? @relation(fields: [user_id], references: [user_id])
+  product_id String?
+  product Products? @relation(fields: [product_id], references: [product_id])
   content String
   created_at DateTime @default(now())
   is_read Boolean @default(false)
