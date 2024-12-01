@@ -6,6 +6,90 @@ class PostPayment {
   constructor() {
     this.#prisma = new PrismaClient();
   }
+
+  async getSuppliers() {
+    const supplier = await this.#prisma.Suppliers.findMany({ });
+    return supplier;
+  }
+
+  async createTransaction({ buyerId, cartItems, deliveryData,deliveryOption ,notificationContent }) {
+    try {
+      return await this.#prisma.$transaction(async (prisma) => {
+        // Grupowanie produktów według sprzedawcy
+        const productsBySeller = cartItems.reduce((acc, item) => {
+          const sellerId = item.seller_id;
+          if (!acc[sellerId]) {
+            acc[sellerId] = [];
+          }
+          acc[sellerId].push(item);
+          return acc;
+        }, {});
+  
+        const transactions = [];
+  
+        // Iteracja przez każdego sprzedawcę i tworzenie `ProductsBought`
+        for (const [sellerId, items] of Object.entries(productsBySeller)) {
+          // Tworzenie rekordu `ProductsBought`
+          const productsBought = await this.#prisma.productsBought.create({
+            data: {
+              buyer_id: buyerId,
+              seller_id: sellerId,
+              sale_time: new Date(),
+            },
+          });
+  
+          // Tworzenie rekordów `ProductsBoughtItems` dla sprzedawcy
+          const productBoughtItems = await Promise.all(
+            items.map((item) =>
+              this.#prisma.productsBoughtItems.create({
+                data: {
+                  products_bought_id: productsBought.products_bought_id,
+                  product_id: item.product_id,
+                  product_quantity: item.quantity,
+                },
+              })
+            )
+          );
+  
+          // Tworzenie rekordu `Delivery`
+          const delivery = await prisma.delivery.create({
+            data: {
+              city: deliveryData.city,
+              street: deliveryData.street,
+              houseNumber: deliveryData.houseNumber,
+              postcode: deliveryData.postcode,
+              phoneNumber: deliveryData.phoneNumber,
+              email: deliveryData.email,
+              status: "Pending",
+              productsBought_id: productsBought.products_bought_id,
+              supplier_id: deliveryData.supplierId,
+            },
+          });
+  
+          // Tworzenie rekordu `Notifications`
+          const notification = await prisma.notifications.create({
+            data: {
+              productsBought_id: productsBought.products_bought_id,
+              content: notificationContent,
+            },
+          });
+  
+          transactions.push({
+            productsBought,
+            productBoughtItems,
+            delivery,
+            notification,
+          });
+        }
+  
+        return transactions; // Zwraca listę transakcji dla każdego sprzedawcy
+      });
+    } catch (error) {
+      console.error("Error creating transactions:", error);
+      throw new Error("Transaction failed.");
+    }
+  }
+  
 }
 
 

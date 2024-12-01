@@ -112,8 +112,9 @@ model ProductsBought{
   notification_id String
   notification Notifications? @relation("Notification_ProductsBought_fk")
   sale_time DateTime
-  deliveryStatus String
-  deliveryOption String
+  delivery_id String
+  delivery Delivery?
+  
 }
 
 model ProductsBoughtItems{
@@ -123,6 +124,28 @@ model ProductsBoughtItems{
   product Products @relation(fields: [product_id], references: [product_id])
   productsBought ProductsBought @relation( "ProductsBoughtItemsToProductsBought",fields: [products_bought_id], references: [products_bought_id])
   product_quantity Int
+}
+model Delivery{
+id String @id @default(uuid())
+city String
+street String
+houseNumber Int
+postcode String
+phoneNumber Int
+email String
+status String
+productsBought_id String @unique
+productsBought ProductsBought @relation(fields: [productsBought_id], references: [products_bought_id])
+supplier_id String @unique
+supplier Suppliers @relation(fields: [supplier_id], references: [id])
+
+}
+model Suppliers {
+id String @id @default(uuid())
+name String
+delivery_price Float
+image String
+deliveries Delivery[]
 }
 
 model Message {

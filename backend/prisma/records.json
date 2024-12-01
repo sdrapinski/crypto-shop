@@ -41,6 +41,27 @@
     {
       "product_category_name": "Houses"
     }
+  ],"suppliers": [
+    {
+      "name": "InPost",
+      "delivery_price" : 2.0,
+      "image":"https://www.kurjerzy.pl/blog/wp-content/uploads/2020/11/blog_892.jpg"
+    },
+    {
+      "name": "DHL",
+      "delivery_price" : 5.0,
+       "image":"https://jakimkurierem.pl/logo_kuriera/dhl_logo.svg"
+    },
+    {
+      "name": "Courier",
+      "delivery_price" : 3.0,
+       "image":"https://us.123rf.com/450wm/pxlprostudio/pxlprostudio1905/pxlprostudio190500365/122523251-ikona-zwi%C4%85zana-z-dostaw%C4%85-na-tle-grafiki-i-projektowania-stron-internetowych-prosty-znak-wektorowy.jpg?ver=6"
+    },
+    {
+      "name": "DPD",
+      "delivery_price" : 5.5,
+       "image":"https://www.sote.pl/media/products/41f921bce3362f5e9c40d50d42c217ec/images/thumbnail/large_product.webp?lm=1681987962"
+    }
   ],
   "users": [
     {

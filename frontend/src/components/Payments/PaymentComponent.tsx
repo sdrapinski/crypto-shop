@@ -128,7 +128,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       </div>
       {paymentError && <div style={{ color: 'red', marginTop: '10px' }}>{paymentError}</div>}
       <button type="submit" disabled={isProcessing}>
-        {isProcessing ? 'Processing...' : `Pay $${amount}`}
+        {isProcessing ? 'Processing...' : `Pay with Stripe`}
       </button>
     </form>
   );

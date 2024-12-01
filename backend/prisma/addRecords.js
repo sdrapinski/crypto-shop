@@ -10,6 +10,11 @@ async function addRecords() {
       data: cat,
     });
   }
+  for (const supplier of records.suppliers) {
+    const newSupplier = await prisma.suppliers.create({
+      data: supplier,
+    })
+  }
 
 
 
