@@ -60,60 +60,64 @@ const EditProduct = () => {
   }
 
   return (
-    <div>
-      <h3>Edit Product</h3>
-      <form
-        onSubmit={handleEdit}
-        style={{ display: "flex", flexDirection: "column", maxWidth: "800px" }}
-      >
-        <label>Product Name:</label>
-        <input
-          type="text"
-          value={product.product_name}
-          onChange={(e) =>
-            setProduct((prevProduct) => ({
-              ...prevProduct!,
-              product_name: e.target.value,
-            }))
-          }
-        />
+    <div className={"container d-flex justify-content-center align-items-center mt-4"}>
+        <div className={"card card-body"}>
+            <h3>Edit Product</h3>
+            <form
+                onSubmit={handleEdit}
+                style={{display: "flex", flexDirection: "column", maxWidth: "800px"}}
+            >
+                <label className={"fw-bold my-1"}>Product Name:</label>
+                <input className={"form-control form-control-sm"}
+                    type="text"
+                    value={product.product_name}
+                    onChange={(e) =>
+                        setProduct((prevProduct) => ({
+                            ...prevProduct!,
+                            product_name: e.target.value,
+                        }))
+                    }
+                />
 
-        <label>Product Description:</label>
-        <textarea
-          value={product.product_description}
-          onChange={(e) =>
-            setProduct((prevProduct) => ({
-              ...prevProduct!,
-              product_description: e.target.value,
-            }))
-          }
-        />
+                <label className={"fw-bold my-1"}>Product Description:</label>
+                <textarea className={"form-control form-control-sm"}
+                    value={product.product_description}
+                    onChange={(e) =>
+                        setProduct((prevProduct) => ({
+                            ...prevProduct!,
+                            product_description: e.target.value,
+                        }))
+                    }
+                />
 
-        <label>Product Quantity:</label>
-        <input
-          type="number"
-          value={product.product_quantity}
-          onChange={(e) =>
-            setProduct((prevProduct) => ({
-              ...prevProduct!,
-              product_quantity: parseInt(e.target.value),
-            }))
-          }
-        />
-        <label>Product Price:</label>
-        <input
-          type="number"
-          value={product.product_dollar_price}
-          onChange={(e) =>
-            setProduct((prevProduct) => ({
-              ...prevProduct!,
-              product_dollar_price: parseFloat(e.target.value),
-            }))
-          }
-        />
+                <label className={"fw-bold my-1"}>Product Quantity:</label>
+                <input className={"form-control form-control-sm"}
+                    type="number"
+                    value={product.product_quantity}
+                    onChange={(e) =>
+                        setProduct((prevProduct) => ({
+                            ...prevProduct!,
+                            product_quantity: parseInt(e.target.value),
+                        }))
+                    }
+                />
+                <label className={"fw-bold my-1"}>Product Price:</label>
+                <input className={"form-control form-control-sm"}
+                    type="number"
+                    value={product.product_dollar_price}
+                    onChange={(e) =>
+                        setProduct((prevProduct) => ({
+                            ...prevProduct!,
+                            product_dollar_price: parseFloat(e.target.value),
+                        }))
+                    }
+                />
 
-        <button type="submit">Save Changes</button>
-      </form>
+                <div>
+                    <button className={"btn btn-primary mt-2"} type="submit">Save Changes</button>
+                </div>
+            </form>
+        </div>
     </div>
   );
 };

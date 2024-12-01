@@ -57,35 +57,39 @@ const UserProducts = () => {
 
   return (
     <div className="tab-pane fade show active" id="userProduct-content">
-      <ul>
+      <div className={""}>
         {products.map((prod) => (
-          <li key={prod.product_id}>
-            {prod.product_name}{" "}
-            <button>
-              {" "}
-              <NavLink to={`editProduct/${prod.product_id}`}>
-                {" "}
-                Edit Product{" "}
-              </NavLink>{" "}
-            </button>{" "}
-            <button
-              onClick={() => {
-                setselectedProduct(prod);
-                setModalShow(true);
-              }}
-            >
-              Delete Product
-            </button>{" "}
-          </li>
+            <div className={"card card-body my-2"}>
+              <div className={"row col-12 my-1"} key={prod.product_id}>
+                <div className={"col-4 fw-bold d-flex justify-content-start align-items-center"}>
+                  {prod.product_name}{" "}
+                </div>
+                <div className={"col-8 d-flex justify-content-end align-items-center"}>
+                  <NavLink className={"btn btn-primary me-1"} to={`editProduct/${prod.product_id}`}>
+                    {" "}
+                    Edit Product{" "}
+                  </NavLink>{" "}
+                  <button className={"btn btn-danger"}
+                          onClick={() => {
+                            setselectedProduct(prod);
+                            setModalShow(true);
+                          }}
+                  >
+                    Delete Product
+                  </button>
+                  {" "}
+                </div>
+              </div>
+            </div>
         ))}
-      </ul>
+      </div>
       {selectedProduct ? (
-        <DeleteProductModal
-          callback={() => handleDeleteProduct(selectedProduct.product_id)}
-          product={selectedProduct}
-          show={modalShow}
-          onHide={() => setModalShow(false)}
-        />
+          <DeleteProductModal
+              callback={() => handleDeleteProduct(selectedProduct.product_id)}
+              product={selectedProduct}
+              show={modalShow}
+              onHide={() => setModalShow(false)}
+          />
       ) : null}
     </div>
   );
