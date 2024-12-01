@@ -23,7 +23,38 @@
       "city": "Tokyo",
       "street": "kiriko 12",
       "postCode":"11-221"
+    },
+    {
+      "country": "Poland",
+      "city": "Krakow",
+      "street": "Florianska 15",
+      "postCode": "31-021"
+    },
+    {
+      "country": "Poland",
+      "city": "Gdansk",
+      "street": "Długa 5",
+      "postCode": "80-831"
+    },
+    {
+      "country": "USA",
+      "city": "New York",
+      "street": "5th Avenue 101",
+      "postCode": "10-001"
+    },
+    {
+      "country": "Germany",
+      "city": "Berlin",
+      "street": "Unter den Linden 25",
+      "postCode": "10-117"
+    },
+    {
+      "country": "France",
+      "city": "Paris",
+      "street": "Champs-Élysées 30",
+      "postCode": "75-008"
     }
+    
   ],
   "products_category": [
     {
@@ -40,8 +71,24 @@
     },
     {
       "product_category_name": "Houses"
+    },
+    {
+      "product_category_name": "Clothes"
+    },
+    {
+      "product_category_name": "Hobby"
+    },
+    {
+      "product_category_name": "Furniture"
+    },
+    {
+      "product_category_name": "Electronics"
+    },
+    {
+      "product_category_name": "Other"
     }
-  ],"suppliers": [
+  ],
+  "suppliers": [
     {
       "name": "InPost",
       "delivery_price" : 2.0,
@@ -55,7 +102,7 @@
     {
       "name": "Courier",
       "delivery_price" : 3.0,
-       "image":"https://us.123rf.com/450wm/pxlprostudio/pxlprostudio1905/pxlprostudio190500365/122523251-ikona-zwi%C4%85zana-z-dostaw%C4%85-na-tle-grafiki-i-projektowania-stron-internetowych-prosty-znak-wektorowy.jpg?ver=6"
+       "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMXlQK9egHJ0sb-KGZNRQU4zXFGTCU3d5Jbw&s"
     },
     {
       "name": "DPD",
@@ -65,6 +112,7 @@
   ],
   "users": [
     {
+      "user_id":"30bab94a-897d-4e79-8cf4-d5a80550720b",
       "user_name": "John",
       "user_surname": "Doe",
       "user_email": "johndoe@example.com",
@@ -76,6 +124,7 @@
       "user_premium_tokens": 10.5
     },
     {
+      "user_id":"94d32062-dc87-4820-9276-31a5634123f3",
       "user_name": "Janus",
       "user_surname": "Bisne'sau",
       "user_email": "JBiz@example.com",
@@ -87,6 +136,7 @@
       "user_premium_tokens": 0
     },
     {
+      "user_id":"ac828c5e-97c2-4c4d-b286-7a6c182e5fe0",
       "user_name": "Adam",
       "user_surname": "Wielki",
       "user_email": "Adam@example.com",
@@ -107,8 +157,82 @@
       "user_password": "Pawelhaslo",
       "user_avatar_url": "https://xsgames.co/randomusers/assets/avatars/male/67.jpg",
       "user_premium_tokens": 100
+    },
+    {
+      "user_name": "Anna",
+      "user_surname": "Kowalska",
+      "user_email": "anna.kowalska@example.com",
+      "user_date_of_birth": "1990-03-15T00:00:00.000Z",
+      "user_phone_number": "601234567",
+      "user_login": "AnnaK90",
+      "user_password": "AnnaPass2023!",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": null
+  },
+  {
+      "user_name": "Carlos",
+      "user_surname": "Gomez",
+      "user_email": "carlos.gomez@example.com",
+      "user_date_of_birth": "1985-09-20T00:00:00.000Z",
+      "user_phone_number": "602345678",
+      "user_login": "Carlos85",
+      "user_password": "CarlosSecure!85",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": 10
+  },
+  {
+      "user_name": "Ewa",
+      "user_surname": "Wiśniewska",
+      "user_email": "ewa.wisniewska@example.com",
+      "user_date_of_birth": "1994-11-30T00:00:00.000Z",
+      "user_phone_number": "603456789",
+      "user_login": "EwaW94",
+      "user_password": "EwaWis!123",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": null
+  },
+  {
+      "user_name": "Tomasz",
+      "user_surname": "Johnson",
+      "user_email": "tomasz.johnson@example.com",
+      "user_date_of_birth": "1991-06-10T00:00:00.000Z",
+      "user_phone_number": "604567890",
+      "user_login": "Tomek91",
+      "user_password": "TomekSecure2024",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": 15
+  },
+  {
+      "user_name": "Sophia",
+      "user_surname": "Martinez",
+      "user_email": "sophia.martinez@example.com",
+      "user_date_of_birth": "1997-08-25T00:00:00.000Z",
+      "user_phone_number": "605678901",
+      "user_login": "SophiaM97",
+      "user_password": "Sophia2023",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": null
+  }
+  ],
+
+  "wallets":[
+    {
+      "wallet_address":"0x2a5A88Fae80C19e719FE12F1bff47389BC201F91",
+      "wallet_status":"Active",
+      "user_id":"30bab94a-897d-4e79-8cf4-d5a80550720b"
+    },
+    {
+      "wallet_address":"0x7c0f1aA2EcB646342e8695Aa538E18BCA49371bE",
+      "wallet_status":"Active",
+      "user_id":"94d32062-dc87-4820-9276-31a5634123f3"
+    },
+    {
+      "wallet_address":"0x1320C7DA6d7DF8539dB3BC0204433551C96e8857",
+      "wallet_status":"Active",
+      "user_id":"ac828c5e-97c2-4c4d-b286-7a6c182e5fe0"
     }
   ],
+
   "products": [
     {
       "product_name": "Opony",
@@ -137,7 +261,7 @@
     {
       "product_name": "Motocykl",
       "products_category_id": 4,
-      "product_description": "ulepszone wersje zwykłych mo-tocykli. Większość to modele półleżące, któ-rych plastikowa obudowa zamyka się nad kierowcą. Około połowa modeli zasilana jest elektrycznie – poruszają się one z maksymalną prędkością 100 km/h i mogą jechać około 8 godz. jazdy/naładowanie. Motocykle zasilane CHOOH2 rozwijają prędkości do 220 km/h i mają zbiornik osiemnastolitrowy.",
+      "product_description": "ulepszone wersje zwykłych mo-tocykli. Większość to modele półleżące, któ-rych plastikowa obudowa zamyka się nad kierowcą. Około połowa modeli zasilana jest elektrycznie poruszają się one z maksymalną prędkością 100 km/h i mogą jechać około 8 godz. jazdy/naładowanie. Motocykle zasilane CHOOH2 rozwijają prędkości do 220 km/h i mają zbiornik osiemnastolitrowy.",
       "product_images": {},
       "product_dollar_price": 750,
       "product_quantity": 1,
@@ -350,20 +474,114 @@
       "product_used": true,
       "product_promotion": null,
       "product_crypto":false
-    }
-  ],
-  "crypto": [
-    {
-      "crypto_name": "Bitcoin",
-      "crypto_usd_price": 26930.7
-    },
-    {
-      "crypto_name": "Ethereum",
-      "crypto_usd_price": 1800.95
-    },
-    {
-      "crypto_name": "Cardano",
-      "crypto_usd_price": 0.37
-    }
+    },{
+      "product_name": "Luxury Villa",
+      "products_category_id": 5,
+      "product_description": "A sprawling villa located in a serene neighborhood. Perfect for families seeking peace and comfort.",
+      "product_images": {},
+      "product_dollar_price": 22500,
+      "product_quantity": 1,
+      "product_popularity": 8,
+      "product_used": false,
+      "product_promotion": "2024-12-15T14:30:00.000Z",
+      "product_crypto": true
+  },
+  {
+      "product_name": "Organic Honey",
+      "products_category_id": 2,
+      "product_description": "Pure organic honey sourced directly from local beekeepers.",
+      "product_images": {},
+      "product_dollar_price": 6,
+      "product_quantity": 50,
+      "product_popularity": 9,
+      "product_used": false,
+      "product_promotion": "2025-01-10T08:45:00.000Z",
+      "product_crypto": false
+  },
+  {
+      "product_name": "Electric Guitar",
+      "products_category_id": 7,
+      "product_description": "A high-quality electric guitar ideal for both beginners and professionals.",
+      "product_images": {},
+      "product_dollar_price": 150,
+      "product_quantity": 10,
+      "product_popularity": 7,
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto": true
+  },
+  {
+      "product_name": "Men's Leather Jacket",
+      "products_category_id": 6,
+      "product_description": "Stylish leather jacket made from 100% genuine leather.",
+      "product_images": {},
+      "product_dollar_price": 45,
+      "product_quantity": 20,
+      "product_popularity": 6,
+      "product_used": false,
+      "product_promotion": "2025-03-20T12:00:00.000Z",
+      "product_crypto": false
+  },
+  {
+      "product_name": "Gaming Laptop",
+      "products_category_id": 9,
+      "product_description": "High-performance gaming laptop with the latest GPU and high refresh-rate display.",
+      "product_images": {},
+      "product_dollar_price": 36,
+      "product_quantity": 15,
+      "product_popularity": 10,
+      "product_used": false,
+      "product_promotion": null,
+      "product_crypto": true
+  },
+  {
+      "product_name": "Modern Dining Table",
+      "products_category_id": 8,
+      "product_description": "Elegant dining table made from premium oak wood.",
+      "product_images": {},
+      "product_dollar_price": 24,
+      "product_quantity": 5,
+      "product_popularity": 7,
+      "product_used": false,
+      "product_promotion": "2024-11-30T10:15:00.000Z",
+      "product_crypto": false
+  },
+  {
+      "product_name": "Adventure Novel - Hard Cover",
+      "products_category_id": 1,
+      "product_description": "A thrilling adventure novel that keeps you on the edge of your seat.",
+      "product_images": {},
+      "product_dollar_price": 7.5,
+      "product_quantity": 100,
+      "product_popularity": 9,
+      "product_used": false,
+      "product_promotion": null,
+      "product_crypto": false
+  },
+  {
+      "product_name": "Electric Skateboard",
+      "products_category_id": 3,
+      "product_description": "Cruise around the city with this eco-friendly electric skateboard.",
+      "product_images": {},
+      "product_dollar_price": 12,
+      "product_quantity": 10,
+      "product_popularity": 8,
+      "product_used": true,
+      "product_promotion": "2025-05-01T18:00:00.000Z",
+      "product_crypto": true
+  },
+  {
+      "product_name": "Vintage Car",
+      "products_category_id": 4,
+      "product_description": "A classic car in excellent condition. Perfect for collectors.",
+      "product_images": {},
+      "product_dollar_price": 1050,
+      "product_quantity": 2,
+      "product_popularity": 10,
+      "product_used": true,
+      "product_promotion": "2025-06-15T09:30:00.000Z",
+      "product_crypto": true
+  }
   ]
+  
 }
