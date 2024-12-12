@@ -13,6 +13,7 @@ export interface CartItem {
 export interface Product {
   product_name: string;
   product_dollar_price: number;
+  product_images: string;
   user:User
 }
 

@@ -162,7 +162,7 @@ const UserWallets = () => {
               <span>Your saved Wallets </span>
             </Row>
             {userWallets.map((wallet) => (
-              <Row>
+              <Row key={wallet.wallet_id}>
                 <div className={"card card-body row"}>
                   <div className={"row col-12"}>
                     <span

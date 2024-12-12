@@ -3,7 +3,7 @@ export interface mainPageProductsInterface {
   product_description: string;
   product_dollar_price: number;
   product_id: string;
-  product_images: {};
+  product_images: string;
   product_name: string;
   product_popularity: number;
   product_promotion: Date | null;
@@ -16,6 +16,7 @@ export interface mainPageProductsInterface {
   product_used: Boolean;
   products_category_id: number;
   user_id: string;
+  product_crypto:boolean
 }
 
 export interface ProductsArrayInterface {

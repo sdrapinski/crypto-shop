@@ -48,7 +48,7 @@ const ProductDetails = () => {
           <div className="product-name">{product.product_name}</div>
           <div className="product-image">
             <img
-              src="https://via.placeholder.com/700x500"
+              src={product.product_images}
               alt={product.product_name}
             />
           </div>

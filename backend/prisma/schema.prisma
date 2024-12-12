@@ -25,6 +25,7 @@ model Region {
 model Products_category{
   product_category_id Int @id @default(autoincrement())
   product_category_name String
+  product_category_image String? @db.VarChar(1000)
   products Products[]
 }
 
@@ -61,7 +62,7 @@ model Products {
   products_category Products_category @relation(fields: [products_category_id], references: [product_category_id])
   product_name         String
   product_description  String? @db.VarChar(1000)
-  product_images        Json
+  product_images        String @db.Text
   product_dollar_price Float
   product_quantity Int
   cartToItem_id CartToItem[]
@@ -109,10 +110,10 @@ model ProductsBought{
   seller_id String 
   seller Users @relation("seller",fields: [seller_id], references: [user_id])
   products_bought_items ProductsBoughtItems[] @relation("ProductsBoughtItemsToProductsBought")
-  notification_id String
+  notification_id String?
   notification Notifications? @relation("Notification_ProductsBought_fk")
   sale_time DateTime
-  delivery_id String
+  delivery_id String?
   delivery Delivery?
   
 }
@@ -131,12 +132,12 @@ city String
 street String
 houseNumber Int
 postcode String
-phoneNumber Int
+phoneNumber String
 email String
 status String
 productsBought_id String @unique
 productsBought ProductsBought @relation(fields: [productsBought_id], references: [products_bought_id])
-supplier_id String @unique
+supplier_id String 
 supplier Suppliers @relation(fields: [supplier_id], references: [id])
 
 }

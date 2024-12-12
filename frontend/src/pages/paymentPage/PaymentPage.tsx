@@ -6,6 +6,9 @@ import { CurrentCryptoPriceInterface } from '../../interfaces/CurrentCryptoPrice
 import PaymentComponent from '../../components/Payments/PaymentComponent';
 import PayWithEthComponent from '../../components/Payments/PayWithEthComponent';
 import DeliveryComponent from '../../components/Delivery/DeliveryComponent';
+import useAxios from '../../hooks/useAxios';
+
+
 
 enum PaymentOption {
   Null = 'Null',
@@ -13,26 +16,14 @@ enum PaymentOption {
   Eth = 'ETH',
 }
 
-enum DeliveryOptionName {
-  InPost = 'InPost',
-  DPD = 'DPD',
-  DHL = 'DHL',
-  Courier = 'Courier',
-}
-
-interface DeliveryOption {
-  name :DeliveryOptionName
-  value:string
+interface DeliveryOptionInterface {
+  delivery_price:number
   image:string
-  cost:number
+  id:string
+  name:string
 }
 
-const deliveryOptions: DeliveryOption[]= [
-  { name: DeliveryOptionName.InPost, value: "inpost", image: "https://www.kurjerzy.pl/blog/wp-content/uploads/2020/11/blog_892.jpg",cost:2 },
-  { name: DeliveryOptionName.DPD, value: "dpd", image: "https://www.sote.pl/media/products/41f921bce3362f5e9c40d50d42c217ec/images/thumbnail/large_product.webp?lm=1681987962",cost:4 },
-  { name: DeliveryOptionName.DHL, value: "dhl", image: "https://jakimkurierem.pl/logo_kuriera/dhl_logo.svg",cost:5 },
-  { name: DeliveryOptionName.Courier, value: "courier", image: "https://us.123rf.com/450wm/pxlprostudio/pxlprostudio1905/pxlprostudio190500365/122523251-ikona-zwi%C4%85zana-z-dostaw%C4%85-na-tle-grafiki-i-projektowania-stron-internetowych-prosty-znak-wektorowy.jpg?ver=6",cost:6 },
-];
+
 
 const PaymentPage = () => {
   const [ethereum, setEthereum] = useState<CurrentCryptoPriceInterface | null>(null);
@@ -43,35 +34,63 @@ const PaymentPage = () => {
     phoneNumber: '',
     email: '',
   });
-  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState<DeliveryOption>(deliveryOptions[0]);
+  const [selectedDeliveryOption, setSelectedDeliveryOption] = useState<DeliveryOptionInterface | null>();
+  const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOptionInterface[] | []>([]);
   const [isPaymentVisible, setIsPaymentVisible] = useState<PaymentOption>(PaymentOption.Null);
 
-  const api = useAxiosCrypto();
+  const apiCrypto = useAxiosCrypto();
   const appContext = useContext(AppContext);
+  const api = useAxios(appContext!);
   const { user, cart } = appContext!;
   const navigate = useNavigate();
   const gatename = 'WK';
 
   const productSuccessfullyBoughtFunction = async () => {
+   
     api
       .post(`/postPayment/createTransaction`, {
         buyerId:user?.user_id,
         cartItems:cart.cartItems,
+        cart_id:cart.cart_id,
         deliveryData,
         deliveryOption:selectedDeliveryOption,
         notificationContent:"you bought an item"
       }
         
       ).then((response)=>{
-        console.log(response.data)
+       
+        if(response.status ===200){
+          if(user?.user_id){
+            appContext?.getCart(user?.user_id)
+          }
+          navigate('/paymentSummary')
+          
+        }
+        
       })
       .catch((err)=>{
         console.error(err)
       })
   };
 
+
   useEffect(() => {
-    api.get<CurrentCryptoPriceInterface>(`/coins/ethereum`).then((resp) => {
+    
+    api.get<DeliveryOptionInterface[]>("/postPayment/getSuppliers").then((resp)=>{
+      console.log(resp.data);
+      
+      setDeliveryOptions(resp.data)
+      
+
+    }).catch((err)=>{
+      console.error(err)
+    })
+    
+  }, [])
+  
+
+  useEffect(() => {
+    apiCrypto.get<CurrentCryptoPriceInterface>(`/coins/ethereum`).then((resp) => {
       setEthereum(resp.data);
     });
     if (user) {
@@ -90,7 +109,7 @@ const PaymentPage = () => {
     setDeliveryData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleDeliveryOptionChange = (option: DeliveryOption) => {
+  const handleDeliveryOptionChange = (option: DeliveryOptionInterface) => {
     setSelectedDeliveryOption(option);
   };
 
@@ -118,12 +137,12 @@ const PaymentPage = () => {
         <div className="section">
           <div className="section__title">Shipping Methods</div>
           <div className="payment-options">
-            {Object.values(deliveryOptions).map((option) => (
+            {deliveryOptions.map((option) => (
               <div
                 key={option.name}
-                onClick={() => handleDeliveryOptionChange(option as DeliveryOption)}
+                onClick={() => handleDeliveryOptionChange(option as DeliveryOptionInterface)}
                 className={
-                  selectedDeliveryOption.value === option.value
+                  selectedDeliveryOption?.name === option.name
                     ? 'payment--visible custom-checkbox__image payment-option__item'
                     : 'custom-checkbox__image payment-option__item'
                 }
@@ -176,20 +195,25 @@ const PaymentPage = () => {
               <>Products ETH value: {totalPriceETH.toFixed(6)} ETH</>
             )}
           </div>
-          {isPaymentVisible === PaymentOption.Stripe ? (
-            <PaymentComponent
-              amount={totalPriceUSD}
-              gate={gatename}
-              productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}
-            />
-          ) : ethereum ? (
-            <PayWithEthComponent
-              ethPrice={ethereum}
-              productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}
-            />
-          ) : (
-            <div>Something went wrong</div>
-          )}
+          {
+            selectedDeliveryOption ? (
+               isPaymentVisible === PaymentOption.Stripe ? (
+              <PaymentComponent
+                amount={totalPriceUSD}
+                gate={gatename}
+                productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}
+              />
+            ) : ethereum && isPaymentVisible === PaymentOption.Eth ? (
+              <PayWithEthComponent
+                ethPrice={ethereum}
+                productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}
+              />
+            ) : (
+              <div>Select Payment option</div>
+            )
+          ):<div>Choose payment and delivery options </div>
+          }
+          
         </div>
       </div>
     </div>

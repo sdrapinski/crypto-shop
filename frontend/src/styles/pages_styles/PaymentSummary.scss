@@ -1,0 +1,53 @@
+.payment-summary-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    color: #2d2d2d;
+    animation: fadeIn 1s ease-in-out;
+  }
+  
+  .payment-success-title {
+    color: #4CAF50;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    animation: pulse 2s infinite;
+  }
+  
+  .payment-success-message {
+    font-size: 1.2rem;
+    color: #555;
+    animation: slideUp 1.5s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      transform: scale(1);
+    }
+    50% {
+      transform: scale(1.1);
+    }
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(20px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }

@@ -1,7 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const PostPayment = require("../scripts/postPayment.js");
+const shopping_cart = require("../scripts/shopping-cart.js");
 const postPayment = new PostPayment();
+const cart = new shopping_cart();
 
 // Endpoint obsługujący tworzenie transakcji
 
@@ -12,7 +14,7 @@ router.route("/getSuppliers").get((req, res) => {
 });
 
 router.post("/createTransaction", async (req, res) => {
-  const { buyerId, cartItems, deliveryData, deliveryOption,notificationContent } = req.body;
+  const { buyerId, cartItems, deliveryData, deliveryOption,notificationContent,cart_id } = req.body;
 
   try {
     // Wywołanie funkcji do tworzenia transakcji
@@ -23,6 +25,8 @@ router.post("/createTransaction", async (req, res) => {
       deliveryOption,
       notificationContent,
     });
+
+     await cart.clearCart(cart_id)
 
     res.status(200).json({
       message: "Transaction created successfully",

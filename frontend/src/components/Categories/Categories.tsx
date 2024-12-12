@@ -4,12 +4,11 @@ import { NavLink } from "react-router-dom";
 import { CategoriesInterface } from "../../interfaces/categories.interface";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
-const categoriesInit = {
-  data: [{ product_category_id: 0, product_category_name: "" }],
-};
+const categoriesInit = [{ product_category_id: 0, product_category_name: "",product_category_image:""  }]
+
 const Categories = () => {
   const [categories, setcategories] =
-    useState<CategoriesInterface>(categoriesInit);
+    useState<CategoriesInterface[]>(categoriesInit);
 
   useEffect(() => {
     axios
@@ -20,14 +19,16 @@ const Categories = () => {
         },
       })
       .then((resp) => {
-        setcategories(resp);
+        console.log(resp.data);
+        
+        setcategories(resp.data);
       });
 
     return () => {};
   }, []);
   return (
     <div className="category-grid">
-      {categories.data.map((category, index) => (
+      {categories.map((category, index) => (
         <NavLink
           key={index}
           to={`/products/category/${category.product_category_id}`}
@@ -35,7 +36,7 @@ const Categories = () => {
           <div className="category-item">
             <div className="category-image">
               <img
-                src="https://via.placeholder.com/150"
+                src={category.product_category_image as string}
                 alt={category.product_category_name}
               />
             </div>

@@ -96,7 +96,6 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       if (error) {
         setPaymentError(error.message || 'Payment failed. Please try again.');
       } else if (paymentIntent?.status === 'succeeded') {
-        alert('Payment succeeded!');
         switch(gate){
             case "WK": // to jest to co nas obchodzi
             if(productSuccessfullyBoughtFunction){

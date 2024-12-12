@@ -77,24 +77,13 @@ class Offers {
   }
 
   async overwrite_Offer(
-    Productinfo
+    product_id, ProductData
   ) {
     const product = await this.#prisma.products.update({
       where: {
         product_id: product_id,
       },
-      data:{
-        products_category_id:Productinfo.products_category_id,
-        product_name:Productinfo.product_name,
-        product_description:Productinfo.product_description,
-        product_images:Productinfo.photo_id,
-        product_dollar_price:Productinfo.product_cost_cash,
-        product_crypto_prices:Productinfo.product_cost_crypto,
-        product_quantity:Productinfo.product_quantity,
-        product_promotion:Productinfo.promoted_for,
-        product_used:Productinfo.product_used,
-        product_crypto:Productinfo.crypto,
-      },
+      data: ProductData
     });
     return product;
   }
@@ -133,7 +122,7 @@ class Offers {
   }
 
   async offersinCategory(CategoryId) {
-    console.log(CategoryId);
+    
     
     const products = await this.#prisma.products.findMany({
       take: 20,
@@ -153,7 +142,7 @@ class Offers {
   }
 
   async getProductByID(id) {
-    console.log(id);
+    
     const product = await this.#prisma.products.findFirst({
       where: {
         product_id: id,
@@ -250,7 +239,7 @@ class Offers {
     if (Productinfo.category  && !isNaN(Number(Productinfo.category))) {
       where.products_category_id = Number(Productinfo.category);
     }
-    console.log(where);
+   
     const products = await this.#prisma.products.findMany({
       where,
     });

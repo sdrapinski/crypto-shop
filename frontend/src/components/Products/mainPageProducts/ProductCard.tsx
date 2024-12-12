@@ -26,7 +26,7 @@ const ProductCard: React.FC<CardProps> = (props) => {
       >
         <div
           className="productCard__background"
-          style={{ backgroundImage: "url(https://picsum.photos/230/300)" }}
+          style={{ backgroundImage: `url(${product.product_images})`}}
         >
           <div className="productCard__content">
             <h4 className="productCard__heading">{product.product_name}</h4>

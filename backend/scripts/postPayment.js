@@ -17,7 +17,7 @@ class PostPayment {
       return await this.#prisma.$transaction(async (prisma) => {
         // Grupowanie produktów według sprzedawcy
         const productsBySeller = cartItems.reduce((acc, item) => {
-          const sellerId = item.seller_id;
+          const sellerId = item.product.user.user_id;
           if (!acc[sellerId]) {
             acc[sellerId] = [];
           }
@@ -30,7 +30,7 @@ class PostPayment {
         // Iteracja przez każdego sprzedawcę i tworzenie `ProductsBought`
         for (const [sellerId, items] of Object.entries(productsBySeller)) {
           // Tworzenie rekordu `ProductsBought`
-          const productsBought = await this.#prisma.productsBought.create({
+          const productsBought = await prisma.productsBought.create({
             data: {
               buyer_id: buyerId,
               seller_id: sellerId,
@@ -41,7 +41,7 @@ class PostPayment {
           // Tworzenie rekordów `ProductsBoughtItems` dla sprzedawcy
           const productBoughtItems = await Promise.all(
             items.map((item) =>
-              this.#prisma.productsBoughtItems.create({
+              prisma.productsBoughtItems.create({
                 data: {
                   products_bought_id: productsBought.products_bought_id,
                   product_id: item.product_id,
@@ -56,13 +56,13 @@ class PostPayment {
             data: {
               city: deliveryData.city,
               street: deliveryData.street,
-              houseNumber: deliveryData.houseNumber,
+              houseNumber: deliveryData.houseNumber || 2,
               postcode: deliveryData.postcode,
               phoneNumber: deliveryData.phoneNumber,
               email: deliveryData.email,
               status: "Pending",
               productsBought_id: productsBought.products_bought_id,
-              supplier_id: deliveryData.supplierId,
+              supplier_id: deliveryOption.id,
             },
           });
   
@@ -73,9 +73,18 @@ class PostPayment {
               content: notificationContent,
             },
           });
+          const updatedProductsBought = await prisma.productsBought.update({
+            where: {
+              products_bought_id: productsBought.products_bought_id,
+            },
+            data: {
+              notification_id: notification.notification_id,
+              delivery_id: delivery.id,
+            },
+          });
   
           transactions.push({
-            productsBought,
+            productsBought: updatedProductsBought,
             productBoughtItems,
             delivery,
             notification,
