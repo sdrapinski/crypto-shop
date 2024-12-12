@@ -11,7 +11,7 @@ import UserCartPaymentAction from "./UserCartPaymentAction";
 const UserCart = () => {
   const appContext = useContext(AppContext);
   const [userCart, setuserCart] = useState(appContext?.cart)
- 
+  console.log(appContext?.cart)
   
   
 
@@ -47,7 +47,7 @@ const UserCart = () => {
           return (
             <div className="userCart__item" key={productId}>
             <img
-                src="https://via.placeholder.com/150"
+                src={product?.product_images}
                 alt={product?.product_name}
               />
               <span className="userCart__product-name">{product?.product_name}</span>{" "}

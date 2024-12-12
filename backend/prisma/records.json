@@ -58,34 +58,44 @@
   ],
   "products_category": [
     {
-      "product_category_name": "Books"
+      "product_category_name": "Books",
+      "procuct_category_image":"https://media.istockphoto.com/id/1313502372/vector/book-icon-open-pages-education-symbol-book-black-silhouette.jpg?s=612x612&w=0&k=20&c=0occ552bX8hSKR9h2upiaEwlNnlpufs2trCqk0j-RXc="
     },
     {
-      "product_category_name": "Food"
+      "product_category_name": "Food",
+      "procuct_category_image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRh91yGxMw3C68_NtO-cD6dFWQ05P73Vm7udA&s"
     },
     {
-      "product_category_name": "Skates"
+      "product_category_name": "Skates",
+      "procuct_category_image":"https://cdn.icon-icons.com/icons2/1364/PNG/512/rollerskater_89248.png"
     },
     {
-      "product_category_name": "Cars"
+      "product_category_name": "Cars",
+      "procuct_category_image":"https://www.iconpacks.net/icons/2/free-car-icon-2897-thumb.png"
     },
     {
-      "product_category_name": "Houses"
+      "product_category_name": "Houses",
+      "procuct_category_image":"https://static.vecteezy.com/system/resources/thumbnails/000/423/572/small/Multimedia__28114_29.jpg"
     },
     {
-      "product_category_name": "Clothes"
+      "product_category_name": "Clothes",
+      "procuct_category_image":"https://static.thenounproject.com/png/113903-200.png"
     },
     {
-      "product_category_name": "Hobby"
+      "product_category_name": "Hobby",
+      "procuct_category_image":"https://static.thenounproject.com/png/3683675-200.png"
     },
     {
-      "product_category_name": "Furniture"
+      "product_category_name": "Furniture",
+      "procuct_category_image":"https://as2.ftcdn.net/v2/jpg/02/19/96/69/1000_F_219966996_WgdHnDsAHPCnevj4p2pgtdUktTO11YhN.jpg"
     },
     {
-      "product_category_name": "Electronics"
+      "product_category_name": "Electronics",
+      "procuct_category_image":"https://www.veryicon.com/download/png/transport/industry/electronics-industry?s=256"
     },
     {
-      "product_category_name": "Other"
+      "product_category_name": "Other",
+      "procuct_category_image":"https://cdn-icons-png.flaticon.com/512/5895/5895032.png"
     }
   ],
   "suppliers": [

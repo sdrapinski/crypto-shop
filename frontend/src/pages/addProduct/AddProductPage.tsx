@@ -21,7 +21,7 @@ interface ProductInfoInterface {
 }
 
 const categoriesInit = {
-  data: [{ product_category_id: 0, product_category_name: "" }],
+  data: [{ product_category_id: 0, product_category_name: "", procuct_category_image:"" }],
 };
 
 const AddProductPage = () => {

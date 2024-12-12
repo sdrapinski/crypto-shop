@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './PaymentSummary.scss';
 
 const PaymentSummary = () => {
   const navigate = useNavigate();
@@ -8,7 +7,7 @@ const PaymentSummary = () => {
   useEffect(() => {
     // Po 4 sekundach przekierowuje na stronę główną
     const timer = setTimeout(() => {
-      navigate('/');
+      navigate('/Homepage');
     }, 4000);
 
     // Czyszczenie timeoutu przy odmontowaniu komponentu

@@ -5,7 +5,7 @@ import { CategoriesInterface } from "../../interfaces/categories.interface";
 
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 const categoriesInit = {
-  data: [{ product_category_id: 0, product_category_name: "" }],
+  data: [{ product_category_id: 0, product_category_name: "",procuct_category_image:"" }],
 };
 const Categories = () => {
   const [categories, setcategories] =
@@ -35,7 +35,7 @@ const Categories = () => {
           <div className="category-item">
             <div className="category-image">
               <img
-                src="https://via.placeholder.com/150"
+                src={category.procuct_category_image}
                 alt={category.product_category_name}
               />
             </div>

@@ -25,6 +25,7 @@ model Region {
 model Products_category{
   product_category_id Int @id @default(autoincrement())
   product_category_name String
+  procuct_category_image String? @db.VarChar(1000)
   products Products[]
 }
 

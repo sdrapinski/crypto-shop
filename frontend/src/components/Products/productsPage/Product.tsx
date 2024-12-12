@@ -27,7 +27,7 @@ const Product: React.FC<ProductProps> = (props) => {
           <div className="row">
             <div className="col-6">
               <img
-                src="https://via.placeholder.com/400x300"
+                src={product.product_images as string}
                 className="card-img"
                 alt=""
               ></img>

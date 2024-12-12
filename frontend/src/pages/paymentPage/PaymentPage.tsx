@@ -23,7 +23,7 @@ const PaymentPage = () => {
   const [isPaymentVisible, setIsPaymentVisible] = useState<PaymentOption>(PaymentOption.Null);
 
   const productSuccessfullyBoughtFunction =()=>{
-    navigate('/payment-summary');
+    navigate('/PaymentSummary');
   };
 
 
