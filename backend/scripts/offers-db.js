@@ -77,26 +77,15 @@ class Offers {
   }
 
   async overwrite_Offer(
-    Productinfo
+      product_id, ProductData
   ) {
-    const product = await this.#prisma.products.update({
+    console.log( product_id, ProductData)
+    return await this.#prisma.products.update({
       where: {
         product_id: product_id,
       },
-      data:{
-        products_category_id:Productinfo.products_category_id,
-        product_name:Productinfo.product_name,
-        product_description:Productinfo.product_description,
-        product_images:Productinfo.photo_id,
-        product_dollar_price:Productinfo.product_cost_cash,
-        product_crypto_prices:Productinfo.product_cost_crypto,
-        product_quantity:Productinfo.product_quantity,
-        product_promotion:Productinfo.promoted_for,
-        product_used:Productinfo.product_used,
-        product_crypto:Productinfo.crypto,
-      },
+      data: ProductData
     });
-    return product;
   }
   async PromoUpdate(product_id, promoted_for) {
     const product = await this.#prisma.products.update({
