@@ -23,7 +23,38 @@
       "city": "Tokyo",
       "street": "kiriko 12",
       "postCode":"11-221"
+    },
+    {
+      "country": "Poland",
+      "city": "Krakow",
+      "street": "Florianska 15",
+      "postCode": "31-021"
+    },
+    {
+      "country": "Poland",
+      "city": "Gdansk",
+      "street": "Długa 5",
+      "postCode": "80-831"
+    },
+    {
+      "country": "USA",
+      "city": "New York",
+      "street": "5th Avenue 101",
+      "postCode": "10-001"
+    },
+    {
+      "country": "Germany",
+      "city": "Berlin",
+      "street": "Unter den Linden 25",
+      "postCode": "10-117"
+    },
+    {
+      "country": "France",
+      "city": "Paris",
+      "street": "Champs-Élysées 30",
+      "postCode": "75-008"
     }
+    
   ],
   "products_category": [
     {
@@ -40,10 +71,48 @@
     },
     {
       "product_category_name": "Houses"
+    },
+    {
+      "product_category_name": "Clothes"
+    },
+    {
+      "product_category_name": "Hobby"
+    },
+    {
+      "product_category_name": "Furniture"
+    },
+    {
+      "product_category_name": "Electronics"
+    },
+    {
+      "product_category_name": "Other"
+    }
+  ],
+  "suppliers": [
+    {
+      "name": "InPost",
+      "delivery_price" : 2.0,
+      "image":"https://www.kurjerzy.pl/blog/wp-content/uploads/2020/11/blog_892.jpg"
+    },
+    {
+      "name": "DHL",
+      "delivery_price" : 5.0,
+       "image":"https://jakimkurierem.pl/logo_kuriera/dhl_logo.svg"
+    },
+    {
+      "name": "Courier",
+      "delivery_price" : 3.0,
+       "image":"https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMXlQK9egHJ0sb-KGZNRQU4zXFGTCU3d5Jbw&s"
+    },
+    {
+      "name": "DPD",
+      "delivery_price" : 5.5,
+       "image":"https://www.sote.pl/media/products/41f921bce3362f5e9c40d50d42c217ec/images/thumbnail/large_product.webp?lm=1681987962"
     }
   ],
   "users": [
     {
+      "user_id":"30bab94a-897d-4e79-8cf4-d5a80550720b",
       "user_name": "John",
       "user_surname": "Doe",
       "user_email": "johndoe@example.com",
@@ -55,6 +124,7 @@
       "user_premium_tokens": 10.5
     },
     {
+      "user_id":"94d32062-dc87-4820-9276-31a5634123f3",
       "user_name": "Janus",
       "user_surname": "Bisne'sau",
       "user_email": "JBiz@example.com",
@@ -66,6 +136,7 @@
       "user_premium_tokens": 0
     },
     {
+      "user_id":"ac828c5e-97c2-4c4d-b286-7a6c182e5fe0",
       "user_name": "Adam",
       "user_surname": "Wielki",
       "user_email": "Adam@example.com",
@@ -86,6 +157,79 @@
       "user_password": "Pawelhaslo",
       "user_avatar_url": "https://xsgames.co/randomusers/assets/avatars/male/67.jpg",
       "user_premium_tokens": 100
+    },
+    {
+      "user_name": "Anna",
+      "user_surname": "Kowalska",
+      "user_email": "anna.kowalska@example.com",
+      "user_date_of_birth": "1990-03-15T00:00:00.000Z",
+      "user_phone_number": "601234567",
+      "user_login": "AnnaK90",
+      "user_password": "AnnaPass2023!",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": null
+  },
+  {
+      "user_name": "Carlos",
+      "user_surname": "Gomez",
+      "user_email": "carlos.gomez@example.com",
+      "user_date_of_birth": "1985-09-20T00:00:00.000Z",
+      "user_phone_number": "602345678",
+      "user_login": "Carlos85",
+      "user_password": "CarlosSecure!85",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": 10
+  },
+  {
+      "user_name": "Ewa",
+      "user_surname": "Wiśniewska",
+      "user_email": "ewa.wisniewska@example.com",
+      "user_date_of_birth": "1994-11-30T00:00:00.000Z",
+      "user_phone_number": "603456789",
+      "user_login": "EwaW94",
+      "user_password": "EwaWis!123",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": null
+  },
+  {
+      "user_name": "Tomasz",
+      "user_surname": "Johnson",
+      "user_email": "tomasz.johnson@example.com",
+      "user_date_of_birth": "1991-06-10T00:00:00.000Z",
+      "user_phone_number": "604567890",
+      "user_login": "Tomek91",
+      "user_password": "TomekSecure2024",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": 15
+  },
+  {
+      "user_name": "Sophia",
+      "user_surname": "Martinez",
+      "user_email": "sophia.martinez@example.com",
+      "user_date_of_birth": "1997-08-25T00:00:00.000Z",
+      "user_phone_number": "605678901",
+      "user_login": "SophiaM97",
+      "user_password": "Sophia2023",
+      "user_avatar_url": "https://example.com/avatar.png",
+      "user_premium_tokens": null
+  }
+  ],
+
+  "wallets":[
+    {
+      "wallet_address":"0x2a5A88Fae80C19e719FE12F1bff47389BC201F91",
+      "wallet_status":"Active",
+      "user_id":"30bab94a-897d-4e79-8cf4-d5a80550720b"
+    },
+    {
+      "wallet_address":"0x7c0f1aA2EcB646342e8695Aa538E18BCA49371bE",
+      "wallet_status":"Active",
+      "user_id":"94d32062-dc87-4820-9276-31a5634123f3"
+    },
+    {
+      "wallet_address":"0x1320C7DA6d7DF8539dB3BC0204433551C96e8857",
+      "wallet_status":"Active",
+      "user_id":"ac828c5e-97c2-4c4d-b286-7a6c182e5fe0"
     }
   ],
   "products": [
@@ -93,243 +237,327 @@
       "product_name": "Opony",
       "products_category_id": 4,
       "product_description": "Dziurawe ale jak się załata to będzie git",
-      "product_images": {},
       "product_dollar_price": 100,
       "product_quantity": 4,
       "product_popularity": 2,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://images.pexels.com/photos/3806252/pexels-photo-3806252.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
       "product_name": "Skuter",
       "products_category_id": 4,
       "product_description": " to ulepszona, zasilana elektrycznie wersja starych skuterów z lat 90-tych. Prędkość maksymalna 65 km/h; może jechać 6 godzin bez ładowania (około 5 minut na każdej stacji usługowej).",
-      "product_images": {},
       "product_dollar_price": 300,
       "product_quantity": 1,
       "product_popularity": 6,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://images.pexels.com/photos/159192/vespa-roller-motor-scooter-cult-159192.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
       "product_name": "Motocykl",
       "products_category_id": 4,
       "product_description": "ulepszone wersje zwykłych mo-tocykli. Większość to modele półleżące, któ-rych plastikowa obudowa zamyka się nad kierowcą. Około połowa modeli zasilana jest elektrycznie – poruszają się one z maksymalną prędkością 100 km/h i mogą jechać około 8 godz. jazdy/naładowanie. Motocykle zasilane CHOOH2 rozwijają prędkości do 220 km/h i mają zbiornik osiemnastolitrowy.",
-      "product_images": {},
       "product_dollar_price": 750,
       "product_quantity": 1,
       "product_popularity": 9,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://images.pexels.com/photos/104842/bmw-vehicle-ride-bike-104842.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
       "product_name": "Opel",
       "products_category_id": 4,
       "product_description": "Sprzedam opla, dubra cena, Ledwo urzywany przebieg 100km licznik nie cowany, zona jezdzila nim do pracy a pracuje w domu",
-      "product_images": {},
       "product_dollar_price": 1000,
       "product_quantity": 1,
       "product_popularity": 5,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://images.pexels.com/photos/14576603/pexels-photo-14576603.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
       "product_name": "Harry potter",
       "products_category_id": 1,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
       "product_dollar_price": 8,
       "product_quantity": 10,
       "product_popularity": 6.7,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://www.harrypotter.com/_next/image?url=%2Fimages%2Fproducts%2Fbooks%2FUK%2Frectangle-1.jpg&w=1320&q=75"
     },
     {
       "product_name": "Horror z Dunwich",
       "products_category_id": 1,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
       "product_dollar_price": 25,
       "product_quantity": 10,
       "product_popularity": 10,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://s.lubimyczytac.pl/upload/books/148000/148994/541538-352x500.jpg"
     },
     {
       "product_name": "Władca Pierścieni:Dwie wieże",
       "products_category_id": 1,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
       "product_dollar_price": 50,
       "product_quantity": 10,
       "product_popularity": 10,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://s.lubimyczytac.pl/upload/books/265000/265271/837845-352x500.jpg"
     },
     {
       "product_name": "Karton",
       "products_category_id": 5,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
-      "product_dollar_price": 5,
+      "product_dollar_price": 1,
       "product_quantity": 100,
       "product_popularity": 3,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://images.pexels.com/photos/4498135/pexels-photo-4498135.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
       "product_name": "kołpak",
       "products_category_id": 4,
       "product_description": "Ukradłem, ale tylko głupi by nie ukradł. Trzeba było pilnować.",
-      "product_images": {},
       "product_dollar_price": 10,
       "product_quantity": 4,
       "product_popularity": 4.5,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Lancer_Hubcap.jpg/1280px-Lancer_Hubcap.jpg"
     },
     {
       "product_name": "Kask dla dziecka",
       "products_category_id": 3,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
       "product_dollar_price": 20,
       "product_quantity": 1,
       "product_popularity": 7.8,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":true
+      "product_crypto":true,
+      "product_images":"https://cdn.thewirecutter.com/wp-content/media/2024/08/kidsbikehelmets-2048px-3811-2x1-1.jpg?width=1024&quality=75&crop=2:1&auto=webp"
     },
     {
       "product_name": "Pęknięta deska",
       "products_category_id": 3,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
       "product_dollar_price": 0,
       "product_quantity": 1,
       "product_popularity": 6.8,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
+      "product_crypto":false,
+      "product_images":"https://media.istockphoto.com/id/91759602/pl/zdj%C4%99cie/skater-uszkodzon%C4%85-p%C5%82yt%C4%99.jpg?s=2048x2048&w=is&k=20&c=8aK5b4COSi5PD24ZPRV95qeCwIhRNhj3XclGNTqKCzk="
     },
     {
       "product_name": "Sześcian",
       "products_category_id": 5,
       "product_description": "20 za noc wedle podręcznika gracza cyberpunk 2020, po prostu 6 ścian",
-      "product_images": {},
       "product_dollar_price": 500,
       "product_quantity": 1,
       "product_popularity": 4.8,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
+      "product_crypto":false,
+      "product_images":"https://images.pexels.com/photos/20943/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
       "product_name": "Pasat",
       "products_category_id": 4,
       "product_description": "TDI!!! super!!! mega oferta!!! niemiec płakał jak sprzedawał!!! do negocjacji esemesem :690420666",
-      "product_images": {},
       "product_dollar_price": 5000,
       "product_quantity": 1,
       "product_popularity": 8.8,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
+      "product_crypto":false,
+      "product_images":"https://ireland.apollo.olxcdn.com/v1/files/v1b6f54l23c3-PL/image;s=1813x1360"
     },
     {
       "product_name": "Pizza",
       "products_category_id": 2,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
       "product_dollar_price": 50,
       "product_quantity": 10,
       "product_popularity": 9.3,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
+      "product_crypto":false,
+      "product_images":"https://images.pexels.com/photos/825661/pexels-photo-825661.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     
     {
       "product_name": "Dobry prepak",
       "products_category_id": 2,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
       "product_dollar_price": 200,
       "product_quantity": 10,
       "product_popularity": 6.8,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
+      "product_crypto":false,
+      "product_images":"https://upload.wikimedia.org/wikipedia/commons/0/06/MRE_7862.jpg"
     },
     {
       "product_name": "Czapka z draszkiem",
       "product_description": "Fajna w czapka, najlepiej nosi się na głowie, spada jak się ją zdejmie -wymaga fizycznego połączenia z użytkownikiem",
       "products_category_id": 3,
-      "product_images": {},
       "product_dollar_price": 20,
       "product_quantity": 50,
       "product_popularity": 5.3,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
+      "product_crypto":false,
+      "product_images":"https://images.pexels.com/photos/1878821/pexels-photo-1878821.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
       "product_name": "kółka",
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "products_category_id": 3,
-      "product_images": {},
       "product_dollar_price": 400,
       "product_quantity": 15,
       "product_popularity": 8.2,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
+      "product_crypto":false,
+      "product_images":"https://media.istockphoto.com/id/628613816/pl/zdj%C4%99cie/stary-vintage-ko%C5%82a-zu%C5%BCytego-skate.jpg?s=2048x2048&w=is&k=20&c=z45uZDVA8wwAtWfE5QnLz9ubtseujbr6mPylXdeuOuI="
     },
     {
       "product_name": "Deskorolka",
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "products_category_id": 3,
-      "product_images": {},
       "product_dollar_price": 40,
       "product_quantity": 1,
       "product_popularity": 7.8,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
-    },
-    {
-      "product_name": "Skateboard",
-      "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "products_category_id": 3,
-      "product_images": {},
-      "product_dollar_price": 500,
-      "product_quantity": 10,
-      "product_popularity": 9.8,
-      "product_used": true,
-      "product_promotion": null,
-      "product_crypto":false
+      "product_crypto":false,
+      "product_images":"https://images.pexels.com/photos/165236/pexels-photo-165236.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
     },
     {
       "product_name": "Villa",
       "products_category_id": 5,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
-      "product_images": {},
       "product_dollar_price": 50000,
       "product_quantity": 10,
       "product_popularity": 10,
       "product_used": true,
       "product_promotion": null,
-      "product_crypto":false
-    }
+      "product_crypto":false,
+      "product_images":"https://images.pexels.com/photos/1438834/pexels-photo-1438834.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+    },
+    {
+      "product_name": "Luxury Villa",
+      "products_category_id": 5,
+      "product_description": "A sprawling villa located in a serene neighborhood. Perfect for families seeking peace and comfort.",
+      "product_images":"https://images.pexels.com/photos/2832183/pexels-photo-2832183.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "product_dollar_price": 22500,
+      "product_quantity": 1,
+      "product_popularity": 8,
+      "product_used": false,
+      "product_promotion": "2024-12-15T14:30:00.000Z",
+      "product_crypto": true
+  },
+  {
+      "product_name": "Organic Honey",
+      "products_category_id": 2,
+      "product_description": "Pure organic honey sourced directly from local beekeepers.",
+      "product_images":"https://www.tierrafarm.com/cdn/shop/files/TFHoney_1200x.png?v=1699475676",
+      "product_dollar_price": 6,
+      "product_quantity": 50,
+      "product_popularity": 9,
+      "product_used": false,
+      "product_promotion": "2025-01-10T08:45:00.000Z",
+      "product_crypto": false
+  },
+  {
+      "product_name": "Electric Guitar",
+      "products_category_id": 7,
+      "product_description": "A high-quality electric guitar ideal for both beginners and professionals.",
+      "product_images":"https://images.pexels.com/photos/92069/pexels-photo-92069.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "product_dollar_price": 150,
+      "product_quantity": 10,
+      "product_popularity": 7,
+      "product_used": true,
+      "product_promotion": null,
+      "product_crypto": true
+  },
+  {
+      "product_name": "Men's Leather Jacket",
+      "products_category_id": 6,
+      "product_description": "Stylish leather jacket made from 100% genuine leather.",
+      "product_images":"https://media.istockphoto.com/id/885931726/pl/zdj%C4%99cie/klasyczna-czarna-sk%C3%B3rzana-kurtka-motocyklowa-z-podszewk%C4%85-strza%C5%82-z-przodu-i-z-ty%C5%82u-izolowane.jpg?s=2048x2048&w=is&k=20&c=s1cldPclaYxlJVbjr_CoDA2jSea7zYd8hM-J_yUokAw=",
+      "product_dollar_price": 45,
+      "product_quantity": 20,
+      "product_popularity": 6,
+      "product_used": false,
+      "product_promotion": "2025-03-20T12:00:00.000Z",
+      "product_crypto": false
+  },
+  {
+      "product_name": "Gaming Laptop",
+      "products_category_id": 9,
+      "product_description": "High-performance gaming laptop with the latest GPU and high refresh-rate display.",
+      "product_images":"https://media.istockphoto.com/id/505227671/pl/zdj%C4%99cie/gracz-komputerowy-laptopa-z-gier-wideo.jpg?s=2048x2048&w=is&k=20&c=LQRwXoPQQbdsLSRWs_6_fsON44fIy6igizjHj0JUI-w=",
+      "product_dollar_price": 36,
+      "product_quantity": 15,
+      "product_popularity": 10,
+      "product_used": false,
+      "product_promotion": null,
+      "product_crypto": true
+  },
+  {
+      "product_name": "Modern Dining Table",
+      "products_category_id": 8,
+      "product_description": "Elegant dining table made from premium oak wood.",
+      "product_images":"https://media.istockphoto.com/id/1309042044/pl/zdj%C4%99cie/wystr%C3%B3j-wn%C4%99trz-stylowego-wn%C4%99trza-jadalni-z-rodzinnym-drewnianym-sto%C5%82em-nowoczesnymi.jpg?s=2048x2048&w=is&k=20&c=Xeb6Ppo6un7kFS8kSr1vgCOf9dMrEgXjK4bqu1EdCmY=",
+      "product_dollar_price": 24,
+      "product_quantity": 5,
+      "product_popularity": 7,
+      "product_used": false,
+      "product_promotion": "2024-11-30T10:15:00.000Z",
+      "product_crypto": false
+  },
+  {
+      "product_name": "Electric Skateboard",
+      "products_category_id": 3,
+      "product_description": "Cruise around the city with this eco-friendly electric skateboard.",
+      "product_images":"https://upload.wikimedia.org/wikipedia/commons/d/de/Electric_skateboard%28800%2C600%2C400watt%29.jpg",
+      "product_dollar_price": 12,
+      "product_quantity": 10,
+      "product_popularity": 8,
+      "product_used": true,
+      "product_promotion": "2025-05-01T18:00:00.000Z",
+      "product_crypto": true
+  },
+  {
+      "product_name": "Vintage Car",
+      "products_category_id": 4,
+      "product_description": "A classic car in excellent condition. Perfect for collectors.",
+      "product_images":"https://images.pexels.com/photos/1209774/pexels-photo-1209774.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      "product_dollar_price": 1050,
+      "product_quantity": 2,
+      "product_popularity": 10,
+      "product_used": true,
+      "product_promotion": "2025-06-15T09:30:00.000Z",
+      "product_crypto": true
+  }
   ],
   "crypto": [
     {

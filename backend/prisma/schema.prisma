@@ -61,7 +61,7 @@ model Products {
   products_category Products_category @relation(fields: [products_category_id], references: [product_category_id])
   product_name         String
   product_description  String? @db.VarChar(1000)
-  product_images        Json
+  product_images String @db.Text
   product_dollar_price Float
   product_quantity Int
   cartToItem_id CartToItem[]

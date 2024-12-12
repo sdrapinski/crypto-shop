@@ -2,12 +2,11 @@ const express = require("express");
 const router = express.Router();
 const PostPayment = require("../scripts/postPayment.js");
 const postPayment = new PostPayment();
+router.route("/notify").post((req, res) => {
 
-router.post("/removefromcart", async (req, res) => {
-    cart.deleteFromCart(req.body.cart_id, req.body.product_id).then((resp)=>{
-      res.send(resp)
-    }).catch(error=>res.send(error))
-  });
-
+    postPayment.notify(req.body).then((response) => {
+      res.send(response);
+    });
+});
   
 module.exports = router;

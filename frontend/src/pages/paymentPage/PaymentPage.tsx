@@ -22,7 +22,9 @@ const PaymentPage = () => {
   const {user,cart} = appContext!
   const [isPaymentVisible, setIsPaymentVisible] = useState<PaymentOption>(PaymentOption.Null);
 
-  const productSuccessfullyBoughtFunction =()=>{}
+  const productSuccessfullyBoughtFunction =()=>{
+    navigate('/payment-summary');
+  };
 
 
     useEffect(() => {
