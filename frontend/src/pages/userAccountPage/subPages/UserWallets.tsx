@@ -10,14 +10,13 @@ import { cryptoWallet } from "../../../classes/User";
 
 const UserWallets = () => {
   const appContext = useContext(AppContext);
+  const {user} = appContext!
   const axiosInstance = useAxios(appContext!);
   const backendUrl = appContext?.backendUrl;
   const userId = appContext?.user?.user_id;
   const [loadingWallet, setLoadingWallet] = useState<string | null>(null);
   const [userWallets, setUserWallets] = useState<cryptoWallet[] | []>([]);
-  const [userWallet, setuserWallet] = useState<null | string>(
-    appContext && appContext.user!.user_wallets.length > 0 ? appContext?.user!.user_wallets[0].wallet_address : null
-  );
+  const [userWallet, setuserWallet] = useState<null | string>(null);
 
   useEffect(() => {
     setUserWallets(appContext?.user?.user_wallets || []);
@@ -47,6 +46,23 @@ const UserWallets = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if(appContext){
+      if(appContext.user){
+        if(appContext.user.user_wallets){
+          if(appContext.user.user_wallets.length > 0){
+            setuserWallet(appContext.user.user_wallets[0].wallet_address)
+          }
+        }
+      }
+    }
+    
+    return () => {
+      
+    }
+  }, [appContext,user])
+  
+
   const activateWallet = async (wallet: string) => {
     const userId = appContext?.user?.user_id;
     if (!userId || !wallet) {
@@ -61,7 +77,7 @@ const UserWallets = () => {
         wallet_address: wallet,
       });
 
-      if (response.status === 200) {
+      if (response.status === 201) {
         // Zmień status portfela w interfejsie
         setUserWallets((prevWallets) =>
           prevWallets.map((w) =>
@@ -162,7 +178,7 @@ const UserWallets = () => {
               <span>Your saved Wallets </span>
             </Row>
             {userWallets.map((wallet) => (
-              <Row>
+              <Row key={wallet.wallet_id}>
                 <div className={"card card-body row"}>
                   <div className={"row col-12"}>
                     <span

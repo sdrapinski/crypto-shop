@@ -40,7 +40,7 @@ router.route("/searchProductWL/:offerName").get((req, res) => {
   });
 });
 router.route("/product/:offerId").put((req, res) => {
-  offer.overwrite_Offer(req.params.offerId).then((response) => {
+  offer.overwrite_Offer(req.params.offerId,req.body).then((response) => {
     res.send(response);
   });
 });

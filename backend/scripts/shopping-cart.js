@@ -20,18 +20,29 @@ class shopping_cart {
   }
 
   async clearCart(cart_id) {
-    const clearedCart = await this.#prisma.cart.update({
-      where: {
-        cart_id: cart_id,
-      },
-      data: {
-        products: {
-          disconnect: true,
+    try {
+     
+      await this.#prisma.cartToItem.deleteMany({
+        where: {
+            cart_id: cart_id,
         },
-      },
     });
 
-    return clearedCart;
+    
+    const updatedCart = await this.#prisma.cart.findUnique({
+        where: {
+            cart_id: cart_id,
+        },
+        include: {
+            cartItems: true, 
+        },
+    });
+
+    return updatedCart;
+  } catch (error) {
+      console.error("Error clearing cart:", error);
+      throw new Error("Unable to clear cart");
+  }
   }
 
   async addToCart(cart_id, product_id, quantity = 1) {

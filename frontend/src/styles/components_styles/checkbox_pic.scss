@@ -1,10 +1,11 @@
 .payment-options {
+ 
     .custom-checkbox {
       position: relative;
       display: inline-block;
       cursor: pointer;
   
-  
+     
       &__image {
         display: inline-block;
         width: 50px; // Set width of the image
@@ -19,5 +20,8 @@
         }
        
       }
+    }
+    .payment-option__item{
+        margin: 0px 5px;
     }
   }

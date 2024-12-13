@@ -20,9 +20,8 @@ interface ProductInfoInterface {
   user_id: string | undefined;
 }
 
-const categoriesInit = {
-  data: [{ product_category_id: 0, product_category_name: "" }],
-};
+const categoriesInit =  [{ product_category_id: 0, product_category_name: "",product_category_image:"" }]
+
 
 const AddProductPage = () => {
   const appContext = useContext(AppContext);
@@ -30,7 +29,7 @@ const AddProductPage = () => {
   const [productName, setProductName] = useState("");
   const [productDescription, setProductDescription] = useState("");
   const [categories, setcategories] =
-    useState<CategoriesInterface>(categoriesInit);
+    useState<CategoriesInterface[]>(categoriesInit);
 
   const [productDollarPrice, setProductDollarPrice] = useState(0);
   const [productQuantity, setProductQuantity] = useState(0);
@@ -65,7 +64,7 @@ const AddProductPage = () => {
         },
       })
       .then((resp) => {
-        setcategories(resp);
+        setcategories(resp.data);
       });
 
     return () => {};
@@ -177,7 +176,7 @@ const AddProductPage = () => {
           onChange={handleCategoryChange}
         >
           <option value="">Select category</option>
-          {categories.data.map((category) => (
+          {categories.map((category) => (
             <option
               key={category.product_category_id}
               value={category.product_category_id}

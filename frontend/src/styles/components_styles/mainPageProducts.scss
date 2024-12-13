@@ -37,6 +37,8 @@
     left: 0;
     border-radius: 10px;
     background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
     transform-origin: bottom;
     transform: scale(1) translateZ(0);
     transition: 0.3 ease;

@@ -7,7 +7,7 @@ class Categories {
     this.#prisma = new PrismaClient();
   }
   async getCategories() {
-    const categories = await this.#prisma.products_category.findMany({});
+    const categories = await this.#prisma.Products_category.findMany({});
     return categories;
   }
   categoriesForMainPage() {

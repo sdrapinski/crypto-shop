@@ -1,5 +1,6 @@
 const { PrismaClient } = require("@prisma/client");
 const shopping_cart = require("../scripts/shopping-cart.js");
+const bcrypt = require("bcryptjs");
 const cart = new shopping_cart();
 const prisma = new PrismaClient();
 const records = require("./records.json");
@@ -10,13 +11,26 @@ async function addRecords() {
       data: cat,
     });
   }
+  for (const supplier of records.suppliers) {
+    const newSupplier = await prisma.suppliers.create({
+      data: supplier,
+    })
+  }
+
+  const salt = await bcrypt.genSalt(10);
+  
 
 
 
   const newUsers = [];
   for (const [index, user] of records.users.entries()) {
+    const hashedPassword = await bcrypt.hash(user.user_password, salt);
     const newUser = await prisma.users.create({
-      data: user,
+      data:{
+        ...user, 
+      user_password: hashedPassword,
+      }
+      
     });
     const userRegion = await prisma.region.create({
       data: { user_id: newUser.user_id, ...records.region[index] },
@@ -58,6 +72,16 @@ async function addRecords() {
       user_index++;
     }
   }
+
+  for (const wallet of records.wallets) {
+    const newWallet = await prisma.cryptoWallet.create({
+      data: {
+        ...wallet
+      },
+    })
+  }
+
+
 }
 
 addRecords()

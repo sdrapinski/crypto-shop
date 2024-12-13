@@ -171,10 +171,19 @@ async deleteWallet(walletId) {
 
 
 async getOrdersHistory(userId) {
-    const productsSold = await this.#prisma.productsSold.findMany(
+    const productsSold = await this.#prisma.productsBought.findMany(
         {
             where: {
-                user_id: userId
+                buyer_id: userId
+            },
+            include:{
+              products_bought_items:{
+                include:{
+                  product:true
+                }
+              },
+              delivery:true,
+              seller:true
             }
         }
     );
@@ -183,14 +192,8 @@ async getOrdersHistory(userId) {
         return [];
     }
 
-    const orders = [];
 
-    for (let productSold of productsSold) {
-       const product = await this.#prisma.products.findUnique({where: {product_id: productSold.product_id}});
-       orders.push(product);
-    }
-
-    return orders;
+    return productsSold;
 }
 
 async getUserMessages(userId) {

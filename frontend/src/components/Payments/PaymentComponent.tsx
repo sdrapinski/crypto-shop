@@ -96,7 +96,6 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       if (error) {
         setPaymentError(error.message || 'Payment failed. Please try again.');
       } else if (paymentIntent?.status === 'succeeded') {
-        alert('Payment succeeded!');
         switch(gate){
             case "WK": // to jest to co nas obchodzi
             if(productSuccessfullyBoughtFunction){
@@ -128,7 +127,7 @@ const CheckoutForm: React.FC<CheckoutFormProps> = ({
       </div>
       {paymentError && <div style={{ color: 'red', marginTop: '10px' }}>{paymentError}</div>}
       <button type="submit" disabled={isProcessing}>
-        {isProcessing ? 'Processing...' : `Pay $${amount}`}
+        {isProcessing ? 'Processing...' : `Pay with Stripe`}
       </button>
     </form>
   );

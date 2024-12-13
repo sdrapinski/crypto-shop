@@ -23,6 +23,8 @@ export const UserOrders = () => {
                     }
                 )
                 .then((response)=>{
+                    console.log(response.data);
+                    
                     setOrders(response.data);
                 });
         }
@@ -30,15 +32,19 @@ export const UserOrders = () => {
 
     return <div className="tab-pane fade show active row justify-content-center align-items-center flex-column">
         {orders.map((order) => (
-            <div className={"card card-body row my-1"}>
+            <div key={order.products_bought_id} className={"card card-body row my-1"}>
                 <div className={"row col-12"}>
-                    <span className="d-flex flex-wrap col-12" style={{wordWrap: "break-word", wordBreak: "break-all"}}>
-                        {order?.product_name}
-                    </span>
+                    <div className="d-flex flex-wrap col-8" style={{wordWrap: "break-word", wordBreak: "break-all"}}>
+                     Seller: {order.seller.user_name}  {order.seller.user_surname}
+                      <br /> Products: {order.products_bought_items.length} 
+                     <br />  Status: {order?.delivery.status} 
+                     <br /> date: {new Date(order.sale_time).toLocaleDateString("pl-PL")}
+                    </div>
+                    <div className={"col-4 d-flex justify-content-end align-items-center mt-2"}>
+                    {/* <button type={"button"} className={"btn btn-primary"}>View</button> */}
                 </div>
-                <div className={"col-12 d-flex justify-content-end align-items-center mt-2"}>
-                    <button type={"button"} className={"btn btn-primary"}>View</button>
                 </div>
+                
             </div>
         ))}
     </div>;
