@@ -114,7 +114,7 @@ const Filters: React.FC<FilterProps> = ({ category, setProducts }) => {
             checked={filters.crypto}
             onChange={handleChange}
           />
-          Crypto Only
+          Allow cryptocurrency
         </label>
       </div>
       

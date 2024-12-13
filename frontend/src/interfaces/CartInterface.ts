@@ -15,6 +15,7 @@ export interface Product {
   product_dollar_price: number;
   product_images: string;
   user:User
+  product_crypto: boolean;
 }
 
 interface User {

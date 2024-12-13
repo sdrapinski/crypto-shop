@@ -7,6 +7,7 @@ import PaymentComponent from '../../components/Payments/PaymentComponent';
 import PayWithEthComponent from '../../components/Payments/PayWithEthComponent';
 import DeliveryComponent from '../../components/Delivery/DeliveryComponent';
 import useAxios from '../../hooks/useAxios';
+import { CartInterface } from '../../interfaces/CartInterface';
 
 
 
@@ -37,6 +38,7 @@ const PaymentPage = () => {
   const [selectedDeliveryOption, setSelectedDeliveryOption] = useState<DeliveryOptionInterface | null>();
   const [deliveryOptions, setDeliveryOptions] = useState<DeliveryOptionInterface[] | []>([]);
   const [isPaymentVisible, setIsPaymentVisible] = useState<PaymentOption>(PaymentOption.Null);
+  const [areAllProductsCryptoAllowed , setAreAllProductsCryptoAllowed ] = useState<boolean>(false);
 
   const apiCrypto = useAxiosCrypto();
   const appContext = useContext(AppContext);
@@ -73,11 +75,21 @@ const PaymentPage = () => {
       })
   };
 
+  const checkIfAllProductsCryptoAllowed = (cart: CartInterface): boolean => {
+    if (!cart || !cart.cartItems || cart.cartItems.length === 0) {
+      return false; 
+    }
+  
+    
+    return cart.cartItems.every((item) => item.product.product_crypto);
+  };
+
 
   useEffect(() => {
     
     api.get<DeliveryOptionInterface[]>("/postPayment/getSuppliers").then((resp)=>{
-      console.log(resp.data);
+
+      
       
       setDeliveryOptions(resp.data)
       
@@ -87,6 +99,16 @@ const PaymentPage = () => {
     })
     
   }, [])
+
+  useEffect(() => {
+    setAreAllProductsCryptoAllowed(checkIfAllProductsCryptoAllowed(cart))
+    
+  
+    return () => {
+      
+    }
+  }, [cart])
+  
   
 
   useEffect(() => {
@@ -118,9 +140,13 @@ const PaymentPage = () => {
   };
 
   const calculateTotalPrice = () => {
-    return cart.cartItems.reduce((total, item) => {
+    const productsPrice = cart.cartItems.reduce((total, item) => {
       return total + item.product.product_dollar_price * item.quantity;
     }, 0);
+    if(selectedDeliveryOption){
+      return productsPrice + selectedDeliveryOption.delivery_price
+    }
+    return productsPrice 
   };
 
   const totalPriceUSD = calculateTotalPrice();
@@ -204,10 +230,20 @@ const PaymentPage = () => {
                 productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}
               />
             ) : ethereum && isPaymentVisible === PaymentOption.Eth ? (
-              <PayWithEthComponent
-                ethPrice={ethereum}
-                productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}
-              />
+
+              areAllProductsCryptoAllowed ? (
+        <PayWithEthComponent
+          ethPrice={ethereum}
+          productSuccessfullyBoughtFunction={productSuccessfullyBoughtFunction}
+        />
+      ) : (
+        <div className="pay-with-eth-disabled">
+          <p>Not all products support crypto payments.</p>
+          <button disabled className="btn btn-secondary">
+            Pay with ETH
+          </button>
+        </div>
+      )
             ) : (
               <div>Select Payment option</div>
             )

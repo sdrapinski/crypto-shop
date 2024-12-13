@@ -48,6 +48,16 @@
           margin-bottom: 5px;
         }
       }
+      .pay-with-eth-disabled {
+        text-align: center;
+        color: gray;
+      
+        button {
+          cursor: not-allowed;
+          background-color: lightgray;
+          border: 1px solid gray;
+        }
+      }
   
       button {
         background-color: #007bff;

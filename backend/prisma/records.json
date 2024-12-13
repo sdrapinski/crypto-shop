@@ -29,31 +29,8 @@
       "city": "Krakow",
       "street": "Florianska 15",
       "postCode": "31-021"
-    },
-    {
-      "country": "Poland",
-      "city": "Gdansk",
-      "street": "Długa 5",
-      "postCode": "80-831"
-    },
-    {
-      "country": "USA",
-      "city": "New York",
-      "street": "5th Avenue 101",
-      "postCode": "10-001"
-    },
-    {
-      "country": "Germany",
-      "city": "Berlin",
-      "street": "Unter den Linden 25",
-      "postCode": "10-117"
-    },
-    {
-      "country": "France",
-      "city": "Paris",
-      "street": "Champs-Élysées 30",
-      "postCode": "75-008"
     }
+    
     
   ],
   "products_category": [
@@ -158,6 +135,7 @@
       "user_premium_tokens": null
     },
     {
+      "user_id":"72614db9-d3ac-4fb9-aa53-49cc5e269ad1",
       "user_name": "Pawel",
       "user_surname": "Gawel",
       "user_email": "Pawel@example.com",
@@ -169,6 +147,7 @@
       "user_premium_tokens": 100
     },
     {
+      "user_id":"069dbaf0-74a2-49e8-8f74-433624316103",
       "user_name": "Anna",
       "user_surname": "Kowalska",
       "user_email": "anna.kowalska@example.com",
@@ -176,50 +155,6 @@
       "user_phone_number": "601234567",
       "user_login": "AnnaK90",
       "user_password": "AnnaPass2023!",
-      "user_avatar_url": "https://example.com/avatar.png",
-      "user_premium_tokens": null
-  },
-  {
-      "user_name": "Carlos",
-      "user_surname": "Gomez",
-      "user_email": "carlos.gomez@example.com",
-      "user_date_of_birth": "1985-09-20T00:00:00.000Z",
-      "user_phone_number": "602345678",
-      "user_login": "Carlos85",
-      "user_password": "CarlosSecure!85",
-      "user_avatar_url": "https://example.com/avatar.png",
-      "user_premium_tokens": 10
-  },
-  {
-      "user_name": "Ewa",
-      "user_surname": "Wiśniewska",
-      "user_email": "ewa.wisniewska@example.com",
-      "user_date_of_birth": "1994-11-30T00:00:00.000Z",
-      "user_phone_number": "603456789",
-      "user_login": "EwaW94",
-      "user_password": "EwaWis!123",
-      "user_avatar_url": "https://example.com/avatar.png",
-      "user_premium_tokens": null
-  },
-  {
-      "user_name": "Tomasz",
-      "user_surname": "Johnson",
-      "user_email": "tomasz.johnson@example.com",
-      "user_date_of_birth": "1991-06-10T00:00:00.000Z",
-      "user_phone_number": "604567890",
-      "user_login": "Tomek91",
-      "user_password": "TomekSecure2024",
-      "user_avatar_url": "https://example.com/avatar.png",
-      "user_premium_tokens": 15
-  },
-  {
-      "user_name": "Sophia",
-      "user_surname": "Martinez",
-      "user_email": "sophia.martinez@example.com",
-      "user_date_of_birth": "1997-08-25T00:00:00.000Z",
-      "user_phone_number": "605678901",
-      "user_login": "SophiaM97",
-      "user_password": "Sophia2023",
       "user_avatar_url": "https://example.com/avatar.png",
       "user_premium_tokens": null
   }
@@ -240,6 +175,16 @@
       "wallet_address":"0x1320C7DA6d7DF8539dB3BC0204433551C96e8857",
       "wallet_status":"Active",
       "user_id":"ac828c5e-97c2-4c4d-b286-7a6c182e5fe0"
+    },
+    {
+      "wallet_address":"0x5b0334A089A4623390dD8b9a23359904348B2C21",
+      "wallet_status":"Inactive",
+      "user_id":"72614db9-d3ac-4fb9-aa53-49cc5e269ad1"
+    },
+    {
+      "wallet_address":"0x118dbA95e5ea0c531Ee236c5CeddE24510312000",
+      "wallet_status":"Inactive",
+      "user_id":"069dbaf0-74a2-49e8-8f74-433624316103"
     }
   ],
   "products": [
