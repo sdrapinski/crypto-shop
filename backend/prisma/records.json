@@ -178,12 +178,12 @@
     },
     {
       "wallet_address":"0x5b0334A089A4623390dD8b9a23359904348B2C21",
-      "wallet_status":"Inactive",
+      "wallet_status":"Active",
       "user_id":"72614db9-d3ac-4fb9-aa53-49cc5e269ad1"
     },
     {
       "wallet_address":"0x118dbA95e5ea0c531Ee236c5CeddE24510312000",
-      "wallet_status":"Inactive",
+      "wallet_status":"Active",
       "user_id":"069dbaf0-74a2-49e8-8f74-433624316103"
     }
   ],

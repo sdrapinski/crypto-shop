@@ -37,44 +37,69 @@ class Offers {
   }
   async removeOffer(product_id) {
     try {
-      // Usuwanie związanych rekordów z innych tabel
+      // Usuwanie rekordów w tabelach powiązanych z produktem
       await this.#prisma.cartToItem.deleteMany({
         where: {
           product_id: product_id,
         },
       });
-
-      await this.#prisma.productsSold.deleteMany({
+  
+      await this.#prisma.productsBoughtItems.deleteMany({
         where: {
           product_id: product_id,
         },
       });
-
+  
       await this.#prisma.message.deleteMany({
         where: {
           product_id: product_id,
         },
       });
-
-      await this.#prisma.notification.deleteMany({
+  
+      // Sprawdzenie powiązanych zakupów i powiązanych powiadomień
+      const productsBought = await this.#prisma.productsBought.findMany({
         where: {
-          product_id: product_id,
+          products_bought_items: {
+            some: {
+              product_id: product_id,
+            },
+          },
         },
       });
-
+  
+      for (const purchase of productsBought) {
+        // Usuwanie powiadomień powiązanych z zakupem
+        if (purchase.notification_id) {
+          await this.#prisma.notifications.delete({
+            where: {
+              notification_id: purchase.notification_id,
+            },
+          });
+        }
+  
+        // Usuwanie zakupu
+        await this.#prisma.productsBought.delete({
+          where: {
+            products_bought_id: purchase.products_bought_id,
+          },
+        });
+      }
+  
       // Usuwanie samego produktu
       const deletedProduct = await this.#prisma.products.delete({
         where: {
           product_id: product_id,
         },
       });
-
+  
       return deletedProduct;
     } catch (error) {
       // Obsługa błędów
       console.error("Error removing offer:", error);
+      throw new Error("Failed to remove offer");
     }
   }
+  
 
   async overwrite_Offer(
     product_id, ProductData
