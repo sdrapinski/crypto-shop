@@ -54,3 +54,19 @@
 .menu .menu__userOptions li {
   margin-bottom: 10px;
 }
+
+.notification-icon {
+  position: relative;
+
+  .notification-badge {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: rgb(223, 210, 33);
+    color: white;
+    border-radius: 50%;
+    padding: 4px 8px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+}

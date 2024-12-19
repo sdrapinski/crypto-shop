@@ -38,4 +38,15 @@ router.post("/createTransaction", async (req, res) => {
   }
 });
 
+router.get('/user-notifications/:userId', async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const notifications = await postPayment.getUserNotifications(userId);
+    res.status(200).json(notifications);
+  } catch (error) {
+    console.error("Error fetching user notifications:", error.message);
+    res.status(500).send({ error: "Could not fetch notifications." });
+  }
+});
+
 module.exports = router;

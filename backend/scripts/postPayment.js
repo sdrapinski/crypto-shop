@@ -98,6 +98,34 @@ class PostPayment {
       throw new Error("Transaction failed.");
     }
   }
+
+  async getUserNotifications(userId) {
+    try {
+      const notifications = await this.#prisma.notifications.findMany({
+        where: {
+          productsBought: {
+            OR: [
+              { buyer_id: userId },
+              { seller_id: userId },
+            ],
+          },
+        },
+        include: {
+          productsBought: {
+          include:{
+            delivery:true,
+            products_bought_items:true
+          }
+          
+        },
+      }
+      });
+      return notifications;
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+      throw new Error("Could not fetch notifications.");
+    }
+  }
   
 }
 

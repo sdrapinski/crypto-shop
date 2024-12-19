@@ -7,6 +7,15 @@ export interface UserData {
     user_date_of_birth: string | null;
 }
 
+export interface Notification {
+    notification_id: string;
+    productsBought_id: string;
+    content: string;
+    created_at: string;
+    is_read: boolean;
+    productsBought: UserOrderHistory;
+}
+
 export interface UserOrderHistory {
     products_bought_id: string;
     buyer_id: string;
