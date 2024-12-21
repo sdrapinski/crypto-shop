@@ -38,4 +38,45 @@ router.post("/createTransaction", async (req, res) => {
   }
 });
 
+router.get('/user-notifications/:userId', async (req, res) => {
+  const { userId } = req.params;
+  try {
+    const notifications = await postPayment.getUserNotifications(userId);
+    res.status(200).json(notifications);
+  } catch (error) {
+    console.error("Error fetching user notifications:", error.message);
+    res.status(500).send({ error: "Could not fetch notifications." });
+  }
+});
+
+router.put("/mark-notification-read/:notificationId", async (req, res) => {
+  const { notificationId } = req.params;
+
+  try {
+    const updatedNotification = await postPayment.markNotificationAsRead(notificationId);
+    res.status(200).json({
+      message: "Notification marked as read successfully",
+      data: updatedNotification,
+    });
+  } catch (error) {
+    console.error("Error marking notification as read:", error.message);
+    res.status(500).json({ error: "Could not mark notification as read." });
+  }
+});
+
+router.put("/confirm-shipment/:deliveryId", async (req, res) => {
+  const { deliveryId } = req.params;
+
+  try {
+    const updatedDelivery = await postPayment.updateDeliveryStatusToShipped(deliveryId);
+    res.status(200).json({
+      message: "Delivery status updated to 'Shipped' successfully",
+      data: updatedDelivery,
+    });
+  } catch (error) {
+    console.error("Error updating delivery status:", error.message);
+    res.status(500).json({ error: "Could not update delivery status." });
+  }
+});
+
 module.exports = router;

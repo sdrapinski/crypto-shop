@@ -47,6 +47,11 @@ const UserMessages = () => {
                 </div>
             </div>
         ))}
+        {messages.length === 0 && (
+            <div>
+                You dont have any messages
+            </div>
+        )}
     </div>;
 };
 
