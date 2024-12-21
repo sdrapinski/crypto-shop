@@ -5,7 +5,7 @@ import { Col } from "react-bootstrap";
 
 const DisplayProducts: React.FC<ProductsArrayInterface> = (props) => {
   const { products } = props;
-  console.log(props);
+  
 
   return (
     <Col>

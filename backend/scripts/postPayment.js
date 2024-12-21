@@ -114,7 +114,11 @@ class PostPayment {
           productsBought: {
           include:{
             delivery:true,
-            products_bought_items:true
+            products_bought_items:{
+              include: {
+                product:true
+              }
+            }
           }
           
         },
@@ -126,8 +130,77 @@ class PostPayment {
       throw new Error("Could not fetch notifications.");
     }
   }
+
+  async updateDeliveryStatusToShipped(deliveryId) {
+    try {
+      // Sprawdź, czy przesyłka istnieje
+      const existingDelivery = await this.#prisma.delivery.findUnique({
+        where: { id: deliveryId },
+        include: {
+          productsBought: {
+            include: {
+              buyer: true,
+              seller: true,
+            },
+          },
+        },
+      });
   
-}
+      if (!existingDelivery) {
+        throw new Error(`Delivery with ID ${deliveryId} does not exist.`);
+      }
+  
+      if (existingDelivery.status === "Shipped") {
+        throw new Error(`Delivery with ID ${deliveryId} is already marked as 'Shipped'.`);
+      }
+  
+      // Aktualizacja statusu przesyłki na "Shipped"
+      const updatedDelivery = await this.#prisma.delivery.update({
+        where: { id: deliveryId },
+        data: { status: "Shipped" },
+      });
+  
+      
+  
+      return updatedDelivery;
+    } catch (error) {
+      console.error(" Error updating delivery status to 'Shipped':", error);
+      throw new Error("Could not update delivery status to 'Shipped'.");
+    }
+  }
+
+  async markNotificationAsRead(notificationId) {
+    try {
+      // Sprawdź, czy powiadomienie istnieje
+      const existingNotification = await this.#prisma.notifications.findUnique({
+        where: { notification_id: notificationId },
+      });
+  
+      if (!existingNotification) {
+        throw new Error(`Notification with ID ${notificationId} does not exist.`);
+      }
+  
+      if (existingNotification.is_read) {
+        throw new Error(`Notification with ID ${notificationId} is already marked as 'read'.`);
+      }
+  
+      // Aktualizacja powiadomienia na przeczytane
+      const updatedNotification = await this.#prisma.notifications.update({
+        where: { notification_id: notificationId },
+        data: { is_read: true },
+      });
+  
+      return updatedNotification;
+    } catch (error) {
+      console.error("Error marking notification as read:", error);
+      throw new Error("Could not mark notification as read.");
+    }
+  }
+  
+  }
+  
+  
+
 
 
 module.exports = PostPayment;

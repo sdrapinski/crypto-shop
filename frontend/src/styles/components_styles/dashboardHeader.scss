@@ -55,6 +55,10 @@
 .input__wrapper input:focus {
   outline: none;
 }
+.notification-item{
+  border-bottom:1px solid rgb(146, 146, 146) ;
+  margin-bottom: 5px;
+}
 
 .main__header .header__autocomplete {
   position: absolute;

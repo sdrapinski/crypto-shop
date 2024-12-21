@@ -33,24 +33,13 @@ const LoginSwitch = () => {
       });
   };
 
-  const markNotificationsAsRead = () => {
-    api
-      .post(`/postPayment/mark-notifications-read/${appcontext!.user!.user_id}`)
-      .then(() => {
-        setUnreadCount(0);
-        setNotifications((prev) =>
-          prev.map((notification) => ({ ...notification, is_read: true }))
-        );
-      });
-  };
+  
 
   const handleButtonClick = (content: string) => {
     if (content !== menuContent) {
       setMenuContent(content);
       setShowMenu(true);
-      if (content === "notifications") {
-        markNotificationsAsRead();
-      }
+      
     } else {
       setShowMenu(!showMenu);
     }
@@ -118,11 +107,12 @@ const LoginSwitch = () => {
 
                 {menuContent === "notifications" && (
                   <div>
-                    {notifications.length > 0 ? (
+                    {notifications.length > 0 && unreadCount > 0 ? (
                       <ul className="notifications-list"  onClick={() => {
                         handleRedirectClick("/notificationsPage");
                       }}>
-                        {notifications.map((notification) => (
+                        
+                        {notifications.filter((notification)=>notification.is_read===false).map((notification) => (
                           <li
                             key={notification.notification_id}
                             className={`notification-item ${
@@ -134,7 +124,9 @@ const LoginSwitch = () => {
                         ))}
                       </ul>
                     ) : (
-                      <p>You don't have any notifications</p>
+                      <p onClick={() => {
+                        handleRedirectClick("/notificationsPage");
+                      }}>You don't have any notifications</p>
                     )}
                   </div>
                 )}

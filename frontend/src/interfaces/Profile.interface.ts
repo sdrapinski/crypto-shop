@@ -34,7 +34,7 @@ interface Product {
     products_category_id: number;
     product_name: string;
     product_description: string;
-    product_images: Record<string, any>;
+    product_images: string;
     product_dollar_price: number;
     product_quantity: number;
     product_watched_by_id: string;
