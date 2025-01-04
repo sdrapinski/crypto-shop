@@ -22,7 +22,6 @@ const CurrentCryptoPrice = () => {
       .get<CurrentCryptoPriceInterface>(`/coins/ethereum`)
       .then((resp) => {
        setEthereum(resp.data)
-       console.log(resp.data);
        
        appContext?.setEthPrice(resp.data)
       });

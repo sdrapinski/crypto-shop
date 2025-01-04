@@ -23,22 +23,19 @@ const UserWallets = () => {
     
     const handleAccountsChanged = (accounts: string[]) => {
       if (accounts.length > 0) {
-        // Aktualizuj stan portfela
         setuserWallet(accounts[0]);
-        console.log("Zmieniono portfel na:", accounts[0]);
       } else {
-        console.warn("Nie znaleziono podłączonych portfeli");
+        console.warn("Couldnt find any wallets");
       }
     };
   
-    // Nasłuchiwanie na zmianę portfela w MetaMask
+    
     if (window.ethereum) {
       window.ethereum.on("accountsChanged", handleAccountsChanged);
     } else {
       console.warn("MetaMask is not installed!");
     }
   
-    // Sprzątanie nasłuchiwania przy unmount
     return () => {
       if (window.ethereum) {
         window.ethereum.removeListener("accountsChanged", handleAccountsChanged);
@@ -71,6 +68,15 @@ const UserWallets = () => {
     }
     setLoadingWallet(wallet);
     try {
+      const checkResponse = await axiosInstance.post("/user/checkWalletAssignment", {
+        wallet_address: wallet,
+      });
+  
+      if (checkResponse.data.isAssigned) {
+        alert("This wallet is already assigned to another user.");
+        return;
+      }
+
       await blockchainService.registerSeller(userId, wallet);
       const response = await axiosInstance.post("/user/activateWallet", {
         user_id: userId,

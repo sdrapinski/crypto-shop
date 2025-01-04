@@ -24,13 +24,9 @@ interface CryptoShopContract {
 
 // Adres wdrożonego kontraktu
 const contractAddress = '0xED77a44706A85A11E19604d8D03Ba9997f096a18';
-// ABI kontraktu (zastąp wklejonym ABI)
 
 
-// Konfiguracja providera dla Sepolia
-// const provider = new ethers.providers.JsonRpcProvider('https://sepolia.infura.io/v3/f4bbb9ca603f4d2498366f7c7bb9e5e5');
 
-// Funkcja pomocnicza do uzyskania instancji kontraktu
 async function getContract(): Promise<ethers.Contract | null> {
     let signer = null
     if (window.ethereum !==null) {
@@ -38,7 +34,7 @@ async function getContract(): Promise<ethers.Contract | null> {
         signer = await provider.getSigner();;
         return new ethers.Contract(contractAddress, ABI, signer);
     } else {
-        console.error("MetaMask nie jest zainstalowany!");
+        console.error("MetaMask is not installed");
         return null;
     }
 }
@@ -46,17 +42,17 @@ async function getContract(): Promise<ethers.Contract | null> {
 export async function getUserWalletAddress() {
     if (typeof window.ethereum !== 'undefined') {
       try {
-        // Poproś użytkownika o podłączenie portfela
+        
         const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
         
-        // Zwróć pierwszy adres (bo użytkownik może mieć więcej portfeli)
+        
         return accounts[0];
       } catch (error) {
-        console.error('Błąd podczas uzyskiwania adresu portfela:', error);
+        console.error('Error getting wallet address:', error);
         return null;
       }
     } else {
-      console.log('MetaMask nie jest zainstalowany');
+      console.log('MetaMask is not installed');
       return null;
     }
   }

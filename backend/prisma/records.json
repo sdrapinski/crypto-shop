@@ -227,7 +227,7 @@
     {
       "product_name": "Opel",
       "products_category_id": 4,
-      "product_description": "Sprzedam opla, dubra cena, Ledwo urzywany przebieg 100km licznik nie cowany, zona jezdzila nim do pracy a pracuje w domu",
+      "product_description": "Sprzedam opla, dobra cena",
       "product_dollar_price": 1000,
       "product_quantity": 1,
       "product_popularity": 5,
@@ -273,7 +273,7 @@
       "product_images":"https://s.lubimyczytac.pl/upload/books/265000/265271/837845-352x500.jpg"
     },
     {
-      "product_name": "Karton",
+      "product_name": "Mieszkanie",
       "products_category_id": 5,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_dollar_price": 1,
@@ -282,7 +282,7 @@
       "product_used": true,
       "product_promotion": null,
       "product_crypto":true,
-      "product_images":"https://images.pexels.com/photos/4498135/pexels-photo-4498135.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      "product_images":"https://i.dobrzemieszkaj.pl/i/20/43/57/r3/1920/50-metrowa-kawalerka-w-stylistyce-loft-1.jpg"
     },
     {
       "product_name": "kołpak",
@@ -321,21 +321,21 @@
       "product_images":"https://media.istockphoto.com/id/91759602/pl/zdj%C4%99cie/skater-uszkodzon%C4%85-p%C5%82yt%C4%99.jpg?s=2048x2048&w=is&k=20&c=8aK5b4COSi5PD24ZPRV95qeCwIhRNhj3XclGNTqKCzk="
     },
     {
-      "product_name": "Sześcian",
+      "product_name": "Kawalerka",
       "products_category_id": 5,
-      "product_description": "20 za noc wedle podręcznika gracza cyberpunk 2020, po prostu 6 ścian",
+      "product_description": "mała ale własna",
       "product_dollar_price": 500,
       "product_quantity": 1,
       "product_popularity": 4.8,
       "product_used": true,
       "product_promotion": null,
       "product_crypto":false,
-      "product_images":"https://images.pexels.com/photos/20943/pexels-photo.jpg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+      "product_images":"https://cdn.prod.website-files.com/604cedb94aba0143030df11c/6098df619134a44834574040_U03_final.jpg"
     },
     {
       "product_name": "Pasat",
       "products_category_id": 4,
-      "product_description": "TDI!!! super!!! mega oferta!!! niemiec płakał jak sprzedawał!!! do negocjacji esemesem :690420666",
+      "product_description": "TDI!!! super!!! mega oferta!!!",
       "product_dollar_price": 5000,
       "product_quantity": 1,
       "product_popularity": 8.8,
@@ -358,7 +358,7 @@
     },
     
     {
-      "product_name": "Dobry prepak",
+      "product_name": "Racja żywnościowa",
       "products_category_id": 2,
       "product_description": "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?",
       "product_dollar_price": 200,
@@ -370,8 +370,8 @@
       "product_images":"https://upload.wikimedia.org/wikipedia/commons/0/06/MRE_7862.jpg"
     },
     {
-      "product_name": "Czapka z draszkiem",
-      "product_description": "Fajna w czapka, najlepiej nosi się na głowie, spada jak się ją zdejmie -wymaga fizycznego połączenia z użytkownikiem",
+      "product_name": "Czapka z daszkiem",
+      "product_description": "Fajna w czapka, najlepiej nosi się na głowie",
       "products_category_id": 3,
       "product_dollar_price": 20,
       "product_quantity": 50,
