@@ -120,6 +120,25 @@ router.route("/getOrdersHistory/:userId").get((req, res) => {
         res.send(response)
     });
 });
+router.post("/checkWalletAssignment", async (req, res) => {
+    const { wallet_address } = req.body;
+  
+    if (!wallet_address) {
+      return res.status(400).send({ message: "Wallet address is required." });
+    }
+  
+    try {
+      const existingWallet = await user.checkIfWalletIsAssigned(wallet_address);
+      if (existingWallet) {
+        return res.status(200).send({ isAssigned: true });
+      } else {
+        return res.status(200).send({ isAssigned: false });
+      }
+    } catch (error) {
+      console.error("Error checking wallet assignment:", error);
+      res.status(500).send({ message: "Internal server error" });
+    }
+  });
 
 router.route("/getUserMessages/:userId").get((req, res) => {
     user.getUserMessages(req.params.userId).then((response) => {res.send(response)});
