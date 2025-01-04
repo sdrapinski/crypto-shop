@@ -1,11 +1,11 @@
 import React, { useState, useContext } from "react";
 import { AppContext } from "../../../state/AppContext";
 import axios from "axios";
-import { mainPageProductsInterface } from "../../../interfaces/product.interface";
+import { ProductPageProductsInterface } from "../../../interfaces/product.interface";
 
 interface FilterProps {
   category: string;
-  setProducts: (products: mainPageProductsInterface[]) => void;
+  setProducts: (products: ProductPageProductsInterface[]) => void;
 }
 
 const Filters: React.FC<FilterProps> = ({ category, setProducts }) => {
@@ -64,7 +64,7 @@ const Filters: React.FC<FilterProps> = ({ category, setProducts }) => {
     setError(null);
 
     try {
-      const response = await axios.post<mainPageProductsInterface[]>(
+      const response = await axios.post<ProductPageProductsInterface[]>(
         `${appcontext?.backendUrl}/offer/getFilteredProducts`,
         { ...filters, category },
         {

@@ -22,7 +22,7 @@ const MainPageProducts = () => {
       )
       .then((resp) => {
         setitems(resp.data);
-        console.log(resp.data);
+       
       });
 
     return () => {};

@@ -21,7 +21,7 @@ const ProductDetails = () => {
         }
       )
       .then((resp) => {
-        console.log(resp.data);
+        
         setProduct(resp.data);
       });
 

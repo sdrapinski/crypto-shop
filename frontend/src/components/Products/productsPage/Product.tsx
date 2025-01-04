@@ -1,9 +1,9 @@
 import React from "react";
-import { mainPageProductsInterface } from "../../../interfaces/product.interface";
+import { ProductPageProductsInterface } from "../../../interfaces/product.interface";
 import { NavLink } from "react-router-dom";
 
 interface ProductProps {
-  product: mainPageProductsInterface;
+  product: ProductPageProductsInterface;
 }
 
 const Product: React.FC<ProductProps> = (props) => {
@@ -16,7 +16,7 @@ const Product: React.FC<ProductProps> = (props) => {
       : product.product_popularity < 7
       ? "text-warning"
       : "text-success";
-  console.log(product);
+  
   return (
     <div className="container">
       <div className="card my-3">
@@ -46,7 +46,7 @@ const Product: React.FC<ProductProps> = (props) => {
                   <div>
                     <strong>Added by:</strong>
                   </div>
-                  <div>{product.user_id}</div>
+                  <div>{product.user.user_name} {product.user.user_surname}</div>
                 </div>
               </div>
               <div className="card mt-3">

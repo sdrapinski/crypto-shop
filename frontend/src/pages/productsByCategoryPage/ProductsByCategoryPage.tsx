@@ -4,18 +4,18 @@ import { useParams } from "react-router-dom";
 import Filters from "../../components/Products/productsPage/Filters";
 import axios from "axios";
 import { AppContext } from "../../state/AppContext";
-import { mainPageProductsInterface } from "../../interfaces/product.interface";
+import { ProductPageProductsInterface } from "../../interfaces/product.interface";
 import DisplayProducts from "../../components/Products/productsPage/DisplayProducts";
 import { Row } from "react-bootstrap";
 
 const ProductsByCategoryPage = () => {
   const { categoryId } = useParams();
-  const [products, setProducts] = useState<mainPageProductsInterface[]>();
+  const [products, setProducts] = useState<ProductPageProductsInterface[]>();
 
   const appcontext = useContext(AppContext);
   useEffect(() => {
     axios
-      .get<mainPageProductsInterface[]>(
+      .get<ProductPageProductsInterface[]>(
         `${appcontext?.backendUrl}/offer/offersincategory/${categoryId}`,
         {
           headers: {

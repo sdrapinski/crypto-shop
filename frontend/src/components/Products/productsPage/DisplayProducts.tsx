@@ -1,9 +1,9 @@
 import React from "react";
-import { ProductsArrayInterface } from "../../../interfaces/product.interface";
+import { NewProductsArrayInterface } from "../../../interfaces/product.interface";
 import Product from "./Product";
 import { Col } from "react-bootstrap";
 
-const DisplayProducts: React.FC<ProductsArrayInterface> = (props) => {
+const DisplayProducts: React.FC<NewProductsArrayInterface> = (props) => {
   const { products } = props;
   
 

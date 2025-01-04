@@ -4,15 +4,15 @@ import { AppContext } from "../../state/AppContext";
 import axios from "axios";
 import Filters from "../../components/Products/productsPage/Filters";
 import DisplayProducts from "../../components/Products/productsPage/DisplayProducts";
-import { mainPageProductsInterface } from "../../interfaces/product.interface";
+import { ProductPageProductsInterface } from "../../interfaces/product.interface";
 const ProductsBySearchPage = () => {
   const { query } = useParams();
-  const [products, setProducts] = useState<mainPageProductsInterface[]>();
+  const [products, setProducts] = useState<ProductPageProductsInterface[]>();
 
   const appcontext = useContext(AppContext);
   useEffect(() => {
     axios
-      .get<mainPageProductsInterface[]>(
+      .get<ProductPageProductsInterface[]>(
         `${appcontext?.backendUrl}/offer/searchProduct/${query}`,
         {
           headers: {
@@ -22,7 +22,7 @@ const ProductsBySearchPage = () => {
         }
       )
       .then((resp) => {
-        console.log(resp);
+       
 
         setProducts(resp.data);
       });
