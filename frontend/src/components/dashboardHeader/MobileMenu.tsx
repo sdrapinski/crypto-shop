@@ -14,16 +14,13 @@ const MobileMenu: React.FC<MobileMenuProps> = (props) => {
       <ul className="mobileMenu__list">
         <li>
           {" "}
-          <Link to="/"> Account </Link>{" "}
+          <Link to="/account"> Account </Link>{" "}
         </li>
         <li>
-          <Link to="/">Cart</Link>
+          <Link to="/usercart">Cart</Link>
         </li>
         <li>
-          <Link to="/">Notifications</Link>
-        </li>
-        <li>
-          <Link to="/">Categories</Link>
+          <Link to="/notificationsPage">Notifications</Link>
         </li>
       </ul>
     </div>
