@@ -48,7 +48,7 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
           `${process.env.REACT_APP_BACKEND_URL}/offer/searchProduct/${event.target.value}`
         )
         .then((response) => {
-          console.log(response);
+          
         });
       setShowOptions(true);
     }

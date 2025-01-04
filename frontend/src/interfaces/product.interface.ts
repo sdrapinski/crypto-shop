@@ -23,10 +23,24 @@ export interface ProductsArrayInterface {
   products: Array<mainPageProductsInterface>;
 }
 
+export interface NewProductsArrayInterface {
+  products: Array<ProductPageProductsInterface>;
+}
+
 export interface ProductDetailsInterface extends mainPageProductsInterface {
   
   user: {
     user_name: string;
+  };
+ 
+}
+
+export interface ProductPageProductsInterface extends mainPageProductsInterface {
+  
+  user: {
+    user_name: string;
+    user_surname:string,
+    user_login:string
   };
  
 }

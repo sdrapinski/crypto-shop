@@ -19,7 +19,7 @@ const Categories = () => {
         },
       })
       .then((resp) => {
-        console.log(resp.data);
+        
         
         setcategories(resp.data);
       });

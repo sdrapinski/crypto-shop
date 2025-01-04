@@ -123,11 +123,30 @@ class Offers {
     });
     return product;
   }
-  OfferSearch(Searched_pharse) {
-    const query = `
-           SELECT * from Products WHERE product_name LIKE '%${Searched_pharse}%' OR product_description LIKE '%${Searched_pharse}%'
-          `;
-    return this.#db.SELECT(query);
+  async OfferSearch(Searched_phrase) {
+    try {
+     
+      const allProducts = await this.#prisma.products.findMany({
+        include:{user:true}
+      });
+  
+      
+      const filteredProducts = allProducts.filter(product => {
+        const nameMatches = product.product_name
+          ? product.product_name.toLowerCase().includes(Searched_phrase.toLowerCase())
+          : false;
+        const descriptionMatches = product.product_description
+          ? product.product_description.toLowerCase().includes(Searched_phrase.toLowerCase())
+          : false;
+  
+        return nameMatches || descriptionMatches;
+      });
+  
+      return filteredProducts;
+    } catch (error) {
+      console.error("Error in OfferSearch:", error);
+      throw new Error("Failed to search offers");
+    }
   }
   OfferSearchWithLimit(Searched_pharse, limit) {
     const query = `
@@ -154,6 +173,15 @@ class Offers {
       where: {
         products_category_id: parseInt(CategoryId),
       },
+      include:{
+        user:{
+          select:{
+            user_name:true,
+            user_surname:true,
+            user_login:true
+          }
+        }
+      }
     });
     return products;
   }
@@ -190,7 +218,8 @@ class Offers {
         products_category_id: item,
       },
       include: {
-        products_category: true,
+        products_category: true
+        
       },
     });
     return products;
@@ -267,6 +296,9 @@ class Offers {
    
     const products = await this.#prisma.products.findMany({
       where,
+      include:{
+        user:true
+      }
     });
   
     return products;
