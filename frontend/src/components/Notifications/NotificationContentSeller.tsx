@@ -49,7 +49,7 @@ const NotificationContentSeller: React.FC<NotificationProps> = ({ notification,h
                 <strong>City:</strong> {delivery.city}
               </p>
               <p>
-                <strong>Street:</strong> {delivery.street} {delivery.houseNumber}
+                <strong>Street:</strong> {delivery.street} 
               </p>
               <p>
                 <strong>Postal Code:</strong> {delivery.postcode}

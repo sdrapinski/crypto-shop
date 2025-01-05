@@ -73,18 +73,22 @@ const UserWallets = () => {
       });
   
       if (checkResponse.data.isAssigned) {
-        alert("This wallet is already assigned to another user.");
+        alert("This wallet is already activated by another user.");
         return;
       }
 
-      await blockchainService.registerSeller(userId, wallet);
+      const metaMaskOperationPermission = await blockchainService.registerSeller(userId, wallet)
+      if(!metaMaskOperationPermission){
+        alert("Failed to activate wallet.");
+        return;
+      }
       const response = await axiosInstance.post("/user/activateWallet", {
         user_id: userId,
         wallet_address: wallet,
       });
 
       if (response.status === 201) {
-        // Zmień status portfela w interfejsie
+        
         setUserWallets((prevWallets) =>
           prevWallets.map((w) =>
             w.wallet_address === wallet ? { ...w, wallet_status: "Active" } : w

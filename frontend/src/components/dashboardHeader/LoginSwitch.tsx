@@ -119,7 +119,7 @@ const LoginSwitch = () => {
                               notification.is_read ? "read" : "unread"
                             }`}
                           >
-                            {notification.content}
+                            {notification.productsBought.buyer_id === appcontext.user?.user_id ? "You bought an item" : "Your item has been purchased"}
                           </li>
                         ))}
                       </ul>

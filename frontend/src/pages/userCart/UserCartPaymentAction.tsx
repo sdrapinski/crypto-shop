@@ -7,7 +7,7 @@ interface UserCartPaymentActionProps {
 
 const UserCartPaymentAction:React.FC<UserCartPaymentActionProps> = ({cartQuantity}) => {
     const appContext = useContext(AppContext);
-    const delivery = 5
+    const delivery = 2
     const cart = appContext?.cart;
 
    const cartValue = cart?.cartItems.reduce((acc,curr)=>acc+ curr.product.product_dollar_price * curr.quantity,0)

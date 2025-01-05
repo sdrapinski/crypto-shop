@@ -16,7 +16,7 @@ interface Seller {
 
 // Typowanie dla kontraktu
 interface CryptoShopContract {
-    registerSeller: (sellerId: string, wallet: string) => Promise<void>;
+    registerSeller: (sellerId: string, wallet: string) => Promise<boolean>;
     buyProduct: (sellerId: string, amount: string) => Promise<boolean>;
     withdrawFunds: (sellerId: string) => Promise<void>;
     checkBalance: (sellerId: string) => Promise<string>;
@@ -67,10 +67,13 @@ const blockchainService: CryptoShopContract = {
                 const tx = await contract.registerSeller(sellerId, wallet);
                 await tx.wait(); // Czekanie na potwierdzenie transakcji
                 console.log("Sprzedawca zarejestrowany!");
+                return true
             } catch (error) {
                 console.error("Błąd podczas rejestrowania sprzedawcy:", error);
+                return false
             }
         }
+        return false
     },
 
     // kupno produktu productPrice:number,currentEthPrice:number ogarniemy w funkcji wyzej

@@ -157,7 +157,10 @@ async activateUserWallet (user_id, wallet_address){
 async checkIfWalletIsAssigned(walletAddress) {
   try {
     const existingWallet = await this.#prisma.cryptoWallet.findFirst({
-      where: { wallet_address: walletAddress },
+      where: { 
+        wallet_address: walletAddress,
+        wallet_status: 'Active',
+       },
     });
     return existingWallet; 
   } catch (error) {

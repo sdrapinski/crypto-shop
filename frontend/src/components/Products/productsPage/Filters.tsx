@@ -16,7 +16,7 @@ const Filters: React.FC<FilterProps> = ({ category, setProducts }) => {
     crypto: false,
     rating: 0,
     days_limit: '',
-    condition: '',
+    condition: false,
   });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -115,6 +115,17 @@ const Filters: React.FC<FilterProps> = ({ category, setProducts }) => {
             onChange={handleChange}
           />
           Allow cryptocurrency
+        </label>
+      </div>
+      <div>
+        <label>
+          <input
+            type="checkbox"
+            name="newproducts"
+            checked={filters.condition}
+            onChange={handleChange}
+          />
+          New Products only 
         </label>
       </div>
       

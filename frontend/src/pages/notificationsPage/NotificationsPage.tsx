@@ -18,6 +18,18 @@ const NotificationsPage = () => {
         fetchNotifications();
       }
     }, [appcontext?.user, api]);
+
+    useEffect(() => {
+      if (activeTab) {
+        const updatedTab = notifications.find(
+          (notification) =>
+            notification.notification_id === activeTab.notification_id
+        );
+        if (updatedTab && updatedTab !== activeTab) {
+          setActiveTab(updatedTab);
+        }
+      }
+    }, [notifications]);
   
     const fetchNotifications = () => {
      
@@ -26,24 +38,34 @@ const NotificationsPage = () => {
         .then((resp) => {
           const data = resp.data;
           setNotifications(data);
+          console.log(resp.data);
+          
           setActiveTab(resp.data[0])
         });
     };
 
-    const handleMenuButtonClick = async (value: notificationInterface) => {
+    const handleMenuButtonClick = (value: notificationInterface) => {
       setActiveTab(value);
+      console.log("handle menu button", value);
+    
       if (!value.is_read) {
         api
           .put(`/postPayment/mark-notification-read/${value.notification_id}`)
           .then(() => {
-            // Zaktualizuj lokalny stan
-            setNotifications((prev) =>
-              prev.map((notification) =>
+            setNotifications((prev) => {
+              const updatedNotifications = prev.map((notification) =>
                 notification.notification_id === value.notification_id
                   ? { ...notification, is_read: true }
                   : notification
-              )
-            );
+              );
+              // Ustaw `activeTab` zgodnie z nowym stanem
+              const updatedActiveTab = updatedNotifications.find(
+                (notification) =>
+                  notification.notification_id === value.notification_id
+              );
+              setActiveTab(updatedActiveTab || null);
+              return updatedNotifications;
+            });
           })
           .catch((err) => {
             console.error("Failed to mark notification as read:", err);
@@ -52,46 +74,56 @@ const NotificationsPage = () => {
     };
 
     const handleConfirmShipment = async (delivery_id: string): Promise<boolean> => {
+      console.log("delivery id "+delivery_id)
       if (!delivery_id) {
         console.error("Delivery ID is missing.");
         return false;
       }
     
       try {
-        await api.put(`/postPayment/confirm-shipment/${delivery_id}`);
+        await api.put(`/postPayment/confirm-shipment/${delivery_id}`).then((resp)=>{
+          console.log(resp)
+        });
        
     
         // Zaktualizuj stan lokalny notifications
         setNotifications((prev) =>
-          prev.map((notification) =>
-            notification.productsBought?.delivery?.id === delivery_id
+          prev.map((notification) => {
+            if (notification.productsBought?.delivery?.id === delivery_id) {
+              return {
+                ...notification,
+                productsBought: {
+                  ...notification.productsBought,
+                  delivery: {
+                    ...notification.productsBought.delivery,
+                    status: "Shipped",
+                  },
+                },
+              };
+            }
+            return notification; // Unchanged notification
+          })
+        );
+    
+    
+        // Zaktualizuj aktywną zakładkę, jeśli dotyczy
+        if (activeTab?.productsBought?.delivery?.id === delivery_id) {
+          setActiveTab((prev) =>
+            prev
               ? {
-                  ...notification,
+                  ...prev,
                   productsBought: {
-                    ...notification.productsBought,
+                    ...prev.productsBought,
                     delivery: {
-                      ...notification.productsBought.delivery,
+                      ...prev.productsBought.delivery,
                       status: "Shipped",
                     },
                   },
                 }
-              : notification
-          )
-        );
-    
-        // Zaktualizuj aktywną zakładkę, jeśli dotyczy
-        if (activeTab?.productsBought?.delivery?.id === delivery_id) {
-          setActiveTab({
-            ...activeTab,
-            productsBought: {
-              ...activeTab.productsBought,
-              delivery: {
-                ...activeTab.productsBought.delivery,
-                status: "Shipped",
-              },
-            },
-          });
+              : null
+          );
         }
+    
     
         return true;
       } catch (err) {
