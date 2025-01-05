@@ -273,6 +273,9 @@ class Offers {
     if (Productinfo.crypto ==true) {
       where.product_crypto = true;
     }
+    if (Productinfo.product_used==true) {
+      where.product_used = true
+    }
   
     if (Productinfo.rating  && !isNaN(parseFloat(Productinfo.rating))) {
       where.product_popularity = {
