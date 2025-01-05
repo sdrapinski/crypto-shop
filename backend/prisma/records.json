@@ -106,19 +106,19 @@
       "user_date_of_birth": "1990-01-01T00:00:00.000Z",
       "user_phone_number": "123456789",
       "user_login": "johndoe",
-      "user_password": "password123",
+      "user_password": "Password123",
       "user_avatar_url": "https://example.com/avatar.png",
       "user_premium_tokens": 10.5
     },
     {
       "user_id":"94d32062-dc87-4820-9276-31a5634123f3",
       "user_name": "Janus",
-      "user_surname": "Bisne'sau",
+      "user_surname": "Biznesu",
       "user_email": "JBiz@example.com",
       "user_date_of_birth": "1967-06-11T00:00:00.000Z",
       "user_phone_number": "666999222",
       "user_login": "Jbizos",
-      "user_password": "hasło",
+      "user_password": "Hasło123!",
       "user_avatar_url": "https://example.com/wuns.png",
       "user_premium_tokens": 0
     },
@@ -130,7 +130,7 @@
       "user_date_of_birth": "1995-01-01T00:00:00.000Z",
       "user_phone_number": "987654321",
       "user_login": "Adam123",
-      "user_password": "password12223",
+      "user_password": "Password12223!",
       "user_avatar_url": "https://example.com/avatar.png",
       "user_premium_tokens": null
     },
@@ -142,7 +142,7 @@
       "user_date_of_birth": "1995-01-01T00:00:00.000Z",
       "user_phone_number": "987654321",
       "user_login": "Pawel1234s",
-      "user_password": "Pawelhaslo",
+      "user_password": "Pawelhaslo!",
       "user_avatar_url": "https://xsgames.co/randomusers/assets/avatars/male/67.jpg",
       "user_premium_tokens": 100
     },
