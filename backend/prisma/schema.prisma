@@ -11,7 +11,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// basic
+
 model Region {
   region_id String @id @default(uuid())
   country String
@@ -29,7 +29,7 @@ model Products_category{
   products Products[]
 }
 
-//main
+
 model Users {
 user_id String @id @default(uuid())
 user_products Products[] @relation("ProductCreatedBy")

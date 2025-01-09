@@ -74,7 +74,7 @@ const Filters: React.FC<FilterProps> = ({ category, setProducts }) => {
           },
         }
       ).then((response) => {
-        console.log(response);
+        
         setProducts(response.data);
       });
     } catch (error) {

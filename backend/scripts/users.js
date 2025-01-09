@@ -49,7 +49,7 @@ class Users {
         user_region:true
       },
     });
-    console.log(findedUser);
+    
     
    
 

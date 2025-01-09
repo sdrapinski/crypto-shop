@@ -82,6 +82,11 @@ const UserProducts = () => {
               </div>
             </div>
         ))}
+
+
+        {products.length===0 && <div>You dont have any products </div>
+        
+        }
       </div>
       {selectedProduct ? (
           <DeleteProductModal
