@@ -23,7 +23,7 @@ export const UserOrders = () => {
                     }
                 )
                 .then((response)=>{
-                    console.log(response.data);
+                   
                     
                     setOrders(response.data);
                 });
@@ -47,5 +47,6 @@ export const UserOrders = () => {
                 
             </div>
         ))}
+        {orders.length === 0 && <div>You dont have any orders yet </div>}
     </div>;
 };

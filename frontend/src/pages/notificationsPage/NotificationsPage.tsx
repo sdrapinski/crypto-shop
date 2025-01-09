@@ -16,8 +16,10 @@ const NotificationsPage = () => {
   useEffect(() => {
       if (appcontext?.user && notifications.length ===0) {
         fetchNotifications();
+       
+        
       }
-    }, [appcontext?.user, api]);
+    }, [appcontext?.user]);
 
     useEffect(() => {
       if (activeTab) {
@@ -38,7 +40,7 @@ const NotificationsPage = () => {
         .then((resp) => {
           const data = resp.data;
           setNotifications(data);
-          console.log(resp.data);
+         
           
           setActiveTab(resp.data[0])
         });
@@ -46,7 +48,7 @@ const NotificationsPage = () => {
 
     const handleMenuButtonClick = (value: notificationInterface) => {
       setActiveTab(value);
-      console.log("handle menu button", value);
+      
     
       if (!value.is_read) {
         api
@@ -74,7 +76,7 @@ const NotificationsPage = () => {
     };
 
     const handleConfirmShipment = async (delivery_id: string): Promise<boolean> => {
-      console.log("delivery id "+delivery_id)
+     
       if (!delivery_id) {
         console.error("Delivery ID is missing.");
         return false;
@@ -82,7 +84,7 @@ const NotificationsPage = () => {
     
       try {
         await api.put(`/postPayment/confirm-shipment/${delivery_id}`).then((resp)=>{
-          console.log(resp)
+          
         });
        
     
@@ -165,6 +167,7 @@ const NotificationsPage = () => {
           }
          
         </div>
+        {notifications.length === 0 && <div>You dont have any notifications </div>}
       </div>
     </div>
   )

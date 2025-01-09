@@ -49,6 +49,18 @@ router.get('/user-notifications/:userId', async (req, res) => {
   }
 });
 
+
+router.get('/getNotificationById/:notificationId', async (req, res) => {
+  const { notificationId } = req.params;
+  try {
+    const notification = await postPayment.getNotificationById(notificationId);
+    res.status(200).json(notification);
+  } catch (error) {
+    console.error("Error fetching user notifications:", error.message);
+    res.status(500).send({ error: "Could not fetch notifications." });
+  }
+});
+
 router.put("/mark-notification-read/:notificationId", async (req, res) => {
   const { notificationId } = req.params;
 

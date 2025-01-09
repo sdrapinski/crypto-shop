@@ -11,10 +11,20 @@ interface NotificationProps {
 
 const NotificationContentSeller: React.FC<NotificationProps> = ({ notification,handleConfirmShipment }) => {
   const { productsBought } = notification;
+  const [deliveryStatus, setDeliveryStatus] = useState<string>();
+
+  useEffect(() => {
+    setDeliveryStatus(notification.productsBought.delivery.status)
+  
+    return () => {
+      
+    }
+  }, [notification.notification_id])
+  
  
 
   // Ustawienie lokalnego stanu dla statusu dostawy
-  const [deliveryStatus, setDeliveryStatus] = useState(productsBought?.delivery?.status || "");
+  
 
   if (!productsBought || !productsBought.delivery) {
     return <div>No detailed delivery information available.</div>;

@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Notification as NotificationInterface } from "../../interfaces/Profile.interface";
 import NotificationContentSeller from "./NotificationContentSeller";
 import NotificationContentBuyer from "./NotificationContentBuyer";
+import useAxios from "../../hooks/useAxios";
+import { AppContext } from "../../state/AppContext";
 
 interface NotificationProps {
   notification: NotificationInterface;
@@ -11,8 +13,26 @@ interface NotificationProps {
 
 const Notification: React.FC<NotificationProps> = ({ notification,user_id,handleConfirmShipment }) => {
   const { productsBought } = notification;
+  const appcontext = useContext(AppContext);
+  const api = useAxios(appcontext!);
+  const [fetchedNotification, setfetchedNotification] = useState<NotificationInterface | null>(null)
 
-  if (!productsBought) {
+
+  useEffect(() => {
+    api
+      .get<NotificationInterface>(`/postPayment/getNotificationById/${notification.notification_id}`)
+        .then((resp) => {
+         
+          setfetchedNotification(resp.data)
+          
+        
+        });
+  
+    
+  }, [notification.notification_id])
+  
+
+  if (!productsBought || !fetchedNotification) {
     return <div>Brak szczegółowych informacji o powiadomieniu.</div>;
   }
 
@@ -23,7 +43,7 @@ const Notification: React.FC<NotificationProps> = ({ notification,user_id,handle
   return (
     <div className="notification-details">
     {
-        isSeller ? <NotificationContentSeller notification={notification} handleConfirmShipment={handleConfirmShipment}/> : <NotificationContentBuyer notification={notification} />
+        isSeller ? <NotificationContentSeller notification={fetchedNotification} handleConfirmShipment={handleConfirmShipment}/> : <NotificationContentBuyer notification={fetchedNotification} />
     }
     </div>
   );

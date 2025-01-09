@@ -131,6 +131,33 @@ class PostPayment {
     }
   }
 
+  async getNotificationById(notificationId) {
+    try {
+      const notification = await this.#prisma.notifications.findUnique({
+        where: {
+          notification_id:notificationId
+        },
+        include: {
+          productsBought: {
+          include:{
+            delivery:true,
+            products_bought_items:{
+              include: {
+                product:true
+              }
+            }
+          }
+          
+        },
+      }
+      });
+      return notification;
+    } catch (error) {
+      console.error("Error fetching notifications:", error);
+      throw new Error("Could not fetch notifications.");
+    }
+  }
+
   async updateDeliveryStatusToShipped(deliveryId) {
     try {
       // Sprawdź, czy przesyłka istnieje
