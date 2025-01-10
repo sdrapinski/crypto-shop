@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 
 export const AppContext = createContext<AppContextInterface | null>(null);
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+const backendUrl = "https://cryptoshop-backend-api.up.railway.app"
 
 
 const initialCart: CartInterface = {

@@ -110,13 +110,14 @@ const UserWallets = () => {
         alert("This wallet has already been added!");
         return;
       }
+      if(wallet){
       axiosInstance
         .post<cryptoWallet>(`/user/createWallet`, {
           user_wallet_address: wallet,
           user_id: userId,
         })
         .then((response) => {
-          console.log(response);
+          
 
           setUserWallets((prevWallets) => [
             ...prevWallets,
@@ -126,7 +127,12 @@ const UserWallets = () => {
           setuserWallet(response.data.wallet_address);
         })
         .catch((err) => console.error(err));
+      }else{
+        alert("Cannot find wallet to add")
+        return
+      }
     });
+  
   };
 
   const deleteWallet = async (walletId: string) => {

@@ -1,18 +1,20 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { NavLink } from "react-router-dom";
 import { CategoriesInterface } from "../../interfaces/categories.interface";
+import { AppContext } from "../../state/AppContext";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 const categoriesInit = [{ product_category_id: 0, product_category_name: "",product_category_image:""  }]
 
 const Categories = () => {
+  const appContext = useContext(AppContext);
   const [categories, setcategories] =
     useState<CategoriesInterface[]>(categoriesInit);
 
   useEffect(() => {
     axios
-      .get(`${backendUrl}/offer/Categories`, {
+      .get(`${appContext!.backendUrl}/offer/Categories`, {
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -25,7 +27,7 @@ const Categories = () => {
       });
 
     return () => {};
-  }, []);
+  }, [appContext?.backendUrl]);
   return (
     <div className="category-grid">
       {categories.map((category, index) => (

@@ -8,10 +8,35 @@ const offer = new Offers();
 
 router.route("/createOffer").post((req, res) => {
 
+  try {
+  const productinfo = req.body;
+  if (
+    !productinfo.user_id ||
+    !productinfo.products_category_id ||
+    !productinfo.product_name ||
+    !productinfo.product_description ||
+    !productinfo.product_images ||
+    !productinfo.product_dollar_price ||
+    !productinfo.product_quantity
+  ) {
+    return res.status(400).send("Invalid data - all fields must be filled");
+  }
+
+  if (typeof productinfo.product_dollar_price !== 'number' || productinfo.product_dollar_price <= 0) {
+    return res.status(400).send("Product dollar price must be a number greater than 0");
+  }
+
+  if (typeof productinfo.product_quantity !== 'number' || productinfo.product_quantity <= 0) {
+    return res.status(400).send("Product quantity must be a number greater than 0");
+  }
+
   offer.addOffer(req.body).then((response) => {
     res.send(response);
   });
-  
+} catch (error) {
+  console.error("Error adding offer:", error);
+  res.status(500).send("An error occurred while adding the offer. Please try again later.");
+}
   
 });
 
@@ -55,7 +80,6 @@ router.route("/promotedProducts").get((req, res) => {
   });
 });
 router.route("/offersincategory/:Categoryid").get((req, res) => {
-  console.log(req.params.Categoryid);
   
   offer.offersinCategory(req.params.Categoryid).then((response) => {
     res.send(response);
@@ -72,7 +96,7 @@ router.route("/mainPageProducts").get((req, res) => {
   });
 });
 router.route("/product/:productId").get((req, res) => {
-  console.log(req.params.productId);
+  
   offer.getProductByID(req.params.productId).then((response) => {
     res.send(response);
   });

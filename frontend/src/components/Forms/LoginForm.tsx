@@ -46,7 +46,7 @@ const LoginForm = () => {
       })
       .catch((error) => {
         setauthenticationFailed(true);
-        console.log(error);
+        console.error(error);
       });
   };
   return (

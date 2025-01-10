@@ -41,13 +41,13 @@ const AddProductPage = () => {
   const [buttonStatus, setButtonStatus] = useState<{text:string,status:number }>({text:"Add Product",status:0 })
   const [isUserWalletActive, setisUserWalletActive] = useState(false)
 
-  const [selectedCategoryId, setSelectedCategoryId] = useState("");
+  const [selectedCategoryId, setSelectedCategoryId] = useState(0);
 
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    setSelectedCategoryId(e.target.value);
+    setSelectedCategoryId(parseInt(e.target.value));
   };
 
-  const backendUrl = process.env.REACT_APP_BACKEND_URL;
+  const backendUrl = appContext?.backendUrl
   useEffect(() => {
 
     if(appContext?.user?.user_wallets && appContext.user.user_wallets.length > 0){
@@ -85,7 +85,7 @@ const AddProductPage = () => {
     // Sprawdzanie, czy każde wymagane pole jest wypełnione
     return requiredFields.every((field) => {
       const value = productInfo[field as keyof typeof productInfo];
-      return value !== undefined && value !== null && value !== "";
+      return value !== undefined && value !== null && value !== "" && value!==0;
     });
   };
 
@@ -95,7 +95,7 @@ const AddProductPage = () => {
     const Productinfo = {
       product_name: productName,
       product_description: productDescription,
-      products_category_id: parseInt(selectedCategoryId), 
+      products_category_id: selectedCategoryId, 
       product_dollar_price:productDollarPrice,
       product_quantity:productQuantity,
       product_promotion: isProductPromoted ? new Date(productPromotion) : null,
@@ -134,7 +134,7 @@ const AddProductPage = () => {
        
       })
       .catch((error) => {
-        // Obsługa błędów podczas dodawania produktu
+        console.error(error)
         setButtonStatus({text:"Failed to add item",status:400})
       });
     }

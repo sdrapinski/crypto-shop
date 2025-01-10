@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import { E164Number } from 'libphonenumber-js';
 import { useNavigate } from 'react-router-dom';
 import InputForm from "./InputForm";
@@ -7,10 +7,13 @@ import PhoneInput from "react-phone-number-input";
 import axios from "axios";
 import { ExtendedRegisterProps } from "../../interfaces/Login.interface";
 import { CountryDropdown, RegionDropdown } from "react-country-region-selector";
+import { AppContext } from "../../state/AppContext";
 
-const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 
 const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
+   const appcontext = useContext(AppContext);
+   const backendUrl = appcontext?.backendUrl;
   const { login, email, password } = props;
   const navigate = useNavigate();
   const [userName, setUserName] = useState("");
@@ -39,7 +42,6 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
     setPhoneNumber(phoneNumber || undefined);
   };
   const handleCountryChange = (val: string) => {
-    // console.log(val)
     setCountry(val);
   };
   const handleCityChange = (e: React.FormEvent<HTMLInputElement>) => {
@@ -102,6 +104,7 @@ const ExtendedRegisterForm: React.FC<ExtendedRegisterProps> = (props) => {
       )
       .then((response) => {
         setRegistrationStatus(response.status)
+        
         if(response.status===200){
           setdisableButton(true)
           setTimeout(()=>{

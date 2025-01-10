@@ -1,16 +1,16 @@
 $font-size: 16px;
 
 :root {
-  --text-xs: #{rem(12px)};
-  --text-sm: #{rem(14px)};
-  --text-base: #{rem(16px)};
-  --text-lg: #{rem(18px)};
-  --text-xl: #{rem(20px)};
-  --text-2xl: #{rem(24px)};
-  --text-3xl: #{rem(32px)};
-  --text-4xl: #{rem(40px)};
-  --text-5xl: #{rem(48px)};
-  --text-6xl: #{rem(60px)};
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 32px;
+  --text-4xl: 40px;
+  --text-5xl: 48px;
+  --text-6xl: 60px;
 }
 
 $breakpoints: (

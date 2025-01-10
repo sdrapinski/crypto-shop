@@ -66,7 +66,7 @@ const blockchainService: CryptoShopContract = {
             try {
                 const tx = await contract.registerSeller(sellerId, wallet);
                 await tx.wait(); // Czekanie na potwierdzenie transakcji
-                console.log("Sprzedawca zarejestrowany!");
+                
                 return true
             } catch (error) {
                 console.error("Błąd podczas rejestrowania sprzedawcy:", error);
@@ -85,7 +85,7 @@ const blockchainService: CryptoShopContract = {
                     value: ethers.parseEther(amount),
                 });
                 await tx.wait();
-                console.log("Wpłata zakończona sukcesem!");
+                
                 return true
             } catch (error) {
                 console.error("Błąd podczas wpłacania środków:", error);
@@ -102,7 +102,7 @@ const blockchainService: CryptoShopContract = {
             try {
                 const tx = await contract.withdraw(sellerId);
                 await tx.wait();
-                console.log("Wypłata zakończona sukcesem!");
+                
             } catch (error) {
                 console.error("Błąd podczas wypłaty środków:", error);
             }

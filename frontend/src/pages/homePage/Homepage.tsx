@@ -15,23 +15,9 @@ import CurrentCryptoPrice from "../../components/CurrentCryptoPrice/CurrentCrypt
 
 //test
 const Homepage = () => {
-  const appContext = useContext(AppContext);
+  // const appContext = useContext(AppContext);
   
-  // useEffect(() => {
-  //   console.log(appContext?.user)
-  //   axios
-  //     .get(`${appContext?.backendUrl}/user/getUserAndProducts/${appContext?.user?.user_id}`,{
-  //       headers: {
-  //         "Content-Type": "application/json",
-  //         Accept: "application/json",
-  //       },
-  //     })
-  //     .then((resp) => {
-  //       console.log(resp);
-  //     });
-
-  //   return () => {};
-  // }, []);
+ 
 
   return (
     <>

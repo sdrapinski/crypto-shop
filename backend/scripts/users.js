@@ -25,6 +25,12 @@ class Users {
           
       }
     });
+   
+    
+    
+    if(!newUser){
+      return false
+    }
   
     const newRegion = await this.#prisma.region.create({
       data:{
@@ -49,6 +55,9 @@ class Users {
         user_region:true
       },
     });
+    if(!findedUser){
+      return { findedUser:[],code:400 };
+    }
     
     
    

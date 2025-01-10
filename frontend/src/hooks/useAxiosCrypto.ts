@@ -1,8 +1,8 @@
 import axios from "axios";
 
 
-const baseURL = process.env.REACT_APP_COIN_GECKO_URL!;
-const apiKey = process.env.REACT_APP_COIN_GECKO_API_KEY!;
+const baseURL = "https://api.coingecko.com/api/v3";
+const apiKey = "CG-vzU3EaiofQxbZ9GoJR1pTxTV";
 
 const useAxiosCrypto = () =>{
     

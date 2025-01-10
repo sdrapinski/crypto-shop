@@ -10,12 +10,15 @@ class Offers {
   async addOffer(
     Productinfo
   ) {
+    
+    const product_category_id = Productinfo.products_category_id ?? 10;
+
     const products = await this.#prisma.products.create({
       data:{
         user:{ connect: { user_id: Productinfo.user_id } },
         products_category: {
           connect: {
-            product_category_id: Productinfo.products_category_id,
+            product_category_id: product_category_id
           },
         },
         product_watchedBy: {
@@ -127,7 +130,12 @@ class Offers {
     try {
      
       const allProducts = await this.#prisma.products.findMany({
-        include:{user:true}
+        include:{user:true},
+        where: {
+          product_quantity: {
+            gte: 1,
+          }
+        }
       });
   
       
@@ -171,6 +179,9 @@ class Offers {
     const products = await this.#prisma.products.findMany({
       take: 20,
       where: {
+        product_quantity: {
+          gte: 1,
+        },
         products_category_id: parseInt(CategoryId),
       },
       include:{
@@ -215,6 +226,9 @@ class Offers {
     const products = await this.#prisma.products.findMany({
       take: 6,
       where: {
+        product_quantity: {
+          gte: 1,
+        },
         products_category_id: item,
       },
       include: {
@@ -230,7 +244,12 @@ class Offers {
     const categories = await this.#prisma.products_category.findMany({
       where: {
         products: {
-          some: {},
+          some: {
+            product_quantity: {
+              gte: 1,
+            },
+          },
+          
         },
       },
     });
@@ -268,6 +287,9 @@ class Offers {
         ...where.product_dollar_price,
         lte: parseFloat(Productinfo.price_max),
       };
+    }
+    where.product_quantity= {
+      gte: 1,
     }
   
     if (Productinfo.crypto ==true) {

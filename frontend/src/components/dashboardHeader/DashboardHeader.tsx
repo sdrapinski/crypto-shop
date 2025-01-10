@@ -18,6 +18,7 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
   const navigate = useNavigate();
 
   const options = ["Wszystko", "Książki", "Filmy"];
+  const backendUrl = appContext?.backendUrl
 
   useEffect(() => {
     async function checkToken() {
@@ -45,7 +46,7 @@ const DashboardHeader: React.FC<HeaderProps> = () => {
     if (event.target.value.length > 2) {
       axios
         .get(
-          `${process.env.REACT_APP_BACKEND_URL}/offer/searchProduct/${event.target.value}`
+          `${backendUrl}/offer/searchProduct/${event.target.value}`
         )
         .then((response) => {
           

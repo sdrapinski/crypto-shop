@@ -4,7 +4,8 @@ import { loadStripe } from '@stripe/stripe-js';
 import { Elements, CardElement, useStripe, useElements } from '@stripe/react-stripe-js';
 import axios from 'axios';
 
-const stripePromise = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY as string);
+const StripeKey = "pk_test_51QMcJ14MgBpXBJt0U21BAbjRPw4FCzghEWu29YjgNGocEColT0l6qebb49zfUUEdZDIxoEwNLPgsAHAzY0dHyhXW009zaT8K3Z"
+const stripePromise = loadStripe(StripeKey);
 interface PaymentComponentProps {
   amount: number;
   gate: string;

@@ -18,8 +18,9 @@ const LoginSwitch = () => {
   useEffect(() => {
     if (appcontext?.user) {
       fetchNotifications();
+     
     }
-  }, [appcontext?.user, api]);
+  }, [appcontext?.user]);
 
   const fetchNotifications = () => {
    

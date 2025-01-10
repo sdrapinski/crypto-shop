@@ -7,15 +7,15 @@ const PaymentSummary = () => {
   useEffect(() => {
     // Po 4 sekundach przekierowuje na stronę główną
     const timer = setTimeout(() => {
-      navigate('/');
+      navigate('/notificationsPage');
     }, 4000);
     // Czyszczenie timeoutu przy odmontowaniu komponentu
     return () => clearTimeout(timer);
   }, [navigate]);
   return (
     <div className="payment-summary-container">
-      <h1 className="payment-success-title">Transakcja udana, poinformowano sprzedawców.</h1>
-      <p className="payment-success-message">Zostaniesz poinformowany w momencie wysłania zamówienia</p>
+      <h1 className="payment-success-title">The transaction was successful, the sellers were informed</h1>
+      <p className="payment-success-message">You can track your order status in notification page </p>
     </div>
   );
 };

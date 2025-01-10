@@ -4,13 +4,14 @@ import { AppContextInterface } from "../interfaces/AppContext.interface";
 
 
 
-const baseURL = process.env.REACT_APP_BACKEND_URL!;
+
 
 const useAxios = (appContext:AppContextInterface) =>{
   
     
     
-    const {checkAccessToken,user} = appContext!
+    const {checkAccessToken,user,backendUrl} = appContext!
+    const baseURL = backendUrl;
     
    
 

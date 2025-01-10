@@ -8,7 +8,7 @@ const user = new Users();
 
 router.post("/login", async (req, res) => {
     const userFromDB = await user.getUserByLoginAndPassword(req.body);
-    console.log("logowanie");
+    console.log("user logged in "+userFromDB.findedUser.user_login);
     
     if (userFromDB.code === 400) {
         return res.sendStatus(400);
@@ -31,8 +31,14 @@ router.post("/ChceckIfUserDoesNotExist", async (req, res) => {
 });
 
 router.post("/registerUser", async (req, res) => {
+   
     user.createUser(req.body).then((resp) => {
-        res.send(resp);
+        
+        
+        if(!resp){
+            return res.sendStatus(403);
+        }
+      return  res.send(resp);
     });
 });
 

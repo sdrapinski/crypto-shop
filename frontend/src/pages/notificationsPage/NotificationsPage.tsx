@@ -10,16 +10,27 @@ const NotificationsPage = () => {
    const api = useAxios(appcontext!);
 
     const [notifications, setNotifications] = useState<notificationInterface[]>([]);
+    const [notificationsFetched, setnotificationsFetched] = useState(false)
      const [activeTab, setActiveTab] = useState<notificationInterface | null>(null);
     
 
   useEffect(() => {
-      if (appcontext?.user && notifications.length ===0) {
-        fetchNotifications();
+  const loadNotifications = async () => {
+    if (appcontext?.user && !notificationsFetched) {
+      
+      try {
+        const data = await fetchNotifications();
        
-        
+        setnotificationsFetched(true); 
+      } catch (error) {
+        console.error("Failed to fetch notifications:", error);
+        setnotificationsFetched(true); 
       }
-    }, [appcontext?.user]);
+    }
+  };
+
+  loadNotifications();
+}, [appcontext?.user, notificationsFetched]);
 
     useEffect(() => {
       if (activeTab) {
@@ -33,7 +44,7 @@ const NotificationsPage = () => {
       }
     }, [notifications]);
   
-    const fetchNotifications = () => {
+    const fetchNotifications = async () => {
      
       api
         .get<notificationInterface[]>(`/postPayment/user-notifications/${appcontext!.user!.user_id}`)
@@ -43,7 +54,9 @@ const NotificationsPage = () => {
          
           
           setActiveTab(resp.data[0])
+          return data
         });
+        return []
     };
 
     const handleMenuButtonClick = (value: notificationInterface) => {

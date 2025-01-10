@@ -163,7 +163,7 @@ const PaymentPage = () => {
         <div className="section">
           <div className="section__title">Shipping Methods</div>
           <div className="payment-options">
-            {deliveryOptions.map((option) => (
+            {deliveryOptions.length > 0 ? deliveryOptions.map((option) => (
               <div
                 key={option.name}
                 onClick={() => handleDeliveryOptionChange(option as DeliveryOptionInterface)}
@@ -179,7 +179,7 @@ const PaymentPage = () => {
               >
                
               </div>
-            ))}
+            )) : <div> Something went wrong with delivery options </div>}
           </div>
         </div>
 
@@ -238,7 +238,9 @@ const PaymentPage = () => {
         />
       ) : (
         <div className="pay-with-eth-disabled">
-          <p>Not all products support crypto payments.</p>
+          <p>Not all products support crypto payments. <br />
+          All products in the cart must have the cryptocurrency payment option enabled
+          </p>
           <button disabled className="btn btn-secondary">
             Pay with ETH
           </button>
