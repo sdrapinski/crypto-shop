@@ -1,6 +1,7 @@
 function getRandomUniqueNumbers(min, max, howMany = 1, exception = []) {
   var uniqueNumbers = [];
 
+  
   while (uniqueNumbers.length < howMany) {
     var randomNumber = Math.floor(Math.random() * (max - min + 1)) + min;
     if (
