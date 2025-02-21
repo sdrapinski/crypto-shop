@@ -28,7 +28,10 @@ const Footer = () => {
         </Row>
         <Row className="footer-bottom">
           <Col className="text-center">
-            <p>&copy; {new Date().getFullYear()} CryptoShop. Wszelkie prawa zastrzeżone.</p>
+            <p> CryptoShop. </p>
+          </Col>
+          <Col className="text-center">
+            <p> Zdjęcia produktów pochodzą z platform takich jak Pexels, Unsplash lub iStockPhoto link do orginalnego zdjecia w tagu img produktu </p>
           </Col>
         </Row>
       </Container>
